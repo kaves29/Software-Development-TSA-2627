@@ -1,0 +1,206 @@
+Project Concept: Speakly — Personalized Communication Training
+Working title · TSA Software Development 2026–2027
+1. The core idea
+SpeakWise is an AI-assisted communication training platform that helps people of different ages practice speaking, presentations, interviews, and everyday communication through personalized feedback, optional body-language analysis, and adaptive exercises.
+Many people need to develop communication skills throughout their lives. A student may struggle with classroom presentations, a job seeker may want to practice interviews, an employee may need to communicate more clearly in meetings, or someone may simply want a comfortable environment to practice speaking.
+Professional coaching can be expensive or difficult to access, and generic practice tools don't necessarily adapt to individual needs.
+SpeakWise addresses this by allowing users to practice on their own schedule, receive feedback about observable communication patterns, and follow exercises tailored to their goals.
+The app does not attempt to determine whether someone is inherently a good speaker. Instead, it helps people identify skills they want to practice and gives them tools to work on those skills.
+2. The problem we're solving
+Communication is a skill people develop across different stages of life, but opportunities to practice aren't always accessible.
+Limited practice opportunities: People may not have someone available to listen to repeated practice attempts.
+Generic feedback: Many tools provide a transcript or a score without explaining what the user should practice next.
+Expensive coaching: Individualized instruction may not be affordable or readily available to everyone.
+Difficulty recognizing patterns: Speakers may not notice recurring filler words, pacing patterns, long pauses, or movement habits.
+Different needs and goals: Someone preparing for an interview needs different practice from someone working on a presentation or everyday conversation.
+SpeakWise combines speech analysis, optional movement awareness, and a personalized learning system to address these challenges.
+3. How the application works
+Step 1 — Choose a goal
+Users choose what they want to practice, their scenario, and which feedback they want. For example, someone might select interview practice and choose speaking pace as a goal.
+Step 2 — Complete a practice session
+Users respond to a prompt by recording audio, with optional webcam video when movement feedback is enabled.
+Step 3 — Review communication patterns
+The app analyzes available speech metrics and, when enabled, observable movement patterns. It presents the findings with explanations and limitations rather than treating them as definitive judgments.
+Step 4 — Receive a personalized exercise
+Your own software selects a relevant activity based on the user's chosen goal, previous attempts, and available feedback.
+Step 5 — Practice again and track progress
+Users complete another attempt, compare similar sessions, and review their progress toward personal goals.
+4. The major features
+A. Speech analysis
+The application records a user's response and uses speech-processing tools to extract useful information.
+Possible metrics include:
+Speaking pace, measured in words per minute when a reliable transcript and duration are available.
+Pauses and their approximate durations.
+Filler-word frequency, such as repeated use of “um” or “like,” where transcription supports reliable detection.
+Transcript review to help users notice unclear explanations or overly long responses.
+Optional speech-fluency practice activities selected by the user.
+Important distinction: ordinary speech-to-text APIs do not automatically provide reliable stuttering detection. SpeakWise can offer supportive fluency-practice activities without claiming to diagnose or treat a speech disorder.
+B. Body-language and movement awareness
+This is the webcam feature you mentioned.
+Using a computer-vision pose-estimation model, the application can identify body landmarks and summarize certain observable movement patterns.
+Possible features include:
+Detecting repeated upper-body movement during a recording.
+Showing an approximate visualization of body position.
+Helping users review movement patterns during presentation practice.
+Allowing users to select a specific movement-related goal.
+Comparing observable patterns between practice attempts.
+The app should not assume that a certain posture means someone is confident, nervous, dishonest, or competent.
+For example, instead of saying, “Your body language is bad,” it could say, “Your upper-body position changed several times during this recording.” The user can then review the recording and decide whether that movement is relevant to their own goals.
+Movement tracking should be optional, and users should still be able to use the app without a webcam.
+C. Multiple practice modes
+
+Presentation mode
+Practice explaining topics, organizing responses, maintaining a suitable pace, and reviewing optional movement feedback.
+
+Interview mode
+Generate practice questions, record responses, review answer structure, and practice giving relevant, concise answers.
+
+Everyday communication mode
+Practice explaining ideas, responding to conversational prompts, and communicating information clearly.
+
+Personalized fluency practice
+Users choose supportive speaking exercises at their own pace. This mode avoids diagnosing speech disorders or presenting disfluency as a personal failure.
+These modes serve different ages and situations while sharing the same underlying analysis and learning system.
+D. The personalized exercise engine — the most important feature
+This is what makes SpeakWise more than a collection of existing APIs.
+After every session, the software evaluates the user's selected goals and available metrics to recommend what they should practice next.
+For example:
+A user selects interview practice and wants to work on pacing.
+They record an answer.
+The app estimates speaking pace and identifies available feedback.
+The exercise engine checks the user's target and previous sessions.
+It recommends an exercise, such as answering a short question while practicing a self-selected pacing goal.
+The user completes another attempt and compares the results.
+The engine could eventually consider several goals at once, prioritize the user's most relevant practice area, and adjust exercise difficulty as the user progresses.
+The initial version does not need an advanced machine-learning model for this. A well-designed rule-based recommendation algorithm is a legitimate algorithm you can build, test, document, and explain. You can explore more advanced personalization later.
+E. Progress dashboard
+Users can view their practice history and progress across different metrics.
+Examples include:
+Speaking pace across comparable attempts.
+Filler-word frequency across sessions.
+Completion of chosen practice exercises.
+Self-reported comfort with a specific communication task.
+Movement summaries when the user has enabled camera analysis.
+Avoid combining all these measurements into one universal “communication ability” score. A user might improve their pacing while still preferring a different speaking style, and both can be perfectly reasonable.
+F. Personalized prompt generation
+The app can generate practice prompts based on the user's scenario and goals.
+Examples:
+Explain a complicated concept in 60 seconds.
+Answer a behavioral interview question.
+Give a short persuasive presentation.
+Explain a process to someone unfamiliar with the topic.
+Prompts can gradually change in difficulty, while the app reuses the same or similar prompts when comparisons between attempts are needed.
+Generated feedback and exercises should be reviewed against clear rules so that the app does not invent problems or make unsupported judgments.
+5. What technology would we use?
+You do not need to train a massive AI model from scratch. The technical challenge is integrating existing capabilities into a reliable application and building your own logic around them.
+Component
+Possible technology
+Purpose
+Frontend
+React + HTML/CSS
+Interactive website and dashboards
+Backend
+Python + FastAPI
+Application logic and API coordination
+Speech recognition
+Google Cloud Speech-to-Text or another suitable provider
+Convert audio to text and obtain supported timing information
+Speech metrics
+Your own Python algorithms
+Calculate supported pace, pause, and filler-word metrics
+Pose estimation
+MediaPipe or a comparable computer-vision model
+Extract body landmarks from video
+Personalized learning
+Your own Python recommendation engine
+Select exercises based on goals and previous attempts
+Database
+SQLite initially; PostgreSQL if needed
+Store goals, session metrics, and progress
+Optional generative AI
+An LLM API
+Generate practice prompts or structured feedback
+
+Specific API capabilities, pricing, privacy terms, and support for different accents need to be verified before choosing providers. Different accents, recording conditions, and speech patterns can affect transcription accuracy.
+What are we actually building ourselves?
+This is an important distinction for the competition.
+Existing components:
+Speech transcription.
+Pose-estimation model.
+Optional language model for generating prompts.
+Our original software:
+The application that connects all components.
+The logic that calculates and organizes useful metrics.
+The goal-selection and exercise recommendation algorithm.
+The progress-tracking system.
+The practice modes and their workflows.
+The interface that communicates feedback responsibly.
+The testing system that evaluates functionality and usefulness.
+Using existing APIs is normal software engineering. However, simply sending a recording to an API and displaying its output would be too limited. Our own learning system must be the centerpiece.
+6. How we handle bias, accessibility, and privacy
+This should be part of the design from the beginning, not a disclaimer added at the end.
+Bias and different communication styles
+Do not infer confidence, intelligence, honesty, or competence from voice or posture.
+Let users choose their goals instead of imposing one ideal speaking style.
+Treat movement feedback as descriptive and optional.
+Test transcription with different accents and recording conditions, and report limitations honestly.
+Allow users to disregard feedback that does not match their situation.
+Accessibility
+Support keyboard navigation and readable text.
+Allow practice without a webcam.
+Provide written prompts and transcripts where possible.
+Avoid making speed, eye contact, or stillness requirements for all users.
+Make practice approachable for users with different needs.
+Privacy
+Explain what data is processed and stored.
+Avoid storing raw audio and video unless genuinely needed and explicitly consented to.
+Give users control over their saved session history.
+Use secure handling for API credentials and user data.
+For a student competition, it would be sensible to begin with limited account data or a local prototype and use consent-based testing.
+7. How we prove the project actually helps
+A major strength would be testing SpeakWise rather than merely claiming it works.
+We could conduct a small, voluntary usability study with participants who agree to try the application.
+A possible research question is:
+Does personalized, goal-based speaking practice help users improve their selected communication metrics more effectively than receiving generic feedback?
+A simple study could involve:
+Participants complete a baseline practice task.
+One group receives generic feedback, while another receives goal-based exercises, if the study can be organized fairly.
+Participants complete comparable practice tasks.
+We compare relevant metrics and collect feedback about usability and perceived usefulness.
+A small study cannot establish broad effectiveness for everyone. We would report the sample size, limitations, and results honestly.
+We should also test the software itself: transcription failures, camera permission issues, API errors, missing audio, inaccurate metrics, and database behavior. Automated unit tests would help demonstrate strong coding practices to TSA judges.
+8. Why this idea fits the TSA rubric
+Your supplied rubric puts considerable weight on creativity, software coding practices, complexity, and code documentation. It also awards 30 points for coding explanation during the presentation/interview.
+TSA criterion
+How SpeakWise addresses it
+Creativity ×2
+Combines speech analysis, movement awareness, and adaptive learning in a user-centered system
+Coding practices ×2
+Uses modular architecture, clear requirements, error handling, and automated tests
+Complexity ×2
+Connects frontend, backend, analysis pipelines, recommendation logic, and a database
+Technical skill ×1
+Demonstrates API integration, Python algorithms, computer vision, and interactive web development
+Code documentation ×2
+Includes readable functions, comments, architecture documentation, and a clear README
+Resources and AI reflection ×1
+Documents external APIs, AI assistance, testing decisions, limitations, and ethical considerations
+Presentation/interview
+Demonstrates a real workflow and explains the code and design decisions
+
+The project should include a working demonstration, accessible source-code repository, and the required Resources and AI Reflection PDF. Every team member should understand the code well enough to explain it.
+9. A realistic development roadmap
+Do not try to build every feature at once. The best strategy is to make the core workflow work first, then add complexity.
+Phase 1 — Build the basic web app
+Create the interface, practice modes, recording screen, goal selection, and session structure.
+Phase 2 — Integrate speech analysis
+Connect a speech API, process transcripts, and implement your own supported metrics. Add error handling for failed recordings and API requests.
+Phase 3 — Build the personalized learning engine
+Implement the algorithm that uses user-selected goals and prior results to recommend targeted exercises.
+Phase 4 — Add session history and progress
+Save relevant metrics and build a dashboard for comparing practice attempts.
+Phase 5 — Add optional pose estimation
+Implement webcam permissions, landmark visualization, movement summaries, and controls to disable camera processing.
+Phase 6 — Test, document, and polish
+Test edge cases, improve accessibility, conduct a small user evaluation, document the code, and prepare an offline demonstration fallback.
+A focused minimum viable product could take several weeks, while a polished version with reliable speech analysis, movement tracking, testing, and documentation could take considerably longer. Your experience, team size, API setup, and available time will determine the actual schedule.
