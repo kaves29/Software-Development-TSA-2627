@@ -9,6 +9,8 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 | Path | Purpose |
 | --- | --- |
 | `md/` | Future topic notes; update existing notes before creating new ones. Currently empty. |
+| `AI/master-implementation-prompt.md` | Owner-approved scope and detailed handoff prompt for the stateless AI onboarding and personalized roadmap prototype. |
+| `AI/second-review-and-fix-prompt.md` | Follow-up instructions for independently auditing, testing, and fixing the prototype against the master specification. |
 | `skills/` | Approved reusable skills for this area; currently empty. |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |
 
