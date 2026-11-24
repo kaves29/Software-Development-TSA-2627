@@ -84,3 +84,27 @@ The first milestone is a complete audio-only practice session: choose a goal, re
 ## Testing
 
 We plan to test metric calculations, exercise selection, session storage, and failures such as missing audio, denied camera access, and unavailable APIs. Voluntary usability testing will help us check whether the feedback is understandable and the exercises are useful. Any results will include the study's size and limitations.
+
+## Post-assessment frontend prototype
+
+From the repository root, run:
+
+```sh
+python -m http.server 8000 --directory frontend
+```
+
+Open http://localhost:8000. The prototype opens on the post-assessment
+dashboard. Choose **Presentation** to set a format, duration, prep time,
+and audience, with an optional local PDF. Choose **Interview** to practice
+with a built-in or self-entered question. Each session has a timer and a
+completion screen with options to retry or return home.
+
+The prototype uses HTML, CSS, and JavaScript without external dependencies.
+It can be served locally for offline review and leaves the production client
+choice open. Rehearsals are timed locally, slides stay on the device, and
+the session summary shows elapsed time. Assessment, account services,
+recording, analysis, saved sessions, and Roadmap are outside this prototype.
+
+The screens draw on the team’s [FigJam app flow](https://www.figma.com/board/fbmVOq5zpYMDSyR7gGmH9z/app-flow)
+and the supplied Cube and Spot palettes. See the [project status](agent-context/project/md/project_status.md#frontend-implementation-progress)
+for implementation and verification details.

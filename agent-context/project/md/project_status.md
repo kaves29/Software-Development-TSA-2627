@@ -34,3 +34,19 @@ The user explicitly confirmed that React Native and Supabase remain proposals; d
 ## Documentation practice
 
 Update this file when the overall state or an unresolved decision changes. Store detailed frontend/backend decisions in their area's `md/` folder when established, and link them from the area's guide. Do not create speculative methodologies or skill instructions. Preserve evidence of external resources and AI assistance for the required reflection without claiming the reflection is complete.
+
+## UI concept progress
+
+- 2026-11-24: Generated a first static Speakly concept for team review, covering practice mode selection, interview recording with camera off, and feedback with a next exercise. Used the repository's proposed practice flow. The Figma app flow file link was unavailable, so screen order and wording remain provisional.
+- Used the user-supplied Cube and Spot palette images. The concept uses very light sage as the app background, slate navy for primary actions, and Spot colors in small accents.
+- AI use for reflection: Codex ImageGen produced the concept image. The displayed session metrics are fictional and should be visibly labeled as sample data in future design reviews. The requested design and motion skills were unavailable in this session. No implementation work was started.
+
+- 2026-11-24: Read the [FigJam app flow](https://www.figma.com/board/fbmVOq5zpYMDSyR7gGmH9z/app-flow) and used Codex ImageGen to draft two static review boards with six screens: goal selection, placement test introduction, home, presentation setup, mock interview setup, and personalized roadmap. Used the supplied Cube and Spot palettes. The dashboard percentage and roadmap progression are illustrative. The presentation draft shows an unsupported 10-minute prep setting and conflicting mode selections. The board specifies prep choices of none, 30 seconds, 1 minute, and 3 minutes. No app implementation started.
+
+## Frontend implementation progress
+
+- 2026-11-24: Added a dependency-free browser prototype for the approved post-assessment scope. The dashboard leads to the Presentation and Interview setup screens from FigJam. No production framework decision was made.
+- Presentation supports random topics, prepared presentations, and assignments. The team’s specified presentation and prep times are available. A selected PDF opens through a local browser URL. Practice distinguishes prep, remaining time, and overtime.
+- Interview uses a built-in sample question or a user-entered question, with an elapsed timer. Both flows offer a completion screen with retry and home links. No recording, analysis, or results storage is involved.
+- Verified in Chromium at 360 px: dashboard navigation, both setup-to-completion paths, whitespace validation, creation of the local PDF link, early end of prep, retry, return home, and no horizontal overflow or uncaught page errors. PDF rendering and the natural countdown transitions were outside this check.
+- AI use for reflection: Codex assisted with the frontend code, documentation, and browser verification. The earlier concept boards were generated with ImageGen. Team review of the interface and rehearsal behavior remains pending.

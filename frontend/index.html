@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speakly · Practice studio</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="#home">Speakly<span>.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#presentation">Presentation</a>
+        <a href="#interview">Interview</a>
+      </nav>
+    </header>
+    <main id="screen" tabindex="-1"></main>
+  </div>
+  <template id="home">
+    <section class="hero">
+      <p class="eyebrow">Practice studio</p>
+      <h1>What would you like<br>to practice?</h1>
+      <p>Rehearse a presentation or try answering an interview question out loud.</p>
+    </section>
+    <div class="choices">
+      <a class="choice" href="#presentation">
+        <span class="mark" aria-hidden="true">▤</span>
+        <h2>Presentation</h2>
+        <p>Choose a topic, set your time, and rehearse with or without slides.</p>
+        <span class="action">Set up presentation <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="choice interview" href="#interview">
+        <span class="mark" aria-hidden="true">◫</span>
+        <h2>Interview</h2>
+        <p>Practice with a sample question or bring one of your own.</p>
+        <span class="action">Set up interview <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </template>
+  <template id="presentation">
+    <a class="back" href="#home">← Home</a>
+    <h1>Presentation setup</h1>
+    <form>
+      <label>Practice format
+        <select name="format">
+          <option value="random">Random topic</option>
+          <option value="prepared">Prepared presentation</option>
+          <option value="assignment">Presentation assignment</option>
+        </select>
+      </label>
+      <label id="topic-field" hidden>Topic <input name="topic" maxlength="240"></label>
+      <div class="fields">
+        <label>Duration
+          <select name="duration">
+            <option value="60">1 minute</option><option value="180" selected>3 minutes</option>
+            <option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option>
+          </select>
+        </label>
+        <label>Prep time
+          <select name="prep">
+            <option value="0">None</option><option value="30">30 seconds</option>
+            <option value="60">1 minute</option><option value="180">3 minutes</option>
+          </select>
+        </label>
+      </div>
+      <label>Audience
+        <select name="audience"><option>Classroom</option><option>Professional</option><option>General</option></select>
+      </label>
+      <label>Slides PDF (optional) <input type="file" name="slides" accept=".pdf,application/pdf"></label>
+      <p class="note">Your PDF opens locally during practice. This rehearsal uses a timer and does not record.</p>
+      <button>Start rehearsal</button>
+    </form>
+  </template>
+  <template id="interview">
+    <a class="back" href="#home">← Home</a>
+    <h1>Mock interview setup</h1>
+    <form>
+      <label>Question source
+        <select name="source"><option value="sample">Sample question</option><option value="own">My question</option></select>
+      </label>
+      <label id="question-field" hidden>Your question <textarea name="question" rows="3" maxlength="500"></textarea></label>
+      <p class="note">Answer out loud at your own pace. This rehearsal uses a timer and does not record.</p>
+      <button>Start interview</button>
+    </form>
+  </template>
+  <template id="practice">
+    <section class="practice">
+      <p class="eyebrow" id="practice-mode"></p>
+      <h1 id="prompt"></h1>
+      <p id="audience"></p>
+      <a id="slides" hidden target="_blank" rel="noopener noreferrer">Open slides in a new tab ↗</a>
+      <p id="timer-label"></p>
+      <p class="timer" id="timer"></p>
+      <button id="advance" type="button">Finish practice</button>
+    </section>
+  </template>
+  <template id="summary">
+    <section class="practice">
+      <p class="eyebrow">Session complete</p>
+      <h1>Practice finished</h1>
+      <p id="elapsed"></p>
+      <a class="button" id="practice-again">Practice again</a>
+      <a class="back" href="#home">Back to home</a>
+    </section>
+  </template>
+</body>
+</html>
