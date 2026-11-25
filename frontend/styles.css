@@ -174,3 +174,12 @@ dialog h2 { margin: 0; }
 .skill-row label { display: flex; align-items: center; margin-bottom: .5rem; }
 .skill-row input { width: auto; accent-color: var(--nav-purple); }
 .skill-row p { margin: .35rem 0; }
+
+#random-settings { display: grid; gap: 1rem; }
+#random-settings .note { margin: 0; }
+.secondary { background: transparent; color: var(--navy); }
+.secondary:hover { background: #dceee3; }
+
+#recording-controls { margin: 1rem 0; padding: .8rem; border: 1px solid var(--line); border-radius: .75rem; background: #edf3eb; }
+#recording-status { margin: 0 0 .65rem; font-weight: 650; }
+#recording-review audio { max-width: 100%; }
