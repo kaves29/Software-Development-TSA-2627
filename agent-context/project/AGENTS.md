@@ -13,8 +13,9 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 | `md/roles.md` | Team responsibilities supplied by the user. |
 | `md/coding_rules.md` | Required coding standards. |
 | `md/competition_info.md` | Supplied competition requirements, rubric, and verification gaps. |
+| `md/user_agent_setup.md` | Agent tools and skills setup for teammates. |
 | `md/sources/` | Preserved user-supplied source material. |
-| `skills/` | Approved reusable skills for this area; currently empty. |
+| `skills/` | Approved reusable skills, including [Skill Creator](skills/skill-creator/SKILL.md). |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |
 
 ## How we work
