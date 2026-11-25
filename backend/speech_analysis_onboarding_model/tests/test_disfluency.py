@@ -8,7 +8,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import soundfile as sf
 
-from speech_analysis.disfluency import labeled_repairs, clip_labels, DisfluencyClips
+from speech_analysis_onboarding_model.disfluency import labeled_repairs, clip_labels, DisfluencyClips
 
 
 class DisfluencyLabelsTest(unittest.TestCase):

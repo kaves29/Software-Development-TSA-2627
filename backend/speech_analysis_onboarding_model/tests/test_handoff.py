@@ -1,6 +1,6 @@
 import unittest
 
-from speech_analysis.handoff import roadmap_evidence
+from speech_analysis_onboarding_model.handoff import roadmap_evidence
 
 
 class HandoffTest(unittest.TestCase):

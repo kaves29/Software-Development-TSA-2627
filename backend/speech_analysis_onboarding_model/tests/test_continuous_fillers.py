@@ -2,7 +2,7 @@ import unittest
 
 import torch
 
-from speech_analysis.train_filler_frames import continuous_targets
+from speech_analysis_onboarding_model.train_filler_frames import continuous_targets
 
 
 class ContinuousTargetTests(unittest.TestCase):

@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from speech_analysis.roadmap import create_app
+from speech_analysis_onboarding_model.roadmap import create_app
 
 
 class RoadmapTest(unittest.TestCase):

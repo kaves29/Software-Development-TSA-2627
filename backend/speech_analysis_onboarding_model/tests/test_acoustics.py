@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from speech_analysis.acoustics import energy_variation
+from speech_analysis_onboarding_model.acoustics import energy_variation
 
 
 class AcousticsTest(unittest.TestCase):

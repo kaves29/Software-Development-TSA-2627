@@ -1,6 +1,6 @@
 import unittest
 
-from speech_analysis.analysis import analyze_features
+from speech_analysis_onboarding_model.analysis import analyze_features
 
 
 class AnalysisTest(unittest.TestCase):

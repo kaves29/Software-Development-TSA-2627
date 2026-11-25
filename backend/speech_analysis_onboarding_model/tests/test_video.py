@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from speech_analysis.video import observations
+from speech_analysis_onboarding_model.video import observations
 
 
 class VideoEvidenceTest(unittest.TestCase):
@@ -25,7 +25,7 @@ class VideoEvidenceTest(unittest.TestCase):
         self.assertEqual(evidence['right_hand_motion']['value'], 0)
 
     def test_proximity_requires_sustained_tracking_and_breaks_on_missing_frame(self):
-        from speech_analysis.video import proximity_intervals
+        from speech_analysis_onboarding_model.video import proximity_intervals
 
         states = [True, True, True, None, True, True, False, True, True, True]
         self.assertEqual(proximity_intervals([
@@ -35,7 +35,7 @@ class VideoEvidenceTest(unittest.TestCase):
 
     def test_background_shift_tracks_known_translation(self):
         import numpy as np
-        from speech_analysis.video import background_shift
+        from speech_analysis_onboarding_model.video import background_shift
 
         rng = np.random.default_rng(24)
         frame = rng.integers(0, 256, (192, 192), dtype=np.uint8)
@@ -47,7 +47,7 @@ class VideoEvidenceTest(unittest.TestCase):
     def test_background_shift_tracks_rotation_and_zoom(self):
         import cv2
         import numpy as np
-        from speech_analysis.video import background_shift
+        from speech_analysis_onboarding_model.video import background_shift
 
         rng = np.random.default_rng(24)
         frame = rng.integers(0, 256, (192, 192), dtype=np.uint8)
@@ -61,7 +61,7 @@ class VideoEvidenceTest(unittest.TestCase):
 
 class ProximityReturnTests(unittest.TestCase):
     def test_missing_landmarks_do_not_count_as_a_return(self):
-        from speech_analysis.video import observed_proximity_returns, proximity_intervals
+        from speech_analysis_onboarding_model.video import observed_proximity_returns, proximity_intervals
 
         for separation, expected in (([None] * 3, 0), ([False, None, False], 0), ([False] * 3, 1)):
             with self.subTest(separation=separation):

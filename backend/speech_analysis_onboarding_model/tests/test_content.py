@@ -2,7 +2,7 @@ import unittest
 import json
 from unittest.mock import patch
 
-from speech_analysis.content import parse_content_result, analyze_content, content_from_words, openai_provider
+from speech_analysis_onboarding_model.content import parse_content_result, analyze_content, content_from_words, openai_provider
 
 
 class ContentTest(unittest.TestCase):
@@ -62,7 +62,7 @@ class ContentTest(unittest.TestCase):
             def read(self, limit):
                 return json.dumps({'output': [{'content': [{'type': 'output_text',
                     'text': json.dumps({'main_point': {'present': True, 'quote': 'hello'}})}]}]}).encode()
-        with patch('speech_analysis.content.urllib.request.urlopen', return_value=Response()) as call:
+        with patch('speech_analysis_onboarding_model.content.urllib.request.urlopen', return_value=Response()) as call:
             answer = openai_provider('hello', 'greet', 'sample-secret', 'gpt-4o-mini')
         request = call.call_args.args[0]
         payload = json.loads(request.data)

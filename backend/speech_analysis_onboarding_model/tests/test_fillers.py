@@ -8,7 +8,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from speech_analysis.fillers import FillerClassifier, save_checkpoint, load_checkpoint, checkpoint_encoder
+from speech_analysis_onboarding_model.fillers import FillerClassifier, save_checkpoint, load_checkpoint, checkpoint_encoder
 
 
 class DummyEncoder(nn.Module):
@@ -70,7 +70,7 @@ class FillerTrainingTest(unittest.TestCase):
         self.assertIn('--encoder', result.stdout)
 
     def test_same_windows_can_be_scored_at_different_thresholds(self):
-        from speech_analysis.fillers import select_filler_events
+        from speech_analysis_onboarding_model.fillers import select_filler_events
 
         windows = [
             {'text': 'um', 'start_s': 0, 'end_s': 1, 'score': .7},
@@ -81,7 +81,7 @@ class FillerTrainingTest(unittest.TestCase):
         self.assertEqual([e['start_s'] for e in select_filler_events(windows, .85)], [.25])
 
     def test_transcript_gaps_require_detected_speech_and_preserve_explicit_fillers(self):
-        from speech_analysis.fillers import transcript_filler_candidates
+        from speech_analysis_onboarding_model.fillers import transcript_filler_candidates
 
         self.assertEqual(transcript_filler_candidates(
             [('Hi', .1, .3), ('um,', .6, .8), ('there', 1.3, 1.5)],
@@ -89,7 +89,7 @@ class FillerTrainingTest(unittest.TestCase):
             [(.3, .6, None), (.6, .8, 'um'), (.8, 1.3, None), (1.5, 1.7, None)])
 
     def test_frame_decoder_localizes_and_drops_short_isolated_predictions(self):
-        from speech_analysis.filler_frames import decode_frames
+        from speech_analysis_onboarding_model.filler_frames import decode_frames
 
         background = [1, 0, 0]
         filler = [.05, .9, .05]
@@ -99,7 +99,7 @@ class FillerTrainingTest(unittest.TestCase):
         ])
 
     def test_hysteresis_bridges_a_short_gap_but_requires_a_confident_frame(self):
-        from speech_analysis.filler_frames import decode_hysteresis
+        from speech_analysis_onboarding_model.filler_frames import decode_hysteresis
 
         rows = [[.4, .6, 0], [.1, .9, 0], [.9, .1, 0], [.4, .6, 0],
                 [1, 0, 0], [1, 0, 0], [.4, .6, 0], [.4, .6, 0]]

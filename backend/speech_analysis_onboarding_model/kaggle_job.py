@@ -165,7 +165,7 @@ def run(root, frames_only=False, continuous=False):
             source += ['--model-dir', str(bundle / 'wavlm')]
         checkpoint = 'filler-continuous-head.pt' if continuous else 'filler-frame-head.pt'
         subprocess.run([sys.executable, '-m', 'torch.distributed.run', '--standalone',
-                        '--nproc-per-node=2', '-m', 'speech_analysis.train_filler_frames',
+                        '--nproc-per-node=2', '-m', 'speech_analysis_onboarding_model.train_filler_frames',
                         *source, '--csv', str(csv_path), '--output', f'/kaggle/working/{checkpoint}',
                         '--batch-size', '8' if continuous else '32', '--device', 'cuda'],
                        check=True, env={**os.environ, 'PYTHONPATH': str(root)})
@@ -184,7 +184,7 @@ def run(root, frames_only=False, continuous=False):
                     '--evaluate-checkpoint', str(output / selected / 'filler-head.pt'),
                     '--baseline-per-label', '32'], check=True)
     sys.path.insert(0, str(root))
-    from speech_analysis.kaggle_disfluency import run as run_disfluency
+    from speech_analysis_onboarding_model.kaggle_disfluency import run as run_disfluency
     run_disfluency(root)
 
 
@@ -192,7 +192,7 @@ def notebook(owner, destination, frames_only=False, continuous=False):
     source = Path(__file__).parent
     files = {name: (source / name).read_text() for name in
              ('fillers.py', 'train_fillers.py', 'kaggle_job.py')}
-    files.update({f'speech_analysis/{name}': (source / name).read_text() for name in
+    files.update({f'speech_analysis_onboarding_model/{name}': (source / name).read_text() for name in
                   ('fillers.py', 'disfluency.py', 'disfluency_model.py', 'train_disfluency.py',
                    'evaluate_disfluency.py', 'kaggle_disfluency.py', 'train_filler_frames.py')})
     command = "run-continuous" if continuous else "run-frames" if frames_only else "run"

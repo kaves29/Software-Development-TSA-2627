@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from speech_analysis.disfluency_model import DisfluencyClassifier, annotation_scores, collate, predict_segments
+from speech_analysis_onboarding_model.disfluency_model import DisfluencyClassifier, annotation_scores, collate, predict_segments
 
 
 class FrameEncoder(nn.Module):
@@ -40,19 +40,19 @@ class DisfluencyModelTest(unittest.TestCase):
         self.assertAlmostEqual(scores['repair']['precision'], 1.0)
 
     def test_training_cli_requires_distinct_train_and_validation_arguments(self):
-        result = subprocess.run([sys.executable, '-m', 'speech_analysis.train_disfluency', '--help'],
+        result = subprocess.run([sys.executable, '-m', 'speech_analysis_onboarding_model.train_disfluency', '--help'],
                                 capture_output=True, text=True)
         self.assertEqual(result.returncode, 0)
         self.assertIn('--train', result.stdout)
         self.assertIn('--validation', result.stdout)
 
     def test_recording_cli_exposes_research_checkpoint(self):
-        result = subprocess.run([sys.executable, '-m', 'speech_analysis', '--help'], capture_output=True, text=True)
+        result = subprocess.run([sys.executable, '-m', 'speech_analysis_onboarding_model', '--help'], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0)
         self.assertIn('--disfluency-head', result.stdout)
 
     def test_heldout_evaluation_cli(self):
-        result = subprocess.run([sys.executable, '-m', 'speech_analysis.evaluate_disfluency', '--help'],
+        result = subprocess.run([sys.executable, '-m', 'speech_analysis_onboarding_model.evaluate_disfluency', '--help'],
                                 capture_output=True, text=True)
         self.assertEqual(result.returncode, 0)
         self.assertIn('--test', result.stdout)

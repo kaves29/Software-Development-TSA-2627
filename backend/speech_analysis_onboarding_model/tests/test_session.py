@@ -5,9 +5,9 @@ import subprocess
 import sys
 from pathlib import Path
 
-from speech_analysis.session import combine_results
-from speech_analysis.session import analyze_session
-from speech_analysis.session import load_manifest
+from speech_analysis_onboarding_model.session import combine_results
+from speech_analysis_onboarding_model.session import analyze_session
+from speech_analysis_onboarding_model.session import load_manifest
 
 
 class SessionTest(unittest.TestCase):
@@ -85,7 +85,7 @@ class SessionTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'bad.json'
             path.write_text('{}')
-            result = subprocess.run([sys.executable, '-m', 'speech_analysis.session', str(path)],
+            result = subprocess.run([sys.executable, '-m', 'speech_analysis_onboarding_model.session', str(path)],
                                     capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
             self.assertIn('manifest', result.stderr.lower())
@@ -106,7 +106,7 @@ class SessionTest(unittest.TestCase):
 
 class ProximitySessionTests(unittest.TestCase):
     def test_only_detailed_video_contributes_to_proximity_returns(self):
-        from speech_analysis.session import combine_results
+        from speech_analysis_onboarding_model.session import combine_results
 
         features = [
             {'hand_near_face': {'status': 'experimental', 'value': .3, 'observed_returns': 1}},

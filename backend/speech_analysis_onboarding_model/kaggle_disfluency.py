@@ -46,10 +46,10 @@ def run(root):
     validation = next(path for name, path in paths.items() if name.startswith('validation-'))
     test = next(path for name, path in paths.items() if name.startswith('test-'))
     subprocess.run([sys.executable, '-m', 'torch.distributed.run', '--standalone', '--nproc-per-node=2',
-                    '-m', 'speech_analysis.train_disfluency', '--train', *train,
+                    '-m', 'speech_analysis_onboarding_model.train_disfluency', '--train', *train,
                     '--validation', str(validation), '--output', str(output), '--batch-size', '2'],
                    check=True, env=env)
-    subprocess.run([sys.executable, '-m', 'speech_analysis.evaluate_disfluency', '--test', str(test),
+    subprocess.run([sys.executable, '-m', 'speech_analysis_onboarding_model.evaluate_disfluency', '--test', str(test),
                     '--checkpoint', str(output / 'disfluency-head.pt'), '--output', str(output / 'test.json')],
                    check=True, env=env)
     (output / 'run.json').write_text(json.dumps({'devices': devices, 'dataset_revision': REVISION}, indent=2))

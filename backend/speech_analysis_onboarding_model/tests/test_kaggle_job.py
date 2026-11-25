@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from speech_analysis.kaggle_job import select_candidate, notebook
+from speech_analysis_onboarding_model.kaggle_job import select_candidate, notebook
 
 
 class ComparisonTest(unittest.TestCase):

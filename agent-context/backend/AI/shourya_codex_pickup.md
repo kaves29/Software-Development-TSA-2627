@@ -1,4 +1,4 @@
-# Sherria Codex pickup
+# Shourya Codex pickup
 
 **Updated:** 2026-11-25
 **Purpose:** Let a new Codex session resume the Speakly AI/audio-model work with the evidence and limits clear. This is a navigation and status document; the linked project notes remain the detailed source of truth.
@@ -28,12 +28,12 @@ The current GitHub `main` branch also contains a browser-based practice prototyp
 
 | Location | What is there |
 | --- | --- |
-| [`backend/speech_analysis/`](../../../backend/speech_analysis/) | Python CLI, audio and video measurements, multi-sample aggregation, model training/evaluation, and roadmap API. |
-| [`backend/speech_analysis/tests/`](../../../backend/speech_analysis/tests/) | `unittest` suite for deterministic code paths and failure cases. |
-| [`backend/speech_analysis/kaggle/`](../../../backend/speech_analysis/kaggle/) | Reproducible Kaggle notebook and private-kernel metadata generated from the checked-in training code. |
-| [`backend/speech_analysis/roadmap.py`](../../../backend/speech_analysis/roadmap.py) | Stateless FastAPI `POST /api/roadmap/generate`; uses an OpenAI Responses API call when configured, or an injected mock provider in tests. |
-| [`backend/speech_analysis/handoff.py`](../../../backend/speech_analysis/handoff.py) | Reduces confirmed profile and recording outputs to roadmap evidence. |
-| [`backend/speech_analysis/session.py`](../../../backend/speech_analysis/session.py) | CLI for two or three recordings, preserving sample-level results and missing evidence. |
+| [`backend/speech_analysis_onboarding_model/`](../../../backend/speech_analysis_onboarding_model/) | Python CLI, audio and video measurements, multi-sample aggregation, model training/evaluation, and roadmap API. |
+| [`backend/speech_analysis_onboarding_model/tests/`](../../../backend/speech_analysis_onboarding_model/tests/) | `unittest` suite for deterministic code paths and failure cases. |
+| [`backend/speech_analysis_onboarding_model/kaggle/`](../../../backend/speech_analysis_onboarding_model/kaggle/) | Reproducible Kaggle notebook and private-kernel metadata generated from the checked-in training code. |
+| [`backend/speech_analysis_onboarding_model/roadmap.py`](../../../backend/speech_analysis_onboarding_model/roadmap.py) | Stateless FastAPI `POST /api/roadmap/generate`; uses an OpenAI Responses API call when configured, or an injected mock provider in tests. |
+| [`backend/speech_analysis_onboarding_model/handoff.py`](../../../backend/speech_analysis_onboarding_model/handoff.py) | Reduces confirmed profile and recording outputs to roadmap evidence. |
+| [`backend/speech_analysis_onboarding_model/session.py`](../../../backend/speech_analysis_onboarding_model/session.py) | CLI for two or three recordings, preserving sample-level results and missing evidence. |
 | [`agent-context/project/md/project_status.md`](../../project/md/project_status.md) | Overall project decisions and status. |
 
 ## Current implementation, in plain terms
@@ -67,8 +67,8 @@ The owner-approved product questions and roadmap cadence are in `onboarding-road
 
 ### Training code and data
 
-- Training/evaluation implementation: [`train_filler_frames.py`](../../../backend/speech_analysis/train_filler_frames.py), [`filler_frames.py`](../../../backend/speech_analysis/filler_frames.py), [`fillers.py`](../../../backend/speech_analysis/fillers.py), and [`kaggle_job.py`](../../../backend/speech_analysis/kaggle_job.py).
-- Notebook checked into GitHub: [`speakly-filler-continuous.ipynb`](../../../backend/speech_analysis/kaggle/speakly-filler-continuous.ipynb). It embeds the project training code at generation time and sets internet/GPU metadata. The private kernel version can differ from this notebook; pull/compare before assuming they are identical.
+- Training/evaluation implementation: [`train_filler_frames.py`](../../../backend/speech_analysis_onboarding_model/train_filler_frames.py), [`filler_frames.py`](../../../backend/speech_analysis_onboarding_model/filler_frames.py), [`fillers.py`](../../../backend/speech_analysis_onboarding_model/fillers.py), and [`kaggle_job.py`](../../../backend/speech_analysis_onboarding_model/kaggle_job.py).
+- Notebook checked into GitHub: [`speakly-filler-continuous.ipynb`](../../../backend/speech_analysis_onboarding_model/kaggle/speakly-filler-continuous.ipynb). It embeds the project training code at generation time and sets internet/GPU metadata. The private kernel version can differ from this notebook; pull/compare before assuming they are identical.
 - Dataset: [PodcastFillers on Zenodo](https://zenodo.org/records/7121457); [annotation terms](https://podcastfillers.github.io/license/). The dataset archive is roughly 6 GB, labels are candidate annotations rather than exhaustive ground truth, and the terms restrict use to noncommercial research. The data is not checked into GitHub and should not be mirrored there.
 - The continuous Kaggle notebook retrieves the archive/labels, verifies expected checksums, selects train/validation recordings, and trains with two T4 GPUs. It needs working Kaggle internet access to fetch Zenodo/Hugging Face data and PyPI dependencies unless a complete offline bundle is attached.
 - [DisfluencySpeech](https://huggingface.co/datasets/amaai-lab/DisfluencySpeech) is a research/development source for marked repair examples. It has a single-actor limitation; annotation gaps do not mean there were no disfluencies. No useful generalizing repetition/repair model was established. Do not treat it as comprehensive truth.
@@ -105,11 +105,11 @@ kaggle kernels status shouryakaveti/speakly-filler-continuous
 kaggle kernels output shouryakaveti/speakly-filler-continuous -p /tmp/speakly-kaggle-output
 
 # Generate a fresh notebook/metadata pair from the checked-in code.
-PYTHONPATH=backend python backend/speech_analysis/kaggle_job.py \
+PYTHONPATH=backend python backend/speech_analysis_onboarding_model/kaggle_job.py \
   --continuous shouryakaveti /tmp/speakly-continuous-notebook
 
 # Upload a reviewed notebook version to Kaggle (only after checking the diff/config).
-kaggle kernels push -p backend/speech_analysis/kaggle
+kaggle kernels push -p backend/speech_analysis_onboarding_model/kaggle
 ```
 
 On a personal machine, install the official Kaggle CLI and create a Kaggle API token from Kaggle account settings. Store it using the CLI's secure local configuration method; do not paste the token into chat, a notebook, environment docs, or source control. Kaggle may require accepting the dataset's terms before downloads. Use the private Kaggle project because the data and model are research-only. Do not enable a training run repeatedly without the owner's intent; report its status instead of polling on a schedule.

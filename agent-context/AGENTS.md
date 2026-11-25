@@ -24,7 +24,7 @@ Speakly is the working title for a communication-practice app with goal-based ex
 | `agent-context/backend/` | Backend context: services, analysis, data, and integration decisions as established. Its `md/` folder holds notes; `skills/` holds approved reusable skills. |
 | `agent-context/project/` | Shared project status, roles, coding rules, competition information, and supplied sources in `md/`; approved project-wide skills in `skills/`. |
 
-Each area has an identical AGENTS.md/CLAUDE.md pair that indexes its local context. Empty folders use `.gitkeep` only so Git retains the structure. The audio analysis code is in `backend/speech_analysis/`. Other application source locations are determined as features are built.
+Each area has an identical AGENTS.md/CLAUDE.md pair that indexes its local context. Empty folders use `.gitkeep` only so Git retains the structure. The audio analysis code is in `backend/speech_analysis_onboarding_model/`. Other application source locations are determined as features are built.
 
 The four main guides (root and agent-context pairs) must also stay identical. Work in the existing checkout; do not create a Git worktree unless the user requests it.
 
