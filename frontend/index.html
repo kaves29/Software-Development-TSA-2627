@@ -41,7 +41,7 @@
           <div><dt>Days practiced</dt><dd id="practice-days">0</dd></div>
           <div><dt>Recordings</dt><dd>0</dd></div>
         </dl>
-        <p class="note">This prototype uses timed rehearsals. Audio and video recording are unavailable.</p>
+        <p class="note">Presentation practice can record audio in your browser. Interview practice uses a timer.</p>
         <h3>Skills you’ve improved</h3>
         <p id="improved-skills"></p>
       </details>
@@ -85,6 +85,14 @@
           <option value="assignment">Presentation assignment</option>
         </select>
       </label>
+      <div id="random-settings">
+        <label>Topic category
+          <select name="category"><option>Technology and AI</option><option>Education</option><option>Society and culture</option><option>Environment</option><option>Business</option><option>Personal experiences</option><option>Current events</option></select>
+        </label>
+        <label>Suggested topic <textarea name="suggestion" rows="3" maxlength="240" required></textarea></label>
+        <button type="button" id="another-topic" class="secondary">Suggest another topic</button>
+        <p class="note">Edit the suggestion to make it more specific.</p>
+      </div>
       <label id="topic-field" hidden>Topic <input name="topic" maxlength="240"></label>
       <div class="fields">
         <label>Duration
@@ -100,11 +108,15 @@
           </select>
         </label>
       </div>
+      <div class="fields">
+        <label>Difficulty <select name="difficulty"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label>
+        <label>Presentation style <select name="style"><option>Informative</option><option>Persuasive</option><option>Argumentative</option><option>Explanatory</option></select></label>
+      </div>
       <label>Audience
         <select name="audience"><option>Classroom</option><option>Professional</option><option>General</option></select>
       </label>
       <label>Slides PDF (optional) <input type="file" name="slides" accept=".pdf,application/pdf"></label>
-      <p class="note">Your PDF opens locally during practice. This rehearsal uses a timer and does not record.</p>
+      <p class="note">Your PDF opens locally during practice. You can choose to record audio during your rehearsal.</p>
       <button>Start rehearsal</button>
     </form>
   </template>
@@ -125,7 +137,12 @@
       <p class="eyebrow" id="practice-mode"></p>
       <h1 id="prompt"></h1>
       <p id="audience"></p>
+      <p id="practice-details"></p>
       <a id="slides" hidden target="_blank" rel="noopener noreferrer">Open slides in a new tab ↗</a>
+      <div id="recording-controls" hidden>
+        <p id="recording-status" role="status" aria-live="polite">Microphone is off.</p>
+        <button id="record-audio" type="button" class="secondary">Start recording</button>
+      </div>
       <p id="timer-label"></p>
       <p class="timer" id="timer"></p>
       <button id="advance" type="button">Finish practice</button>
@@ -136,6 +153,7 @@
       <p class="eyebrow">Session complete</p>
       <h1>Practice finished</h1>
       <p id="elapsed"></p>
+      <div id="recording-review" hidden><p>Your recording</p><audio controls></audio></div>
       <a class="button" id="practice-again">Practice again</a>
       <a class="back" href="#home">Back to home</a>
     </section>

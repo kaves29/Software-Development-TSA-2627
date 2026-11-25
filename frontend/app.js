@@ -1,9 +1,13 @@
 const screen = document.querySelector('#screen');
-const topics = [
-  'Explain a skill you would like to learn.',
-  'Describe one change that would improve your community.',
-  'Teach your audience how to get started with a hobby.'
-];
+const topics = {
+  'Technology and AI': ['Explain how a piece of technology helps you learn.', 'Discuss one way AI could change everyday life.'],
+  'Education': ['Describe one change that could improve learning.', 'Explain a skill schools should teach.'],
+  'Society and culture': ['Describe a tradition that brings people together.', 'Explain how art can bring a community together.'],
+  'Environment': ['Suggest a way your community could reduce waste.', 'Explain why a local green space matters.'],
+  'Business': ['Describe a business idea that solves an everyday problem.', 'Explain what makes a customer experience memorable.'],
+  'Personal experiences': ['Describe a challenge that taught you something.', 'Explain a hobby you would recommend to someone.'],
+  'Current events': ['Explain a recent event that matters to your community.', 'Discuss a current issue and a possible response.']
+};
 const questions = [
   'Tell me about a time you solved a problem.',
   'Describe a time you worked with a team.',
@@ -12,6 +16,24 @@ const questions = [
 
 let interval;
 let slidesUrl;
+let recordingStream;
+let recorder;
+let recordingUrl;
+let recordingSession = 0;
+
+function releaseMicrophone() {
+  recordingStream?.getTracks().forEach(track => track.stop());
+  recordingStream = undefined;
+}
+
+function discardRecording() {
+  recordingSession++;
+  if (recorder && recorder.state !== 'inactive') recorder.stop();
+  recorder = undefined;
+  releaseMicrophone();
+  if (recordingUrl) URL.revokeObjectURL(recordingUrl);
+  recordingUrl = undefined;
+}
 
 const skills = [
   ['Pacing', 'Read a short paragraph slowly, then repeat at a comfortable pace.'],
@@ -110,6 +132,7 @@ function bindRoadmap() {
 
 function show(template) {
   clearInterval(interval);
+  if (template !== 'practice' && template !== 'summary') discardRecording();
   if (slidesUrl) {
     URL.revokeObjectURL(slidesUrl);
     slidesUrl = undefined;
@@ -139,11 +162,76 @@ function startPractice(mode, settings) {
   if (settings.audience) {
     screen.querySelector('#audience').textContent = 'Audience: ' + settings.audience;
   }
+  if (mode === 'presentation') {
+    screen.querySelector('#practice-details').textContent = settings.style + ' · ' + settings.difficulty;
+  }
   if (settings.slides?.size) {
     slidesUrl = URL.createObjectURL(settings.slides);
     const link = screen.querySelector('#slides');
     link.href = slidesUrl;
     link.hidden = false;
+  }
+
+  let recordingFinished = Promise.resolve();
+  if (mode === 'presentation') {
+    const controls = screen.querySelector('#recording-controls');
+    const status = screen.querySelector('#recording-status');
+    const button = screen.querySelector('#record-audio');
+    controls.hidden = false;
+    button.addEventListener('click', async () => {
+      if (recorder && recorder.state !== 'inactive') {
+        recorder.stop();
+        button.disabled = true;
+        return;
+      }
+      if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+        status.textContent = 'Audio recording is unavailable in this browser.';
+        return;
+      }
+      const session = ++recordingSession;
+      button.disabled = true;
+      status.textContent = 'Waiting for microphone permission…';
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        if (session !== recordingSession || !controls.isConnected) {
+          stream.getTracks().forEach(track => track.stop());
+          return;
+        }
+        recordingStream = stream;
+        recorder = new MediaRecorder(stream);
+        const activeRecorder = recorder;
+        const chunks = [];
+        recordingFinished = new Promise(resolve => {
+          recorder.addEventListener('dataavailable', event => {
+            if (event.data.size) chunks.push(event.data);
+          });
+          recorder.addEventListener('stop', () => {
+            stream.getTracks().forEach(track => track.stop());
+            if (recordingStream === stream) recordingStream = undefined;
+            if (session === recordingSession && chunks.length) {
+              if (recordingUrl) URL.revokeObjectURL(recordingUrl);
+              recordingUrl = URL.createObjectURL(new Blob(chunks, { type: activeRecorder.mimeType }));
+            }
+            if (controls.isConnected) {
+              status.textContent = 'Recording stopped. You can listen after finishing practice.';
+              button.textContent = 'Record again';
+              button.disabled = false;
+            }
+            resolve();
+          }, { once: true });
+        });
+        recorder.start();
+        status.textContent = 'Microphone on — recording now.';
+        button.textContent = 'Stop recording';
+        button.disabled = false;
+      } catch {
+        releaseMicrophone();
+        if (session === recordingSession && controls.isConnected) {
+          status.textContent = 'Microphone access failed. Check your browser permissions and try again.';
+          button.disabled = false;
+        }
+      }
+    });
   }
 
   const label = screen.querySelector('#timer-label');
@@ -182,7 +270,16 @@ function startPractice(mode, settings) {
       dashboard.practiceDays.push(date);
       saveDashboard();
     }
+    if (recorder && recorder.state !== 'inactive') recorder.stop();
+    else if (!recordingStream) recordingSession++;
     show('summary');
+    recordingFinished.then(() => {
+      const review = screen.querySelector('#recording-review');
+      if (review && recordingUrl) {
+        review.hidden = false;
+        review.querySelector('audio').src = recordingUrl;
+      }
+    });
     screen.querySelector('#elapsed').textContent = 'Rehearsal time: ' + formatTime(elapsed);
     const retry = screen.querySelector('#practice-again');
     retry.href = '#' + mode;
@@ -201,10 +298,30 @@ function bindSetup(mode) {
   const picker = form.elements.namedItem(presentation ? 'format' : 'source');
   const customField = form.elements.namedItem(presentation ? 'topic' : 'question');
 
+  const suggestion = presentation ? form.elements.namedItem('suggestion') : null;
+  const category = presentation ? form.elements.namedItem('category') : null;
+
+  function suggestTopic() {
+    const choices = topics[category.value];
+    const alternatives = choices.filter(topic => topic !== suggestion.value);
+    suggestion.value = pick(alternatives.length ? alternatives : choices);
+  }
+
+  if (presentation) {
+    suggestion.addEventListener('input', () => suggestion.setCustomValidity(''));
+    category.addEventListener('change', suggestTopic);
+    form.querySelector('#another-topic').addEventListener('click', suggestTopic);
+    suggestTopic();
+  }
+
   function updateField() {
     const custom = picker.value !== (presentation ? 'random' : 'sample');
     customField.closest('label').hidden = !custom;
     customField.required = custom;
+    if (presentation) {
+      screen.querySelector('#random-settings').hidden = custom;
+      suggestion.required = !custom;
+    }
     customField.setCustomValidity('');
   }
 
@@ -221,6 +338,11 @@ function bindSetup(mode) {
       customField.reportValidity();
       return;
     }
+    if (suggestion?.required && !suggestion.value.trim()) {
+      suggestion.setCustomValidity('Enter a topic before starting.');
+      suggestion.reportValidity();
+      return;
+    }
     const slides = data.get('slides');
     if (slides?.size && !(/\.pdf$/i.test(slides.name) &&
       (!slides.type || slides.type === 'application/pdf'))) {
@@ -231,10 +353,12 @@ function bindSetup(mode) {
     }
 
     startPractice(mode, {
-      prompt: customField.required ? customPrompt : pick(presentation ? topics : questions),
+      prompt: customField.required ? customPrompt : presentation ? suggestion.value.trim() : pick(questions),
       prep: Number(data.get('prep')),
       duration: Number(data.get('duration')),
       audience: data.get('audience'),
+      style: data.get('style'),
+      difficulty: data.get('difficulty'),
       slides
     });
   });
