@@ -9,7 +9,7 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 | Path | Purpose |
 | --- | --- |
 | `md/` | Frontend notes, including the [skills index](md/skills.md). |
-| `skills/` | Approved reusable skills for this area; currently empty. |
+| `skills/` | Approved reusable skills, including [Frontend Design](skills/frontend-design/SKILL.md), [UI/UX Pro Max](skills/ui-ux-pro-max/SKILL.md), and [Unslop Motion](skills/unslop-motion/SKILL.md). |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |
 
 ## How we work
