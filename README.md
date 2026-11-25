@@ -2,13 +2,13 @@
 
 Personalized communication practice · TSA Software Development 2026–2027
 
-Speakly is a planned web app for practicing presentations, interviews, and everyday conversations. Users record a response, review feedback, and get a focused exercise based on their goals and previous attempts.
+Speakly is a planned communication-practice app for presentations, interviews, and everyday conversations. Users will record a response, review supported feedback, and get a focused exercise based on their goals and previous attempts.
 
 The goal is to make useful speaking practice easier to access without needing a coach or someone available to listen every time.
 
 ## Project status
 
-This project is in the planning stage. The features and technology choices below describe the proposed app; they have not been implemented yet. **Speakly** is the working title.
+The project is in planning with an early Python audio-analysis and roadmap API prototype. The React Native app and real-user evaluation are not in this repository yet. Check [`project_status.md`](agent-context/project/md/project_status.md) before treating a planned feature as implemented. **Speakly** is the working title.
 
 ## How it works
 
@@ -49,7 +49,7 @@ Webcam-based pose estimation could help users review repeated upper-body movemen
 
 | Component | Proposed tools |
 | --- | --- |
-| Frontend | React, HTML, and CSS |
+| Frontend | React Native (team proposal; confirm before implementation) |
 | Backend | Python and FastAPI |
 | Speech recognition | A speech-to-text provider, still to be selected |
 | Speech metrics and exercise recommendations | Custom Python logic |
