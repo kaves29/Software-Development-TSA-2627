@@ -9,7 +9,7 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 | Path | Purpose |
 | --- | --- |
 | `md/` | Frontend notes, including the [skills index](md/skills.md). |
-| `skills/` | Approved reusable skills for this area; currently empty. |
+| `skills/` | Reusable skills for this area, including Playwright browser automation. |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |
 
 ## How we work
