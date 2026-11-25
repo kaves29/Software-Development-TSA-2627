@@ -107,10 +107,11 @@ Presentation, Interview, Roadmap, and Progress sections. The bottom tabs
 provide a second route to Home and the three practice areas. Roadmap offers
 sample exercises and lets users select focus skills and mark improvements
 they notice. Progress counts distinct local days with a finished rehearsal,
-shows self-reported improvements, and displays zero recordings because
-capture is unavailable. The display name, goal date, practice dates, and
+shows self-reported improvements, and displays zero saved recordings.
+Presentation practice supports optional audio recording and immediate playback.
+Recordings are temporary and are not saved between sessions. The display name, goal date, practice dates, and
 skill selections are stored in the current browser. Assessment, account
-services, recording, analysis, and saved session playback remain outside
+services, interview recording, analysis, and saved session playback remain outside
 this prototype.
 
 The screens draw on the team’s [FigJam app flow](https://www.figma.com/board/fbmVOq5zpYMDSyR7gGmH9z/app-flow)
