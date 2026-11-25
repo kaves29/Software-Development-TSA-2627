@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speakly · Practice studio</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <main id="screen" tabindex="-1"></main>
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a href="#home"><span aria-hidden="true">⌂</span>Home</a>
+      <a href="#presentation"><span aria-hidden="true">▤</span>Presentation</a>
+      <a href="#interview"><span aria-hidden="true">♧</span>Interview</a>
+      <a href="#roadmap"><span aria-hidden="true">◇</span>Roadmap</a>
+    </nav>
+  </div>
+  <template id="home">
+    <section class="goal-hero">
+      <div class="greeting">
+        <div><h1 id="greeting">Hello, speaker!</h1><p>Keep working toward your speaking goals.</p></div>
+        <button class="profile" id="edit-profile" type="button" aria-label="Edit dashboard name">S</button>
+      </div>
+      <button class="goal-ring" id="edit-goal" type="button">
+        <span>Goal countdown</span>
+        <strong id="goal-value">Set a date</strong>
+        <span id="goal-caption">Choose your target day</span>
+      </button>
+    </section>
+    <section class="dashboard-sheet" aria-labelledby="practice-heading">
+      <span class="sheet-handle" aria-hidden="true"></span>
+      <h2 id="practice-heading">Your practice</h2>
+      <a class="dashboard-row" href="#presentation"><span class="row-icon" aria-hidden="true">▤</span><span><strong>Presentation</strong><small>Set up a rehearsal</small></span><span aria-hidden="true">›</span></a>
+      <a class="dashboard-row" href="#interview"><span class="row-icon" aria-hidden="true">♧</span><span><strong>Interview</strong><small>Try a mock question</small></span><span aria-hidden="true">›</span></a>
+      <a class="dashboard-row" href="#roadmap"><span class="row-icon" aria-hidden="true">◇</span><span><strong>Roadmap</strong><small>Choose skills to focus on</small></span><span aria-hidden="true">›</span></a>
+      <details class="progress-box" open>
+        <summary>Progress</summary>
+        <dl class="stats">
+          <div><dt>Days practiced</dt><dd id="practice-days">0</dd></div>
+          <div><dt>Saved recordings</dt><dd>0</dd></div>
+        </dl>
+        <p class="note">Presentation practice can record audio in your browser. Interview practice uses a timer.</p>
+        <h3>Skills you’ve improved</h3>
+        <p id="improved-skills"></p>
+      </details>
+    </section>
+    <dialog id="goal-dialog">
+      <form method="dialog">
+        <h2>Set your goal date</h2>
+        <label>Target date <input name="target" type="date" required></label>
+        <div class="dialog-actions">
+          <button value="cancel" formnovalidate>Cancel</button>
+          <button value="save">Save date</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="profile-dialog">
+      <form method="dialog">
+        <h2>Edit your greeting</h2>
+        <label>Display name <input name="displayName" maxlength="40" autocomplete="given-name"></label>
+        <div class="dialog-actions">
+          <button value="cancel">Cancel</button><button value="save">Save name</button>
+        </div>
+      </form>
+    </dialog>
+  </template>
+  <template id="roadmap">
+    <section class="inner-page">
+      <a class="back" href="#home">← Home</a>
+      <h1>Your roadmap</h1>
+      <p>Choose skills to practice. Mark improvement when you notice a change in your own rehearsals.</p>
+      <div id="skill-list"></div>
+    </section>
+  </template>
+  <template id="presentation">
+    <a class="back" href="#home">← Home</a>
+    <h1>Presentation setup</h1>
+    <form>
+      <label>Practice format
+        <select name="format">
+          <option value="random">Random topic</option>
+          <option value="prepared">Prepared presentation</option>
+          <option value="assignment">Presentation assignment</option>
+        </select>
+      </label>
+      <div id="random-settings">
+        <label>Topic category
+          <select name="category"><option>Technology and AI</option><option>Education</option><option>Society and culture</option><option>Environment</option><option>Business</option><option>Personal experiences</option><option>Current events</option></select>
+        </label>
+        <label>Suggested topic <textarea name="suggestion" rows="3" maxlength="240" required></textarea></label>
+        <button type="button" id="another-topic" class="secondary">Suggest another topic</button>
+        <p class="note">Edit the suggestion to make it more specific.</p>
+      </div>
+      <label id="topic-field" hidden>Topic <input name="topic" maxlength="240"></label>
+      <div class="fields">
+        <label>Duration
+          <select name="duration">
+            <option value="60">1 minute</option><option value="180" selected>3 minutes</option>
+            <option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option>
+          </select>
+        </label>
+        <label>Prep time
+          <select name="prep">
+            <option value="0">None</option><option value="30">30 seconds</option>
+            <option value="60">1 minute</option><option value="180">3 minutes</option>
+          </select>
+        </label>
+      </div>
+      <div class="fields">
+        <label>Difficulty <select name="difficulty"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label>
+        <label>Presentation style <select name="style"><option>Informative</option><option>Persuasive</option><option>Argumentative</option><option>Explanatory</option></select></label>
+      </div>
+      <label>Audience
+        <select name="audience"><option>Classroom</option><option>Professional</option><option>General</option></select>
+      </label>
+      <label>Slides PDF (optional) <input type="file" name="slides" accept=".pdf,application/pdf"></label>
+      <p class="note">Your PDF opens locally during practice. You can choose to record audio during your rehearsal.</p>
+      <button>Start rehearsal</button>
+    </form>
+  </template>
+  <template id="interview">
+    <a class="back" href="#home">← Home</a>
+    <h1>Mock interview setup</h1>
+    <form>
+      <label>Question source
+        <select name="source"><option value="sample">Sample question</option><option value="own">My question</option></select>
+      </label>
+      <label id="question-field" hidden>Your question <textarea name="question" rows="3" maxlength="500"></textarea></label>
+      <p class="note">Answer out loud at your own pace. This rehearsal uses a timer and does not record.</p>
+      <button>Start interview</button>
+    </form>
+  </template>
+  <template id="practice">
+    <section class="practice">
+      <p class="eyebrow" id="practice-mode"></p>
+      <h1 id="prompt"></h1>
+      <p id="audience"></p>
+      <p id="practice-details"></p>
+      <a id="slides" hidden target="_blank" rel="noopener noreferrer">Open slides in a new tab ↗</a>
+      <div id="recording-controls" hidden>
+        <p id="recording-status" role="status" aria-live="polite">Microphone is off.</p>
+        <button id="record-audio" type="button" class="secondary">Start recording</button>
+      </div>
+      <p id="timer-label"></p>
+      <p class="timer" id="timer"></p>
+      <button id="advance" type="button">Finish practice</button>
+    </section>
+  </template>
+  <template id="summary">
+    <section class="practice">
+      <p class="eyebrow">Session complete</p>
+      <h1>Practice finished</h1>
+      <p id="elapsed"></p>
+      <div id="recording-review" hidden><p>Your recording</p><audio controls></audio></div>
+      <a class="button" id="practice-again">Practice again</a>
+      <a class="back" href="#home">Back to home</a>
+    </section>
+  </template>
+</body>
+</html>

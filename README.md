@@ -8,7 +8,7 @@ The goal is to make useful speaking practice easier to access without needing a 
 
 ## Project status
 
-The project is in planning with an early Python audio-analysis and roadmap API prototype. The React Native app and real-user evaluation are not in this repository yet. Check [`project_status.md`](agent-context/project/md/project_status.md) before treating a planned feature as implemented. **Speakly** is the working title.
+The project includes a browser-based practice prototype and an early Python audio-analysis/roadmap API prototype. AI analysis is not connected to the practice interface, and the React Native app and real-user evaluation remain future work. Check [`project_status.md`](agent-context/project/md/project_status.md) before treating a planned feature as implemented. **Speakly** is the working title.
 
 ## How it works
 
@@ -49,7 +49,7 @@ Webcam-based pose estimation could help users review repeated upper-body movemen
 
 | Component | Proposed tools |
 | --- | --- |
-| Frontend | React Native (team proposal; confirm before implementation) |
+| Frontend | Browser prototype; production framework unresolved (React Native is a proposal) |
 | Backend | Python and FastAPI |
 | Speech recognition | A speech-to-text provider, still to be selected |
 | Speech metrics and exercise recommendations | Custom Python logic |
@@ -84,3 +84,36 @@ The first milestone is a complete audio-only practice session: choose a goal, re
 ## Testing
 
 We plan to test metric calculations, exercise selection, session storage, and failures such as missing audio, denied camera access, and unavailable APIs. Voluntary usability testing will help us check whether the feedback is understandable and the exercises are useful. Any results will include the study's size and limitations.
+
+## Post-assessment frontend prototype
+
+From the repository root, run:
+
+```sh
+python -m http.server 8000 --directory frontend
+```
+
+Open http://localhost:8000. The prototype opens on the post-assessment
+dashboard. Choose **Presentation** to set a format, duration, prep time,
+and audience, with an optional local PDF. Choose **Interview** to practice
+with a built-in or self-entered question. Each session has a timer and a
+completion screen with options to retry or return home.
+
+The prototype uses HTML, CSS, and JavaScript without external dependencies.
+It can be served locally for offline review and leaves the production client
+choice open. Rehearsals are timed locally, slides stay on the device, and
+the session summary shows elapsed time. The phone dashboard has a user-set goal-date countdown and stacked
+Presentation, Interview, Roadmap, and Progress sections. The bottom tabs
+provide a second route to Home and the three practice areas. Roadmap offers
+sample exercises and lets users select focus skills and mark improvements
+they notice. Progress counts distinct local days with a finished rehearsal,
+shows self-reported improvements, and displays zero saved recordings.
+Presentation practice supports optional audio recording and immediate playback.
+Recordings are temporary and are not saved between sessions. The display name, goal date, practice dates, and
+skill selections are stored in the current browser. Assessment, account
+services, interview recording, analysis, and saved session playback remain outside
+this prototype.
+
+The screens draw on the team’s [FigJam app flow](https://www.figma.com/board/fbmVOq5zpYMDSyR7gGmH9z/app-flow)
+and the supplied Cube and Spot palettes. See the [project status](agent-context/project/md/project_status.md#frontend-implementation-progress)
+for implementation and verification details.

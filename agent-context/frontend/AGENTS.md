@@ -8,8 +8,8 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 
 | Path | Purpose |
 | --- | --- |
-| `md/` | Future topic notes; update existing notes before creating new ones. Currently empty. |
-| `skills/` | Approved reusable skills for this area; currently empty. |
+| `md/` | Frontend notes, including the [skills index](md/skills.md). |
+| `skills/` | Approved reusable skills, including [Frontend Design](skills/frontend-design/SKILL.md), [UI/UX Pro Max](skills/ui-ux-pro-max/SKILL.md), [Unslop Motion](skills/unslop-motion/SKILL.md), and [Playwright](skills/playwright-skill/SKILL.md). |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |
 
 ## How we work
