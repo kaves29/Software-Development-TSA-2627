@@ -102,8 +102,16 @@ completion screen with options to retry or return home.
 The prototype uses HTML, CSS, and JavaScript without external dependencies.
 It can be served locally for offline review and leaves the production client
 choice open. Rehearsals are timed locally, slides stay on the device, and
-the session summary shows elapsed time. Assessment, account services,
-recording, analysis, saved sessions, and Roadmap are outside this prototype.
+the session summary shows elapsed time. The phone dashboard has a user-set goal-date countdown and stacked
+Presentation, Interview, Roadmap, and Progress sections. The bottom tabs
+provide a second route to Home and the three practice areas. Roadmap offers
+sample exercises and lets users select focus skills and mark improvements
+they notice. Progress counts distinct local days with a finished rehearsal,
+shows self-reported improvements, and displays zero recordings because
+capture is unavailable. The display name, goal date, practice dates, and
+skill selections are stored in the current browser. Assessment, account
+services, recording, analysis, and saved session playback remain outside
+this prototype.
 
 The screens draw on the team’s [FigJam app flow](https://www.figma.com/board/fbmVOq5zpYMDSyR7gGmH9z/app-flow)
 and the supplied Cube and Spot palettes. See the [project status](agent-context/project/md/project_status.md#frontend-implementation-progress)

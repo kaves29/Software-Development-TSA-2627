@@ -9,36 +9,70 @@
 </head>
 <body>
   <div class="shell">
-    <header>
-      <a class="brand" href="#home">Speakly<span>.</span></a>
-      <nav aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#presentation">Presentation</a>
-        <a href="#interview">Interview</a>
-      </nav>
-    </header>
     <main id="screen" tabindex="-1"></main>
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a href="#home"><span aria-hidden="true">⌂</span>Home</a>
+      <a href="#presentation"><span aria-hidden="true">▤</span>Presentation</a>
+      <a href="#interview"><span aria-hidden="true">♧</span>Interview</a>
+      <a href="#roadmap"><span aria-hidden="true">◇</span>Roadmap</a>
+    </nav>
   </div>
   <template id="home">
-    <section class="hero">
-      <p class="eyebrow">Practice studio</p>
-      <h1>What would you like<br>to practice?</h1>
-      <p>Rehearse a presentation or try answering an interview question out loud.</p>
+    <section class="goal-hero">
+      <div class="greeting">
+        <div><h1 id="greeting">Hello, speaker!</h1><p>Keep working toward your speaking goals.</p></div>
+        <button class="profile" id="edit-profile" type="button" aria-label="Edit dashboard name">S</button>
+      </div>
+      <button class="goal-ring" id="edit-goal" type="button">
+        <span>Goal countdown</span>
+        <strong id="goal-value">Set a date</strong>
+        <span id="goal-caption">Choose your target day</span>
+      </button>
     </section>
-    <div class="choices">
-      <a class="choice" href="#presentation">
-        <span class="mark" aria-hidden="true">▤</span>
-        <h2>Presentation</h2>
-        <p>Choose a topic, set your time, and rehearse with or without slides.</p>
-        <span class="action">Set up presentation <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="choice interview" href="#interview">
-        <span class="mark" aria-hidden="true">◫</span>
-        <h2>Interview</h2>
-        <p>Practice with a sample question or bring one of your own.</p>
-        <span class="action">Set up interview <span aria-hidden="true">→</span></span>
-      </a>
-    </div>
+    <section class="dashboard-sheet" aria-labelledby="practice-heading">
+      <span class="sheet-handle" aria-hidden="true"></span>
+      <h2 id="practice-heading">Your practice</h2>
+      <a class="dashboard-row" href="#presentation"><span class="row-icon" aria-hidden="true">▤</span><span><strong>Presentation</strong><small>Set up a rehearsal</small></span><span aria-hidden="true">›</span></a>
+      <a class="dashboard-row" href="#interview"><span class="row-icon" aria-hidden="true">♧</span><span><strong>Interview</strong><small>Try a mock question</small></span><span aria-hidden="true">›</span></a>
+      <a class="dashboard-row" href="#roadmap"><span class="row-icon" aria-hidden="true">◇</span><span><strong>Roadmap</strong><small>Choose skills to focus on</small></span><span aria-hidden="true">›</span></a>
+      <details class="progress-box" open>
+        <summary>Progress</summary>
+        <dl class="stats">
+          <div><dt>Days practiced</dt><dd id="practice-days">0</dd></div>
+          <div><dt>Recordings</dt><dd>0</dd></div>
+        </dl>
+        <p class="note">This prototype uses timed rehearsals. Audio and video recording are unavailable.</p>
+        <h3>Skills you’ve improved</h3>
+        <p id="improved-skills"></p>
+      </details>
+    </section>
+    <dialog id="goal-dialog">
+      <form method="dialog">
+        <h2>Set your goal date</h2>
+        <label>Target date <input name="target" type="date" required></label>
+        <div class="dialog-actions">
+          <button value="cancel" formnovalidate>Cancel</button>
+          <button value="save">Save date</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="profile-dialog">
+      <form method="dialog">
+        <h2>Edit your greeting</h2>
+        <label>Display name <input name="displayName" maxlength="40" autocomplete="given-name"></label>
+        <div class="dialog-actions">
+          <button value="cancel">Cancel</button><button value="save">Save name</button>
+        </div>
+      </form>
+    </dialog>
+  </template>
+  <template id="roadmap">
+    <section class="inner-page">
+      <a class="back" href="#home">← Home</a>
+      <h1>Your roadmap</h1>
+      <p>Choose skills to practice. Mark improvement when you notice a change in your own rehearsals.</p>
+      <div id="skill-list"></div>
+    </section>
   </template>
   <template id="presentation">
     <a class="back" href="#home">← Home</a>
