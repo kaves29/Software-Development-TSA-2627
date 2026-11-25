@@ -1,0 +1,14 @@
+# Speakly analysis goals
+
+Validate 15 distinct audio features, 15 distinct video features, and 5–10 features that use both modalities. Use complete English speaking recordings. The minimum score for each feature is 0.85 and the target is 0.90. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
+
+## Benchmark acceptance protocol
+
+- Freeze feature definitions, tolerances, labels, exclusions, and the split before optimization. Keep speakers and source recordings disjoint across splits, including derived clips. Keep the final labels separate from model and threshold development.
+- Use pooled event F1 for event features, with one-to-one matches, class agreement, and both endpoints within 250 ms as the initial event rule. Report precision, recall, false alarms per minute, and boundary error. Review the tolerance against annotator agreement before freezing it.
+- Use macro F1 for categorical features. For continuous measurements and landmark tracking, define a tolerance in meaningful units before tuning and use the fraction within tolerance, alongside absolute error. Freeze a separate tolerance for each such feature before it can pass.
+- Use all eligible labeled units as the denominator for tolerance scores. For event and classification scores, count unavailable predictions as misses when there is labeled evidence. Report coverage and uncertainty by resampling speakers. Disclose missing reference labels, and do not count a feature as validated when it has no independent labeled positives.
+- Compare fusion to both single-modality baselines on the same recordings, with the same labels and scoring rules. Report alignment errors and show incremental value from combining modalities.
+- Freeze predictor and scorer revisions, source terms, recording hashes, split identifiers, label provenance, and commands. Keep recordings, credentials, and restricted artifacts private.
+
+Candidate fusion tasks include visible speech timing versus voiced segments, gesture timing versus speech onset, gesture overlap with pauses, gesture timing around pitch accents, and nod timing during speaking versus listening. These are candidates pending an observable definition, independent labeling, and baseline comparisons.
