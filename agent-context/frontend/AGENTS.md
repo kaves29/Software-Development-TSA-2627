@@ -8,7 +8,7 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 
 | Path | Purpose |
 | --- | --- |
-| `md/` | Future topic notes; update existing notes before creating new ones. Currently empty. |
+| `md/` | Frontend notes, including the [skills index](md/skills.md). |
 | `skills/` | Approved reusable skills for this area; currently empty. |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |
 
