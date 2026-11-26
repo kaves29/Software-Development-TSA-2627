@@ -28,3 +28,4 @@
 
 - Owner set 0.70 as the current minimum and reiterated the need to complete the audio, video, and multimodal pipelines. The requested combined-feature count needs clarification. The prior 0.85 threshold in GOALS.md was superseded.
 - Current audio feature names include overlapping prompt and organization heuristics and provider-backed content observations. The video list contains 15 outputs but lacks independent validation for those outputs. Session aggregation has no validated multimodal features. Counts of fields do not establish distinct, validated capabilities.
+- Compared balanced and recall Uhm spans with WavLM class labels on both complete development recordings. Pooled typed F1 was 0.511 and 0.510, respectively. This remains below the current 0.70 minimum. More recall alone added false alarms and did not improve pooled performance.
