@@ -25,7 +25,7 @@ def decode_frames(probabilities, duration, threshold=.6, min_frames=5):
     return events
 
 
-def score_recording(model, waveform, batch_size=16, *, window_samples=16000):
+def score_recording(model, waveform, batch_size=16, *, window_samples=16000, device='cpu'):
     import numpy as np
     import torch
 
@@ -42,7 +42,7 @@ def score_recording(model, waveform, batch_size=16, *, window_samples=16000):
             batch = starts[index:index + batch_size]
             clips = [waveform[start:start + window_samples] for start in batch]
             audio = np.stack([np.pad(clip, (0, window_samples - len(clip))) for clip in clips])
-            probabilities = model(torch.from_numpy(audio)).softmax(-1).cpu().numpy()
+            probabilities = model(torch.from_numpy(audio).to(device)).softmax(-1).cpu().numpy()
             for start, clip, rows in zip(batch, clips, probabilities):
                 offset = start // stride
                 valid = min(len(rows), max(0, (len(clip) - 400) // stride + 1))

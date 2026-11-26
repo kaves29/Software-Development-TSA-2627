@@ -88,3 +88,30 @@ We ran the verified PodcastFillers head on the full 943.787 s development headse
 Eighteen of the 40 historical predictions had a midpoint within 250 ms of another participant's annotated filler and no target-speaker filler. This is evidence of possible headset bleed, with competing speech attribution worth testing. It does not establish that all 18 events are crosstalk or that a single-channel speaking sample would behave the same way.
 
 A development-only crosstalk diagnostic compared target Headset-3 against the one available competing stream, Headset-1. Keeping events at least 6 dB stronger on the target stream retained all six strict matches and removed 29 unmatched predictions: precision 0.545, recall 0.375, F1 0.4444. The 0 and 3 dB trials gave F1 0.2308 and 0.3243. The other two headset downloads returned HTTP 503 after retries, so the all-channel comparison remains unrun. This is a one-recording diagnostic that requires an extra synchronized audio channel; it does not support deploying this threshold for single-mic onboarding. Recall was unchanged, so speaker attribution alone is insufficient.
+
+A second competing headset (Headset-2) became available for IS1008a.D. Comparing target RMS against the larger of the two available competing-channel RMS values gave 0.4615 development F1 at both 3 dB and 6 dB, with 6 of 16 references matched and 10 predictions. The 0 dB result was 0.375. These are still one-recording, extra-channel diagnostics. A third competing headset is needed for the complete comparison. Recall stayed 0.375.
+
+### Warm-start adaptation experiment
+
+The next pilot froze the uploaded WavLM encoder and fine-tuned its existing linear head on 120 four-second windows, sampled evenly from ES2008a.A and TS3005a.A with seed 42 and a two-second hop. Sampled frames included both filler classes. The objective used inverse square-root class weights on annotated frames only, five passes through the cached features, and AdamW at 0.0003. Full-recording scoring uses the fixed 0.60 and 0.80 thresholds, 12 consecutive frames, and the unchanged 250 ms two-boundary scorer. Additional training recordings could not be retrieved from the AMI mirror (HTTP 503). The small sample is a development experiment rather than a generalization claim.
+
+To reproduce with the same three complete WAV files named by recording ID and the uploaded checkpoint:
+
+```sh
+PYTHONPATH=backend python -m speech_analysis_onboarding_model.adapt_ami_filler \
+  ami_public_manual_1.6.2.zip recordings filler-continuous-head.pt adaptation-output \
+  --train ES2008a.A --train TS3005a.A --development IS1008a.D
+```
+
+The runner writes input digests and sampled window offsets. It rejects official test recordings for either role. It can use CUDA when available; the local pilot ran on CPU.
+
+The warm-start pilot finished the complete IS1008a.D development comparison:
+
+| Head | Decoder threshold | Matches / predictions | Precision | Recall | Event F1 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Original | 0.60 | 8 / 80 | 0.100 | 0.500 | 0.167 |
+| Original | 0.80 | 6 / 40 | 0.150 | 0.375 | 0.214 |
+| Adapted | 0.60 | 5 / 38 | 0.132 | 0.312 | 0.185 |
+| Adapted | 0.80 | 3 / 14 | 0.214 | 0.188 | 0.200 |
+
+Adaptation suppressed predictions, including correct detections. The training loss improvement did not produce a better maximum among the two predeclared thresholds on this development track. Do not promote the adapted head on this result.
