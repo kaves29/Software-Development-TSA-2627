@@ -36,7 +36,7 @@ def main():
     parser.add_argument("checkpoint", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--train", action="append", required=True)
-    parser.add_argument("--development", required=True)
+    parser.add_argument("--development", action="append", required=True)
     parser.add_argument("--windows-per-track", type=int, default=60)
     parser.add_argument(
         "--original-scores",
@@ -47,14 +47,21 @@ def main():
     args = parser.parse_args()
     root, out = args.audio_dir, args.output
     train, development = args.train, args.development
-    if len(set(train)) != len(train) or args.windows_per_track < 1:
-        parser.error("provide unique training recordings and a positive window count")
+    if (
+        any(len(set(group)) != len(group) for group in (train, development))
+        or args.windows_per_track < 1
+    ):
+        parser.error("provide unique recording IDs and a positive window count")
+    if args.original_scores and len(development) != 1:
+        parser.error("--original-scores requires exactly one development recording")
     with ZipFile(args.annotations) as archive:
         splits = recording_splits(archive)
         if not set(train) <= {row["recording"] for row in splits["training"]}:
             parser.error("all training recordings must be assigned to AMI training")
-        if development not in {row["recording"] for row in splits["development"]}:
-            parser.error("the comparison recording must be assigned to AMI development")
+        if not set(development) <= {row["recording"] for row in splits["development"]}:
+            parser.error(
+                "all comparison recordings must be assigned to AMI development"
+            )
         out.mkdir(parents=True, exist_ok=False)
         with (out / "words.csv").open("w", newline="") as destination:
             writer = csv.writer(destination)
@@ -92,8 +99,10 @@ def main():
     inputs = [
         args.annotations,
         args.checkpoint,
-        *(root / f"{name}.wav" for name in (*train, development)),
+        *(root / f"{name}.wav" for name in (*train, *development)),
     ]
+    if args.original_scores:
+        inputs.append(args.original_scores)
     provenance = {}
     for path in inputs:
         with path.open("rb") as stream:
@@ -184,46 +193,64 @@ def main():
         },
         out / "head.pt",
     )
-    waveform = decode_audio(root / f"{development}.wav", 3600)
-    duration = len(waveform) / 16000
-    if not 0 < duration <= 3600:
-        raise ValueError(
-            "expected a complete nonempty development recording up to one hour"
-        )
+    adapted_head = {
+        key: value.detach().clone() for key, value in model.head.state_dict().items()
+    }
+    pooled = {
+        (tag, threshold): []
+        for tag in ("original", "adapted")
+        for threshold in (0.60, 0.80)
+    }
     with ZipFile(args.annotations) as archive:
-        refs = filler_reference(archive, development, duration)
-    probabilities = score_recording(
-        model, waveform, batch_size=4, window_samples=64000, device=args.device
-    )
-    np.save(out / "development.npy", probabilities)
-    if args.original_scores:
-        original = np.load(args.original_scores, allow_pickle=False)
-        if original.shape != probabilities.shape:
-            raise ValueError(
-                "cached original scores do not match the development recording length"
+        for recording in development:
+            waveform = decode_audio(root / f"{recording}.wav", 3600)
+            duration = len(waveform) / 16000
+            if not 0 < duration <= 3600:
+                raise ValueError(
+                    "expected a complete nonempty development recording up to one hour"
+                )
+            reference = filler_reference(archive, recording, duration)
+            model.head.load_state_dict(adapted_head)
+            adapted = score_recording(
+                model, waveform, batch_size=4, window_samples=64000, device=args.device
             )
-    else:
-        model.head.load_state_dict(original_head)
-        original = score_recording(
-            model, waveform, batch_size=4, window_samples=64000, device=args.device
-        )
-    for tag, scores in [("original", original), ("adapted", probabilities)]:
-        for threshold in (0.60, 0.80):
-            predictions = decode_frames(scores, duration, threshold, 12)
-            print(
-                tag,
-                threshold,
-                recording_event_metrics(
-                    [
-                        {
-                            "duration_s": duration,
-                            "predicted": predictions,
-                            "reference": refs,
-                        }
-                    ]
-                ),
-                flush=True,
-            )
+            np.save(out / f"{recording}.npy", adapted)
+            if args.original_scores:
+                original = np.load(args.original_scores, allow_pickle=False)
+                if original.shape != adapted.shape:
+                    raise ValueError(
+                        "cached original scores do not match the development recording length"
+                    )
+            else:
+                model.head.load_state_dict(original_head)
+                original = score_recording(
+                    model,
+                    waveform,
+                    batch_size=4,
+                    window_samples=64000,
+                    device=args.device,
+                )
+            for tag, scores in (("original", original), ("adapted", adapted)):
+                for threshold in (0.60, 0.80):
+                    row = {
+                        "duration_s": duration,
+                        "reference": reference,
+                        "predicted": decode_frames(scores, duration, threshold, 12),
+                    }
+                    pooled[tag, threshold].append(row)
+                    print(
+                        recording,
+                        tag,
+                        threshold,
+                        recording_event_metrics([row]),
+                        flush=True,
+                    )
+    report = {
+        f"{tag}_{threshold:.2f}": recording_event_metrics(rows)
+        for (tag, threshold), rows in pooled.items()
+    }
+    (out / "metrics.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(json.dumps(report, indent=2))
 
 
 if __name__ == "__main__":
