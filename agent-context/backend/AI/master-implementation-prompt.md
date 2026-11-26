@@ -1,5 +1,7 @@
 # Master implementation prompt: AI onboarding and personalized roadmap
 
+> **Update:** The owner subsequently chose a broad ten-week outline with detailed current-week activities and confirmed a new initial question set with two personalized follow-ups. See `onboarding-roadmap-plan.md` for the current direction and exact questions. Conflicting question and follow-up requirements and the 70 detailed daily activities below are superseded. This historical handoff needs revision before implementation.
+
 Give this entire prompt to the implementation agent. It defines the approved prototype scope and decisions from the project owner. Follow the repository's root and backend `AGENTS.md` instructions and coding rules before changing code.
 
 ## Mission

@@ -1,0 +1,6 @@
+openai-whisper==20250625
+silero-vad==6.3
+librosa==1.0.1
+transformers==4.57.6
+soundfile==0.14.0
+pyarrow==22.0.0

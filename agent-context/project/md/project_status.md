@@ -3,9 +3,9 @@
 ## Current state
 
 - Working title: Speakly. The original concept also used SpeakWise; the README uses Speakly consistently.
-- Stage: planning and context setup. No application code, dependency manifest, build, or test suite exists.
+- Stage: browser practice prototype plus an initial audio/video analysis and roadmap API prototype. The Python CLI and research trainer live in `backend/speech_analysis/`; see [audio analysis and filler research](../../backend/AI/audio-analysis.md) for design and verified results. The browser interface is not yet connected to the AI service.
 - Completed: a public project overview and agent context structure, including roles, coding standards, competition notes, a deadline tracker, and synchronized agent guides.
-- No application features, providers, or technical integrations have been validated.
+- The audio analyzer has passed CPU smoke checks. The experimental filler classifier completed private Kaggle training and held-out podcast evaluation, without meeting the generalization target. Validation on real onboarding responses and integration with the practice interface and roadmap generator remain future work.
 
 ## Proposed product
 

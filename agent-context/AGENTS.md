@@ -4,7 +4,7 @@
 
 We are a four-person team of second-year high-school students in Buford, Georgia, competing in TSA Software Development with the goal of reaching nationals. The students lead the project; coding agents help implement and explain their work.
 
-Speakly is the working title for a communication-practice app with goal-based exercises, speech feedback, progress tracking, and optional movement feedback. The repository currently contains planning documentation only. Do not describe planned features as implemented.
+Speakly is the working title for a communication-practice app with goal-based exercises, speech feedback, progress tracking, and optional movement feedback. The repository contains project planning and an initial audio analysis prototype. Check the project status before describing features as implemented.
 
 ## Start here
 
@@ -24,7 +24,7 @@ Speakly is the working title for a communication-practice app with goal-based ex
 | `agent-context/backend/` | Backend context: services, analysis, data, and integration decisions as established. Its `md/` folder holds notes; `skills/` holds approved reusable skills. |
 | `agent-context/project/` | Shared project status, roles, coding rules, competition information, and supplied sources in `md/`; approved project-wide skills in `skills/`. |
 
-Each area has an identical AGENTS.md/CLAUDE.md pair that indexes its local context. Empty folders use `.gitkeep` only so Git retains the structure. Application source folders and detailed frontend/backend methodologies have not been established.
+Each area has an identical AGENTS.md/CLAUDE.md pair that indexes its local context. Empty folders use `.gitkeep` only so Git retains the structure. The audio analysis code is in `backend/speech_analysis/`. Other application source locations are determined as features are built.
 
 The four main guides (root and agent-context pairs) must also stay identical. Work in the existing checkout; do not create a Git worktree unless the user requests it.
 
