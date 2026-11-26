@@ -215,6 +215,7 @@ function bindHome() {
     screen.querySelector('#practice-heading').textContent = new Intl.DateTimeFormat(undefined, {weekday:'long', month:'short', day:'numeric'}).format(date);
     screen.querySelector('#today-date').textContent = matching.filter(({session}) => session.done).length + '/' + matching.length + ' completed';
     list.replaceChildren();
+    const timeGroups = new Map();
     for (const { session, index } of matching) {
       const row = document.createElement('div');
       row.className = 'session-line';
@@ -222,29 +223,53 @@ function bindHome() {
       button.type = 'button';
       button.className = 'session-row';
       button.textContent = session.name;
+      const isPast = session.date < localDateKey();
       button.addEventListener('click', () => openSession(index));
       const check = document.createElement('input');
       check.type = 'checkbox';
       check.className = 'session-check';
       check.checked = Boolean(session.done);
+      check.disabled = isPast;
       check.setAttribute('aria-label', 'Mark ' + session.name + ' complete');
-      check.addEventListener('change', () => { session.done = check.checked; saveDashboard(); renderSessions(); });
+      check.addEventListener('change', () => {
+        if (session.date < localDateKey()) { renderSessions(); return; }
+        session.done = check.checked; saveDashboard(); renderSessions();
+      });
       const card = document.createElement('div');
       card.className = 'session-card';
       card.append(button, check);
       const time = document.createElement('div');
       time.className = 'session-time';
-      time.textContent = session.startTime ? session.startTime + (session.endTime ? '–' + session.endTime : '') : new Intl.DateTimeFormat(undefined, {weekday:'short', month:'numeric', day:'numeric'}).format(date);
-      row.append(card, time);
+      const timeKey = session.startTime ? session.startTime + (session.endTime ? '–' + session.endTime : '') : '';
+      if (timeKey && timeGroups.has(timeKey)) {
+        timeGroups.get(timeKey).querySelector('.session-group-cards').append(card);
+        continue;
+      }
+      const cards = document.createElement('div');
+      cards.className = 'session-group-cards';
+      cards.append(card);
+      if (timeKey) {
+        time.textContent = timeKey;
+        timeGroups.set(timeKey, row);
+      } else {
+        time.hidden = true;
+        row.classList.add('untimed');
+      }
+      row.append(cards, time);
       list.append(row);
     }
-    addButton.hidden = matching.length >= 5;
-    limitMessage.hidden = matching.length < 5;
+    const isPast = selectedDate < localDateKey();
+    addButton.hidden = isPast || matching.length >= 5;
+    limitMessage.hidden = !isPast && matching.length < 5;
+    limitMessage.textContent = isPast ? 'Past sessions are view-only.' : 'Maximum of five sessions';
   }
 
   function openSession(index) {
     editingIndex = index;
     const session = dashboard.sessions[index];
+    const isPast = session.date < localDateKey();
+    for (const control of form.elements) control.disabled = isPast;
+    screen.querySelector('#session-dialog-title').textContent = isPast ? 'Past session' : 'Edit session';
     form.elements.sessionName.value = session.name;
     form.elements.sessionType.value = session.type;
     form.elements.sessionDescription.value = session.description;
@@ -257,6 +282,7 @@ function bindHome() {
   function saveSession() {
     if (editingIndex < 0) return;
     const old = dashboard.sessions[editingIndex];
+    if (old.date < localDateKey()) { editingIndex = -1; renderSessions(); return; }
     const requestedDate = form.elements.sessionDate.value || old.date;
     const destinationFull = dashboard.sessions.filter((session, index) => index !== editingIndex && session.date === requestedDate).length >= 5;
     dashboard.sessions[editingIndex] = {
@@ -264,7 +290,7 @@ function bindHome() {
       name: form.elements.sessionName.value.trim() || old.name,
       type: form.elements.sessionType.value,
       description: form.elements.sessionDescription.value.trim(),
-      date: destinationFull ? old.date : requestedDate,
+      date: destinationFull || requestedDate < localDateKey() ? old.date : requestedDate,
       startTime: form.elements.startTime.value,
       endTime: form.elements.endTime.value
     };
@@ -274,7 +300,7 @@ function bindHome() {
   }
   addButton.addEventListener('click', () => {
     const count = dashboard.sessions.filter(session => session.date === selectedDate).length;
-    if (count >= 5) return;
+    if (count >= 5 || selectedDate < localDateKey()) { renderSessions(); return; }
     dashboard.sessions.push({ name: 'Session ' + (count + 1), type: '', description: '', date: selectedDate });
     saveDashboard();
     renderSessions();
@@ -285,7 +311,7 @@ function bindHome() {
   form.elements.sessionDate.addEventListener('change', () => {
     const target = form.elements.sessionDate.value;
     const count = dashboard.sessions.filter((session, index) => index !== editingIndex && session.date === target).length;
-    form.elements.sessionDate.setCustomValidity(count >= 5 ? 'This date already has five sessions.' : '');
+    form.elements.sessionDate.setCustomValidity(target < localDateKey() ? 'Choose today or a future date.' : count >= 5 ? 'This date already has five sessions.' : '');
   });
   form.addEventListener('submit', event => {
     if (!form.elements.sessionName.value.trim()) {
@@ -296,6 +322,7 @@ function bindHome() {
   });
   form.elements.sessionName.addEventListener('input', () => form.elements.sessionName.setCustomValidity(''));
   screen.querySelector('#delete-session').addEventListener('click', () => {
+    if (dashboard.sessions[editingIndex]?.date < localDateKey()) return;
     dashboard.sessions.splice(editingIndex, 1);
     editingIndex = -1;
     saveDashboard();
@@ -303,8 +330,49 @@ function bindHome() {
     renderSessions();
   });
 
+  const timeDialog = screen.querySelector('#time-dialog');
+  const timeForm = screen.querySelector('#time-form');
+  let timeTarget = null;
+  for (let hour = 1; hour <= 12; hour++) {
+    timeForm.elements.hour.add(new Option(String(hour), String(hour)));
+  }
+  for (let minute = 0; minute < 60; minute++) {
+    const value = String(minute).padStart(2, '0');
+    timeForm.elements.minute.add(new Option(value, value));
+  }
+  for (const field of [form.elements.startTime, form.elements.endTime]) {
+    function openTime() {
+      timeTarget = field;
+      const [hourText, minuteText] = (field.value || '09:00').split(':');
+      const hour = Number(hourText);
+      timeForm.elements.hour.value = String(hour % 12 || 12);
+      timeForm.elements.minute.value = minuteText;
+      timeForm.elements.period.value = hour >= 12 ? 'PM' : 'AM';
+      timeDialog.returnValue = '';
+      timeDialog.showModal();
+    }
+    field.addEventListener('click', openTime);
+    field.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openTime();
+      }
+    });
+  }
+  timeDialog.addEventListener('close', () => {
+    if (!timeTarget) return;
+    if (timeDialog.returnValue === 'clear') timeTarget.value = '';
+    if (timeDialog.returnValue === 'save') {
+      const hour = Number(timeForm.elements.hour.value) % 12 + (timeForm.elements.period.value === 'PM' ? 12 : 0);
+      timeTarget.value = String(hour).padStart(2, '0') + ':' + timeForm.elements.minute.value;
+    }
+    timeTarget = null;
+  });
+  timeDialog.addEventListener('click', event => { if (event.target === timeDialog) timeDialog.close(); });
+
   const calendar = screen.querySelector('#calendar-dialog');
   let month = new Date();
+  let calendarTarget = null;
   function renderCalendar() {
     screen.querySelector('#calendar-title').textContent = new Intl.DateTimeFormat(undefined, {month:'long', year:'numeric'}).format(month);
     const grid = screen.querySelector('#calendar-grid');
@@ -321,26 +389,68 @@ function bindHome() {
       const button = document.createElement('button');
       button.type = 'button'; button.textContent = String(day);
       button.setAttribute('aria-label', new Intl.DateTimeFormat(undefined, {dateStyle:'full'}).format(date));
-      if (key < today) button.classList.add('past');
-      if (key === selectedDate) button.setAttribute('aria-current', 'date');
-      button.addEventListener('click', () => { selectedDate = key; calendar.close(); renderSessions(); });
+      if (key < localDateKey()) button.classList.add('past');
+      if (key < localDateKey() && calendarTarget === form.elements.sessionDate) button.disabled = true;
+      const activeDate = calendarTarget ? calendarTarget.value : selectedDate;
+      if (key === activeDate) button.setAttribute('aria-current', 'date');
+      if (key === today) button.classList.add('calendar-today');
+      button.addEventListener('click', () => {
+        if (calendarTarget) {
+          calendarTarget.value = key;
+          calendarTarget.dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+          selectedDate = key;
+          renderSessions();
+        }
+        calendar.close();
+      });
       grid.append(button);
     }
   }
-  screen.querySelector('#calendar-open').addEventListener('click', () => { month = new Date(selectedDate + 'T12:00:00'); renderCalendar(); calendar.showModal(); });
+  function openCalendar(target) {
+    calendarTarget = target;
+    const initialDate = target?.value || selectedDate;
+    month = new Date(initialDate + 'T12:00:00');
+    renderCalendar();
+    calendar.showModal();
+  }
+  screen.querySelector('#calendar-open').addEventListener('click', () => openCalendar(null));
+  form.elements.sessionDate.addEventListener('click', () => openCalendar(form.elements.sessionDate));
+  goalForm.elements.target.addEventListener('click', () => openCalendar(goalForm.elements.target));
+  for (const field of [form.elements.sessionDate, goalForm.elements.target]) {
+    field.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openCalendar(field);
+      }
+    });
+  }
+  goalForm.addEventListener('submit', event => {
+    if (event.submitter?.value === 'save' && !goalForm.elements.target.value) {
+      event.preventDefault();
+      openCalendar(goalForm.elements.target);
+    }
+  });
   screen.querySelector('#month-prev').addEventListener('click', () => { month.setDate(1); month.setMonth(month.getMonth() - 1); renderCalendar(); });
   screen.querySelector('#month-next').addEventListener('click', () => { month.setDate(1); month.setMonth(month.getMonth() + 1); renderCalendar(); });
-  screen.querySelector('#calendar-close').addEventListener('click', () => calendar.close());
+  calendar.addEventListener('click', event => { if (event.target === calendar) calendar.close(); });
 
   const bars = screen.querySelector('#skill-bars');
   dashboard.skillLevels.forEach((skill, index) => {
     const row = document.createElement('div'); row.className = 'skill-bar';
     const name = document.createElement('input'); name.value = skill.name; name.maxLength = 40; name.setAttribute('aria-label', 'Skill ' + (index + 1) + ' name');
-    const range = document.createElement('input'); range.type = 'range'; range.min = 0; range.max = 100; range.value = skill.value; range.setAttribute('aria-label', 'Skill ' + (index + 1) + ' self-reported level');
-    const output = document.createElement('output'); output.textContent = skill.value + '%';
-    name.addEventListener('change', () => { skill.name = name.value.trim() || skill.name; name.value = skill.name; saveDashboard(); });
-    range.addEventListener('input', () => { skill.value = Number(range.value); output.textContent = skill.value + '%'; saveDashboard(); });
-    row.append(name, range, output); bars.append(row);
+    const progress = document.createElement('progress');
+    progress.max = 100;
+    progress.value = 0;
+    progress.setAttribute('aria-label', skill.name + ' progress, 0 percent');
+    const output = document.createElement('output'); output.textContent = '0%';
+    name.addEventListener('change', () => {
+      skill.name = name.value.trim() || skill.name;
+      name.value = skill.name;
+      progress.setAttribute('aria-label', skill.name + ' progress, 0 percent');
+      saveDashboard();
+    });
+    row.append(name, progress, output); bars.append(row);
   });
   renderSessions();
 }

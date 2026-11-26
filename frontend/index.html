@@ -12,9 +12,9 @@
     <main id="screen" tabindex="-1"></main>
     <nav class="bottom-nav" aria-label="Main navigation">
       <a href="#home"><span aria-hidden="true">⌂</span><span>Home</span></a>
-      <a href="#presentation"><span aria-hidden="true">▤</span><span>Presentation</span></a>
-      <a href="#interview"><span aria-hidden="true">♧</span><span>Interview</span></a>
-      <a href="#roadmap"><span aria-hidden="true">◇</span><span>Roadmap</span></a>
+      <a href="#presentation"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M12 17v3m-4 1 4-1 4 1M7 8h10M7 11h6"/></svg></span><span>Presentation</span></a>
+      <a href="#interview"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4m-3 0h6"/></svg></span><span>Interview</span></a>
+      <a href="#roadmap"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M7 18h5a3 3 0 0 0 0-6h-1a3 3 0 0 1 0-6h6"/></svg></span><span>Roadmap</span></a>
     </nav>
   </div>
   <template id="home">
@@ -34,7 +34,7 @@
     </section>
     <section class="dashboard-sheet" aria-labelledby="practice-heading">
       <div class="sheet-hint" aria-hidden="true">⌃</div>
-      <div class="sheet-heading"><div><h2 id="practice-heading"></h2><p id="today-date"></p></div><button type="button" id="calendar-open" class="calendar-open" aria-label="Choose session date">▦</button></div>
+      <div class="sheet-heading"><div><h2 id="practice-heading"></h2><p id="today-date"></p></div><button type="button" id="calendar-open" class="calendar-open" aria-label="Choose session date"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18M7 14h.01M12 14h.01M17 14h.01M7 18h.01M12 18h.01"/></svg></button></div>
       <div id="session-list" class="session-list"></div>
       <button id="add-session" class="add-session" type="button">＋ Add another session</button>
       <p id="session-limit" class="session-limit" hidden>Maximum of five sessions</p>
@@ -63,8 +63,8 @@
           </select>
         </label>
         <label>Description <textarea name="sessionDescription" rows="3" maxlength="500"></textarea></label>
-        <label>Date <input type="date" name="sessionDate" required></label>
-        <div class="fields"><label>Start time (optional) <input type="time" name="startTime"></label><label>End time (optional) <input type="time" name="endTime"></label></div>
+        <label>Date <input type="text" name="sessionDate" readonly required aria-label="Date" class="date-field" placeholder="Choose a date"></label>
+        <div class="fields"><label>Start time (optional) <input type="text" name="startTime" readonly class="time-field" aria-label="Start time (optional)"></label><label>End time (optional) <input type="text" name="endTime" readonly class="time-field" aria-label="End time (optional)"></label></div>
         <div class="dialog-actions">
           <button type="button" id="delete-session" class="delete-session">Delete</button>
           <button value="save">Done</button>
@@ -75,7 +75,7 @@
       <form method="dialog">
         <h2>Set your goal date</h2>
         <label>Goal name <input name="goalName" maxlength="60"></label>
-        <label>Target date <input name="target" type="date" required></label>
+        <label>Target date <input name="target" type="text" readonly required aria-label="Target date" class="date-field" placeholder="Choose a date"></label>
         <div class="dialog-actions">
           <button value="remove" formnovalidate>Remove goal</button>
           <button value="cancel" formnovalidate>Cancel</button>
@@ -84,9 +84,23 @@
       </form>
     </dialog>
     <dialog id="calendar-dialog" aria-labelledby="calendar-title">
-      <div class="calendar-header"><button type="button" id="month-prev" aria-label="Previous month">‹</button><h2 id="calendar-title"></h2><button type="button" id="month-next" aria-label="Next month">›</button></div>
+      <p class="calendar-kicker">Choose a date</p><div class="calendar-header"><button type="button" id="month-prev" aria-label="Previous month">‹</button><h2 id="calendar-title"></h2><button type="button" id="month-next" aria-label="Next month">›</button></div>
       <div class="calendar-grid" id="calendar-grid"></div>
-      <button type="button" id="calendar-close" class="secondary">Close</button>
+    </dialog>
+    <dialog id="time-dialog" aria-labelledby="time-title">
+      <form method="dialog" id="time-form">
+        <h2 id="time-title">Choose a time</h2>
+        <div class="time-picker">
+          <label>Hour <select name="hour" aria-label="Hour"></select></label>
+          <label>Minute <select name="minute" aria-label="Minute"></select></label>
+          <label>Period <select name="period" aria-label="Period"><option>AM</option><option>PM</option></select></label>
+        </div>
+        <div class="dialog-actions">
+          <button value="clear" formnovalidate>Clear</button>
+          <button value="cancel" formnovalidate>Cancel</button>
+          <button value="save">Set time</button>
+        </div>
+      </form>
     </dialog>
     <dialog id="profile-dialog">
       <form method="dialog">
