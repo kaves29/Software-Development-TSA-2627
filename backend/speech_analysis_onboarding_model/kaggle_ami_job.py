@@ -165,4 +165,25 @@ for name in ('metrics.json', 'inputs.json', 'head.pt'):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
-    notebook(parser.parse_args().output)
+    parser.add_argument(
+        "--owner", help="Also write private Kaggle CLI metadata for this account"
+    )
+    args = parser.parse_args()
+    notebook(args.output)
+    if args.owner:
+        metadata = {
+            "id": f"{args.owner}/speakly-ami-adaptation",
+            "title": "Speakly AMI Adaptation",
+            "code_file": args.output.name,
+            "language": "python",
+            "kernel_type": "notebook",
+            "is_private": True,
+            "enable_gpu": True,
+            "enable_internet": True,
+            "dataset_sources": [],
+            "competition_sources": [],
+            "kernel_sources": [f"{args.owner}/speakly-filler-continuous"],
+        }
+        (args.output.parent / "kernel-metadata.json").write_text(
+            json.dumps(metadata, indent=2) + "\n"
+        )
