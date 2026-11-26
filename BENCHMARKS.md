@@ -54,3 +54,14 @@ The verified uploaded WavLM frame checkpoint scored **0.3396 event F1** on the f
 A development-only grid over fixed boundary shifts and padding selected .60/12 with a 100 ms later center and 60 ms outward expansion at both endpoints (equivalent to start +40 ms and end +160 ms, clipped to recording duration). This setting yielded 33 matches and 0.5197 F1 at the original tolerance. Freeze it alongside the historical .80/12 comparison before scoring TS3005a.A. This is candidate calibration from one recording and does not change production defaults.
 
 At the development-selected .60/12 setting, after the 100 ms center shift, 50 of 69 predicted midpoints fell inside an annotated filler, 16 inside other annotated words, and three outside annotated words. These are prediction counts and may include multiple hits on one reference. The 33 strict event matches show that many promising candidates still have inaccurate boundaries. A separate fixed-duration grid peaked at 0.4554 F1 on the same recording, below variable-length boundary correction.
+
+### Frozen transfer check
+
+TS3005a.A is a different AMI speaker group from ES2008a.A. Its full 1,318.848 s Headset-0 stream has SHA-256 `7ca6fe56d9a8b2294ff69a13466ebce1c408434f2f457a245eec792b5fa266f9` and 113 labeled fillers. Both decoders were fixed before these labels were scored.
+
+| Decoder | Matches / predictions | Precision | Recall | Event F1 | Unmatched predictions/min |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Historical .80/12 | 52 / 104 | 0.500 | 0.460 | 0.479 | 2.366 |
+| Development .60/12 plus boundary correction | 58 / 152 | 0.382 | 0.513 | 0.438 | 4.276 |
+
+The corrected decoder recovered six additional matches but added 48 predictions, so the improvement on ES2008a.A did not transfer. Keep the historical decoder as baseline. Both AMI recordings are now evaluated and must not be reused as final untouched test material for a model developed in response to these results. A subsequent training experiment should test whether continuous in-domain speaker-disjoint negatives and an explicit boundary prediction objective improve this baseline. Evaluate that experiment on fresh speakers and preserve the two-boundary metric.
