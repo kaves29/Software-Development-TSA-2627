@@ -154,12 +154,12 @@ def background_shift(previous, current, pose):
     return float(np.median(np.linalg.norm(projected - background, axis=1)))
 
 
-def analyze_video(path, model, *, hand_model=None, face_model=None):
+def analyze_video(path, model, *, hand_model=None, face_model=None, max_seconds=240):
     import mediapipe as mp
 
     command = [
         'ffmpeg', '-v', 'error', '-nostdin', '-i', str(path), '-map', '0:v:0',
-        '-t', '241', '-vf', f'fps={FPS},scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=decrease,'
+        '-t', str(max_seconds + 1), '-vf', f'fps={FPS},scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=decrease,'
         f'pad={WIDTH}:{HEIGHT}:(ow-iw)/2:(oh-ih)/2', '-pix_fmt', 'rgb24', '-threads', '1',
         '-f', 'rawvideo', 'pipe:1']
     frame_bytes = HEIGHT * WIDTH * 3
@@ -176,8 +176,8 @@ def analyze_video(path, model, *, hand_model=None, face_model=None):
     with tempfile.TemporaryFile() as pixels:
         subprocess.run(command, stdout=pixels, stderr=subprocess.PIPE, check=True, timeout=90)
         count, remainder = divmod(pixels.tell(), frame_bytes)
-        if remainder or not 0 < count <= FPS * 240:
-            raise ValueError('provide a video of up to 240 seconds')
+        if remainder or not 0 < count <= FPS * max_seconds:
+            raise ValueError(f'provide a video of up to {max_seconds} seconds')
         pixels.seek(0)
         with ExitStack() as stack:
             detector = stack.enter_context(mp.tasks.vision.PoseLandmarker.create_from_options(options))
@@ -245,8 +245,12 @@ if __name__ == '__main__':
     parser.add_argument('--pose-model', type=Path, required=True)
     parser.add_argument('--hand-model', type=Path)
     parser.add_argument('--face-model', type=Path)
+    parser.add_argument('--max-seconds', type=int, choices=range(1, 3601), metavar='1–3600',
+                        default=240, help='Override the recording limit for offline benchmarks')
     args = parser.parse_args()
     try:
-        print(json.dumps(analyze_video(args.video, args.pose_model, hand_model=args.hand_model, face_model=args.face_model), allow_nan=False))
+        result = analyze_video(args.video, args.pose_model, hand_model=args.hand_model,
+                               face_model=args.face_model, max_seconds=args.max_seconds)
+        print(json.dumps(result, allow_nan=False))
     except (OSError, ValueError, RuntimeError, ImportError, subprocess.SubprocessError) as exc:
         parser.exit(1, f'Video analysis failed: {type(exc).__name__}\n')

@@ -13,12 +13,12 @@ SAMPLE_RATE = 16000
 MAX_SECONDS = 240
 
 
-def decode_audio(path):
+def decode_audio(path, max_seconds=MAX_SECONDS):
     import numpy as np
 
     completed = subprocess.run(
         ['ffmpeg', '-v', 'error', '-nostdin', '-i', str(path), '-map', '0:a:0',
-         '-t', str(MAX_SECONDS + 1), '-ac', '1', '-ar', str(SAMPLE_RATE),
+         '-t', str(max_seconds + 1), '-ac', '1', '-ar', str(SAMPLE_RATE),
          '-f', 'f32le', 'pipe:1'],
         capture_output=True, check=True, timeout=90,
     )
@@ -26,16 +26,16 @@ def decode_audio(path):
 
 
 def analyze_recording(path, targets, model_name, cache_dir, filler_head=None, *, prompt='', content_openai=False,
-                      disfluency_head=None):
+                      disfluency_head=None, max_seconds=MAX_SECONDS):
     import numpy as np
     import torch
     from silero_vad import get_speech_timestamps, load_silero_vad
 
     started = time.perf_counter()
-    waveform = decode_audio(path)
+    waveform = decode_audio(path, max_seconds)
     duration = len(waveform) / SAMPLE_RATE
-    if not duration or duration > MAX_SECONDS:
-        raise ValueError(f'provide an audio recording up to {MAX_SECONDS} seconds')
+    if not duration or duration > max_seconds:
+        raise ValueError(f'provide an audio recording up to {max_seconds} seconds')
     torch.set_num_threads(min(4, os.cpu_count() or 1))
     speech = [(row['start'] / SAMPLE_RATE, row['end'] / SAMPLE_RATE)
               for row in get_speech_timestamps(torch.from_numpy(waveform), load_silero_vad(),
@@ -145,10 +145,12 @@ def main():
     parser.add_argument('--cache-dir', default=os.environ.get('SPEAKLY_MODEL_CACHE'))
     parser.add_argument('--filler-head', type=Path, help='Optional research checkpoint')
     parser.add_argument('--disfluency-head', type=Path, help='Optional unvalidated research checkpoint')
+    parser.add_argument('--max-seconds', type=int, choices=range(1, 3601), metavar='1–3600',
+                        default=MAX_SECONDS, help='Override the recording limit for offline benchmarks')
     args = parser.parse_args()
     try:
         result = analyze_recording(args.audio, args.target, args.model, args.cache_dir, args.filler_head,
-                                   disfluency_head=args.disfluency_head)
+                                   disfluency_head=args.disfluency_head, max_seconds=args.max_seconds)
     except (OSError, RuntimeError, ValueError, ImportError, subprocess.SubprocessError) as exc:
         parser.exit(1, f'Audio analysis failed: {exc}\n')
     print(json.dumps(result, indent=2, allow_nan=False))

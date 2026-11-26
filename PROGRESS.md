@@ -11,3 +11,5 @@
 
 - Set the count to ten multimodal features and documented an overall acceptance score. Replaced greedy event matching with maximum-cardinality one-to-one matching and included unavailable outputs in recall and coverage. All 63 tests passed after the rename and scorer changes. The Ponytail connector was unavailable.
 - Matched the four AMI label layers on meeting and participant slot. The intersection contains all four slots in ES2008a, ES2008b, TS3005a, and TS3005b. These are 16 participant-recording pairs, not evidence of 16 independent speakers. Before using this material for final validation, resolve speaker IDs across sessions and verify media and label coverage.
+
+- Verified AMI participant identity across meetings, downloaded the complete headset and close-up streams for the first development case, and added an offline duration override and reproducible AMI filler evaluation entry point. The default recording limit remains 240 seconds. The 63-test suite passed with the audio override. Final push remains gated on the complete acceptance results.
