@@ -23,21 +23,22 @@
         <div><h1 id="greeting">Hello, speaker!</h1><p>Keep working toward your speaking goals.</p></div>
         <button class="profile" id="edit-profile" type="button" aria-label="Edit dashboard name">S</button>
       </div>
-      <button class="goal-ring" id="edit-goal" type="button">
+      <div class="goal-carousel"><button type="button" id="goal-prev" class="goal-nav" aria-label="Previous goal">‹</button><button class="goal-ring" id="edit-goal" type="button">
         <span class="goal-label">Your goal</span>
-        <strong id="goal-value">Set a date</strong>
+        <strong id="goal-value">—</strong>
         <span id="goal-caption">Choose your target day</span>
-      </button>
+      </button><button type="button" id="goal-next" class="goal-nav" aria-label="Next goal">›</button></div>
+      <p id="goal-position" class="goal-position"></p>
       <div class="week-heading"><span>This week</span><span>Practice days</span></div>
       <ol class="week-strip" id="week-strip" aria-label="Practice days this week"></ol>
     </section>
     <section class="dashboard-sheet" aria-labelledby="practice-heading">
       <div class="sheet-hint" aria-hidden="true">⌃</div>
-      <div class="sheet-heading"><div><h2 id="practice-heading">Your practice</h2><p id="today-date"></p></div></div>
+      <div class="sheet-heading"><div><h2 id="practice-heading"></h2><p id="today-date"></p></div><button type="button" id="calendar-open" class="calendar-open" aria-label="Choose session date">▦</button></div>
       <div id="session-list" class="session-list"></div>
       <button id="add-session" class="add-session" type="button">＋ Add another session</button>
       <p id="session-limit" class="session-limit" hidden>Maximum of five sessions</p>
-      <details class="progress-box" open>
+      <details class="progress-box">
         <summary>Progress</summary>
         <dl class="stats">
           <div><dt>Days practiced</dt><dd id="practice-days">0</dd></div>
@@ -45,6 +46,8 @@
         </dl>
         <h3>Skills you’ve improved</h3>
         <p id="improved-skills"></p>
+        <div id="skill-bars"></div>
+        <p class="note">Skill levels are self-reported.</p>
       </details>
     </section>
     <dialog id="session-dialog" aria-labelledby="session-dialog-title">
@@ -60,6 +63,8 @@
           </select>
         </label>
         <label>Description <textarea name="sessionDescription" rows="3" maxlength="500"></textarea></label>
+        <label>Date <input type="date" name="sessionDate" required></label>
+        <div class="fields"><label>Start time (optional) <input type="time" name="startTime"></label><label>End time (optional) <input type="time" name="endTime"></label></div>
         <div class="dialog-actions">
           <button type="button" id="delete-session" class="delete-session">Delete</button>
           <button value="save">Done</button>
@@ -69,12 +74,19 @@
     <dialog id="goal-dialog">
       <form method="dialog">
         <h2>Set your goal date</h2>
+        <label>Goal name <input name="goalName" maxlength="60"></label>
         <label>Target date <input name="target" type="date" required></label>
         <div class="dialog-actions">
+          <button value="remove" formnovalidate>Remove goal</button>
           <button value="cancel" formnovalidate>Cancel</button>
           <button value="save">Save date</button>
         </div>
       </form>
+    </dialog>
+    <dialog id="calendar-dialog" aria-labelledby="calendar-title">
+      <div class="calendar-header"><button type="button" id="month-prev" aria-label="Previous month">‹</button><h2 id="calendar-title"></h2><button type="button" id="month-next" aria-label="Next month">›</button></div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+      <button type="button" id="calendar-close" class="secondary">Close</button>
     </dialog>
     <dialog id="profile-dialog">
       <form method="dialog">

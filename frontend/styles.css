@@ -364,3 +364,67 @@ body { background: #e4ede5; }
   .session-row, .add-session { transition: transform 110ms ease-out; }
 }
 .sheet-hint { color: #708277; text-align: center; font-size: 1.25rem; line-height: .7; margin: -.3rem 0 .8rem; }
+
+.goal-carousel { display: grid; grid-template-columns: 2.8rem minmax(0, 1fr) 2.8rem; align-items: center; margin-top: 1.4rem; }
+.goal-carousel .goal-ring { margin: 0 auto; width: min(52vw, 13.3rem); }
+.goal-nav { padding: 0; width: 2.6rem; height: 2.6rem; border: 0; border-radius: 50%; background: transparent; color: #f5faf7; font-size: 2rem; line-height: 1; }
+.goal-nav:disabled { opacity: .3; }
+.goal-nav:hover:not(:disabled) { background: #ffffff25; }
+.goal-ring {
+  background: radial-gradient(circle at 45% 43%, #e3f5ee99, #b5d8ca55 45%, #648b9455 78%, #7fc9b988 100%);
+  border: 1px solid #b9fff0;
+  box-shadow: inset 0 0 1.2rem #c4ffeb88, 0 0 .5rem #adfff0, 0 0 1.2rem #74dfc888;
+  color: #fff;
+}
+.goal-ring:hover { background: radial-gradient(circle at 45% 43%, #e3f5eeaa, #b5d8ca55 45%, #648b9455 78%, #7fc9b988 100%); }
+.goal-ring .goal-label, #goal-caption { color: #f5fff9; }
+.goal-ring strong { font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: clamp(2.5rem, 12vw, 3.8rem); font-weight: 400; }
+.goal-position { text-align: center; color: #eef8f1; font-size: .72rem; margin: .7rem 0 0; }
+.week-day.past { opacity: .55; }
+.week-day.past .week-dot { border-style: dashed; }
+.week-day.today.practiced .week-dot { color: #31483d; }
+.sheet-heading { display: flex; justify-content: space-between; align-items: center; }
+.calendar-open { width: 2.75rem; height: 2.75rem; padding: 0; background: #e9efea; color: #435e50; border: 0; border-radius: 50%; font-size: 1.25rem; }
+.calendar-open:hover { background: #dae8dd; }
+.session-line { display: grid; grid-template-columns: minmax(0, 1fr) 4.5rem; align-items: stretch; }
+.session-card { position: relative; min-width: 0; }
+.session-row { padding-right: 3.4rem; }
+.session-check { position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); width: 1.5rem; height: 1.5rem; margin: 0; accent-color: #527d69; cursor: pointer; }
+.session-time { display: flex; align-items: center; justify-content: center; border-left: 1px solid #cadbd0; margin-left: .55rem; padding-left: .3rem; color: #566a5c; font-size: .65rem; text-align: center; overflow-wrap: anywhere; }
+.calendar-header { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.calendar-header button { min-width: 2.7rem; padding: .4rem; font-size: 1.3rem; }
+.calendar-header h2 { font-size: 1.2rem; text-align: center; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .2rem; margin: 1rem 0; text-align: center; }
+.calendar-grid span { font-size: .75rem; padding: .5rem 0; }
+.calendar-grid button { background: transparent; color: #2c3e35; border: 0; padding: .45rem 0; min-height: 2.5rem; }
+.calendar-grid button.past { color: #899990; }
+.calendar-grid button[aria-current="date"] { background: #525778; color: white; border-radius: 50%; }
+.calendar-grid button:hover { background: #d6e5d9; color: #293c33; }
+.skill-bar { display: grid; grid-template-columns: minmax(0, 1fr) 1.25fr 2.5rem; align-items: center; gap: .5rem; margin: .65rem 0; }
+.skill-bar input[type="text"], .skill-bar input:not([type]) { background: transparent; border: 0; padding: .35rem 0; font-size: .85rem; }
+.skill-bar input[type="range"] { padding: 0; accent-color: #667c94; }
+.skill-bar output { font-size: .75rem; }
+
+/* Keep the mobile navigation legible as content scrolls beneath it. */
+:root {
+  --nav-purple: #54547a;
+  --nav-lavender: #e8e8f0;
+  --nav-inactive: #54547a;
+}
+.bottom-nav::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  left: -.7rem;
+  right: -.7rem;
+  bottom: calc(-.65rem - env(safe-area-inset-bottom));
+  height: calc(5.75rem + env(safe-area-inset-bottom));
+  background: linear-gradient(to bottom, transparent, #f2f6f1b8 42%, #f2f6f1ed 100%);
+}
+.bottom-nav a[aria-current] { color: #45456b; background: #e8e8f0; }
+.week-day.today .week-dot { outline-color: #d9f4e8; }
+@media (max-width: 38rem) {
+  html { scrollbar-width: none; }
+  html::-webkit-scrollbar { display: none; }
+}

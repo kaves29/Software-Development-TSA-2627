@@ -85,12 +85,13 @@ function updateHome() {
     item.className = 'week-day';
     if (practiced) item.classList.add('practiced');
     if (isToday) item.classList.add('today');
+    if (dateKey < localDateKey(todayDate)) item.classList.add('past');
     const label = new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(day);
     const fullDate = new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).format(day);
     item.setAttribute('aria-label', fullDate + (isToday ? ', today' : '') + (practiced ? ', practiced' : ', no practice recorded'));
     const circle = document.createElement('span');
     circle.className = 'week-dot';
-    circle.textContent = practiced ? '✓' : String(day.getDate());
+    circle.textContent = String(day.getDate());
     const dayName = document.createElement('span');
     dayName.className = 'week-day-name';
     dayName.textContent = label;
@@ -100,13 +101,7 @@ function updateHome() {
   screen.querySelector('#improved-skills').textContent = dashboard.improved.length
     ? dashboard.improved.join(', ') + ' · Self-reported'
     : 'Track improvements in your roadmap.';
-  if (!dashboard.goal) return;
 
-  const today = Date.parse(localDateKey());
-  const days = Math.round((Date.parse(dashboard.goal) - today) / 86400000);
-  screen.querySelector('#goal-value').textContent = days > 0 ? days + (days === 1 ? ' day' : ' days')
-    : days === 0 ? 'Goal day' : 'Date passed';
-  screen.querySelector('#goal-caption').textContent = days > 0 ? 'until your goal · Edit date' : 'Tap to edit your date';
 }
 
 function bindDashboardDialog(dialogId, buttonId, fieldName, key) {
@@ -125,15 +120,86 @@ function bindDashboardDialog(dialogId, buttonId, fieldName, key) {
   });
 }
 
-function bindSessions() {
+function bindHome() {
+  if (!Array.isArray(dashboard.goals)) {
+    dashboard.goals = [{ name: 'Your goal', date: dashboard.goal || '' }];
+  }
   if (!Array.isArray(dashboard.sessions)) {
     dashboard.sessions = [
       { name: 'Session 1', type: '', description: '' },
       { name: 'Session 2', type: '', description: '' }
     ];
-    saveDashboard();
+  }
+  const today = localDateKey();
+  for (const session of dashboard.sessions) {
+    if (!session.date) session.date = today;
+  }
+  if (!Array.isArray(dashboard.skillLevels)) {
+    dashboard.skillLevels = ['Pacing', 'Clarity', 'Structure'].map(name => ({ name, value: 0 }));
+  }
+  saveDashboard();
+  updateHome();
+  bindDashboardDialog('#profile-dialog', '#edit-profile', 'displayName', 'name');
+
+  let goalIndex = 0;
+  const goalDialog = screen.querySelector('#goal-dialog');
+  const goalForm = goalDialog.querySelector('form');
+
+  function renderGoal() {
+    const goal = dashboard.goals[goalIndex];
+    screen.querySelector('.goal-label').textContent = goal ? goal.name || 'Your goal' : 'Add a goal';
+    const value = screen.querySelector('#goal-value');
+    const caption = screen.querySelector('#goal-caption');
+    if (!goal) {
+      value.textContent = '+';
+      caption.textContent = 'Set another goal';
+    } else if (!goal.date) {
+      value.textContent = '—';
+      caption.textContent = 'Tap to set a date';
+    } else {
+      const days = Math.round((Date.parse(goal.date) - Date.parse(localDateKey())) / 86400000);
+      value.textContent = days > 0 ? String(days) : days === 0 ? '0' : '—';
+      caption.textContent = days > 0 ? (days === 1 ? 'day to go' : 'days to go') : days === 0 ? 'Goal day' : 'Goal date passed';
+    }
+    screen.querySelector('#goal-position').textContent = goal ? (goalIndex + 1) + ' / ' + dashboard.goals.length : 'Add a goal';
+    screen.querySelector('#goal-prev').disabled = goalIndex === 0;
+    screen.querySelector('#goal-next').disabled = goalIndex >= dashboard.goals.length - (dashboard.goals.length >= 3 ? 1 : 0);
+    screen.querySelector('#goal-next').hidden = goalIndex >= dashboard.goals.length;
   }
 
+  screen.querySelector('#goal-prev').addEventListener('click', () => { goalIndex--; renderGoal(); });
+  screen.querySelector('#goal-next').addEventListener('click', () => { goalIndex++; renderGoal(); });
+  screen.querySelector('#edit-goal').addEventListener('click', () => {
+    const goal = dashboard.goals[goalIndex];
+    goalForm.elements.goalName.value = goal?.name || '';
+    goalForm.elements.target.value = goal?.date || '';
+    goalDialog.returnValue = '';
+    goalDialog.showModal();
+  });
+  goalDialog.addEventListener('close', () => {
+    if (goalDialog.returnValue === 'save') {
+      const goal = { name: goalForm.elements.goalName.value.trim() || 'Your goal', date: goalForm.elements.target.value };
+      if (goalIndex === dashboard.goals.length && dashboard.goals.length < 3) dashboard.goals.push(goal);
+      else dashboard.goals[goalIndex] = goal;
+    } else if (goalDialog.returnValue === 'remove' && dashboard.goals[goalIndex]) {
+      dashboard.goals[goalIndex].date = '';
+      dashboard.goals[goalIndex].name = 'Your goal';
+    }
+    saveDashboard();
+    renderGoal();
+  });
+  let touchStartX = 0;
+  screen.querySelector('.goal-carousel').addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
+  screen.querySelector('.goal-carousel').addEventListener('touchend', event => {
+    const delta = event.changedTouches[0].clientX - touchStartX;
+    if (delta > 50 && goalIndex > 0) goalIndex--;
+    if (delta < -50 && goalIndex < dashboard.goals.length && dashboard.goals.length < 3) goalIndex++;
+    else if (delta < -50 && goalIndex < dashboard.goals.length - 1) goalIndex++;
+    renderGoal();
+  }, { passive: true });
+  renderGoal();
+
+  let selectedDate = today;
   const list = screen.querySelector('#session-list');
   const addButton = screen.querySelector('#add-session');
   const limitMessage = screen.querySelector('#session-limit');
@@ -142,23 +208,38 @@ function bindSessions() {
   let editingIndex = -1;
 
   function renderSessions() {
+    const matching = dashboard.sessions.map((session, index) => ({ session, index }))
+      .filter(({ session }) => session.date === selectedDate)
+      .sort((a, b) => (a.session.startTime || '99').localeCompare(b.session.startTime || '99'));
+    const date = new Date(selectedDate + 'T12:00:00');
+    screen.querySelector('#practice-heading').textContent = new Intl.DateTimeFormat(undefined, {weekday:'long', month:'short', day:'numeric'}).format(date);
+    screen.querySelector('#today-date').textContent = matching.filter(({session}) => session.done).length + '/' + matching.length + ' completed';
     list.replaceChildren();
-    dashboard.sessions.forEach((session, index) => {
+    for (const { session, index } of matching) {
+      const row = document.createElement('div');
+      row.className = 'session-line';
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'session-row';
-      const name = document.createElement('span');
-      name.textContent = session.name;
-      const arrow = document.createElement('span');
-      arrow.className = 'session-arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = '›';
-      button.append(name, arrow);
+      button.textContent = session.name;
       button.addEventListener('click', () => openSession(index));
-      list.append(button);
-    });
-    addButton.hidden = dashboard.sessions.length >= 5;
-    limitMessage.hidden = dashboard.sessions.length < 5;
+      const check = document.createElement('input');
+      check.type = 'checkbox';
+      check.className = 'session-check';
+      check.checked = Boolean(session.done);
+      check.setAttribute('aria-label', 'Mark ' + session.name + ' complete');
+      check.addEventListener('change', () => { session.done = check.checked; saveDashboard(); renderSessions(); });
+      const card = document.createElement('div');
+      card.className = 'session-card';
+      card.append(button, check);
+      const time = document.createElement('div');
+      time.className = 'session-time';
+      time.textContent = session.startTime ? session.startTime + (session.endTime ? '–' + session.endTime : '') : new Intl.DateTimeFormat(undefined, {weekday:'short', month:'numeric', day:'numeric'}).format(date);
+      row.append(card, time);
+      list.append(row);
+    }
+    addButton.hidden = matching.length >= 5;
+    limitMessage.hidden = matching.length < 5;
   }
 
   function openSession(index) {
@@ -167,37 +248,44 @@ function bindSessions() {
     form.elements.sessionName.value = session.name;
     form.elements.sessionType.value = session.type;
     form.elements.sessionDescription.value = session.description;
+    form.elements.sessionDate.setCustomValidity('');
+    form.elements.sessionDate.value = session.date;
+    form.elements.startTime.value = session.startTime || '';
+    form.elements.endTime.value = session.endTime || '';
     dialog.showModal();
   }
-
   function saveSession() {
     if (editingIndex < 0) return;
-    const oldSession = dashboard.sessions[editingIndex];
+    const old = dashboard.sessions[editingIndex];
+    const requestedDate = form.elements.sessionDate.value || old.date;
+    const destinationFull = dashboard.sessions.filter((session, index) => index !== editingIndex && session.date === requestedDate).length >= 5;
     dashboard.sessions[editingIndex] = {
-      name: form.elements.sessionName.value.trim() || oldSession.name,
+      ...old,
+      name: form.elements.sessionName.value.trim() || old.name,
       type: form.elements.sessionType.value,
-      description: form.elements.sessionDescription.value.trim()
+      description: form.elements.sessionDescription.value.trim(),
+      date: destinationFull ? old.date : requestedDate,
+      startTime: form.elements.startTime.value,
+      endTime: form.elements.endTime.value
     };
     saveDashboard();
     editingIndex = -1;
     renderSessions();
   }
-
   addButton.addEventListener('click', () => {
-    if (dashboard.sessions.length >= 5) return;
-    dashboard.sessions.push({
-      name: 'Session ' + (dashboard.sessions.length + 1),
-      type: '',
-      description: ''
-    });
+    const count = dashboard.sessions.filter(session => session.date === selectedDate).length;
+    if (count >= 5) return;
+    dashboard.sessions.push({ name: 'Session ' + (count + 1), type: '', description: '', date: selectedDate });
     saveDashboard();
     renderSessions();
     openSession(dashboard.sessions.length - 1);
   });
-
   dialog.addEventListener('close', saveSession);
-  dialog.addEventListener('click', event => {
-    if (event.target === dialog) dialog.close();
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  form.elements.sessionDate.addEventListener('change', () => {
+    const target = form.elements.sessionDate.value;
+    const count = dashboard.sessions.filter((session, index) => index !== editingIndex && session.date === target).length;
+    form.elements.sessionDate.setCustomValidity(count >= 5 ? 'This date already has five sessions.' : '');
   });
   form.addEventListener('submit', event => {
     if (!form.elements.sessionName.value.trim()) {
@@ -206,9 +294,7 @@ function bindSessions() {
       form.elements.sessionName.reportValidity();
     }
   });
-  form.elements.sessionName.addEventListener('input', () => {
-    form.elements.sessionName.setCustomValidity('');
-  });
+  form.elements.sessionName.addEventListener('input', () => form.elements.sessionName.setCustomValidity(''));
   screen.querySelector('#delete-session').addEventListener('click', () => {
     dashboard.sessions.splice(editingIndex, 1);
     editingIndex = -1;
@@ -216,14 +302,47 @@ function bindSessions() {
     dialog.close();
     renderSessions();
   });
-  renderSessions();
-}
 
-function bindHome() {
-  updateHome();
-  bindSessions();
-  bindDashboardDialog('#goal-dialog', '#edit-goal', 'target', 'goal');
-  bindDashboardDialog('#profile-dialog', '#edit-profile', 'displayName', 'name');
+  const calendar = screen.querySelector('#calendar-dialog');
+  let month = new Date();
+  function renderCalendar() {
+    screen.querySelector('#calendar-title').textContent = new Intl.DateTimeFormat(undefined, {month:'long', year:'numeric'}).format(month);
+    const grid = screen.querySelector('#calendar-grid');
+    grid.replaceChildren();
+    for (const name of ['M', 'T', 'W', 'T', 'F', 'S', 'S']) {
+      const label = document.createElement('span'); label.textContent = name; grid.append(label);
+    }
+    const first = new Date(month.getFullYear(), month.getMonth(), 1);
+    for (let i = 0; i < (first.getDay() + 6) % 7; i++) grid.append(document.createElement('span'));
+    const days = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+    for (let day = 1; day <= days; day++) {
+      const date = new Date(month.getFullYear(), month.getMonth(), day);
+      const key = localDateKey(date);
+      const button = document.createElement('button');
+      button.type = 'button'; button.textContent = String(day);
+      button.setAttribute('aria-label', new Intl.DateTimeFormat(undefined, {dateStyle:'full'}).format(date));
+      if (key < today) button.classList.add('past');
+      if (key === selectedDate) button.setAttribute('aria-current', 'date');
+      button.addEventListener('click', () => { selectedDate = key; calendar.close(); renderSessions(); });
+      grid.append(button);
+    }
+  }
+  screen.querySelector('#calendar-open').addEventListener('click', () => { month = new Date(selectedDate + 'T12:00:00'); renderCalendar(); calendar.showModal(); });
+  screen.querySelector('#month-prev').addEventListener('click', () => { month.setDate(1); month.setMonth(month.getMonth() - 1); renderCalendar(); });
+  screen.querySelector('#month-next').addEventListener('click', () => { month.setDate(1); month.setMonth(month.getMonth() + 1); renderCalendar(); });
+  screen.querySelector('#calendar-close').addEventListener('click', () => calendar.close());
+
+  const bars = screen.querySelector('#skill-bars');
+  dashboard.skillLevels.forEach((skill, index) => {
+    const row = document.createElement('div'); row.className = 'skill-bar';
+    const name = document.createElement('input'); name.value = skill.name; name.maxLength = 40; name.setAttribute('aria-label', 'Skill ' + (index + 1) + ' name');
+    const range = document.createElement('input'); range.type = 'range'; range.min = 0; range.max = 100; range.value = skill.value; range.setAttribute('aria-label', 'Skill ' + (index + 1) + ' self-reported level');
+    const output = document.createElement('output'); output.textContent = skill.value + '%';
+    name.addEventListener('change', () => { skill.name = name.value.trim() || skill.name; name.value = skill.name; saveDashboard(); });
+    range.addEventListener('input', () => { skill.value = Number(range.value); output.textContent = skill.value + '%'; saveDashboard(); });
+    row.append(name, range, output); bars.append(row);
+  });
+  renderSessions();
 }
 
 function bindRoadmap() {
