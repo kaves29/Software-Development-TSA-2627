@@ -39,7 +39,7 @@ class ContinuousWindows(Dataset):
     samples = 4 * RATE
     frame_count = (samples - 400) // 320 + 1
 
-    def __init__(self, episodes, csv_file, split, limit=None):
+    def __init__(self, episodes, csv_file, split, limit=None, *, window_hop_seconds=None):
         self.intervals = defaultdict(list)
         with csv_file.open(newline='', encoding='utf-8-sig') as source:
             for row in csv.DictReader(source):
@@ -53,12 +53,17 @@ class ContinuousWindows(Dataset):
                 end = float(row['event_end_inepisode'])
                 if 0 <= start < end:
                     self.intervals[path].append((start, end, LABELS.index(label) if label in LABELS else 0))
+        if window_hop_seconds is not None and window_hop_seconds not in (1, 2, 4):
+            raise ValueError('window hop must be 1, 2, or 4 seconds')
         self.windows = []
         for path, events in self.intervals.items():
             if not path.is_file():
                 raise FileNotFoundError(path)
             for start, end, _ in events:
                 offset = max(0, round(((start + end) / 2 - 2) * RATE))
+                if window_hop_seconds is not None:
+                    hop = window_hop_seconds * RATE
+                    offset = (offset // hop) * hop
                 self.windows.append((path, offset))
         self.windows = list(dict.fromkeys(self.windows))[:limit]
         if not self.windows:
@@ -145,7 +150,8 @@ def train(args):
     model = FrameClassifier(encoder, encoder_name='wavlm').to(device)
     optimizer = torch.optim.AdamW(model.head.parameters(), lr=.001)
     dataset = ContinuousWindows if args.episodes else AnnotatedClips
-    datasets = {split: dataset(args.episodes or args.clips, args.csv, split, args.limit)
+    window_options = {} if args.window_hop_seconds is None else {'window_hop_seconds': args.window_hop_seconds}
+    datasets = {split: dataset(args.episodes or args.clips, args.csv, split, args.limit, **window_options)
                 for split in ('train', 'validation')}
     sampler = DistributedSampler(datasets['train']) if world > 1 else None
     loaders = {split: DataLoader(data, shuffle=split == 'train' and sampler is None,
@@ -221,4 +227,9 @@ if __name__ == '__main__':
     parser.add_argument('--limit', type=int)
     parser.add_argument('--device', default='cpu')
     parser.add_argument('--model-dir', type=Path)
-    train(parser.parse_args())
+    parser.add_argument('--window-hop-seconds', type=int, choices=(1, 2, 4),
+                        help='Snap annotation-centered windows to a fixed grid for continuous recordings')
+    args = parser.parse_args()
+    if args.window_hop_seconds is not None and not args.episodes:
+        parser.error('--window-hop-seconds requires --episodes')
+    train(args)

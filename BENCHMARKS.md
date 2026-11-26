@@ -65,3 +65,18 @@ TS3005a.A is a different AMI speaker group from ES2008a.A. Its full 1,318.848 s 
 | Development .60/12 plus boundary correction | 58 / 152 | 0.382 | 0.513 | 0.438 | 4.276 |
 
 The corrected decoder recovered six additional matches but added 48 predictions, so the improvement on ES2008a.A did not transfer. Keep the historical decoder as baseline. Both AMI recordings are now evaluated and must not be reused as final untouched test material for a model developed in response to these results. A subsequent training experiment should test whether continuous in-domain speaker-disjoint negatives and an explicit boundary prediction objective improve this baseline. Evaluate that experiment on fresh speakers and preserve the two-boundary metric.
+
+### AMI split audit for the next training experiment
+
+Use the archive's official train/development/unseen meeting assignments. `ami_split` verifies global speaker identities across all assigned meetings, including speakers without word files, and rejects prior evaluation speakers in test. It yields 392 train tracks from 100 speakers, 80 development tracks from 20 speakers, and 80 test tracks from 20 speakers. No global speaker IDs cross the three partitions. ES2008a and TS3005a are official training meetings. Their existing scores are transfer diagnostics for the PodcastFillers checkpoint. They cannot measure generalization of an AMI-trained model.
+
+`ami_training` reads only train/development word files. It exports 19,200 labeled fillers and 453,871 other word spans for training, plus 4,190 labeled fillers and 94,969 other word spans for development. Gaps without a word reference remain unlabeled. Use the official test set once the candidate, event decoder, and comparison are frozen. The manifests verify identity and split annotations; full media availability and annotation completeness must be checked per track.
+
+```sh
+PYTHONPATH=backend python -m speech_analysis_onboarding_model.ami_split ami_public_manual_1.6.2.zip > splits.json
+PYTHONPATH=backend python -m speech_analysis_onboarding_model.ami_training ami_public_manual_1.6.2.zip training-words.csv
+```
+
+For the next comparison, hold the WavLM encoder and recording-level scorer fixed. Train a frame head on AMI training meetings with both filler classes and annotated ordinary speech, and compare it with the original checkpoint. Select checkpoints and decoders on official development meetings by pooled 250 ms event F1. Report per-speaker and per-class results, false alarms per minute, and uncertainty by resampling speakers. Freeze both models and their decoders before opening official test labels. An explicitly requested final full-system test will still need suitable labels and representative capture for video and multimodal features.
+
+A CPU smoke run used the first 12 grid windows per split and one epoch, beginning from a fresh head. Training windows lacked `uh` and development windows lacked `um`. The training and development frame F1 values were 0.036 and 0.011. This verifies the data and training path and is too small and class-incomplete to evaluate improvement. Use a 2-second grid hop for the larger continuous-recording pilot and verify both labels are present in each exported subset before training.
