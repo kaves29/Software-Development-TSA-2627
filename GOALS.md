@@ -1,6 +1,6 @@
 # Speakly analysis goals
 
-Validate 15 distinct audio features, 15 distinct video features, and 10 features that use both modalities. Use complete English speaking recordings. The minimum score for each feature is 0.85 and the target is 0.90. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
+Validate 15 distinct audio features, 15 distinct video features, and 10 features that use both modalities. Use complete English speaking recordings. The current owner-requested minimum is 0.70 for each feature and for the system, with 0.80 as the working target. The number of multimodal features is pending clarification. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
 
 ## Benchmark acceptance protocol
 
@@ -13,4 +13,4 @@ Validate 15 distinct audio features, 15 distinct video features, and 10 features
 
 Candidate fusion tasks include visible speech timing versus voiced segments, gesture timing versus speech onset, gesture overlap with pauses, gesture timing around pitch accents, and nod timing during speaking versus listening. These are candidates pending an observable definition, independent labeling, and baseline comparisons.
 
-For the overall result, use the unweighted mean of the 40 frozen per-feature scores from the end-to-end held-out run. Require at least 0.85 overall and on every individual feature. An unscored feature leaves the overall gate unresolved. Score outputs from the normal analysis entry point on complete recordings, including abstentions.
+For an overall descriptive result, report the unweighted mean of the frozen per-feature scores from the end-to-end held-out run. Require at least 0.70 overall and on every individual feature. An unscored feature leaves the overall gate unresolved. Score outputs from the normal analysis entry point on complete recordings, including abstentions.
