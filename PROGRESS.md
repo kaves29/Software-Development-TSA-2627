@@ -31,3 +31,4 @@
 - Compared balanced and recall Uhm spans with WavLM class labels on both complete development recordings. Pooled typed F1 was 0.511 and 0.510, respectively. This remains below the current 0.70 minimum. More recall alone added false alarms and did not improve pooled performance.
 
 - Tested cross-speaker WavLM agreement filtering on SDK recall candidates. Transfer F1 was 0.526 and 0.457, essentially unchanged from the unfiltered hybrid. No model or threshold was promoted.
+- Evaluated a Switchboard-trained five-label WavLM research checkpoint on two complete development recordings. An exploratory cross-recording agreement filter achieved 0.524 and 0.563 typed filler event F1. The result remains below 0.70 and requires independent data, a licensing review, and a reproducible implementation before use.
