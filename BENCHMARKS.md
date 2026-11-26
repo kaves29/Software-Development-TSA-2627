@@ -40,3 +40,5 @@ PYTHONPATH=backend python -m speech_analysis_onboarding_model.video ES2008a.A.av
 ```
 
 The AMI head and hand labels encode communicative events. For example, ES2008a.A has 49 concord signals, 39 emphasis signals, and nine labeled communicative hand intervals. These labels cannot serve as reference tracks for fingertip-to-face proximity, exact landmark positions, or the full set of pose measurements. [AVA Active Speaker](https://research.google.com/ava/download.html#ava-active-speaker-download-v10) is a candidate external check for visible speech attribution. It does not cover the remaining fusion features or the onboarding domain.
+
+The full headset run with Whisper tiny.en and Silero VAD, without a filler checkpoint, took 252.729 s on CPU and returned no analysis errors. At the 250 ms two-boundary tolerance, it matched one of 58 references with four predictions: precision 0.250, recall 0.0172, F1 0.0323, and 0.173 false alarms per minute. The mean boundary error was 0.110 s on the single match. This is a development result from one speaker and is far below acceptance.
