@@ -33,9 +33,9 @@ def load_manifest(path):
     return result
 
 
-def analyze_session(recordings, analyzer, video_analyzer=None):
+def analyze_session(recordings, analyzer, video_analyzer=None, *, allow_single=False):
     # Validate the request before running any expensive model inference.
-    combine_results([{'id': item.get('id'), 'result': {}} for item in recordings])
+    combine_results([{'id': item.get('id'), 'result': {}} for item in recordings], allow_single=allow_single)
     samples = []
     for item in recordings:
         try:
@@ -44,7 +44,7 @@ def analyze_session(recordings, analyzer, video_analyzer=None):
             result = {'quality': {'errors': [f'recording: {type(exc).__name__}']}, 'features': {}}
         if item.get('video') and video_analyzer:
             try:
-                video = video_analyzer(item['path'])
+                video = video_analyzer(item.get('video_path', item['path']))
                 result.setdefault('features', {}).update(video['features'])
                 result.setdefault('quality', {})['video'] = video['quality']
                 if video.get('landmark_evidence'):
@@ -56,12 +56,13 @@ def analyze_session(recordings, analyzer, video_analyzer=None):
         for name in names:
             fields.setdefault(name, {'status': 'unavailable', 'value': None})
         samples.append({'id': item['id'], 'result': result})
-    return combine_results(samples)
+    return combine_results(samples, allow_single=allow_single)
 
 
-def combine_results(samples):
-    if not 2 <= len(samples) <= 3:
-        raise ValueError('provide two or three recordings')
+def combine_results(samples, *, allow_single=False):
+    minimum = 1 if allow_single else 2
+    if not minimum <= len(samples) <= 3:
+        raise ValueError('provide one to three recordings' if allow_single else 'provide two or three recordings')
     ids = [sample.get('id') for sample in samples]
     if any(not isinstance(value, str) or not value.strip() for value in ids) or len(set(ids)) != len(ids):
         raise ValueError('recording IDs must be distinct nonempty strings')

@@ -299,3 +299,18 @@ The session report now lists which samples produced detailed fingertip-to-face r
 For the first video event benchmark, `python -m speech_analysis_onboarding_model.evaluate ANALYSIS_JSON REFERENCE_JSON` accepts a reference object with `hand_near_face` intervals (each with `start_s` and `end_s`). Use detailed hand and face analysis output. The scorer calculates event precision, recall, F1 and boundary error with a 250 ms tolerance on both boundaries. Empty predicted intervals with sufficient tracking count as zero detections. Missing interval evidence is reported separately so evaluation can report both event scores and abstention coverage.
 
 The same video benchmark accepts an optional `hand_near_face_returns` reference count. Annotators count a return only after visible separation. The scorer reports count error and exact agreement independently of interval F1, and preserves abstention when the model has no return count.
+
+## Offline onboarding handoff
+
+`backend/speech_analysis_onboarding_model/onboarding.py` accepts one audio response and an optional separate video of that response. It runs the existing local analysis and returns JSON with a `summary` in readable text, individual `observations`, the supplied `question`, `quality`, and `analysis_status`. `observations_available` means at least one observation exists for each requested modality; it does not mean every feature is available or accurate. Individual observations retain their status and use null for unavailable evidence. Event output includes counts and times, not raw transcript text. Audio and video are analyzed independently; synchronization between separate files is not verified. These are descriptive, experimental measurements, not personality or emotional-state judgments.
+
+For an audio-only response:
+
+```sh
+PYTHONPATH=backend python -m speech_analysis_onboarding_model.onboarding response.wav \
+  --question "Explain your idea" --model tiny.en --cache-dir /path/to/model-cache
+```
+
+For a separate video, add `--video response.mp4 --pose-model /path/to/pose_landmarker.task`. Optional `--hand-model` and `--face-model` enable detailed hand/face evidence; `--filler-head` supplies an optional filler checkpoint. The same media file can be passed as the audio and video argument if it has both tracks. `--max-seconds` defaults to 240 and can be increased to 3600 for offline evaluation. Model files, Python dependencies, ffmpeg and sufficient compute must be available. The Whisper model is local or downloaded into the configured cache; no OpenAI API call is made by this entry point.
+
+Python callers can use `analyze_onboarding(audio_path, video_path=..., question=..., pose_model=...)` from `speech_analysis_onboarding_model.onboarding`. The resulting dictionary is serializable with `json.dumps(..., allow_nan=False)` and can be supplied to a future system with the person's questionnaire answers. This is a local analysis handoff, not an integrated onboarding website or a verified roadmap generator. On 6- and 15-second excerpts from the same AMI recording, the local CPU models generated audio-only and separate-audio/video handoffs; this is a functional smoke test, not an accuracy evaluation or confirmation that all features work for all input.
