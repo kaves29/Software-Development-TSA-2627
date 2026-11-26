@@ -1,0 +1,3067 @@
+{
+  "archive": "https://doi.org/10.5281/zenodo.22638749",
+  "license": "CC-BY-NC-SA-4.0",
+  "metadata_md5": "15dcb5396438ad52f196029444f87b1e",
+  "samples": [
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_137_Gesture_Point.npz",
+      "sha256": "8714b74c680f30434aa2cbb309c5c4ce003ce5b735a928aa42f3ee79d45ffd02",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_195_Gesture_Praggest.npz",
+      "sha256": "8f2b5138c340e97ecb67cdb9e4e7eb7cd2be11c74a7b32a1848f27efb896e874",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_276_Gesture_Praggest.npz",
+      "sha256": "762a089fd50707201de4af39510e5d8dc60eccaf2911de120831ab14512d44a9",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_291_Gesture_Beatgest.npz",
+      "sha256": "835bd7756650a263853a3ced2b5bf0437ba75acb8c01a5a95045d16e2edd2c2f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_257_Gesture_Praggest.npz",
+      "sha256": "b2528efcce29414433984e8095ba4448c3a35ac8d934504b9674eb61c256b140",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_166_Gesture_Praggest.npz",
+      "sha256": "f4374de6a743a46f3468e42db90942a89b4cc9d4189777c930a18831b5e45723",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_275_Gesture_Praggest.npz",
+      "sha256": "1cfad92b65afe0b17bcff78eababbada5b51413e38958fa1b6cd605a7b5a9957",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_219_Gesture_Praggest.npz",
+      "sha256": "59d862b07d2b3d434d29853bdd8ffa014bc99055f772f253c164d15309169624",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_294_Gesture_Beatgest.npz",
+      "sha256": "4af516f38a4e5a02bec40344310a0b189f20db5254a4c96c674662b0dccecfce",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_173_Gesture_Praggest.npz",
+      "sha256": "6a9802957c3f625888742be5bcd5cd7b6cda78469a7ec66f41e264d1d25d8176",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_113_Gesture_Point.npz",
+      "sha256": "c38f0565c7e64944d6b5bbcec5dcf51a9afc66f14e66fa6b49a117764496d0fb",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_213_Gesture_Praggest.npz",
+      "sha256": "8306c2e9667e5867f2792e8321e4aee27905059b7256d963357652f32f719206",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_333_Gesture_Repgest.npz",
+      "sha256": "bd5309390be1af93d9ce7edc28a5ac4c39b89c0a9de9e1d1bfaf43478b23ee0b",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_106_Gesture_Point.npz",
+      "sha256": "6ba19cdaf279f331eac91d02abce9b8a8e0e0a6e4e19cdbab6379c47fe149644",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad03_328_Gesture_Repgest.npz",
+      "sha256": "8f1a92cb2320dcbe850812b719ef1e4a3bac2f27a0bcf64574ddf221a23ca23a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_131_NoGesture_None.npz",
+      "sha256": "dfbaf86f5cc2d499ba33b8d47f07af18764a3bf11157a775a1edb717e4e7fdde",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_236_NoGesture_None.npz",
+      "sha256": "256ed2ca48044941c495e237dc730b92c0d4501655b81f304f0b798ff632d278",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_141_NoGesture_None.npz",
+      "sha256": "3c9b635013a065e3cfc9dd870808b6fb6c964e509c954551e4791a9a14e5d1f0",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_84_NoGesture_None.npz",
+      "sha256": "f26235fdaead89a1c941005f4d321dff5185f9de0e7d870bef651428b023f9e6",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_246_NoGesture_None.npz",
+      "sha256": "27574896317fbc7421539360a7a7d0921eeccfb15ba4a8efeb141171b6938bce",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_108_NoGesture_None.npz",
+      "sha256": "541829f28d155075ebeb400c0a5fdad9787c991c3ff861492a70236e023deb46",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_43_NoGesture_None.npz",
+      "sha256": "f06667354ae86004d6b7c3c070a0030da3ce06f08bf2e8bb1a7a5890f05d689d",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_217_NoGesture_None.npz",
+      "sha256": "bacdb4fc6873ea3db41e83d33f685b8397ec6d1142a95d5e7cc52d8d8f51654b",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_223_NoGesture_None.npz",
+      "sha256": "29637298b689e471e4b4da76581d5b8f8c6f89d5930cc425e6f4762e33cb28c7",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_25_NoGesture_None.npz",
+      "sha256": "8b163a235af3626114b303071dc1f2502e3e95bae920d6b33004f3a897a866bc",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_270_NoGesture_None.npz",
+      "sha256": "1e1b2bdbef1c5f52f84a6ddfb91807fdafc8bebc4450e22e6037294c76feb070",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_200_NoGesture_None.npz",
+      "sha256": "147e3da56b358d64e9411f695f5eaaeb7c2d91298181bc2c2abb3507f85f4479",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_272_NoGesture_None.npz",
+      "sha256": "53795ca5e200a0a486dd4d612af870de3fa7a89d2de55953a32efbb9ed8ed208",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_76_NoGesture_None.npz",
+      "sha256": "ca050dca2cd06100c8fbc0383097b3bc0e13badbf6e82bf8c1d557f3d49c9bb4",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad03_214_NoGesture_None.npz",
+      "sha256": "e51ff49077816aeffe0fe039f5b2d96176dd87136dd7647b0e8a4f08a505e5e9",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_461_Gesture_Repgest.npz",
+      "sha256": "377079b53bf7a5921204fea211037f5175cbf8baceb49426571a010c99631451",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_612_Gesture_Speakerreferent.npz",
+      "sha256": "ad1d24e35743e8ae3fc7a8abb03199e69ef6960e34f1485a1083242c3d52445a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_292_Gesture_Beatgest.npz",
+      "sha256": "8aaae5948c0e826734da72ab6d8d79412692208f1d2619238309b920a7aa908d",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_410_Gesture_Repgest.npz",
+      "sha256": "920f19ed39d34b6512056ed68e3b19bece88d9a954c0359ff7215d31e6c9c758",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_520_Gesture_Repgest.npz",
+      "sha256": "a6c31552c3cbfbe43a8de154ca78ddc431dabcef18665f7bceeb1786277664c9",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_446_Gesture_Repgest.npz",
+      "sha256": "0f8701da329d51b6a3a557838ce57cd532ee3b6921af48b97efb283582ecc155",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_260_Gesture_Praggest.npz",
+      "sha256": "5fb42e24d928319471eefd02b05a3394b83c913d5f81baf9172915c04e953a55",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_567_Gesture_Speakerreferent.npz",
+      "sha256": "aee4194e4abd56c4401831420250c3a8cd1e67e03049bb390a6ec2c8561b862c",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_324_Gesture_Beatgest.npz",
+      "sha256": "d9194a4e4653f3dd941d24170947af6a7cf6cf699f4ec6bfeefa7c0ad0940628",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_145_Gesture_Point.npz",
+      "sha256": "bd8353bd7f761560736a481118e0346f50afa05a007a062a97ba11050f5143ed",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_159_Gesture_Point.npz",
+      "sha256": "ec0015f3dff2f17e53933b80920bf9f0860c04c563f8467c0cd1c6892a5d8b60",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_440_Gesture_Repgest.npz",
+      "sha256": "88d98388409b7c9753690d554ad7dd23cf70bcc92f477abe25c3b6959cc58d07",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_531_Gesture_Repgest.npz",
+      "sha256": "73de9d3f4f1b6bdf1ff18c1d7d7601c13a9d46ddec7002cbd56e172816de76be",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_165_Gesture_Praggest.npz",
+      "sha256": "7e1fb63ba452d17c02afe2f90a10d3d45b12ab42603f22bdaf2719da20c188d3",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad05_489_Gesture_Repgest.npz",
+      "sha256": "ce197cb68e1fbdb7b506b2d45bcb510fa7e11d96619f5fba34575ce9f7c670bb",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_167_NoGesture_None.npz",
+      "sha256": "f8588f34fd5137b7bace083f8dd34d58b380741c0ba36f48795122d85c15f095",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_235_NoGesture_None.npz",
+      "sha256": "f5fa9bca173f7fc4f3cc6a8a066959a82641ead2db6a69af9e438bcb9b2cf375",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_375_NoGesture_None.npz",
+      "sha256": "b8f29fcfd9f8a72c3299b71d592f8e353854ebeda975320e05f78ae36a3761b4",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_156_NoGesture_None.npz",
+      "sha256": "1670a16953e43168f5cfc1392ec774c87eb06614d47184a646ba74deb7e2cc70",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_507_NoGesture_None.npz",
+      "sha256": "12316c7c2e334a9fba4876007a9cb140310e668155e3f4e3a0bc32dbfd269917",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_550_NoGesture_None.npz",
+      "sha256": "efd25aa22ce27f89493c6c297eff1db899e1e8bdba88b17db4286e527aece5bd",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_138_NoGesture_None.npz",
+      "sha256": "aa1ca85e5ffb1c149b3a1b74f2e6268e92cac307a19a52d563ae3768cc1d96d7",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_85_NoGesture_None.npz",
+      "sha256": "8e73e370726f8f6568a732a4b2544edb75e9efce586f6f91eb31cdbaa739db6f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_54_NoGesture_None.npz",
+      "sha256": "c2c1a826bd2a5bbfd4bc16bfe9e1300d4882bfe54290fa3e1eb36d9bf55f1f0a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_96_NoGesture_None.npz",
+      "sha256": "dae0db9183d46520b6cc49b9d435971a5aaccfc14cc05686a0c1d43bc7aeb485",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_461_NoGesture_None.npz",
+      "sha256": "f19ca3281f5ebd2b4aedb2963a81ea2304a0e29324b6d4abadba1be69e8af21b",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_315_NoGesture_None.npz",
+      "sha256": "30ba136bf56c1f7c412900f70e3e751f6d13141114b48f97ad0a7073140cd338",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_210_NoGesture_None.npz",
+      "sha256": "cb09d0e9e6a3699c54bf023ef51594852c5ab1fbfed81b254e284d093e2663f1",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_560_NoGesture_None.npz",
+      "sha256": "4472bca3caa59d28929c4048979db19ec6d26245f2a884117c2296d7be78340c",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad05_173_NoGesture_None.npz",
+      "sha256": "ba9dec0739a4ca0092e5bce6e4c388ef52bcfe66659398320e1c50e38fbf884a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_227_Gesture_Speakerreferent.npz",
+      "sha256": "d6bb2788bfe15ba1bcafa3560230a371803f92c621f72df52817239ad23198f5",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_68_Gesture_Point.npz",
+      "sha256": "121c98b45a4b5fdf95a032a1d171455d5f13c29a90450d81b93d7e039f9d4df3",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_264_Gesture_Speakerreferent.npz",
+      "sha256": "dbc00b0c752636da5b1a4f70656a937914ff5eb5768c1f06478f7f104da48587",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_79_Gesture_Point.npz",
+      "sha256": "d23037f60faf4af586cb512cddef07a6b834ab6a34565021af142e419d4795eb",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_125_Gesture_Praggest.npz",
+      "sha256": "10f2b40c9f1d22388168aadabc58a9ff02dcf2901ecd09aa08ed78b8bdd6a252",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_137_Gesture_Praggest.npz",
+      "sha256": "51e33e40f05efd9f9dac948919177a37a8ff7f85eb6df2723bb421b28cddf7ef",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_249_Gesture_Speakerreferent.npz",
+      "sha256": "f996b3b7e80345bbd4851449dcff6fe330892a2b3ae4609f7814a2388ee1197f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_252_Gesture_Speakerreferent.npz",
+      "sha256": "2bad3553da4677660f8f51c6c73fd34b75d1ebd5bdda3f3693ec5e9fdc322e8f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_279_Gesture_Speakerreferent.npz",
+      "sha256": "31a4bf0bf48e115b3a8537b30f6fde18a1a5a3e14b5abd22f4afd1e5a029821f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_215_Gesture_Repgest.npz",
+      "sha256": "54b091f097dedd944e5004e51b007f9c01fac574bf4927aff63ae808e2557afe",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_192_Gesture_Repgest.npz",
+      "sha256": "a1fb43a47077abe57b631914a2667d3d24cab7c830b721ece49da94ff899185c",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_89_Gesture_Point.npz",
+      "sha256": "2ea07dc203e5293c5eb7a93208e88b7ee9a8607bbb492c9a63f9be2f10a76c25",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_230_Gesture_Speakerreferent.npz",
+      "sha256": "f14f858151bc878683b51d0ea0bcf56a63044545e8c3c4eab64bc685a184d52c",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_170_Gesture_Praggest.npz",
+      "sha256": "e771eba5d621ea40de8a9f5ac2774ef20009d6665f8530cde4d2d3264085e8c3",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad07_146_Gesture_Praggest.npz",
+      "sha256": "7ddf0bc2e5a123143f1c35bc23c82fa436edcee1d985f9f61ed1829ab2c5cdba",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_51_NoGesture_None.npz",
+      "sha256": "8ac93ed6c53e30b022c38d091fcb1e738de23530bf171a37266759982505f03a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_105_NoGesture_None.npz",
+      "sha256": "123b5f07b2a3709142ea90473dd933da8ae122e1c5fd13aa9d8289b6c7c10bbe",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_124_NoGesture_None.npz",
+      "sha256": "ec70aaa80de334e70ea522ac75662a57e56ec32bb7a3e322c589b173139cb5e5",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_87_NoGesture_None.npz",
+      "sha256": "4010760058d1a842732189b075f24d836b6ca2fde6181ba95b87ba0fddb59bb1",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_194_NoGesture_None.npz",
+      "sha256": "522121d8f86bcb3a67c1c425627b2a9d4c98d6239a44ef9291f3c5cbcca86ba4",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_107_NoGesture_None.npz",
+      "sha256": "974e53786b0f6463e6d8f6756f5715730c2cb4e4091ce1b5041c7bd2fe4a3960",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_246_NoGesture_None.npz",
+      "sha256": "dfa8ae3e0c70fb025a90baa3011bdbc95460e25e23ec45f56a6324359e2304a7",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_192_NoGesture_None.npz",
+      "sha256": "6d7f1cd622407ef9b12b80fa3e530f8a2331daa861e71b6db7d46c10ce14b29d",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_198_NoGesture_None.npz",
+      "sha256": "6c79024db31c3f9cf669f4d7c0902318125077f787efb240948feced2d11c9eb",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_156_NoGesture_None.npz",
+      "sha256": "c5d4006bbc0d0104a3565bf4900975b2467f1d9b0787f1f3fc155a4cf5af15d5",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_249_NoGesture_None.npz",
+      "sha256": "d29e70c4668f19f889fef0e020e89eda08333a84da3b909a695f4f1928052063",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_5_NoGesture_None.npz",
+      "sha256": "87ab4abf34db35a77a63b88a7e66160589cfacd694b2e9b50b426eee1d01fed8",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_20_NoGesture_None.npz",
+      "sha256": "254fc6eb895ed44ae2a8d425459d2995fc9664f3ad0ee1bedfe295fddb142fd2",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_263_NoGesture_None.npz",
+      "sha256": "f2ce459c89213de3922809746a1df8d7d098a48d6bb08c30b512cbe726e3807a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad07_190_NoGesture_None.npz",
+      "sha256": "a7641c0bd9dcba31b193bb0e8e36ea00151b73e8eba8032cbee45d980e4f6b87",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_102_Gesture_Point.npz",
+      "sha256": "f8e61d649b52e302050d6f52eb27490e9fd21298ef63d012b3ee695b4ff65dec",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_368_Gesture_Repgest.npz",
+      "sha256": "b5b24f55916a8ed4adad77104016194edbed4c3747f03788ac34fcb477ac6d85",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_92_Gesture_Point.npz",
+      "sha256": "b7422f49de572ac75b5c6f6bbeb449ff017f733dfecb4cb0093f38822439af66",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_351_Gesture_Repgest.npz",
+      "sha256": "9d1a5102855cc849de93ce2ddfe8a6d41622c77a067e9d0faed6c2ae63f62103",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_177_Gesture_Praggest.npz",
+      "sha256": "452a1721f342a9bf548ac57b17660ab0b7c6b5d4f10b79df49281c36ce03e092",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_293_Gesture_Praggest.npz",
+      "sha256": "f785e5fe7387c868903530864fbe935cf30b7983fc3b6062422f5b68c82fc2ee",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_151_Gesture_Praggest.npz",
+      "sha256": "c829e365c1aca1f6463f0469bfc82f7540eb53f64d26c752b06ee657c8b7c0f3",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_79_Gesture_Point.npz",
+      "sha256": "9bb927f8eb786708d4b7a1fd134ff850ce8bc688f62d6ee1b786526c321ac888",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_97_Gesture_Point.npz",
+      "sha256": "24ed8cd404e7b17ae36989df736d655e95f1c7d626db6f2860bfb9f298ce716c",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_269_Gesture_Praggest.npz",
+      "sha256": "ad2b16cdfe3f89b16f9251856b96cc3499a3cdf33f02e7c549428e9976843fa8",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_251_Gesture_Praggest.npz",
+      "sha256": "3d6879ed569e7e5b57c071f437529953e2ee91d57a54aad9f1ba5c0f93472f8a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_343_Gesture_Repgest.npz",
+      "sha256": "a9a00ff0b0ce8c699a2f57cb09ae97d3f660ac9cc3aabf91bb55c04e2219e456",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_387_Gesture_Repgest.npz",
+      "sha256": "e2fe5f4cbc950043345aecc6c6de2eed37ee856177e36b7b790ea6a74aa63438",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_187_Gesture_Praggest.npz",
+      "sha256": "3edeb31156472d46aa3aa6cce08a57dfc81bc880f43c230b292ef528907d359b",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad09_239_Gesture_Praggest.npz",
+      "sha256": "2f79aa6fb4de0003847466c5f7d59396a9d2edf386e412bf829711453a0f14fc",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_112_NoGesture_None.npz",
+      "sha256": "eaa4d665fda87e46f94c54dc15a86631a5bdca36a1e2cdda1c4d15f8ce84469f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_321_NoGesture_None.npz",
+      "sha256": "f43c5677ef52d48456a884b98164dad693a368f55adb732b6531dd87e3f02aae",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_177_NoGesture_None.npz",
+      "sha256": "259f6db4013cc420949f5b4d172dd619674d96cfa781e54fa8429dfe3fc135f8",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_48_NoGesture_None.npz",
+      "sha256": "214cb26ffb040e3b6cff37fdb90ab83c5a3bb5494b8cef1c90bd4048743363b1",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_44_NoGesture_None.npz",
+      "sha256": "fb294e8ad7c887c749e9e4b3a8314bcf79b02ae3edbd91532cf72e98cd69f8a9",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_289_NoGesture_None.npz",
+      "sha256": "62ad71a2e745121cecadb3c20fe1e4481b0a0bb9c3babcfba6e3ebd043b680b6",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_278_NoGesture_None.npz",
+      "sha256": "befbdf538ce6644b3a451bec0f823a874a40883090fd4dd027970c89261a5a32",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_113_NoGesture_None.npz",
+      "sha256": "5f530c255e382665f118b675f7839b72b519c81c56fc3228499b4b3fea643bae",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_262_NoGesture_None.npz",
+      "sha256": "db97fb538925fa8d86e8477d93f71e5c224f9d0b25897c4f1b3299e52476f161",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_138_NoGesture_None.npz",
+      "sha256": "690b9c815c1dcf34fea2d7b5cf8dfc8a60babd02f6438ee762d1527a4990a9d2",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_187_NoGesture_None.npz",
+      "sha256": "d5d4865690e14e6c520cd89421c130c8d3bd2af50efdd3bf24f533d2c08b2044",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_41_NoGesture_None.npz",
+      "sha256": "86be2cef10e1838dec1cf2fe9e676e7e055ab780adb9bb8db6bf2f30179fa395",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_67_NoGesture_None.npz",
+      "sha256": "98f3f3c77db9b0d0baf8bb5ea222baecce580fc4af3535086e3d18bb7406577b",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_296_NoGesture_None.npz",
+      "sha256": "23964a7d957b6399a416979d4adcd4ba605082ea2014f65d03ae1aa7392923e5",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad09_268_NoGesture_None.npz",
+      "sha256": "06dd2c76fbd57adc42341cbaf1ba51a8639f632f234438fc6366920847ff9676",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_346_Gesture_Repgest.npz",
+      "sha256": "cc550ed835daa54a97e1c2b3a4cea8e0a4cba84f3c5b0d5a66f3991608e12c70",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_137_Gesture_Point.npz",
+      "sha256": "d81f1c1510868109e7bb8bf7044535fcbf739ad00cb6db99c6ea921e707d2548",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_7_Gesture_Beatgest.npz",
+      "sha256": "724419788d24eb66a856e60c2d6e98b4806483d657891db53798b00873aac722",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_223_Gesture_Praggest.npz",
+      "sha256": "1e689b01b08a402ffba325b2214965fbea5a74e9ceeafe7c8087aef4ccfc0d10",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_279_Gesture_Repgest.npz",
+      "sha256": "d70f2a4f248a1bd5b304360f7692df6e50804bada496e7d0fdeb4a98800967b9",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_134_Gesture_Point.npz",
+      "sha256": "57a9bfefceb5fb1032001cfafecb9f8a96f86dc655bd10803ced7aca2cd02925",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_293_Gesture_Repgest.npz",
+      "sha256": "2964a75ae927f5344a1609199dacde57eef3d47baaa4dee7c5c35e1a06abfdf2",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_14_Gesture_Beatgest.npz",
+      "sha256": "64299d02c328590e3bd943d1ab437b176f04c79cd89da92d7733c3c7fc840022",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_180_Gesture_Praggest.npz",
+      "sha256": "b60aafaee96f4917acbafa899591a2a05557d14ba7d943394005fc067c754c71",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_16_Gesture_Beatgest.npz",
+      "sha256": "23b286457f2c847f4ed071472e8d114bdd06cfa651b4be425de641f2a2f8997e",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_322_Gesture_Repgest.npz",
+      "sha256": "4c97fd97d38c67bd4f5616f96f904d99fd11e0ab6c9495091d8dffcfcd466b8b",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_13_Gesture_Beatgest.npz",
+      "sha256": "02755ede54efd99e14b16c70298abaeb93996e60bd112c71def9cc5f69b459d5",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_175_Gesture_Praggest.npz",
+      "sha256": "f12074acec022806f42316e0cf9dbdbcbd5e3c4faec6b325af81b89ae25f797c",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_135_Gesture_Point.npz",
+      "sha256": "21ce0758cb9f05e9380313a5feb023acaca614387885612a358b908ec1050f4f",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad10_284_Gesture_Repgest.npz",
+      "sha256": "08ef98f9ff1fa89085b594de198b49a9e6e925b628b452fa71c8c5fe57b083b5",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_9_NoGesture_None.npz",
+      "sha256": "322a8ca2e36bcaec13685b9838d337c3050bc1d9108ff02678b578b68d4cb228",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_247_NoGesture_None.npz",
+      "sha256": "ab1cc4bdc2738d73fdb07e144706a05741b7bfffd149c12c519c5f1f65727c4a",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_263_NoGesture_None.npz",
+      "sha256": "1b7d3e6b6975a460c74fa2be7a2cd026d47dd8c6a6b1bd121530038114e1f4cc",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_104_NoGesture_None.npz",
+      "sha256": "a4fc8202a3bdc3daab5f8d5d30126b4c85b78206eca50a91840a3d426f337eea",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_11_NoGesture_None.npz",
+      "sha256": "b8867c1c382c1c142111ee459cfe43628d5b67a639a03482734c424d167227ee",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_95_NoGesture_None.npz",
+      "sha256": "4c84ce48ace49ab966552e8301cc30003a82fd387056789b2b72b11188de13af",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_188_NoGesture_None.npz",
+      "sha256": "a2aca1bff69cd59db3374c295492dd6b874a1fc2c4bc35c2bfba895e0fd98042",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_152_NoGesture_None.npz",
+      "sha256": "9c1d5e68b2c865cb0c5e18c4e9ba550e5c8d6fa3bedf2c3c645344e31bf8dd0d",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_196_NoGesture_None.npz",
+      "sha256": "eba3daa31310ca5503eb61adcdd469fc751a0447f8f4da3f04173ac39819fc78",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_228_NoGesture_None.npz",
+      "sha256": "da995831e6098d68fa9cf040f411140e42d531081efd9ef608f63766456823b6",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_28_NoGesture_None.npz",
+      "sha256": "561f2729b9daa13e3a1e1d294c517f0014ee446c471a13350193eea03481bba2",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_132_NoGesture_None.npz",
+      "sha256": "f703a8a20a3692c0e3d1211c297dc895aaa2ad655b58a7c8945390b8d785a3d3",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_133_NoGesture_None.npz",
+      "sha256": "232b9a7deb8e3241c3cfced4c679aea9b6d212c06385f0928f380c263114e495",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_239_NoGesture_None.npz",
+      "sha256": "7a603730356b7a0dbc55c3d163a888b56deb7c3ce550417fc4b20ca68cc22336",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad10_208_NoGesture_None.npz",
+      "sha256": "b7abbdd66beb2f91120912dc5e17b76f6d477bdd50fdd8592a1272d40051d775",
+      "selection_seed": 72,
+      "role": "training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_243_Gesture_Beatgest.npz",
+      "sha256": "a43bf1fe0b85bef3eead95b9aeda567986a16a329b9722eff16608e87fa05967",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_162_Gesture_Praggest.npz",
+      "sha256": "b97d831de9e1aa86cce61aadf0cbcef037fe2d689fec355600fd5ea95fba6706",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_67_Gesture_Point.npz",
+      "sha256": "abc5e4a92ee07f99ff079c55d66d7de8ef6455a34c3eef4becd30c940f1dc917",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_55_Gesture_Point.npz",
+      "sha256": "3aa402e875e20a571992e9a79b5ad2501d6c8cbd639c1986ecf12a5934857567",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_98_Gesture_Point.npz",
+      "sha256": "0dbafe36a1d22967adb3a4298b0f10c67b958630971c339571ba4dc47c61284e",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_193_Gesture_Praggest.npz",
+      "sha256": "5e3c1680faa5aa5143e8026a934ac3b351045e941e653e97aa868b14478672a3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_46_Gesture_Point.npz",
+      "sha256": "40d452063fb53f567f6c9d6f38a65a27696989498d56b91d6748c4d25015ce91",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_252_Gesture_Beatgest.npz",
+      "sha256": "c08019d548f8fd86db41f585eb29a235e9c9c3a4fb65fecc276fb88d5d8da800",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_137_Gesture_Praggest.npz",
+      "sha256": "100daae9d85574018d3acb2f81272b32da2664f40ee71e6e1a7e7a9d7b2dec09",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_59_Gesture_Point.npz",
+      "sha256": "38d782f4ea471176999e28e58267f34d3809ac78cbfe32a22102b2eb59001b25",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_306_Gesture_Repgest.npz",
+      "sha256": "23a37e9f14d09638871d79dc1e93d10911174c5ece148e93fdfebc3b18e8b3a4",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_75_Gesture_Point.npz",
+      "sha256": "a56065bd554bc41755d906d6795b811bbf52d76eff4479d8140211c6b3b298e3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_66_Gesture_Point.npz",
+      "sha256": "c29bd9e9350ce3bee8ddf51897bb59e7e7ac3a826884cba0aeb675f42aabff94",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_203_Gesture_Praggest.npz",
+      "sha256": "19adb77a606c6ead292f006f8dd30c28cf1a7cf9057bae64214ed0af31088965",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad11_330_Gesture_Repgest.npz",
+      "sha256": "c3bceac0871787b0dc0318ba399a0dc3cabbc2cd3d310c4d032d0e3000b2554b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_150_NoGesture_None.npz",
+      "sha256": "5693976405b9e816c6ecaa23aa27605c7dbe485201bb70487672c82861b41058",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_10_NoGesture_None.npz",
+      "sha256": "27326893095def4792ec55c2ebf2c347f5b5c9cfcc25669352bd9bdee59d754d",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_217_NoGesture_None.npz",
+      "sha256": "23be8b6de9881952de046c03f00ee618234899ef0167df4c34293b35a990b07e",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_28_NoGesture_None.npz",
+      "sha256": "6ee47155720de00d74d4755a19506d2a4a50cfa58837141bbc38487d4a2c518c",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_111_NoGesture_None.npz",
+      "sha256": "6e312c9d4299634c64c854fdf969801c17f0d81066838b8fd6ad63b02fc2df69",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_2_NoGesture_None.npz",
+      "sha256": "547a0b901ec9d4c20ecbdf68d5dd066d2cde4df7d9d49641e9b0c05c575999ba",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_262_NoGesture_None.npz",
+      "sha256": "23579c4f9639804765bebbeebf8b30c3001afe96a6c4174a4d2f20e0aba14f65",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_96_NoGesture_None.npz",
+      "sha256": "7c1d75c7f4905cd5c584450a4f6a51115e00e539107928703ccb24f579c17652",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_33_NoGesture_None.npz",
+      "sha256": "063430aeeb2fca1f74cefed475b24f2c80703ff783b487e3a63534efb2a83345",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_69_NoGesture_None.npz",
+      "sha256": "525417f7711a71c65f6711466b3f841e866eeae6f7a2ed9b49ef4a85237c4c53",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_94_NoGesture_None.npz",
+      "sha256": "061f47a77ca2f366580d9c9ddaebcf204ce886b33d465d0e5ec1c157a550c9f7",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_38_NoGesture_None.npz",
+      "sha256": "fb2fccf8376383ed22c271d97de33309c77ce5dbd1bee2914ec16784d31548ef",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_183_NoGesture_None.npz",
+      "sha256": "7f9f82f5cf13052d258524c09062f1f7c9c2b09fc22e67c69ff1a8a221776b98",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_125_NoGesture_None.npz",
+      "sha256": "d8a4a26d743e6023d3fe1e822cd88215e04649c4e22b79648e662645cc6a6534",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad11_221_NoGesture_None.npz",
+      "sha256": "6b724e03a662b0ec317f74b88be4f2fde77a9683dae5d678ab5aecacf3ac8387",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_480_Gesture_Repgest.npz",
+      "sha256": "97058eb3a151a8a2dd5e19416810edd45c5a62b5717b1df86424d7b28e50e0d3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_493_Gesture_Repgest.npz",
+      "sha256": "7d729dae68033e526aa94e2e7b9e2b137f776dc95e2e0a5a552174962e3adf96",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_294_Gesture_Praggest.npz",
+      "sha256": "863bed0184ed8c5d16414704fa00f53325e8af7ff6745e3d145829b80ed81943",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_237_Gesture_Point.npz",
+      "sha256": "2e2871ac2875a55478f3ffa0dec748902a5e9a02aa42a39cbbf853ed4ce06c81",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_426_Gesture_Repgest.npz",
+      "sha256": "4b85a4552710763042d0515cbc5fef065b78829414a6f6c34de3a666914e09e9",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_368_Gesture_Praggest.npz",
+      "sha256": "6cd6d2b3c7c59915be1c7abb937a7e5873ab7841e749aba299e97ec396c80c87",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_341_Gesture_Praggest.npz",
+      "sha256": "bbb64afd5da2c9ebe60d930d0bb322ecb7d5b4a96914cf25e41e864d55957dfb",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_257_Gesture_Point.npz",
+      "sha256": "47009486f63495a8d7e61a23794e89cf56f2ba85e372ea1169ad9906931a486c",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_307_Gesture_Praggest.npz",
+      "sha256": "07829ab5abf6a91f607a08824c33cde93b616d5d68cd9eff5ab567fdb6c82e20",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_203_Gesture_Point.npz",
+      "sha256": "1acf4d306e833c86c5d7b48ed0e390fc5a8999061bca110533c4ce7aed2ff662",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_301_Gesture_Praggest.npz",
+      "sha256": "b3be5cd48d6dc8dddeabdcbfe3fdab145d4c1acd3e8cd7981c128097ce4ea6eb",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_328_Gesture_Praggest.npz",
+      "sha256": "fe2c7afa63009742558e639c174afb299797d7102b662bd01e7b23b9885faa9d",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_330_Gesture_Praggest.npz",
+      "sha256": "52552732b2465d13bbeb7a8a4fbb00b7615d81c9d74e1ecba20f5113f8bbb6ee",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_216_Gesture_Point.npz",
+      "sha256": "aa2e2d96a8c04d325c9c89963653ae7ecdd8e8f4480c9c0fc48a147bff2eaebd",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad14_311_Gesture_Praggest.npz",
+      "sha256": "f7759e11b10fba714e73f02d88fc5308d70df67d4249c4132d8f64fff00e7c2a",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_332_NoGesture_None.npz",
+      "sha256": "1a0a8cc11c90a2b7f402f8473b8e037a2563ca95e50dda923aee81daaeddf3f8",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_179_NoGesture_None.npz",
+      "sha256": "43f090e4dddc4185cb183fcdd847d78cb227a145a4440fb11cf71f524a0693c5",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_72_NoGesture_None.npz",
+      "sha256": "eeacbbe962f8f52d2c9b667f35674383cf660312f61a3d571657f305de7bce40",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_299_NoGesture_None.npz",
+      "sha256": "e81b2e52618f06f0c6586430ec1049654da1d60faa3c4475b7c03dd66cbd3479",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_139_NoGesture_None.npz",
+      "sha256": "37f574f09ce5258853619d930d2e5d60bbced717531d1f4ac1a640cce58f7cbd",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_138_NoGesture_None.npz",
+      "sha256": "6a6336901493072e5361b2dddd47f6017b0340630a38555e2b5dff66ab4bddbf",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_137_NoGesture_None.npz",
+      "sha256": "66930b484f4e3e50d77af9e607b745ba0dfebcbcfb7d1839219ee6a3ba721cca",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_8_NoGesture_None.npz",
+      "sha256": "9271e1e97818c4aee00ec88c956dcee216b68e9de4e0245523674779366ff9d3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_188_NoGesture_None.npz",
+      "sha256": "b442d8e10406f9ce1eb0e57338f93576f3e74c99ed2d5be6273b5402b91f0d0c",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_160_NoGesture_None.npz",
+      "sha256": "459096286c8ddb3e1aa09d05947ec4f711f50c0fdf61739fb6c49f8300d7ed0e",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_45_NoGesture_None.npz",
+      "sha256": "6e3b65511017e1263ded70f9e80e09f0a3a1dcb2fdc0ebd3853cc4bd5a386adf",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_165_NoGesture_None.npz",
+      "sha256": "ee8b4a3deb902ba0d346edee7d01969eea7354405dec13df83af06f3485337b8",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_301_NoGesture_None.npz",
+      "sha256": "6e024928c6496892450a1a8e7770b965c8524bf3d7234f9a409e96091ad3c00b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_312_NoGesture_None.npz",
+      "sha256": "0d99e3811c2e9a588b502187e91df62211dcac8db64fe1c316fab5fe7b6eb5c0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad14_324_NoGesture_None.npz",
+      "sha256": "a59a23fcf90744b1e6021491eefd493928268df9117d83fa85cd40c051100847",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_160_Gesture_Praggest.npz",
+      "sha256": "56e65f0738afb8bebea42550d52edc1c026d81fc3cccda7555f8f3f7f97e30b6",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_153_Gesture_Praggest.npz",
+      "sha256": "0c6ddde8b0c44e2c00ecfa17a4f3618f6bfa0fc20e4b19b3140cf722f76c2313",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_143_Gesture_Praggest.npz",
+      "sha256": "efd5f1c972705b91dd688bfed33f9cf1a51ccd3d1351aa58a39bdbcbe980eb1a",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_123_Gesture_Point.npz",
+      "sha256": "f6b85132c533b53145c68b2c79da40d8c20f3f12f71a3ace95539d5680ffceac",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_130_Gesture_Praggest.npz",
+      "sha256": "7cef35771fcf74dbf19a2bfc4690fb6c6d0a4fd108abff8591e5bf34828b1539",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_162_Gesture_Beatgest.npz",
+      "sha256": "5404939fe95a646b32ee5f0372d9f1b3dff02a46b2d36ba395229ddd9d19a1a7",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_127_Gesture_Praggest.npz",
+      "sha256": "edf9eeff97cfa2d61d693bc95e23da80db56fda63cdd59f7a5cf981c54a2fed0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_120_Gesture_Point.npz",
+      "sha256": "fe79822eb2bbe7abb6aeef6fd6fc5ed56e945466d17de9c6e0064e2c32355076",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_111_Gesture_Point.npz",
+      "sha256": "d11efa11103f5bd67b4cdf4bc6483d78ce5661fe1981be992c8129b859a92e12",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_134_Gesture_Praggest.npz",
+      "sha256": "bfee402c18c491616a09b4334480bde143edafe262c7c6dffb8cb147bec0f141",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_114_Gesture_Point.npz",
+      "sha256": "644be8dc54ecde525b9e4f3cf17a12a0512317c43ccf9cac2bb9f553467c06f3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_135_Gesture_Praggest.npz",
+      "sha256": "ef2007cf8f7b9c8351adb1a6fe9906a4fadb63b35c2c0b23295f00adee63e5d4",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_133_Gesture_Praggest.npz",
+      "sha256": "5dcce1067befc0da91a2c843bd7b476d341a845a32fd202410d94a8fd0e5b65c",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_161_Gesture_Praggest.npz",
+      "sha256": "59824a99160758371a31dbc7aa719aacc7210bb460047fbabf47ed8d07f7b257",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad15_150_Gesture_Praggest.npz",
+      "sha256": "806eb014652bc66705391c32a56985214b85004506de48934ce203db2b7ad902",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_51_NoGesture_None.npz",
+      "sha256": "bd86757ee60856b661fe8c77992d7f32129e7a7fc6952487b97199ba338d62d8",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_14_NoGesture_None.npz",
+      "sha256": "4ff3703b805023b54e1b36f61fbb9e264df740b141983a83849fb29e5c217327",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_30_NoGesture_None.npz",
+      "sha256": "5825b5b008e7d9b7f3ff1c47de38d1ae8ee83591f899f6fcfe307db6908c104e",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_33_NoGesture_None.npz",
+      "sha256": "0f79999509c5d3a63038f351625b135abfb32e07fe0cdeba991a492352dd51a1",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_19_NoGesture_None.npz",
+      "sha256": "02df72fc7845806fe7da9702555afcd7e63a87838386606542d54ffd1360f7d3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_29_NoGesture_None.npz",
+      "sha256": "bed1d9cae57f71b19b2c830619d8f0b1a58dc59ed0aeea57027d71e839ead7ad",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_54_NoGesture_None.npz",
+      "sha256": "11a15e02b3a0dc354a0b676976cb7d506e2de92d57475aca84fe25fb3efad064",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_38_NoGesture_None.npz",
+      "sha256": "415e29e8dd43ae1e2bde81f3623114d6c7731aa05cffa5373b6343f955c4143a",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_8_NoGesture_None.npz",
+      "sha256": "ab3f73b241467f29268bff8cfd00a754cb450c7951890e7be49458399bfccb84",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_17_NoGesture_None.npz",
+      "sha256": "a4f89544351a4c46f32cad21912d4bf44c5a6ce868211d301c3825ecb2bc4c7a",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_23_NoGesture_None.npz",
+      "sha256": "ce9663822421fe39c5ed643393c5d6986d5b049cf84d4ee5f93315e8373c53e0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_16_NoGesture_None.npz",
+      "sha256": "2549c956ecabbff63f38aece93c00a7c3e0ced0e2fbea39f8fbcebef954834dd",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_41_NoGesture_None.npz",
+      "sha256": "61c0e51bc1794be8cff8a5bbd8da8b91b12741f452cc8b122f51ecc5d2efef4b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_27_NoGesture_None.npz",
+      "sha256": "4a94c59e14d9d6d839a7086113d83da78e33e0a85f9181e54dee88255f2d33c8",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad15_31_NoGesture_None.npz",
+      "sha256": "e17228d8d26c4fc0f6ccc3c1fd3aff33c1798018de3cbf47743cf64a758aba22",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_311_Gesture_Praggest.npz",
+      "sha256": "2ceca336f165e3a93354383372ee3a5126eab97ca0acad335ddb91c787b4f22b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_232_Gesture_Praggest.npz",
+      "sha256": "35efbb99cf928f619e8ab71b43706d218731104d079ace03be9da2d856f63c33",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_464_Gesture_Repgest.npz",
+      "sha256": "a2284d0f25e44a4301549cd47eb7931382e38be6a4f655ad81f3e585a27cb9ad",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_308_Gesture_Praggest.npz",
+      "sha256": "8fdaf88dd3011d2ca0c5a837141ba96e0d1f5b01eb52ac5e37a7aae0b70aa17e",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_141_Gesture_Point.npz",
+      "sha256": "1b25b7584ae9330945c951cd987e2a19380fa2b381890746e75d659ae3e8ff40",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_350_Gesture_Beatgest.npz",
+      "sha256": "852aa576641f30ba28a5b41380fa8922ddf29ee8f22702b063c7ed88ab37432d",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_117_Gesture_Point.npz",
+      "sha256": "0887350ac15ac9fe9bc9c8a0e3c6fab72183b421fb0ce1574ca1fbf63adf7f37",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_61_Gesture_Point.npz",
+      "sha256": "fba67d5a674463a1a4f62e7cc9603e19a392d4db74bb21dd9aefe4c8bf97c13a",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_71_Gesture_Point.npz",
+      "sha256": "209aef2ef21c380fa48555a0650cb6e11529d290b9bb15c655f77100fc690ef4",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_148_Gesture_Point.npz",
+      "sha256": "13112a72cf0286491598bd6842df17fed026b163e754b33fafc26899acc6beb8",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_153_Gesture_Point.npz",
+      "sha256": "ae118cb85c0e2ef145bb915b29bc3793d83de331761b0570f5d2d228d482c7b9",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_424_Gesture_Repgest.npz",
+      "sha256": "bf1a8c0ce60147a9afff1667d26be961d5f40e7b1f558b9db32ae2128e2dac35",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_233_Gesture_Praggest.npz",
+      "sha256": "1548b0d9fad800ce61b3948e83b69dff753264f3a2f53220e0a65ffd480c5295",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_373_Gesture_Repgest.npz",
+      "sha256": "1e4daef8f36aba06dd751296cf37996d49387c0f4ccf79d6adba4f2a0b8bf445",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad16_339_Gesture_Praggest.npz",
+      "sha256": "fe91098646ed81972cd579fa2cd6c9b042b8ab9f75cb562b28d2d134ad732b34",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_352_NoGesture_None.npz",
+      "sha256": "ad6a933e5b891cb419ce9f0fbcbcc51d124d89227b4fa346debbdf9e02f7960d",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_141_NoGesture_None.npz",
+      "sha256": "5108ae48091b77d47c7e211b3576920d53f162fad55a20e124262e739e248329",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_396_NoGesture_None.npz",
+      "sha256": "ac1b910df00a310e9a1deb2d770a98e7bd8cc07e07a3306ca3c8e7931c591072",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_1_NoGesture_None.npz",
+      "sha256": "ce8c880f9c7f5834f573a22400fe2058c93079d3583dea2abcc8395499fabaf0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_249_NoGesture_None.npz",
+      "sha256": "57066def35147bbed19a4278abbb93f69de25ffd171a0116d220fe91dbd52a82",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_120_NoGesture_None.npz",
+      "sha256": "67510632b210fb63ba15b3726cb96b0777ae383cda92a588f973a7b3a54ebf75",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_204_NoGesture_None.npz",
+      "sha256": "0b8f1ace663cb6ee2e52dc3efc9ca936da38ce4cf26c9f03fd3305f61edbf59c",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_150_NoGesture_None.npz",
+      "sha256": "b51a1c38e48f459af9650096976d051d3a7f26925555c0ee34c9bbfce8278c12",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_121_NoGesture_None.npz",
+      "sha256": "e650c69001cc46e5bfe822a95f6350e045a89a584f646e17f2a8191f0b3700c9",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_52_NoGesture_None.npz",
+      "sha256": "cac130ce268f9c27a77ae1f7f303f6a7f09d18c0a3cccf5e9ace6271e1f127b0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_233_NoGesture_None.npz",
+      "sha256": "5d300c5fb8d39b9fb68381868ada41aa8a63f09c22975d7e1df0a8263a19fda5",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_191_NoGesture_None.npz",
+      "sha256": "fa0d41384368b905801a50da0f75761cfc83ad890e88a8e581affe9fb87c1e6e",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_41_NoGesture_None.npz",
+      "sha256": "121fcf3c6d1cc8b9120486087cb5bb80d2f5db62acac4a914ac30f53e0832546",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_79_NoGesture_None.npz",
+      "sha256": "a4e280e099947c7d6fbb8cdf1ea17ac3334aaca1366906a264ecb52f6649be47",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad16_162_NoGesture_None.npz",
+      "sha256": "cd79c07c649c73735ffb2cc2c8ea7c42d8bfb5c1d3c6f6f92942b06a5d931d11",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_312_Gesture_Filler.npz",
+      "sha256": "f74a656ef7651224c16040350d1e101ac362fd1021afc25a619b2025a20dbe49",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_113_Gesture_Point.npz",
+      "sha256": "a84ab9e05705c1f7c36e6c587037ce69f796998bb95ad1b7ea5031eaeb45cbdc",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_448_Gesture_Filler.npz",
+      "sha256": "99e0d374dbccf979a0557a761d2b1aaebda7cda5e3cba90a2f66e90eb9adfcf2",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_464_Gesture_Filler.npz",
+      "sha256": "1e5f5f9075eadcfa420fde02276599a52626d8c89ba35e82968fa3c113762c4f",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_402_Gesture_Filler.npz",
+      "sha256": "62a34f4b152b731bf90bbdcc26c37a0c7053938b5bfb681ec3ddd1aec276996b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_416_Gesture_Filler.npz",
+      "sha256": "9728f8f8df73eeb8feebe9dfa9b003a670ba92576e84556c4b41b38cc9c305b5",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_306_Gesture_Filler.npz",
+      "sha256": "6f311efc5610391211763cda28c6b48158c61dd1705e13e607b11055f9780d72",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_433_Gesture_Filler.npz",
+      "sha256": "1ea7144572fb2bd48980b0aaed0fefe9ce966918198ae25513eabb79c380144f",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_429_Gesture_Filler.npz",
+      "sha256": "fb193780c34b5aaa87665dad5d3cb958f68f558693d6c82ec480d8e457c20eb2",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_445_Gesture_Filler.npz",
+      "sha256": "9a46b7c5dea185b6a0654910ece315a6dd65465d9211e782c41f7a834c599605",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_179_Gesture_Praggest.npz",
+      "sha256": "bab62e8c9597f5ca901402735f1696c74d292bad80bffd5d8fd61542bacc7e2f",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_108_Gesture_Point.npz",
+      "sha256": "a3c416748c25a9cfd28239491aebff45b017b6d4c84e6dc9da28cd0059bbdfa3",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_205_Gesture_Praggest.npz",
+      "sha256": "0d6e090059153c0a704c644667f8bda8047962f82353f5320e5ba243998a3187",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_168_Gesture_Praggest.npz",
+      "sha256": "67d08299781cb7617e4edc2893657185fede52643ee281bbe28bfbe9905f363b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Ecolang_ad19_370_Gesture_Filler.npz",
+      "sha256": "7bfd10e2db1b66fb6e2e975c54f8ea94e3e9df28d97215336d5fe2c5280260f0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_20_NoGesture_None.npz",
+      "sha256": "c1e459b7c1582fa6b39507912b552d252448d3a0e0731592fd8995912ebf3001",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_59_NoGesture_None.npz",
+      "sha256": "b94da0363e603d60f6c1e7e0e2426a3a109414d223636e23c9f37a541e3294a0",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_277_NoGesture_None.npz",
+      "sha256": "1ebc75823ff74b8c7ed2dcf95114fb669966093e1ed4e38dbcf32a13c2938e28",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_161_NoGesture_None.npz",
+      "sha256": "bbac6e06b6d44dea77f8f76599de9e59717512e2ce20cb8354c13246ac7a8a49",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_132_NoGesture_None.npz",
+      "sha256": "b3494d44cdca611ee9daa16cf9f9fdfe749999d04c96792d13001b0c01a44ce9",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_150_NoGesture_None.npz",
+      "sha256": "63e0d595537d5ded0ad73ba221e6f40a7f47dcebbf0962f49e2bbc5934fb5a00",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_381_NoGesture_None.npz",
+      "sha256": "a23f0f356013233313a0a0dec09e7709038634f7cb2cc42f8d53a9224972d7fa",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_290_NoGesture_None.npz",
+      "sha256": "ae82039ba09f6175e2762a78699c3b0af5cbd89458c4321bd2613bded29db84b",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_217_NoGesture_None.npz",
+      "sha256": "491662f13cc9ac2e46180cd2b2d4f4cc9bbe8b2b8690462273139e1948f81a48",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_360_NoGesture_None.npz",
+      "sha256": "9d9874420c48c2648c645a0501a21731e59371c73099e7fff33124ecb0b52bbe",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_274_NoGesture_None.npz",
+      "sha256": "698c96311d61d1bc3c295957cb672c991f0260bbf035e610afae5218de7781bf",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_225_NoGesture_None.npz",
+      "sha256": "6fde862a4c584cbd7769b5a4e502b5df4894fc49a9e373b1fe830540437c2582",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_190_NoGesture_None.npz",
+      "sha256": "3e98450ef5c3475681d9647997e73cb9c62d287a84f0c7926fbaf08c6f8f2ebc",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_238_NoGesture_None.npz",
+      "sha256": "eb01fe89a7ad2a390a4b7eb5444d242dd2f5e1aa0205c72369f05400f925a9af",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Ecolang_ad19_319_NoGesture_None.npz",
+      "sha256": "9ba156c0bcc02b210a4a1b6d8426868c7266b637264b87e6fbc96b5c59a82724",
+      "selection_seed": 73,
+      "role": "prospective_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14750_Gesture_None.npz",
+      "sha256": "fc3c68d686c6388054ecc9d25cbee49266e94d486d050540da4d046e98f2d7d7",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14531_Gesture_None.npz",
+      "sha256": "732471d24baa21774233703f2815d7e6d2e4a5f5850c9d45174107d1a3cfd390",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13515_Gesture_None.npz",
+      "sha256": "3c7a7c4d2e053485a7514392e41a1e3e34a2a893a1d7b6de334763c24676d659",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14036_Gesture_None.npz",
+      "sha256": "9e6cf4f569cf07ebf249076e8215f2e93202de3aab01e618224ca8bbac404bbe",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13532_Gesture_None.npz",
+      "sha256": "9c11c6ecdef5291343c76731ab6255dbb17b6a5b5f4f7bbad27a3478180ee7d1",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14011_Gesture_None.npz",
+      "sha256": "99b9e66de9bbf3b91b45b39952e3cd569fb4348f715eb85563009f98fedbcac0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13686_Gesture_None.npz",
+      "sha256": "0db8754f139519c814e41a5c8bdd4b0eb866037dcf2e4923e7164fef1b32b322",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13771_Gesture_None.npz",
+      "sha256": "ef3b704d362d858417da085d0bc2b16df2f4e901e290921c06990b9bb0bd89b8",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14112_Gesture_None.npz",
+      "sha256": "9eeb29edc0e8e3179d4395cc02b4a0ade6caa4d78db803444f8f631f473bd608",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13530_Gesture_None.npz",
+      "sha256": "a2fc4c69f7524c19d75933586427de92f04f3f145ed77fc216911b54d69eccaf",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14353_Gesture_None.npz",
+      "sha256": "af252f1247cdf05f2963b4b421ff9e1c427507405331e18aa3aded2e61856c46",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14389_Gesture_None.npz",
+      "sha256": "bdf24cc44af3b9065671b1f2f4fe61f522ef4c89374d7ae4f5eb883db25f5c3b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14552_Gesture_None.npz",
+      "sha256": "6212252f015777a77bfff5eb716e6f53d8803675bfa06cd827fde5a0ceed2293",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13928_Gesture_None.npz",
+      "sha256": "efbc4d86af430e98ad0407b3d8df50233a6aa1d02336872e3839958b1bda729f",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14362_Gesture_None.npz",
+      "sha256": "84bc5168692f7a7e20dc24ec6f4b876d737066e15a1328b662fff6c309895b3b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_257_NoGesture_None.npz",
+      "sha256": "192349f7e2d69ea96fb9912bb204066ea4f6351ac60a65bcb110a37ddde9b761",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_389_NoGesture_None.npz",
+      "sha256": "2e6adf3e09a91c6aece1375e0983a7645d494d942f507b871f4ae0a32dd44df4",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_357_NoGesture_None.npz",
+      "sha256": "495a75926e6a893e2e2de0f0b3481c3b72136c4f81008ad4fe7a20ac7ca6351b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_563_NoGesture_None.npz",
+      "sha256": "71afcf6265e24e42e2b4f6f180d3ffe1968a8ac16b346e10575888ea35dc21df",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_79_NoGesture_None.npz",
+      "sha256": "57775a1c70dfcc2cf9dd0e366339a44d4533c7c8a783ca75972397c9a70d3b05",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_102_NoGesture_None.npz",
+      "sha256": "f809d80653d9c3e0c2707d7e130308017e1be0ed4d17ceaa8ffa610ec9b872cb",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_574_NoGesture_None.npz",
+      "sha256": "b5de0d7df8353e9a7ef92c4f76acb657a109e1dff53f23a776bd26ad910c4e6a",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_140_NoGesture_None.npz",
+      "sha256": "db1a039d225f4dc07c87e2445471d1173d9951790fb16bb3328563c3e0c60835",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_217_NoGesture_None.npz",
+      "sha256": "21b61437603404df825559594593ae8b3e546ceefd7e2d454560fbee8b261b22",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_30_NoGesture_None.npz",
+      "sha256": "926e8ef9e99124f0ebb91f3ff00d37fdccd9b90162e10a6efae99afece045fd1",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_503_NoGesture_None.npz",
+      "sha256": "1e5b2554df50592255a46315728229f388d9318b6d55343e8d4d921fe00c932f",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_243_NoGesture_None.npz",
+      "sha256": "f3853c8773f76a322c0efb625dc6b05f944992928c4a6927711a4a78a995217e",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_650_NoGesture_None.npz",
+      "sha256": "03c6c3b80b04769dfee0730efe8345e0819f11107fe1a9f6ed8863c575591f87",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_488_NoGesture_None.npz",
+      "sha256": "20a97932980b07e4396dbad3f2596ee7cc531a57034a08928d15b3a1217ae33f",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_316_NoGesture_None.npz",
+      "sha256": "9b22811500a525b85ea840e676ef2e15a68cc2e49c61cf7420a3f24765e56fbb",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6846_Gesture_None.npz",
+      "sha256": "6e4c04c182e95b1f760b5c59e4f4e5baeb48b8bcd3a3d4d93f0a8d12ca341a42",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6833_Gesture_None.npz",
+      "sha256": "06ed8028f175cefb4926a28840c27eb8b7a67536180f01ee0c1927c191c60036",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7040_Gesture_None.npz",
+      "sha256": "9d7ad4c7b6e1bb55a5942e80baf553b9f2fee4e34bbec48b3035a3c7063e5bfc",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6546_Gesture_None.npz",
+      "sha256": "8c826135f25916face1471afeb315b0291afcdba5565128e6a5bd95a0a39909c",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6780_Gesture_None.npz",
+      "sha256": "05a5458d72e514d50b0328d2c66b942104841f4d1df02a61607444f1a2c6597f",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6731_Gesture_None.npz",
+      "sha256": "4888563249491a8446dd5a3a8685de236fdf845336ca077082ad81dd0c44c6bb",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6613_Gesture_None.npz",
+      "sha256": "56da45f8e25f18f2b3985d0ca77e3445b4d76757ac39c064337f22e6dbda1b61",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6796_Gesture_None.npz",
+      "sha256": "f4ab572cdd15c8f0c0cfb3fd374b22306b844c3883511102560d981cd18db3a0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6926_Gesture_None.npz",
+      "sha256": "f4af722c247d763aad5aef0c33d80f6a16547bcf718650160cf4913c09abe9e1",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6593_Gesture_None.npz",
+      "sha256": "f9024bbc3378dc0bbf6cf506314548924dfdc890b3d95d11560bfaaa52825ed0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6566_Gesture_None.npz",
+      "sha256": "e06d2f93b3acb6d44c1682663a24c54cb605d06cc50fb82bb218bf7bf47e254a",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6564_Gesture_None.npz",
+      "sha256": "a716898390473dc87c2552f8da4ef3f9ccfccef66778bdb2dcc77c79d1347bb1",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6670_Gesture_None.npz",
+      "sha256": "4b60f7d3f0fc14eccc0d3cac3238423e227d0ef6e08c1bd307b79d97b2005190",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6997_Gesture_None.npz",
+      "sha256": "0a8dcdc38466ade351b9533eb36e09cb2e43a91b69fc08fd01c5142e0c273671",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7104_Gesture_None.npz",
+      "sha256": "95f0a191ec5edb8c10463562fe9805a0f6dc0c065456b75648139705b5ea62dc",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_28_NoGesture_None.npz",
+      "sha256": "6db594a2d6387578e0144370aa5872b5f6096ffc99fa0a7d679608ca03866519",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_167_NoGesture_None.npz",
+      "sha256": "f549820a1170a3eb6390f6b4df2e2a7a97ce147bb4e4dfa2505793c595be05a9",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_179_NoGesture_None.npz",
+      "sha256": "4cbd9b218569d0330ddfde52d69962e61f2939941a033f9954592068df8f6ced",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_180_NoGesture_None.npz",
+      "sha256": "15de9de98262c2902df7c886f011d352eeba6c3af4874a2431128cd2bf95392a",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_44_NoGesture_None.npz",
+      "sha256": "f3bc86a9805a6b82fcb7fd1c2c3f0bc7b4d5a6201cf339fc1293d5e2b14e7639",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_59_NoGesture_None.npz",
+      "sha256": "a9a71c7da19869b17359ab16663ea6b70522af9698fe84ba6f9c765890e11848",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_5_NoGesture_None.npz",
+      "sha256": "94bb7ca63a6a43dd4a1cceaaefbb084cd22fff6c6d54ca8d5c875189866173a7",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_275_NoGesture_None.npz",
+      "sha256": "76075a895c3a1b1242c048d9e77856f98fbb7749f23d24cfc4f0a29b5fb3c15e",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_147_NoGesture_None.npz",
+      "sha256": "12c2d936f9af366154fb7ffff36e80acb81a351011ff16b619081c308ba93bad",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_204_NoGesture_None.npz",
+      "sha256": "c578e41d5ce7b5eebbb71f97997ee4d97eabcd081dda5c49b33655f021e92600",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_186_NoGesture_None.npz",
+      "sha256": "54d4f7386e644373deab7a45efc7373db11a53089bf0fa1351280c9f84878e8d",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_125_NoGesture_None.npz",
+      "sha256": "e61b838b7b5d5d6f4216a2433312468a0817fc3e76603732261d2213bca5b513",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_48_NoGesture_None.npz",
+      "sha256": "8af7ba7a20f72f91c31cbd08fd4d29ce6cf53a5fd298af9db169eddf61085cd0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_76_NoGesture_None.npz",
+      "sha256": "e4cc6d0ea19aad4e06db1ff2092c4504902cf2328082284692e0f253ba0837ce",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_158_NoGesture_None.npz",
+      "sha256": "e0f1ab405c0b113af3c210bb327a3034f44ab5945b87d56e23e64cc69a8b98b2",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_905_Gesture_None.npz",
+      "sha256": "c1e9980378b7fb9c6ca98dd21faf3fa4d3c1b942d1b303b652bd6e00a62b2511",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1188_Gesture_None.npz",
+      "sha256": "7b53f04a1f2d0f687338bd3f439be9c161aac8e5ac54fea6230e9677b26b70e0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1226_Gesture_None.npz",
+      "sha256": "dedecfe82386aad164a224420330a4d63e31cc8fc39404a9e9b6aa086c9e5203",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1376_Gesture_None.npz",
+      "sha256": "44b76f32fbd3c8c27b3a2ee2d46ccc8aa9ca1d12e6738aa5bdccd6177d75ae4b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1022_Gesture_None.npz",
+      "sha256": "50ea42bbc6b445d52e08424138b2654b45355de085fbd60f94e47871c52dbc31",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1350_Gesture_None.npz",
+      "sha256": "d496a4a6a1c2a97feb371982fcd5cbd3e451f7819b5b3dd535e80f30078eac95",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1378_Gesture_None.npz",
+      "sha256": "0f3a5fe9c54b0e875f0b7fa410037b56f9a4d408b846f69cabb0f710adcff800",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_962_Gesture_None.npz",
+      "sha256": "327c5708dab3027814cf2b410f129d594bed82bf5231d091dc55b6dc4a6ea32b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1364_Gesture_None.npz",
+      "sha256": "6f4251d56ee799159c7ff8758eae1a41a31e0fcffe401eabb49917f566335322",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1397_Gesture_None.npz",
+      "sha256": "6f8a7afb1855c52095e989ebd45f684e3e4043a2ac091cc172bcbbac85598c84",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1213_Gesture_None.npz",
+      "sha256": "2f11d9ec29a2439219fe0c78123b669b53c5c29a734b7687379d2e6dc61e2ca2",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_782_Gesture_None.npz",
+      "sha256": "e90e0bb7a293bf0a3a4d37fd72cc313a5f79412428192a8a4551039c067887d9",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1129_Gesture_None.npz",
+      "sha256": "b136141e36e06478e4e0a1614f176bb230be7a2c97c2f50d1f5777756217275a",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1239_Gesture_None.npz",
+      "sha256": "cd0aee84442d966f3c79df84f04dba6a5cd94ac3aec2a57f699ae71040836041",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_ES2016_1209_Gesture_None.npz",
+      "sha256": "a10b3688c187c2bcc83c4852a66a00027f86514e5b7f03251e6124429345c36c",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_98_NoGesture_None.npz",
+      "sha256": "5726e61066ca6aad1e779c23b8bb00868b81e4ee8b125d681ed2e0709a323da6",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_25_NoGesture_None.npz",
+      "sha256": "0f3219ac86822cdb5d2a7c30da66780df91290f01d07bf1ca7f5951029e0f287",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_42_NoGesture_None.npz",
+      "sha256": "80bdf05982075ef1a7874723b7179826e1b46c156119cae34782e53392413d72",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_204_NoGesture_None.npz",
+      "sha256": "c2ddfeb1db912f40dd7e0d5af638071a2b03013242ae1cf8128276a8002c9398",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_248_NoGesture_None.npz",
+      "sha256": "cdea6eb1434604dbc9ce55711a1923419d2f2de1f1c17b505781ba0e5191629c",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_141_NoGesture_None.npz",
+      "sha256": "15a9f3f49c6828253938ea43fac00aef24488068d2fde38fcb3613a5d26952ec",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_156_NoGesture_None.npz",
+      "sha256": "0cdf61255e03231c3c847621804720590392c7adad86cbdee7fb459b0a17d43e",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_75_NoGesture_None.npz",
+      "sha256": "7102507023da2e23a97ad60cc4fa8cbfd1db397d384924073a5cef4477968ce0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_198_NoGesture_None.npz",
+      "sha256": "e71f8edf94a26da1fa730ce1728880769492f9f23a678ee0c452d0c3273dec7f",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_159_NoGesture_None.npz",
+      "sha256": "55400da0624e6a2dd983c860ccbfb4db9a565f03fd435f429fd544eeb93c8363",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_238_NoGesture_None.npz",
+      "sha256": "ea492a51c9bd7979fced7a1c333815b258e1134c49a3652c33be6313f8ebbf5d",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_232_NoGesture_None.npz",
+      "sha256": "cc25fba08f1596af0efad534919902695bb6a5bf155ca33001666a8f4582e8ff",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_164_NoGesture_None.npz",
+      "sha256": "0082d9e7666d8d55d089c8974d958f9d9a94b0e4ae0cbe11d47665af9fb20b06",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_125_NoGesture_None.npz",
+      "sha256": "26f0c932182709160832dc373b1a23998d936d94d3b45eed74d8a5cdc80a7e73",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_ES2016_74_NoGesture_None.npz",
+      "sha256": "53443f01eb301a53346d51d54547d7ba8d0d5172ea646adfe2aded6c187382b6",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_907_Gesture_None.npz",
+      "sha256": "3b4d6995801a5667da4b5084f8d16341d786823d96dc96cd81b99ad31b3fb27d",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_980_Gesture_None.npz",
+      "sha256": "1750480b971340d790175dcc5642e5c8e567b7f49503f32112b12452309c9440",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_244_Gesture_None.npz",
+      "sha256": "1b1e3bdde1654ea52e388cb841cf5c6e5ba8b7ae0c6b2d038445702e89d3ba8b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_502_Gesture_None.npz",
+      "sha256": "a01b217d6620c74c222cf64580baa6d06b29fbf8ac5d5905c712a45cfb694f38",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_723_Gesture_None.npz",
+      "sha256": "ece1082f06e8b54118d5f35c06e7e02e58d676b3072285f2940a40129f63317e",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_241_Gesture_None.npz",
+      "sha256": "74b46f5e8db2f0087f790e56bf204c102981f6e6fa94b289d53f065b2404d6af",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_621_Gesture_None.npz",
+      "sha256": "f02122af75bd55db7b384c5bbbbae39bd447640b7489e07f35e9dd6258365cd6",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_181_Gesture_None.npz",
+      "sha256": "0315fc8a28c53241b7fbbc677313b8ce0b27a8db39dd4268d405d100c97b15c8",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_369_Gesture_None.npz",
+      "sha256": "7601f7b9daab4438ca44116c1e054b99c1fa56d46233c5b3865bfe2d579d7d47",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_359_Gesture_None.npz",
+      "sha256": "70f9db084290f117fe2780fb5d15ff37a1465d20d2e0a77cbd9d1d46aa834cb9",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_945_Gesture_None.npz",
+      "sha256": "cd5cc4ed3bcf5b1d2a6fd214542a921a2fac065599e2bad958d1a699f1f16558",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_650_Gesture_None.npz",
+      "sha256": "5c9ebb2881cb52bf83efd703b078c870ac9bf422484d8f624397057afdd1062a",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_737_Gesture_None.npz",
+      "sha256": "526b79cf2ccb2a576c03e360bddea011ad37e6c122232235a8f601215a19f189",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_748_Gesture_None.npz",
+      "sha256": "b8413b9aa271f1f42c1f0374bdf3b157c2767f5ed26f05236026f8477f1be5b2",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_FB2015_937_Gesture_None.npz",
+      "sha256": "f9e2211dd767f626811302b21e15528b1d50db9c521eb0f1541c16496572d762",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_160_NoGesture_None.npz",
+      "sha256": "119482e6a6f9d8aa83138865b80cfdd879c8a8d2524eb9c15c34b089a9b47178",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_39_NoGesture_None.npz",
+      "sha256": "563e14c45bdab1a82809b6395d66c3ca118ed797f4067578460e478304302bac",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_304_NoGesture_None.npz",
+      "sha256": "20f59bbd12a8d49cd8eae47ea2d0b212b966775424ceddc470cd0e7afbe8b477",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_167_NoGesture_None.npz",
+      "sha256": "5575be5bb3a12d9fcde4d76578b4e118e7af17176b87595a78de6d7688134622",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_334_NoGesture_None.npz",
+      "sha256": "bbc3c139fd65e238bb1c5cdd3f120786a3630e2f98ea8a0083b7511fc4b51f76",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_235_NoGesture_None.npz",
+      "sha256": "bff25efc624a3255524b275661be1e646784ead14bc45aea0f8cae3177610e74",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_33_NoGesture_None.npz",
+      "sha256": "128f5de64a7cd4f42d809a6b37a8c7c1822bcde72baa3038b72e7d71ccde9d74",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_216_NoGesture_None.npz",
+      "sha256": "5745d8266c6d7b3f3efe942a4903f8730273cfbbfd06f7f672aceac3eeae4d00",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_312_NoGesture_None.npz",
+      "sha256": "ba735af2abef45b47c782314e6d6ab2f0d752ce868e5ed9faf97fb33904a34e7",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_35_NoGesture_None.npz",
+      "sha256": "5e44c487f20fc512ee3c3ea666b3c82f8660725d193ccbee077ff4637c5dbf52",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_295_NoGesture_None.npz",
+      "sha256": "16e312ca158b03df3ff28c1ccadc1de9c0d43a8c62ed15243246f59034ecbff8",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_18_NoGesture_None.npz",
+      "sha256": "aad4539b0b1d63f47db4d6409a9a46894e2289f626d28de37b39f11bfed58fb5",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_43_NoGesture_None.npz",
+      "sha256": "2e252b9a9171a63d1548cd5505cf382fffa5f0e2c1dc49e26e438b5054a7c64d",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_57_NoGesture_None.npz",
+      "sha256": "c15187e5f1ea1461d9e906b654da7b81896391ca0704ebb01a0f920c1f431770",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_FB2015_182_NoGesture_None.npz",
+      "sha256": "de5faf05b32d9d39e072974671ea88a3aebf8b52cb06d6ef81f28599a0577ca9",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_350_Gesture_None.npz",
+      "sha256": "b97247b8059cc2801f8a2be85c14ecf7a922669a53a4e75b62e63dc3817dfbdc",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_998_Gesture_None.npz",
+      "sha256": "57bc5a0a3e46dbb98cad787e54e0f0628b500e46bc0a35f3be1b6c19b30d1ebe",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_406_Gesture_None.npz",
+      "sha256": "d03c7b5750e29aa03e14311729c2220413e823759f1a33801dc8e284150fce4b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_859_Gesture_None.npz",
+      "sha256": "019c23573add87313aa0ac04408567bbd7da3e5b5dfb718bc03099e8ce0c70ea",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_243_Gesture_None.npz",
+      "sha256": "28ee5e21a5f1eeda3b7f47d0e23a00d422e0aa76f3ba76aa7e54c1dfa995ea28",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_296_Gesture_None.npz",
+      "sha256": "354e68a4e3e2a1c9c457d035663ccbdf103e8fa441e61cb443168990c15aa619",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_921_Gesture_None.npz",
+      "sha256": "cb4b729aeea4758cbff50b6760159f508a6d10194ef7632544af31dbd21654ac",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_531_Gesture_None.npz",
+      "sha256": "800181effc13fe00efda7b37de1ce7b3229c055f277bdcd6cc6640812d6ab7b0",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_917_Gesture_None.npz",
+      "sha256": "c5df024310af5372f6efc42bd66f25fe06f17bb1955bd7b7d2cd2e5b5f2b2974",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_770_Gesture_None.npz",
+      "sha256": "70957af17697d134c1a72b32e4a874876949052ed22813dd3244233430f22d62",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_426_Gesture_None.npz",
+      "sha256": "69f79d4784e9cf5d7bb1bea48ed5470c0572207d816f1649b67892a7f5f71b1f",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_196_Gesture_None.npz",
+      "sha256": "89ae8d7e5021108b98cc6a568ae06d26c052a4a4699143fd40288ba777da1bb5",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_383_Gesture_None.npz",
+      "sha256": "8cc8a5b98b550caf427145e761fff705bc634a386164ba33293379587c22a4a6",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_241_Gesture_None.npz",
+      "sha256": "a1ba0f28d5c33d64b267b0281639af1427ede0783adfe8dd15d60087e40995f1",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_MD2018_869_Gesture_None.npz",
+      "sha256": "00dbb3180f45ebbdacaaff6f62dec939c703777adbab806152d59e79d37f38d9",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_376_NoGesture_None.npz",
+      "sha256": "6a4a0dac527f1011c1772bb8f89a09e7cd033318c520be91aa8be4eb2c0f85c3",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_278_NoGesture_None.npz",
+      "sha256": "44acccf47a06fc61c4db8db2b2b1eb817440372141f8e78b25a881757c6b8857",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_179_NoGesture_None.npz",
+      "sha256": "f71b9b0541c99a5acd8a1cec6699f62419ddc3c5d5a4a7c2424a3e62449b1d6c",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_31_NoGesture_None.npz",
+      "sha256": "60fdce058823fe3850b252c052db5a5dbfe93a8dd58ac6fccf990b83d5d9d9a5",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_146_NoGesture_None.npz",
+      "sha256": "d3fab5f07a6cc2d75698f8a860f302251a2d6f4f397aa0e32d17997d35c42749",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_378_NoGesture_None.npz",
+      "sha256": "a60feab2af0274ef08a11b9fdce05e89118d45b9e1297dc3161e031223e7ad27",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_213_NoGesture_None.npz",
+      "sha256": "24ee6c3b1f5e4ed455ed4fef5c98346fc785870bc7d1b41a1ee3f91ea44b103e",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_107_NoGesture_None.npz",
+      "sha256": "a671d7e85e7a0653a6dae0a2b1b1a1be1f49c456b911fbe6d3a056932cab8ada",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_8_NoGesture_None.npz",
+      "sha256": "d1d425415b4065b9522dff371f3ee0dc51ff8f165ac651e73b1e68cf231df922",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_393_NoGesture_None.npz",
+      "sha256": "e54df285e6bdd0494659dcd519011241435195b7ea7b058a33b61545a15ad858",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_258_NoGesture_None.npz",
+      "sha256": "6ef41873fe200c5724c5d4967dd549486dd485f68a4b93ca6f5a95993ac56fcb",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_171_NoGesture_None.npz",
+      "sha256": "44216a052dbd9ce8c10c214aa3d500221419e9faf959433479a02ee523ccbb62",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_188_NoGesture_None.npz",
+      "sha256": "59b29f9744afdd9759c150cc116b35a4b0d833d73bd1a08e2971abad71bdce8b",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_114_NoGesture_None.npz",
+      "sha256": "13be2988ca46fdd4bbefa88663aecb7b74a5c542b6df5d3a696fd24b461474fa",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_MD2018_15_NoGesture_None.npz",
+      "sha256": "0f9abc5af02519ada0fedbdec34fcbd6ee56d466e77d9bcd7a9e16b9dcd8ba8e",
+      "selection_seed": 74,
+      "role": "transfer_development"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_882_Gesture_None.npz",
+      "sha256": "5d318d3b395435c744cf9dba7f5d957e7b1503b4da8b1c582958904ea7ec28fd",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_860_Gesture_None.npz",
+      "sha256": "e358a1d111bfe2d4ae1c14b85f00d547c1a3dfc1de6f7a35733a5cdda2022ae0",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_888_Gesture_None.npz",
+      "sha256": "3c0070627f6dc421b0d8e8f027a1f79cc5c6fb2fc783ec2059274dbfe5c19d7c",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1052_Gesture_None.npz",
+      "sha256": "ce0607d4e021a9fe02d20c29fb36767e2213f628b32899f0024b1497ea857176",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_967_Gesture_None.npz",
+      "sha256": "3e4c1a06b20e2cf396431b7ccdda6715f893de54ed62fec39cf652b6c776e278",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_915_Gesture_None.npz",
+      "sha256": "350570ffbac0df11461939d56f67a7bbe6947e6ff1e20526c38bf5e12320fb35",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_740_Gesture_None.npz",
+      "sha256": "0954cd124d4339eadb2bd5802415ac15aa19cffeeecb7794675431a10523a772",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1133_Gesture_None.npz",
+      "sha256": "2d9e2053a06b4323280078e0a4c1d70fe070f5ecced9bb24f9d37fd7bdd8a618",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_706_Gesture_None.npz",
+      "sha256": "6c572a72781eebf6d3a81e0df8dd3b19b872afadcca58204d56016e8d25c23bd",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1111_Gesture_None.npz",
+      "sha256": "e6ae657a730d1031319c56c21a153beb56034ae886ba9988053d9ab4d9003dd8",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_625_Gesture_None.npz",
+      "sha256": "7b33273e61c88aabe2de94d973265cce68066ab01056a3a199a295629e9ed45f",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_653_Gesture_None.npz",
+      "sha256": "7b949e79b2c10bf80abf7690aab41ff31175d8a92bd8eb7d324cf981d5a94338",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_945_Gesture_None.npz",
+      "sha256": "5543666da5075f755c12637a63f82d1e38d03c53233a62fd343dae03240ba1c7",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_746_Gesture_None.npz",
+      "sha256": "37e86b5a43092bddcffbbd867a2bfc064861546f1c1157fb341eb439a0fd7911",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_928_Gesture_None.npz",
+      "sha256": "887c3c7d6c3ec3f644b9a4f776020f97d9af677ac52dd08e20f25fc1242a11df",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_646_Gesture_None.npz",
+      "sha256": "2a90a22c805f97390a3784916f97938dcfa7505b72ed358cbfc6ec65a55b7b22",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_820_Gesture_None.npz",
+      "sha256": "1e6d4632e4445f786a4c3306e7873d799f337c0203af455345565f7ca9ce9c83",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1036_Gesture_None.npz",
+      "sha256": "5c3b80ac88cb2c740aab2fd95bba4cc53756748143da8b5d3c47118b8efabbd9",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_779_Gesture_None.npz",
+      "sha256": "b7d8156ec3702e0ef53233e50925b6ac8d460f14bce7e4ed4be7734681fdac61",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_900_Gesture_None.npz",
+      "sha256": "1a0231ffac59b8c8b057bfce70f841d33c8b174e8c377eef4ecf1288e69d0ef8",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_558_Gesture_None.npz",
+      "sha256": "8807231db9c8e9178e9717521bf29ec607c63597563726de52a665e1862b6b0e",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1171_Gesture_None.npz",
+      "sha256": "51229d107d18194a6151a3db67ecfb8f7efb5d03b5a0bf31699f4896abce9f72",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1131_Gesture_None.npz",
+      "sha256": "c1c1b1b3e10027471407d21ba842fd822aafd718059ec722bee87a7fe319c307",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_862_Gesture_None.npz",
+      "sha256": "de5a809a1291c946e8c9f575f1d9517c9997e8194299ffe093ceebdc32c230f3",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1093_Gesture_None.npz",
+      "sha256": "fac0f5d826f77ded6c07d3d5cdd55877dd2976821045a586bd08b399221b42e7",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_499_Gesture_None.npz",
+      "sha256": "3f13b1a0eb7b4e73fc8520335c46522c102e00ff429698e2c2dc8f3100ca3ad2",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_621_Gesture_None.npz",
+      "sha256": "652ab8a28ccb1c945db563fecea4f0c02e2c92b9d2f29a4cdc0be3002d492e3b",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_922_Gesture_None.npz",
+      "sha256": "c74f1102b153eb687bd5e1aaa89b886020245faf14d3fa51068c0fd84e855ea8",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_681_Gesture_None.npz",
+      "sha256": "ece2530911595fd9199ac7d7a27282bd722c0e2c482e8281be7f13f6cb325e3d",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_SJ2010_1113_Gesture_None.npz",
+      "sha256": "6298d0d282186d182eb1866c6bd6da2f6443f23bbb342c8d85df4dda88ddc3fd",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_64_NoGesture_None.npz",
+      "sha256": "39a26b19acc6161144d133f8b777fa6272b600b2a0d0e4f3250203e3d9bb5775",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_108_NoGesture_None.npz",
+      "sha256": "536675624726d3d6e1a58f23fc44f0b581b1cc6354e24147f44208844c613df8",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_241_NoGesture_None.npz",
+      "sha256": "b7e767b6d27a0a48ed3de249470fd3a681f9735811edeb35c5cc84851493b9b6",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_127_NoGesture_None.npz",
+      "sha256": "4af8d05f7793c45ecd281c6ad48b3605cb0356be5143cc7690006a179b62c64c",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_131_NoGesture_None.npz",
+      "sha256": "3526686b4b68581ae119b186edd69fcadea016f3da9a43e388685804076eec0f",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_125_NoGesture_None.npz",
+      "sha256": "341913e7265d724c7292df9d87b619d208f1a3f009efb9072c0324580edd74cc",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_224_NoGesture_None.npz",
+      "sha256": "bf9cb2eab1336cafb3eb7dc62e39d73dcdedaf5837245889d873501916263fbb",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_249_NoGesture_None.npz",
+      "sha256": "b5f30ec44753b87fb4e4b38f3d6f862ec254e141d1aa4ffcb30fb13d17802b64",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_18_NoGesture_None.npz",
+      "sha256": "9b3b52d020ee6611ac6ec025dbdeb4bf8edbe6d193dff3cabc2b5327b620c7c7",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_126_NoGesture_None.npz",
+      "sha256": "1accd9432f660c71f7c567a5abfc3a5ae7bc36895d94289b400d206e09305078",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_141_NoGesture_None.npz",
+      "sha256": "0f0cd8767ea2cf828c10b2cf96542420774dbf5294d4d382d6414552a042c95f",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_40_NoGesture_None.npz",
+      "sha256": "52a234a19d76a865fc52a17b1c8c451c7f650aa8a859d0cf9f7226d49b422fd4",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_155_NoGesture_None.npz",
+      "sha256": "b71a68c647f0290c2c9d1db671260b6af7c581abd8e50af1b3154eae3ec54437",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_98_NoGesture_None.npz",
+      "sha256": "4e337720ba174fabb5c5bea4e9e83139b49add010b06ddd222e2af680ca8727e",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_267_NoGesture_None.npz",
+      "sha256": "edcc06b40a1e8f5a46f2bb6bf1db966690aa68e905a7c159fdc5cb58723f4709",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_152_NoGesture_None.npz",
+      "sha256": "f200352993f750a612ae1f2cabd6d3fec1bea08c9ada0e4c7bc5bed95f831f40",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_65_NoGesture_None.npz",
+      "sha256": "8105d1edb0609ab12f46d3028a76043818f1127960740a1b1966651629db72a2",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_234_NoGesture_None.npz",
+      "sha256": "3aa8e4f62ab3611109263e6728056fbf5b0f8bdd6c7f6394500f9069eb0ba073",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_84_NoGesture_None.npz",
+      "sha256": "1eac80eddfe19abf98bcb5da122d6ebcbdf3431b10907cc50f1db4a237f80e1d",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_198_NoGesture_None.npz",
+      "sha256": "0779f2623852f32c3424ac881876ea5bfdd567f337677d959cfcd95c87492d0b",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_212_NoGesture_None.npz",
+      "sha256": "bd40d86a4d0dda657eae723b276c3ab8cba831361db4fe31a22c4bcceb3c78d1",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_273_NoGesture_None.npz",
+      "sha256": "d0868ea779c5f3afc01cb1d70f05ae0340e84a5662e1f65ab38e74bb9f703ca1",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_245_NoGesture_None.npz",
+      "sha256": "b307ae88b74f4cea9ead1e14de25e78db030d415d25fb9ebc74b07720aece558",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_260_NoGesture_None.npz",
+      "sha256": "87faf18ff71f641a42c022bfa75a7822e5e8cc133ff9763e2739982c559e9f4d",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_262_NoGesture_None.npz",
+      "sha256": "d6f14ba65f7a21a936d0fe7284f1ee3cab5c939aea276eeef5b719b457014841",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_100_NoGesture_None.npz",
+      "sha256": "6149f8cd5f5164bfd7c992a10ddcf728c7a31dfec5e76bcc7883bd8f86a9ce88",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_33_NoGesture_None.npz",
+      "sha256": "8ee3b4c9aed7f5693c2f3c8de7942a484727c064b689e34bb22823db16addaa8",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_105_NoGesture_None.npz",
+      "sha256": "b836d088edbd2b6e6768e10e9001d214178c864f2abbdcef2ca32ab1304e5a14",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_6_NoGesture_None.npz",
+      "sha256": "90f879262418ae72ed7476a083a8f69cb79251b036f7b8d07377d514677f187b",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_SJ2010_16_NoGesture_None.npz",
+      "sha256": "bfab9f40ea2c4b13bcf3a7a5df600ce1ce242a49a9aecc68c34fb09ebacc9d88",
+      "selection_seed": 75,
+      "role": "domain_adaptation_training"
+    }
+  ]
+}

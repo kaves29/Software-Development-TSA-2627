@@ -1,6 +1,6 @@
 # Speakly analysis goals
 
-Validate 15 distinct audio features, 15 distinct video features, and 10 features that use both modalities. Use complete English speaking recordings. The current owner-requested minimum is 0.70 for each feature and for the system, with 0.80 as the working target. The number of multimodal features is pending clarification. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
+Validate 15 distinct audio features, 15 distinct video features, and 10 features that use both modalities. Use complete English speaking recordings. The current owner-requested minimum is 0.70 for each feature and for the system, with 0.80 as the working target. The owner subsequently clarified the multimodal target as ten features. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
 
 ## Benchmark acceptance protocol
 
