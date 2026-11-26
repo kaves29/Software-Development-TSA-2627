@@ -93,7 +93,10 @@ def main():
     parser.add_argument("annotations", type=Path)
     parser.add_argument("audio_dir", type=Path)
     parser.add_argument("recordings", nargs="+")
-    parser.add_argument(
+    inputs = parser.add_mutually_exclusive_group()
+    inputs.add_argument("--word-cache-dir", type=Path,
+                        help="Score timestamped transcription from RECORDING.crisper-words.json")
+    inputs.add_argument(
         "--prediction-dir",
         type=Path,
         help="Score existing analysis JSON instead of oracle words",
@@ -128,6 +131,14 @@ def main():
                     else None
                 )
             else:
+                if args.word_cache_dir:
+                    path = args.word_cache_dir / f"{name}.crisper-words.json"
+                    rows_from_asr = json.loads(path.read_text())
+                    words = [
+                        (row["word"], row["start"], row["end"])
+                        for row in rows_from_asr
+                        if row["word"].strip().lower() not in {"[breath]", "[noise]", "[laughter]"}
+                    ]
                 prediction = analyze_features(duration, [(0, duration)], words, [])[
                     "repetitions"
                 ]["value"]

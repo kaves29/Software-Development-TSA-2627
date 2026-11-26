@@ -2,7 +2,7 @@
 
 import argparse
 import json
-from itertools import product
+from itertools import pairwise, product
 from pathlib import Path
 
 import numpy as np
@@ -16,7 +16,14 @@ parser.add_argument(
     action="store_true",
     help="Evaluate the fixed five-speaker development rule",
 )
+parser.add_argument(
+    "--cycle-consistency",
+    action="store_true",
+    help="Require repeated extrema of the same polarity at comparable amplitudes",
+)
 args = parser.parse_args()
+if args.fixed and args.cycle_consistency:
+    parser.error("the fixed baseline uses the original extrema count")
 root = args.data_dir
 labels = json.loads((root / "educator_labels.json").read_text())
 tracks = np.load(root / "educator_tracks.npz", allow_pickle=False)
@@ -47,23 +54,22 @@ for k, v in sorted(labels.items(), key=lambda x: int(x[0])):
     label = int(v["reps"].split()[0]) >= 2
     result = {}
     for smooth, prom in product([1, 2, 4], [0.08, 0.15, 0.25, 0.4]):
-        if not curves:
-            score = None
-        else:
-            score = max(
-                len(
-                    find_peaks(
-                        gaussian_filter1d(y, smooth), prominence=prom, distance=3
-                    )[0]
-                )
-                + len(
-                    find_peaks(
-                        -gaussian_filter1d(y, smooth), prominence=prom, distance=3
-                    )[0]
-                )
-                for y in curves
-            )
-        result[(smooth, prom)] = score
+        counts = []
+        for curve in curves:
+            smoothed = gaussian_filter1d(curve, smooth)
+            peaks = [find_peaks(sign * smoothed, prominence=prom, distance=3)[0]
+                     for sign in (1, -1)]
+            if not args.cycle_consistency:
+                counts.append(sum(len(indices) for indices in peaks))
+                continue
+            # A similar return position helps reject large one-off sweeps.
+            counts.append(max(
+                (1 + sum(abs(smoothed[right] - smoothed[left]) <= prom
+                         for left, right in pairwise(indices))
+                 for indices in peaks if len(indices)),
+                default=0,
+            ))
+        result[(smooth, prom)] = max(counts, default=None)
     rows.append((k, v["speaker"], label, result))
 
 
@@ -109,6 +115,7 @@ if args.fixed:
         )
     print("pooled", evaluate(rows, setting), flush=True)
 else:
+    held_out = []
     for speaker in sorted({r[1] for r in rows}):
         train = [r for r in rows if r[1] != speaker]
         test = [r for r in rows if r[1] == speaker]
@@ -123,3 +130,7 @@ else:
             evaluate(test, best),
             flush=True,
         )
+        held_out.append(evaluate(test, best)[3])
+    pooled = np.sum(held_out, axis=0)
+    (_, fp), (fn, tp) = pooled
+    print("pooled", float(2 * tp / max(1, 2 * tp + fp + fn)), pooled.tolist())
