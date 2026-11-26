@@ -96,11 +96,28 @@ def analyze_recording(path, targets, model_name, cache_dir, filler_head=None, *,
 
             encoder_name = checkpoint_encoder(filler_head)
             base_model, base_revision = ENCODERS[encoder_name]
-            model = FillerClassifier(AutoModel.from_pretrained(base_model, revision=base_revision),
-                                     encoder_name=encoder_name)
+            metadata = torch.load(filler_head, map_location='cpu', weights_only=True)
+            frame_head = metadata.get('kind') == 'frame_filler'
+            if frame_head:
+                from .train_filler_frames import FrameClassifier
+
+                classifier = FrameClassifier
+            else:
+                classifier = FillerClassifier
+            model = classifier(AutoModel.from_pretrained(base_model, revision=base_revision),
+                               encoder_name=encoder_name)
             load_checkpoint(model, filler_head)
-            features['fillers'] = {'status': 'experimental', 'value': detect_fillers(model, waveform, speech),
-                                   'method': f'{encoder_name} fixed windows'}
+            if frame_head:
+                from .filler_frames import decode_frames, score_recording
+
+                probabilities = score_recording(model, waveform,
+                                                window_samples=metadata.get('window_samples', SAMPLE_RATE))
+                events = decode_frames(probabilities, duration, threshold=.80, min_frames=12)
+                method = f'{encoder_name} frame classifier (.80, 12 frames)'
+            else:
+                events = detect_fillers(model, waveform, speech)
+                method = f'{encoder_name} fixed windows'
+            features['fillers'] = {'status': 'experimental', 'value': events, 'method': method}
         except (OSError, RuntimeError, ValueError, ImportError) as exc:
             errors.append(f'filler classifier: {type(exc).__name__}')
     if any(error.startswith('pitch:') for error in errors):
