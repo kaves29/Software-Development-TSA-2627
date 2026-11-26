@@ -38,3 +38,5 @@ PYTHONPATH=backend python -m speech_analysis_onboarding_model.video ES2008a.A.av
   --pose-model pose_landmarker_lite.task --hand-model hand_landmarker.task \
   --face-model face_landmarker.task --max-seconds 1200 > ES2008a.A.video.json
 ```
+
+The AMI head and hand labels encode communicative events. For example, ES2008a.A has 49 concord signals, 39 emphasis signals, and nine labeled communicative hand intervals. These labels cannot serve as reference tracks for fingertip-to-face proximity, exact landmark positions, or the full set of pose measurements. [AVA Active Speaker](https://research.google.com/ava/download.html#ava-active-speaker-download-v10) is a candidate external check for visible speech attribution. It does not cover the remaining fusion features or the onboarding domain.
