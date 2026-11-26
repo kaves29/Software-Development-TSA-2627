@@ -22,6 +22,20 @@ TRAIN = (
     "TS3011a.A",
 )
 DEVELOPMENT = ("IS1008a.D", "TS3004a.A")
+AUDIO_SHA = {
+    "ES2008a.A": "9038704a0c2380b3abed17af3927e110a3783d3e8a0a7743af86275552f5588a",
+    "TS3005a.A": "7ca6fe56d9a8b2294ff69a13466ebce1c408434f2f457a245eec792b5fa266f9",
+    "ES2005a.A": "ffe5eb825fcc0a9113173d828c1ce66e256e49c6e933987927c6353043ef4112",
+    "ES2006a.A": "2ee7c31443367833a385d1bd8c56b6a516a56193b90892fb042e9ad681109b18",
+    "TS3009a.A": "7b789a7109a59b54e033f82ed1a7a91881114b84bae7ffa1f4692d650b31c5ae",
+    "IS1003a.A": "5a633e76470335e5e7d830980f00269f1dee28ceecf38a07257b1b7c1e5bd8d6",
+    "ES2002a.A": "3bf0627106d6b6f02e5cc8b69f283b70303275c6b354aef3bdc7a50762d3f25e",
+    "ES2007a.A": "869ffbca7c16ea0e8093388aaed0383d03480deddb0a1cdf4f9bb081bc4cfa61",
+    "ES2010a.A": "d2b9737be13bcb49f8ec5fd8f55884edf6326864fde1098e4fb244675e9cebec",
+    "TS3011a.A": "f46b3f9fb8e4945e50fa46bc7ae29a3601d624c8d7f652af7725d900aefd8493",
+    "IS1008a.D": "a60e45356e8324231ba259bc63046d68aefc17b4a063a6a497736e7cb525642a",
+    "TS3004a.A": "bde78c71e744b535f860964160857b646c3052c1286a4fb2c015fccf8991dcf0",
+}
 MODULES = (
     "__main__",
     "acoustics",
@@ -89,6 +103,8 @@ for split, requested in (('training', train), ('development', development)):
                f'{{meeting}}/audio/{{meeting}}.Headset-{{channel}}.wav')
         path = audio / f'{{recording}}.wav'
         download(url, path)
+        if digest(path) != {AUDIO_SHA!r}[recording]:
+            raise ValueError(f'AMI audio checksum mismatch: {{recording}}')
         subprocess.run(['ffprobe', '-v', 'error', str(path)], check=True)
 """
     run = f"""subprocess.run([sys.executable, '-m', 'pip', 'install', '-q',
