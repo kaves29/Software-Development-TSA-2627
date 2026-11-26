@@ -115,3 +115,7 @@ The warm-start pilot finished the complete IS1008a.D development comparison:
 | Adapted | 0.80 | 3 / 14 | 0.214 | 0.188 | 0.200 |
 
 Adaptation suppressed predictions, including correct detections. The training loss improvement did not produce a better maximum among the two predeclared thresholds on this development track. Do not promote the adapted head on this result.
+
+The same two-speaker head was compared on full development track TS3004a.A (1,345.323 s, SHA-256 `bde78c71e744b535f860964160857b646c3052c1286a4fb2c015fccf8991dcf0`) using the same encoder features for both heads. Original F1 was 0.3605 at .60 and 0.2609 at .80. Adapted F1 was 0.3248 at .60 and 0.2680 at .80. Pooling the two development tracks gives original F1 0.2910 (.60) and 0.2456 (.80), versus adapted F1 0.2807 (.60) and 0.2520 (.80). At .60, adaptation reduced unmatched predictions from 150 to 68 but also reduced correct matches from 39 to 24 across 79 references. Do not promote this head.
+
+The mirror later supplied three additional annotated training tracks (ES2005a.A, ES2006a.A and TS3009a.A). The follow-up pilot samples up to 60 windows per track from five distinct training speakers with the original checkpoint, seed, loss and scoring settings kept fixed. Source paths, hashes and sampled offsets are recorded in the local run manifest. The official AMI test set remains sealed.
