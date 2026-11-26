@@ -11,7 +11,13 @@ from scipy.signal import find_peaks
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("data_dir", type=Path)
-root = parser.parse_args().data_dir
+parser.add_argument(
+    "--fixed",
+    action="store_true",
+    help="Evaluate the fixed five-speaker development rule",
+)
+args = parser.parse_args()
+root = args.data_dir
 labels = json.loads((root / "educator_labels.json").read_text())
 tracks = np.load(root / "educator_tracks.npz", allow_pickle=False)
 grid = list(product([1, 2, 4], [0.08, 0.15, 0.25, 0.4], [2, 3, 4, 5]))
@@ -87,17 +93,33 @@ def evaluate(sub, setting):
     return precision, recall, f, [[tn, fp], [fn, tp]]
 
 
-for speaker in sorted({r[1] for r in rows}):
-    train = [r for r in rows if r[1] != speaker]
-    test = [r for r in rows if r[1] == speaker]
-    best = max(grid, key=lambda x: (evaluate(train, x)[2], x))
-    print(
-        speaker,
-        "selected",
-        best,
-        "train",
-        evaluate(train, best),
-        "test",
-        evaluate(test, best),
-        flush=True,
-    )
+if args.fixed:
+    setting = (2, 0.08, 3)
+    for speaker in sorted({r[1] for r in rows}):
+        group = [r for r in rows if r[1] == speaker]
+        print(
+            speaker,
+            "available",
+            sum(r[3][(2, 0.08)] is not None for r in group),
+            "total",
+            len(group),
+            "test",
+            evaluate(group, setting),
+            flush=True,
+        )
+    print("pooled", evaluate(rows, setting), flush=True)
+else:
+    for speaker in sorted({r[1] for r in rows}):
+        train = [r for r in rows if r[1] != speaker]
+        test = [r for r in rows if r[1] == speaker]
+        best = max(grid, key=lambda x: (evaluate(train, x)[2], x))
+        print(
+            speaker,
+            "selected",
+            best,
+            "train",
+            evaluate(train, best),
+            "test",
+            evaluate(test, best),
+            flush=True,
+        )

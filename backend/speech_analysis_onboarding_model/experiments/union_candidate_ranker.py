@@ -17,15 +17,21 @@ from sklearn.preprocessing import StandardScaler
 from speech_analysis_onboarding_model.ami_split import recording_splits
 from speech_analysis_onboarding_model.evaluate import recording_event_metrics
 from speech_analysis_onboarding_model.evaluate_ami import filler_reference
-from speech_analysis_onboarding_model.filler_frames import decode_frames
+from speech_analysis_onboarding_model.filler_frames import (
+    decode_frames,
+    decode_hysteresis,
+)
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--annotations", type=Path, required=True)
 parser.add_argument("--sdk-dir", type=Path, required=True)
 parser.add_argument("--acoustic-dir", type=Path, required=True)
 parser.add_argument("--label-dir", type=Path, required=True)
+parser.add_argument("--independent-threshold", type=float)
 parser.add_argument("recordings", nargs="+")
 args = parser.parse_args()
+if args.independent_threshold is not None and not 0 <= args.independent_threshold <= 1:
+    parser.error("independent threshold must be between 0 and 1")
 names = args.recordings
 if len(set(names)) != len(names) or len(names) < 3:
     parser.error("provide at least three unique recordings")
@@ -49,8 +55,18 @@ for n in names:
     p = np.load(args.acoustic_dir / f"{n}.npy", allow_pickle=False)[:, 0]
     with ZipFile(args.annotations) as z:
         refs = filler_reference(z, n, a["duration"])
-    acoustic = decode_frames(
-        np.column_stack((1 - p, p, np.zeros_like(p))), a["duration"], 0.5, 6
+    frames = np.column_stack((1 - p, p, np.zeros_like(p)))
+    acoustic = (
+        decode_frames(frames, a["duration"], 0.5, 6)
+        if args.independent_threshold is None
+        else decode_hysteresis(
+            frames,
+            a["duration"],
+            onset=args.independent_threshold,
+            continuation=args.independent_threshold,
+            min_frames=6,
+            max_gap=0,
+        )
     )
     used = set()
     candidates = []

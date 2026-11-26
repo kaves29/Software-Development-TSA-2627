@@ -27,12 +27,21 @@ def main():
     parser.add_argument("annotations", type=Path)
     parser.add_argument("pose_csv", type=Path)
     parser.add_argument("output_dir", type=Path)
+    parser.add_argument(
+        "--cohort", choices=("educators", "train5", "dev2"), default="educators"
+    )
     args = parser.parse_args()
     if (
         digest(args.annotations) != ANNOTATION_SHA256
         or digest(args.pose_csv) != POSE_SHA256
     ):
         raise ValueError("input files do not match the recorded GESRes release")
+    groups = {
+        "educators": {"Lecturer1", "Lecturer2", "Lecturer3"},
+        "train5": {"Lecturer1", "Lecturer2", "Lecturer3", "Politician1", "Clinician2"},
+        "dev2": {"Politician2", "Clinician3"},
+    }
+    expected = {"educators": 767, "train5": 1254, "dev2": 747}
     with args.annotations.open(encoding="utf-8-sig", newline="") as stream:
         labels = {
             int(row["annotation_number"]): {
@@ -42,10 +51,13 @@ def main():
                 "handedness": row["handedness"],
             }
             for row in csv.DictReader(stream)
-            if row["id"].startswith("3Educator")
+            if row["id_short"] in groups[args.cohort]
         }
-    if len(labels) != 767 or len({row["speaker"] for row in labels.values()}) != 3:
-        raise ValueError("unexpected educator identities or annotation count")
+    if (
+        len(labels) != expected[args.cohort]
+        or {row["speaker"] for row in labels.values()} != groups[args.cohort]
+    ):
+        raise ValueError("unexpected identities or annotation count")
     columns = ["frame_index", "annotation_number"] + [
         f"point_{point}_{field}"
         for point in (11, 12, 13, 14, 15, 16)

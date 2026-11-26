@@ -1,6 +1,6 @@
 # Speakly analysis goals
 
-Prioritize validation of 15 distinct audio features and 15 distinct video features. The owner has deferred multimodal feature optimization and validation for now. Use complete English speaking recordings. The current owner-requested minimum is 0.70 for each feature and for the system, with 0.80 as the working target. The prior multimodal target was ten features; revisit it only after the separate pipelines. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
+Prioritize validation of 15 distinct audio features and 15 distinct video features. The owner has deferred multimodal feature optimization and validation for now. Use complete English speaking recordings. The owner set 0.50 for each audio and video feature as the first milestone, with 0.70 as the next goal. Use appropriate per-feature metrics rather than forcing F1 onto continuous measurements. The prior multimodal target was ten features; revisit it only after the separate pipelines. Website, live capture, OpenAI, and roadmap work require separate approval after analysis validation.
 
 ## Benchmark acceptance protocol
 
@@ -13,4 +13,4 @@ Prioritize validation of 15 distinct audio features and 15 distinct video featur
 
 Deferred candidate fusion tasks include visible speech timing versus voiced segments, gesture timing versus speech onset, gesture overlap with pauses, gesture timing around pitch accents, and nod timing during speaking versus listening. These are candidates pending an observable definition, independent labeling, and baseline comparisons.
 
-For an overall descriptive result, report the unweighted mean of the frozen per-feature scores from the end-to-end held-out run. Require at least 0.70 overall and on every individual feature. An unscored feature leaves the overall gate unresolved. Score outputs from the normal analysis entry point on complete recordings, including abstentions.
+For an overall descriptive result, report the unweighted mean of the frozen per-feature scores from the end-to-end held-out run. Require at least 0.50 on every individual audio and video feature for the first milestone; 0.70 remains the next goal. An unscored feature leaves the overall gate unresolved. Score outputs from the normal analysis entry point on complete recordings, including abstentions.
