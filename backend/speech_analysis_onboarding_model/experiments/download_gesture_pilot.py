@@ -6,7 +6,6 @@ Requires remotezip. Review the dataset's CC BY-NC-SA 4.0 terms before use.
 import argparse
 import hashlib
 import json
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from urllib.request import urlopen
 
@@ -34,12 +33,40 @@ def download_group(samples, directory):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
+    parser.add_argument(
+        "--expanded", action="store_true", help="Include extra TED training clips"
+    )
+    parser.add_argument(
+        "--multisimo",
+        action="store_true",
+        help="Include domain training and the MULTISIMO development clips",
+    )
+    parser.add_argument(
+        "--additional-speakers",
+        action="store_true",
+        help="Include four additional MULTISIMO speakers",
+    )
     args = parser.parse_args()
     args.directory.mkdir(parents=True, exist_ok=True)
     manifest = json.loads(
         Path(__file__).with_name("gesture_pilot_manifest.json").read_text()
     )
     samples = manifest["samples"]
+    if args.expanded or args.multisimo or args.additional_speakers:
+        by_name = {Path(sample["path"]).name: sample for sample in samples}
+        manifests = ["gesture_domain_manifest.json"]
+        if args.multisimo or args.additional_speakers:
+            manifests.append("gesture_multisimo_manifest.json")
+        if args.additional_speakers:
+            manifests.append("gesture_multisimo_extra_manifest.json")
+        for manifest_name in manifests:
+            expanded = json.loads(Path(__file__).with_name(manifest_name).read_text())
+            for sample in expanded["samples"]:
+                name = Path(sample["path"]).name
+                if name in by_name and sample["sha256"] != by_name[name]["sha256"]:
+                    raise ValueError(f"Conflicting sample hash: {name}")
+                by_name[name] = sample
+        samples = list(by_name.values())
     metadata = args.directory / "metadata_summary.csv"
     if (
         not metadata.exists()
@@ -67,13 +94,8 @@ def main():
     if not samples:
         print("All manifest samples are present and verified.")
         return
-    with ThreadPoolExecutor(max_workers=5) as pool:
-        list(
-            pool.map(
-                lambda group: download_group(group, args.directory),
-                [samples[i::5] for i in range(5)],
-            )
-        )
+    # The source has a rate limit; avoid concurrent range requests.
+    download_group(samples, args.directory)
 
 
 if __name__ == "__main__":

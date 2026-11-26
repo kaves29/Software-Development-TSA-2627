@@ -1,0 +1,486 @@
+{
+  "seed": 82,
+  "archive": "https://doi.org/10.5281/zenodo.22638749",
+  "samples": [
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_1_Gesture_Iconic.npz",
+      "sha256": "f53d27307952ba3ac8c21936aa3adf69132ccb476d79cc7bfc5b76e7e7eb9a12"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_48_Gesture_Beat.npz",
+      "sha256": "e02080ba57f997eaa282e930f1ca1f7a8d018075df2188cb3296af79b4c59732"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_49_Gesture_Iconic.npz",
+      "sha256": "3e860a95eb227a65fe5d422b53fbfc0a0950c5a611786a1081478e977a6a3795"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_28_Gesture_Symbolic.npz",
+      "sha256": "42b697e8d6ed0b4dd772669c569047a6facc2d5f4a009df5fe876adac9a3ea33"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_21_Gesture_Iconic.npz",
+      "sha256": "5c24c5fb4e301076330737a32fe6887fb482b892f7eaed7ce99e1b7fb2dc494b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_20_Gesture_Iconic.npz",
+      "sha256": "8e8cda338256c35d22ad79c34c667cd85d3e2c185bcd04c8528f8237b91fa336"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_26_Gesture_Iconic.npz",
+      "sha256": "1c936b6ffe86dad6626af658f1ac6ade403957d2dce4b8b157c2f48d75f89579"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_53_Gesture_Beat.npz",
+      "sha256": "4be58523d696b63ce9bce1f5070eb4a15240123ffe79b9c553c44b78d5604ffd"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_12_Gesture_Beat.npz",
+      "sha256": "7903cf936afd0160c0a3ea8f8644d1685170625c9254f5e81e544dadc5a29db0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_36_Gesture_Beat.npz",
+      "sha256": "b99494e9325e761da68b42cddd4c4a898be4278eca1583d7b5311672ea21e7ed"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_44_Gesture_Beat.npz",
+      "sha256": "89e024c55583c57664dcbfbf7d164e7ca10606ec5396d374816cb472bcdd1bb3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_16_Gesture_Beat.npz",
+      "sha256": "8ad82714582670ebde59a0e823f692196bcdac43ced5d49e55f069fe7f416c99"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_8_Gesture_Iconic.npz",
+      "sha256": "93e8dc67317d028304dffc5a1b705163baef21c1a530db907c06ca0dd76b9f09"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_9_Gesture_Deictic.npz",
+      "sha256": "289766704fc24e7942f5de04c3dd775d98b2315a7e2e4fe0b33d91f21210a79c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P016_S07_27_Gesture_Beat.npz",
+      "sha256": "a5eebfac176df52ac0d9471618469dfc05814f3afd93b326f03186e57ce9a21a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_23_NoGesture_None.npz",
+      "sha256": "a6c4b4690cd6dbcf8a91ae7c7d9fc404945483f14b56c24dce101c1d2a67d7c8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_21_NoGesture_None.npz",
+      "sha256": "9857b1fa9758ad52842704a2a038fa55e765bbd8cefd8b71d82872d56040c560"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_54_NoGesture_None.npz",
+      "sha256": "8d88d0b9d171be28bc99965a1a5b97ceb84295f47bd54791ee285aa087305293"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_18_NoGesture_None.npz",
+      "sha256": "f896a030f7e15208a9434316ca269b9c438ff3a067f9c92d2d356477948df77c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_41_Move_NA.npz",
+      "sha256": "872c733b7e75fbb90e6581fc04d1b9f31d36b0c09118e859e89de4df7fd20f34"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_26_NoGesture_None.npz",
+      "sha256": "ecbf693d8de7a1f56d478f114eff8f39c12c296822b90373aeddb47a398a5910"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_47_Move_NA.npz",
+      "sha256": "f3c7ee339b31db11d2308148288ab722c830b9cc14aa5e52c68729e4016b3241"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_28_NoGesture_None.npz",
+      "sha256": "7b4c17700afbca07cdb3906864c27e5e9ee048c821fa15e4dfb392e14ff1ad11"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_46_Move_NA.npz",
+      "sha256": "5c45c1e87dd8f69dd6771ee371a57ef41dedf86a70248630677bfd001526350a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_36_NoGesture_None.npz",
+      "sha256": "3cde1a8b1ca92ca5a6e2f7fff0c4eef8aad4c0bb987f31950573181874002770"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_13_NoGesture_None.npz",
+      "sha256": "b5e5c4d9d96fb6106a5bae1a5c2dc231ee6d39f36ed85d1ebeb3cc5405cf81c8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_51_NoGesture_None.npz",
+      "sha256": "154d486048ff1424d544e1a862e4a1718e35f568c9803e8a86db3932ad2836ca"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_19_Move_NA.npz",
+      "sha256": "bbc95f38c2e833b4a5253fa02f87419e187888df8ee533994339f5f09b6b9890"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_48_NoGesture_None.npz",
+      "sha256": "b1d8ab18c8a6a6fcda09108194024abecd3ff87bbe9317ad6ccba9b0e0351b0d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P016_S07_0_Move_NA.npz",
+      "sha256": "6b3ee966948647d208227d5fe9495c6a7eb1126c128cd7401144ec33120d51d0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_23_Gesture_Iconic.npz",
+      "sha256": "d4ce99d2fb3bc178eaae632f4dba8fbc9baf695bc387d25ce70fc02a477990f4"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_2_Gesture_Iconic.npz",
+      "sha256": "f05176c49ac5b94105c4dcc951aa98df363d65c5878aaa9c8ae3190a5a0d0773"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_25_Gesture_Beat.npz",
+      "sha256": "bf30ed2e0a044762b1082e6f1a49b0fce1bcbae5f8e6dbff88fce7a954582f12"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_11_Gesture_Beat.npz",
+      "sha256": "765c1e62af573c1977ca524045ae8c0d70dde63fc584aed3e165c9ee17bdf6e7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_8_Gesture_Beat.npz",
+      "sha256": "38fd7c466b1dda003a6506ecd00a6ec39f3a3d01310d4b36c41df92a501e19b3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_24_Gesture_Beat.npz",
+      "sha256": "5c14ce6f3fdcb7ca9fab07c38007593a30958a97196f74d2090d980caaf677fc"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_31_Gesture_Beat.npz",
+      "sha256": "ad25d8a543a06782f543ebd0d521af549fe44ecc465a865c51047097730bbbc9"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_5_Gesture_Deictic.npz",
+      "sha256": "1e55edf2714a9217a47922f9fb533cbb6d0746ba6b60614c25f0347ff5e79c57"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_9_Gesture_Beat.npz",
+      "sha256": "87c16f1d5a852155b0cf84cf28debafb75785a8a4838a5f33594b4194e3fd709"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_20_Gesture_Iconic.npz",
+      "sha256": "41d8a4fb461b4f141ef75a60b731787c23e6a8f948cbb09c516744f7acef47f8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_26_Gesture_Beat.npz",
+      "sha256": "054f8d3af0a253c10a3e8565f0d6acd901269e8b94854eb2b983f0ddb3f56347"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_16_Gesture_Beat.npz",
+      "sha256": "39004fb188af495892827e51642ff64675217bc1b6b1bd631760c2dac305675e"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_7_Gesture_Iconic.npz",
+      "sha256": "b56a5cc94e7d94fc7403f7b479323b1fde2f4cb7e806d209b4eb28a12be750e5"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_18_Gesture_Iconic.npz",
+      "sha256": "30d2123cd2e46661f9f8f87084d9c7fa74a7265c8db19f4cc42e18c6ef8e1f30"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P019_S08_14_Gesture_Beat.npz",
+      "sha256": "dec11652d11e57b3e2ba99a200c276ab188302a06ac675253cdc6d0ca0882ce0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_0_NoGesture_None.npz",
+      "sha256": "5703bedd9879e0c401b1ad49aca19343a43ee2144bfece5b3ceff781473c627e"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_22_NoGesture_None.npz",
+      "sha256": "68e857d5645a8419e934b1af6f6e10cc440a24b8f43d7f4c6209045db33fbf42"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_21_Move_NA.npz",
+      "sha256": "b86d6629869c64f10d61fa709b0460850d097eb1dd5492c7aa7456993dd717cf"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_13_NoGesture_None.npz",
+      "sha256": "049e9ec20a2d3953b3db5c08355024a6d42a8564aef1d640115b9a3d70854ac3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_4_NoGesture_None.npz",
+      "sha256": "842b6fba7b8f47b0d09c594be81d46c2ca73dad186c081d6aa24b82361d836cb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_19_NoGesture_None.npz",
+      "sha256": "0d614ec7f899ea1767f274dccddaf8a03478a016e192faa8d7d8f54061218c93"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_7_NoGesture_None.npz",
+      "sha256": "9d55263df241c5d2cde2508a0542fa9a5c6ea76372dab545b42d1a68c77097ee"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_10_Move_NA.npz",
+      "sha256": "639d2eaae96973127005e139e85e3d0445dcdc70f3307c571a658372a2cd282a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_18_NoGesture_None.npz",
+      "sha256": "e091e8b5bfb22083cc9599a30ce2be1f81ff35d2ed2287f0cd07a80a0630a26b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_0_Move_NA.npz",
+      "sha256": "583023e99efa2d88fd554f8ceaacdae23424c445797fdc7f3eb082b2abcd4359"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_8_NoGesture_None.npz",
+      "sha256": "6d8db4b8d6354e49fca41bc29236a6f250db42651a0baa4f7d23fb4ec0fb39d3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_6_NoGesture_None.npz",
+      "sha256": "b39b40cf21ab87cbf58387549a8d6d379de8e448d0e6cb52c3ae8184c47904eb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_11_NoGesture_None.npz",
+      "sha256": "6402136e59434b44b5a2dd6279e06829ee5caa57ec5e51e6c221a8514e564d14"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_22_Move_NA.npz",
+      "sha256": "e6d178b56bf0e9bf7834b848302eb2d86502f963804ebc75dfc01f9b5f67a227"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P019_S08_9_NoGesture_None.npz",
+      "sha256": "baada3dbaaa78bbb4defbb5189b9a2ddd876221d931bbec63612074fe4bc9892"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_29_Gesture_Beat.npz",
+      "sha256": "34aae6d87dcb30ebd9d9bad017f70b94f336a928b2d289c5562e3ddbb0a12cb1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_4_Gesture_Iconic.npz",
+      "sha256": "b28b5abce6d10264124b375e7bd53d8fc5ac2dc5f791d6da962f735de2d9e755"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_48_Gesture_Beat.npz",
+      "sha256": "467897fd9a4f9fc18533fbeef62b74e4025728da48c2127e9adaed7e9b77fae9"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_31_Gesture_Iconic.npz",
+      "sha256": "b6053d71db485f7a8866ab64ef5ef75bd99cf5bfe0329693323dfea0c2a1d616"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_10_Gesture_Iconic.npz",
+      "sha256": "28bbe297761a7266c9439ecfb917ea92242b8880164546cf62c936fd7e832978"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_26_Gesture_Beat.npz",
+      "sha256": "60542741bec89eb0736b94efd66ac4066021c80a4ef85f7bbfde4b8cca1cca8f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_28_Gesture_Beat.npz",
+      "sha256": "e19de69f7360a0ed187c60bc632b811d42151daaed682a6d9eb0d346c71b0d30"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_45_Gesture_Beat.npz",
+      "sha256": "ea36b3884200c23084fac9b7464caec34fb4c26f8baaaf3b70784e32bc7fd168"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_19_Gesture_Iconic.npz",
+      "sha256": "6686b4876b2cd788e7ecd8c55efeff7b79107c1fe493a119da1ae9ab60d5b6aa"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_12_Gesture_Symbolic.npz",
+      "sha256": "c3d3f18522e972b4ab4e08ac9353d057fb1de05ab9017c85007818a70578c389"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_39_Gesture_Iconic.npz",
+      "sha256": "69e7740bedafd368e7859d345ce6958a0bf5920753baad3f011f186511a85f7a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_46_Gesture_Beat.npz",
+      "sha256": "02e54e0d8d11f4642019ad4749e0e61adb08ae43507aac7d49f6a03deaffe790"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_8_Gesture_Beat.npz",
+      "sha256": "84e5768db0ac1a887ddd8924c697f3778d66badd6600065a9d4f5969ab70cca3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_11_Gesture_Beat.npz",
+      "sha256": "e7f53b478fc5d5b919ebee5cfd8e1c0d593bcc3c917a72b3307661513bbd7355"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P020_S09_25_Gesture_Deictic.npz",
+      "sha256": "ff40239b180222440e4ce688ca47f32ca0907654f8f00e352f6ac5c9f2a62490"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_3_NoGesture_None.npz",
+      "sha256": "3bdfc8485aef1afd8eb3741620f24958b63bf57a29902b62971ba7f7c3eccef1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_37_NoGesture_None.npz",
+      "sha256": "3191ffb10d042465145bdbcfcf64848093b33b0eb32644bbcc05ee0721829a0b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_47_NoGesture_None.npz",
+      "sha256": "c42c40b441d7fbe3c4d3ef813c1f3ae128c5d737f3c1561bd3dd91c9bff907f8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_45_NoGesture_None.npz",
+      "sha256": "63c73669ecd708d78e562cb217cf2d34e04f8fb3b6c2d703b351699c4443b951"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_16_Move_NA.npz",
+      "sha256": "c99086484e630a3808379d7ec8a56d18bfeb7608c18c61286117c380137073f6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_35_NoGesture_None.npz",
+      "sha256": "bd03457b0fb2f0c20f478d9d2a02e472ccfc25f327474d402be417eb9066e1d5"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_6_NoGesture_None.npz",
+      "sha256": "f4829500dda79f1de4331ef86b9dc810e04b37761df082ebc99156bd8f2e02a3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_40_Move_NA.npz",
+      "sha256": "2918ac7af52a00bd6acd3e6443be342f04f61e71226fc16307155c25510d3712"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_42_NoGesture_None.npz",
+      "sha256": "442efcb957fd4bff74f995e79ed52e4efbe43a7a02e3138642b209e33adfc855"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_39_NoGesture_None.npz",
+      "sha256": "3d94fd5fa9b3ba1b5d02f8786a68d45aac1635b39e796985720bb14440ae91fd"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_38_Move_NA.npz",
+      "sha256": "3de9dbadefe9ecabbbd7a5e12480b81bcfb9bc44a0368a31bbc5ae4e460e6c7c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_36_NoGesture_None.npz",
+      "sha256": "6e0ba81940dd4fefd87bdbcea8a55305f67b00224408ca2451494335151a118b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_13_NoGesture_None.npz",
+      "sha256": "637cece28fc2130ae8775083dd00361fde30d1deca091ba24761bfd010e19e62"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_7_NoGesture_None.npz",
+      "sha256": "9e0989270b2a88c99026f5d64eae410d6dbc7dcc61cd5dc54329f5cfc36358c7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P020_S09_7_Move_NA.npz",
+      "sha256": "d945f5e6b510381fdda6211bc3c2e3e460705c493a1f4e679e404d881795c39d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_34_Gesture_Beat.npz",
+      "sha256": "05989b3d6a554ff902bcda2c5f4820306ced40c2ae60a5080674f85968428913"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_26_Gesture_Beat.npz",
+      "sha256": "7c964ca6151b39f8e0f1b1973af7d5237c62ec91e9671d8d932aa816c62cf441"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_4_Gesture_Beat.npz",
+      "sha256": "f83a49d05da4c7ec662c3eb361d39789217c9a35e55bf1c68a9b2998c2cf3af1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_16_Gesture_Beat.npz",
+      "sha256": "44753b337630b89eb117d544f42649828da57db56ffd4654ce66cb026779ac57"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_12_Gesture_Beat.npz",
+      "sha256": "09e2f1abd33d2bbb7e5d0bcd3e32322d6dd8f33cd375688e5d454b916e213a76"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_35_Gesture_Iconic.npz",
+      "sha256": "03011bad62589077a7cf1be0c364e2cc51e74150f5fc8e665430d1e659af8632"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_3_Gesture_Beat.npz",
+      "sha256": "2816710ef62b4765130a9d4423ab53439f2090a7c56b3907b9eba58312fd7b1b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_33_Gesture_Beat.npz",
+      "sha256": "94a121e9eaaf9fdb4a3c6674b2b8bac637a5a3e6bfd9368060e0fb1c135c6ec1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_21_Gesture_Beat.npz",
+      "sha256": "b920661d18495d35a981985a95d85e65f47e0b01a40a9a3afbc494448b07047c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_17_Gesture_Beat.npz",
+      "sha256": "965f9cf7c1db5b32b5319c0c897944fd6639f0ee010b00c8cb227869ad4833b2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_6_Gesture_Beat.npz",
+      "sha256": "0fd1a1e08a886eb5d29b25735df610f10ffac1b085adee6aec9baa300d32b9e1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_24_Gesture_Beat.npz",
+      "sha256": "7e70ed78ae20df8bb6c144719715ff74c05591b35f60fbd7f426dd2c22db2f13"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_32_Gesture_Beat.npz",
+      "sha256": "c4f52e13608e9ca0c057b8f3716679d2891428d86d88be7c98a63fd89af7abe1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_38_Gesture_Beat.npz",
+      "sha256": "8c9d591f60766dcd0d6a98a37588603505fac0ea38114e526aa9843e6b31fc58"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/Multisimo_P023_S10_27_Gesture_Beat.npz",
+      "sha256": "7525a62bc0ed568c90f7ba7404a9216aaade462201d5359c2c90c1dd5d204f7e"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_15_NoGesture_None.npz",
+      "sha256": "edc7824f42193d7b8822ddac5ec8d7201f5630b66522357ac804d9af36efe374"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_41_NoGesture_None.npz",
+      "sha256": "f7b200e3c7510c1a029f1d8490236b1a1bab8406a56d89d8bc00f447a60c9814"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_27_NoGesture_None.npz",
+      "sha256": "549d2238e7f6b42e1713796329789ad56f3a5f83a70b7702c21f911ceef378a2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_22_NoGesture_None.npz",
+      "sha256": "740a50a6310b5a3fa1e15c16b037f89c8772f8bf1b1f9b4cf458dd3ac7027b6f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_5_NoGesture_None.npz",
+      "sha256": "7d7d851c4c98ac7f47cc428bf18c18b4b49b8b2ec73579eb4657badf028d719a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_17_NoGesture_None.npz",
+      "sha256": "64b1c23fe308cd371f44775ac0bf0f58b45b55b86a820e13ca1736df8b7af234"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_19_NoGesture_None.npz",
+      "sha256": "c78a056669f68608e1ca95bc04f8f9a6b41540878cd72c2e0b55694a55500d9c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_21_NoGesture_None.npz",
+      "sha256": "8c7c68a15d896bb221d001b398ef47f11b10d99320cc7f862c91855724d68a26"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_32_NoGesture_None.npz",
+      "sha256": "40fbe4a5f82b17ee800e592824de918474bf54fb9bedbbd49efda75886e16949"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_20_Move_NA.npz",
+      "sha256": "b01304b65b5445401b4ae78c09e0018383bf4edb6471537a9e9a31b5e5bf3dbb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_29_NoGesture_None.npz",
+      "sha256": "892beaae01fa3ae6e5c1c60b39441da98f5996d310d2c9520e2c9e9190a97aac"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_16_NoGesture_None.npz",
+      "sha256": "bc14e17ec8375cdfcef77789ffa84c8198d5f6cef9721a83ed76b7672fc3c10c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_13_NoGesture_None.npz",
+      "sha256": "075fa6ecaa3622b8f7292d9c5064f5c7af250a926e2c74b65e0805d5c8b98f36"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_20_NoGesture_None.npz",
+      "sha256": "b2ec384ac890090913f34527e74949c2d3beb4111179af772b6673e57f540704"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/Multisimo_P023_S10_37_NoGesture_None.npz",
+      "sha256": "1197358b1ce42b4fd71309e471c3e7e4f0b501e15ddfa4e6d0c769a009b7f62e"
+    }
+  ]
+}

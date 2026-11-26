@@ -1,0 +1,806 @@
+{
+  "seed": 79,
+  "archive": "https://doi.org/10.5281/zenodo.22638749",
+  "samples": [
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13590_Gesture_None.npz",
+      "sha256": "0e62422b7486d7ba73002b09b8524750a79c8c70c07fe4651e6a84bd7aa8f939"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14342_Gesture_None.npz",
+      "sha256": "948ce840e84043df0e9fe3ed5c4a307081e9bdc17740f1e2f5e811f80b7a5ae0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14108_Gesture_None.npz",
+      "sha256": "f9d927a4661aae3eaf300ae8d15637e3a8f1e66ecaa123517215e4d73f82fef7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14717_Gesture_None.npz",
+      "sha256": "3a9b42ff6fb3a81876800fab0a0c92b723083cb2b87d3ec32ca2f0c27da13ad9"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13637_Gesture_None.npz",
+      "sha256": "b9699640492c95426be0d10c5c681f5637f3e4437c7d6dc1e6588cda20271db6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13837_Gesture_None.npz",
+      "sha256": "1a9a3a08c2d1d4e9636276b2cd04a901699219cbc27741dba099181a8394c037"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13852_Gesture_None.npz",
+      "sha256": "ddb88c32850ec3d6b4339fa35d0e91813ec18ea7f3841e1120e4c0196558f64d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14481_Gesture_None.npz",
+      "sha256": "811e01952d3205560856ba9e2fd4a37044ee5b1852f48231609b83e8545a33ac"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13617_Gesture_None.npz",
+      "sha256": "93f54ca505092bf4c46665bb787926ec55bd4a27641344e6e6c51211944556ff"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13392_Gesture_None.npz",
+      "sha256": "a1b2a890880c975989a636de757cbb497972757f739336fae5051d799eaff940"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14112_Gesture_None.npz",
+      "sha256": "9eeb29edc0e8e3179d4395cc02b4a0ade6caa4d78db803444f8f631f473bd608"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13298_Gesture_None.npz",
+      "sha256": "63cd3fdff4caf1297b677fe61e25f73cd7ece8fcd0c85770f03745debc8863ee"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13732_Gesture_None.npz",
+      "sha256": "67fc9946c6675f60d822e0e96c52585019af4943b0ff52cca192099e7b2a0673"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13504_Gesture_None.npz",
+      "sha256": "8fc748511771a3394e65d7638c6a1ef8d4f0757ff4aed536edede6b575603065"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14472_Gesture_None.npz",
+      "sha256": "ac0fe2c1a9f9c2c8b9c69fd4db349a69a0bbdc17ef270e734feb316b6a80346e"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14011_Gesture_None.npz",
+      "sha256": "99b9e66de9bbf3b91b45b39952e3cd569fb4348f715eb85563009f98fedbcac0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13661_Gesture_None.npz",
+      "sha256": "517be243dabbacf5bb837c4b394a519364a18f67007b6528448e4f5ab32ef25d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14273_Gesture_None.npz",
+      "sha256": "1a372cb9aea515e6085763c1fa5d239a64d290898606bbea1d3e5e4d3d414565"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14447_Gesture_None.npz",
+      "sha256": "22067d4039acc6a26c9bd99bd02d0a7b7d16af192fa7504e3cef1984eba92127"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14156_Gesture_None.npz",
+      "sha256": "c71545d84595d4eadcf5eea4c6e8e8f1f22e6171bd59e11aa5675055be54e940"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14767_Gesture_None.npz",
+      "sha256": "014e1723b47d6fa383626175b4ebe260fcccaa889006443b6034747fb6fc4ceb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13460_Gesture_None.npz",
+      "sha256": "81b15f815847bf0e538463617fa7d26d35bf8e4ff3a8707918c37671ecb2a329"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14195_Gesture_None.npz",
+      "sha256": "800c9f69265daf1ce3d841eaa67e846386a07ad5037e6720f9f6fe4529de4600"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13494_Gesture_None.npz",
+      "sha256": "1a657047461586c6a7748e2348b63535a9756adb034712c1d7ba66d0cc74a89e"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13884_Gesture_None.npz",
+      "sha256": "ed74bd4cac074ca2f7e6d49b3b046acd393e54a1a5b4e04e23806d8148c3be94"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14459_Gesture_None.npz",
+      "sha256": "91704247a4ec2dcbecfe3a522975e79a747ece6799aeac6036ece0679d5a79a7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13328_Gesture_None.npz",
+      "sha256": "02a541427a04e331eed141b1c9ff2a6912671028ecade0b30f576255cb4c09be"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14070_Gesture_None.npz",
+      "sha256": "c047f15f3faeea3b34c9e645f3ff953219e420289e54287fa220790b4f5dbac8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14387_Gesture_None.npz",
+      "sha256": "c4ac143bd3192e7ceff1b3003ba08299194903faa990d1cd7ddb4df065d5cac6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13424_Gesture_None.npz",
+      "sha256": "5e7402fb79033e0c43ffbe1baf356d60ca7955283911cff5151571da32e99cf1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13378_Gesture_None.npz",
+      "sha256": "e50385d14daa2c493d9d4b6f7cfb294cde4c381c40285562ddb92c8516c2545d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14391_Gesture_None.npz",
+      "sha256": "ffb45b9a67ac5d03dd86dcc5feb49615d45472d2983fbb7fac23a2b1a4014207"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13473_Gesture_None.npz",
+      "sha256": "76ce8c4f694c629889c0276d2f8db131da68269314bc67088008f8b559dfc1a2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14788_Gesture_None.npz",
+      "sha256": "22dcad10729fb34c01a33850fc9311374a77ebb247ad1712d832f6fbf2ee8406"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13518_Gesture_None.npz",
+      "sha256": "38bcfe529132dd8487f2ecb06917e847a088614ef6f6e1d6898705c3c90c87e1"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13834_Gesture_None.npz",
+      "sha256": "7ffd8a79fbb172b868c6ab13235674df4e84dc354bccb377d34247a439ed2312"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13695_Gesture_None.npz",
+      "sha256": "f5325f7678a8a1a08c30eadd677c0979b1f810d92978d585aceaaaf30fc4040d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14249_Gesture_None.npz",
+      "sha256": "97a7e1982230242e143880602747bd6f8b78d4e7193aa71da63ad3546e3ef259"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13913_Gesture_None.npz",
+      "sha256": "329359a96989f03f1db48295a25e320a746b52a7c8bab32e8916a15ba5437c01"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14101_Gesture_None.npz",
+      "sha256": "4e56536e453a0a01d1ac59f28595820bdc8ec97460683c5510786dc4c7d4409a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13779_Gesture_None.npz",
+      "sha256": "4ddf666ff61263bbdc60f3e8a339db161f462dd9313ea31eceb7b5786d8469af"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14038_Gesture_None.npz",
+      "sha256": "aa93ced783037c08dfd84f008dbf65482f2f4d3bdfcd34b6b0fda1963bc42be7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14411_Gesture_None.npz",
+      "sha256": "af1e0be5480d7f094d57ba76e164c4526c7b5369154e33fd269237c0da3f6b6f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13906_Gesture_None.npz",
+      "sha256": "b1fce33634db5c35a8dfc7d8935c1e8399d9d818de564b999bc49af16d1bff3a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13670_Gesture_None.npz",
+      "sha256": "7e2bcf3a9d2fe82a6fd442e9f13aaafa7b4616511319cb776bb4015c7d4b681a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13385_Gesture_None.npz",
+      "sha256": "c60e6c02e6c0af94702273300b37f64c53059abbb2f56ba1e49671c934ca18dc"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_13305_Gesture_None.npz",
+      "sha256": "dad2149234b9e06efcf97522358b64ba9699e2c0b00533d8ea74324086be9845"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14692_Gesture_None.npz",
+      "sha256": "f309086c7abc721eb0144f88cd81fa0c9384764f59f0f09c0f7fcbb3a3e8bca7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14614_Gesture_None.npz",
+      "sha256": "7c28479dfba9161b4bda6515b0fe99887ed699a4744541938ae7ca4afd8f6750"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_DL2016_14146_Gesture_None.npz",
+      "sha256": "6b9fa39d2e9da60b0b6470f071bca08f387ba4f7b17b3956f33c83cf02420241"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_144_NoGesture_None.npz",
+      "sha256": "8ce980e5d603e34eea48d533cb91080d690cbe2a3a7d973aa79256bf2c1de42d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_236_NoGesture_None.npz",
+      "sha256": "fee558111fdf55897954a789e3b39adde3e338015a0d2f7a69eb993536b7e45a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_390_NoGesture_None.npz",
+      "sha256": "1b0e54e9082231e052c68ef7d18de1d23500af51d5142b11a2c76efad1a0c925"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_292_NoGesture_None.npz",
+      "sha256": "46f145550c7ee50b776065a3856cdb0eb34c451a8df4bd7146ad3402f2785e7a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_351_NoGesture_None.npz",
+      "sha256": "c5e831dfdd20206f310e160d892b00925680cb3cc761d9f7dda936571bf28d60"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_415_NoGesture_None.npz",
+      "sha256": "18ac715b5fe375c5a48172ff1c4dca225de682ced43b663f815e50c6d05a8c36"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_120_NoGesture_None.npz",
+      "sha256": "e23215f502bf6fa840cf6b273ec6f2d7a536a3a751d620d73104ceda1f9e7fa6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_58_NoGesture_None.npz",
+      "sha256": "ff24b509dda49ad0824e4fee08d601d5e225203183cc0ed50f3d0adb1b754496"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_88_NoGesture_None.npz",
+      "sha256": "1425b433f73118f62e72db11700c645893c347706c141a52498727ec2be47526"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_245_NoGesture_None.npz",
+      "sha256": "b1b59c46269571b9d8a9822a2d5c18a9cdd1caff3fb0c87fc6ea9b5b3f85431c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_562_NoGesture_None.npz",
+      "sha256": "bce63c56724f94f371543cffb96f47a85e3684613ec8135ebc7899d20bb04973"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_72_NoGesture_None.npz",
+      "sha256": "7484768e8815fe6f675863c31eb2111e78a81a6522430a79d43b667141d7547b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_578_NoGesture_None.npz",
+      "sha256": "0531df439048135c07f6385981909195203f35bdd36cba0088c4317ec0c4587d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_84_NoGesture_None.npz",
+      "sha256": "ba3df84189a7138c3ebf8e2f67ca56c600a72a761e949e50d75a3ab3043610f0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_11_NoGesture_None.npz",
+      "sha256": "689aa406ea34bb2a573d4a642c5309eb746884a3ee1e4d94614a617f6359bbc2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_66_NoGesture_None.npz",
+      "sha256": "77f878a529515300463f344976a8186622d32b0f66a308984f9528c5f73d17d7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_604_NoGesture_None.npz",
+      "sha256": "2479fe3a2d5208c14023c316cd2395e623157174fe68feb4345fed0b348d27a8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_434_NoGesture_None.npz",
+      "sha256": "b7e9f8301315e73da7b919af38f2d70925a99cc39145dd525d2b62a9e810e64b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_115_NoGesture_None.npz",
+      "sha256": "62d8e1da6f72111b74398257e023f0860cc59222054e9a3fd0f5eb115502665f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_494_NoGesture_None.npz",
+      "sha256": "f4b7027521f825f0e1768e69832161f5599e48bb75dbc93a9ba9e9783551cf2a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_212_NoGesture_None.npz",
+      "sha256": "f4c755094f0294afef16c051d0eeae09cfe4cc38bfc326e91ec440b7858dede9"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_110_NoGesture_None.npz",
+      "sha256": "abe2221ecdc5c98dc20133f3b10f40d7a96ab9917b3c8831f0d3421235bbbcab"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_106_NoGesture_None.npz",
+      "sha256": "099862c4dbaf504e3c68308fb63a4c40c65cc4d03aa39edbbfcc7c02907aa6ac"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_311_NoGesture_None.npz",
+      "sha256": "4d1c6d4d5d9cec18bea735dae5b26f7dfd274a208e035de6ecb9058e08ae0de4"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_470_NoGesture_None.npz",
+      "sha256": "fdb7110034167ce0f06b364515d12a51c6e6f4feced6e3d5e50856a34b4c7ba4"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_504_NoGesture_None.npz",
+      "sha256": "070bf323c46b1fcfaa64830457041607a7c7fa32ca9e025d41894017e6af28a6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_553_NoGesture_None.npz",
+      "sha256": "8d6782756518186ad82814c03ee1aae3f33fca5c24596a12cebf6377d5caffd9"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_288_NoGesture_None.npz",
+      "sha256": "bed3b670cee74e3b12065439254694dcd867456fca0492deadca04076d3d0454"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_439_NoGesture_None.npz",
+      "sha256": "398d34f3a72e94992ecf1204c4bf6473ec85849d2ec7787fba39588c23ac9778"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_329_NoGesture_None.npz",
+      "sha256": "fd5a97f816a69356be45242322d8efd76ba27cb5040985a2879750edb5331ca4"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_609_NoGesture_None.npz",
+      "sha256": "43cad55f71cdf42a6019a09d8ce7b32401cbc9cd4429cef48194c61638058276"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_618_NoGesture_None.npz",
+      "sha256": "1218144b6df6c50b1fbd08b854902ccbfd33eff0d72ab38cac24b3a388fed8f5"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_291_NoGesture_None.npz",
+      "sha256": "ca6e2752c48ce9a1f52ffccf91cc51d0c05d06ad391bd9b088051b75ebab7e0d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_230_NoGesture_None.npz",
+      "sha256": "bbdb7315e589f5442dda3406dd8df28ca53424b5cdf0020433c758881d5b0c86"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_536_NoGesture_None.npz",
+      "sha256": "aac99758d2ffe1199053c4d4e5f4009732911acebc9248ef89127f59331f39c2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_181_NoGesture_None.npz",
+      "sha256": "d7cc3031baafd33dd4d439d65232b0bc54d4a9255da363555b3892bbaa941d5f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_597_NoGesture_None.npz",
+      "sha256": "326da6ae3d274a85de59500f833deb429cc947b74698a9c4a857ab6101c3b7c2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_147_NoGesture_None.npz",
+      "sha256": "0c523427bc711a908c071c1725b52ed67820cb219f8bce37d755d738960e6865"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_432_NoGesture_None.npz",
+      "sha256": "82f1aaa25e3c4399edca2be7ff7dd9d02d5449dc713388c09b7e427b13cf671f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_606_NoGesture_None.npz",
+      "sha256": "89fbd857ca9c07355219381641e576f622000e4025b7b3ea4c77a0b0b368f898"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_235_NoGesture_None.npz",
+      "sha256": "d42e6b1984924fa0d23d31745e6aa23f716d32ae5e266e56e2561fed1ad0a5de"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_551_NoGesture_None.npz",
+      "sha256": "297e75e1b27a563463293c3a1a27a5cd015e99051b911dce624b459411ba6755"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_635_NoGesture_None.npz",
+      "sha256": "f48f836198363f0e52b1deae42bf8047da5137409c69085c1a8c25dcad0b1c04"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_164_NoGesture_None.npz",
+      "sha256": "ac4c42a5b23e7903d889935cb2f4d4e26ddb68757f6b5ddec98d41b16351ddeb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_25_NoGesture_None.npz",
+      "sha256": "0c0f2680aadd94729e5b9aecf46c72529616878bf6c499171989eb3609f27e50"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_619_NoGesture_None.npz",
+      "sha256": "96ae6ed0b8f8ae4eb753e6bbf6cf13aa86fb57ad2524da5da2769bcec2dd60c7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_532_NoGesture_None.npz",
+      "sha256": "1f508c7e36b872c588850da55676aeeeeb53f4848aedb661040c8333b1977f72"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_281_NoGesture_None.npz",
+      "sha256": "cb651b03db4624a2922f8ac5c7c66c2c3b9924f02a1f30d826d65a3c6b90a666"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_213_NoGesture_None.npz",
+      "sha256": "989f623f421bb4af6e5d9b6c67eb44db12f29aee46f8052b06fa7d27abcc694c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_DL2016_216_NoGesture_None.npz",
+      "sha256": "f26ffd6af2afef3b71031262cb3fca91633bb923b9ff63bd4e9fedd806b8b406"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6863_Gesture_None.npz",
+      "sha256": "a1ad7cc031693f972043071ed447be08052b621345292e28e8192f549edea102"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7035_Gesture_None.npz",
+      "sha256": "84a6cd1d56ff7f78ad649f446685d7f5c0924bdf1d719e0bf7b3b5f1da432a77"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6840_Gesture_None.npz",
+      "sha256": "01acc2035fdf6221a9f85950ca3fea45381e629026de73fc70a106dcf2fedc02"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7058_Gesture_None.npz",
+      "sha256": "323ee4c33c8c1684b20e1991e7f0bbed725abe5320de1c6499c4f8da361ed6bd"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6821_Gesture_None.npz",
+      "sha256": "68add7eb9f47d32857d78d5620051e786d2af2ed9d317aa6e7f9ff68ef0d66c8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6764_Gesture_None.npz",
+      "sha256": "d33df164b615a49ba4e217e803174afe3dccdb85b39a9cc864124cd572309060"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6833_Gesture_None.npz",
+      "sha256": "06ed8028f175cefb4926a28840c27eb8b7a67536180f01ee0c1927c191c60036"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6830_Gesture_None.npz",
+      "sha256": "56c6250cca24b347c43e104a7918f984d69c31887076b574e387b32bae6e9856"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6815_Gesture_None.npz",
+      "sha256": "5e26654e2433f69a25630d23c052581cb8a5b287323820c33702d56eb88ff8a8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6751_Gesture_None.npz",
+      "sha256": "ae6b543c92ab0961392a5d0d9ad18eb7b6cdc73827e8d7c41d4b19d141280443"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6672_Gesture_None.npz",
+      "sha256": "e92db730fac3346bbe1c812858056c56dc26cea301959d9316772f3e2e507423"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6596_Gesture_None.npz",
+      "sha256": "f3329370c3710cf4a2f40a7ef16f178a87989a1dcc24f0f2c5b123958f058997"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6841_Gesture_None.npz",
+      "sha256": "5486f5d3402eca7435ff1f54f96321b00966cf6737c15b401e15a8cd2c063265"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7106_Gesture_None.npz",
+      "sha256": "039670559f096c9bc1b5624868c6c5adae14b067abd0aa05d8dc0d083b3b0026"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6548_Gesture_None.npz",
+      "sha256": "4cbc622ba3485dc692d2276234425acf55fe8dafa25ac817565c321ae383e17a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6680_Gesture_None.npz",
+      "sha256": "2fcc6ba2500fdb16251bb59d3201d17d1203660578069de62ffbfef186e337d7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6550_Gesture_None.npz",
+      "sha256": "a6c4d470e73feb522604d3ae98da9a086c5a2bb006a3e800feb7d917c878a7a8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6993_Gesture_None.npz",
+      "sha256": "baf8f83494dded096c7036b78768f181028d7b57593b878ba6d29a90aaea3bcc"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6898_Gesture_None.npz",
+      "sha256": "5618e6c8c6100c5523f61ebe30869c6318cc9f08cb70d5f2125ad27abcb7650a"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6952_Gesture_None.npz",
+      "sha256": "0c7aabb93aaa891b6f580b21e64e1b7081ebfc554ad56dee99af6043e82c8fc5"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6913_Gesture_None.npz",
+      "sha256": "c0fc18b742e8ceab928111f34c099572b54ab0eed53b657b5abd0386ba706e4d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6974_Gesture_None.npz",
+      "sha256": "f817ccaca889c1830bcb3d4fafa76d5ff1ee9b185fe98a96805ac9456d8fc77b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7145_Gesture_None.npz",
+      "sha256": "6bbceec17cb9d3e04ad309ac4f28e60cd28e0ad8996056fcbc4ff5f5f1ed12f4"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6854_Gesture_None.npz",
+      "sha256": "c9d7f91a9ec87a69469ab651c95bd078832cade9546335ac00aa3239e1110d85"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7111_Gesture_None.npz",
+      "sha256": "963def18e19881c68bc57d6fe3491347e5f15d972f9de8ce4e1913f8b6f6e028"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6871_Gesture_None.npz",
+      "sha256": "69197231de670e8f73e8921a2487e09c03757b53cfd7e05ea194df50b15bdbf6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6885_Gesture_None.npz",
+      "sha256": "34746736866bdb1d0204d565a70dd848422e723ca956a96b31cc9ea05fbda0c6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6692_Gesture_None.npz",
+      "sha256": "be254968762b9355acd7213b2283bff9f4407827e024fd1855a2a197e9263b97"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6923_Gesture_None.npz",
+      "sha256": "9cb31bb55977061b6b35c7eb94c23e0f74dba8d6bd6549b2fabe36ff8594f3f9"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6844_Gesture_None.npz",
+      "sha256": "96486c137f51f650c9df8553ce1c8dbb037b2f57f1ef57f13890cb8ef581f7a8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6723_Gesture_None.npz",
+      "sha256": "915133f969af712d27cef0265bef7f337c547fbc048b53c32d0c70e882e12346"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6802_Gesture_None.npz",
+      "sha256": "302d7baa617974ba1748f4775a6e417b319ebd2e9212bf3bb28924bb0bd216d7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7135_Gesture_None.npz",
+      "sha256": "f6dd9f743cbfdb430617542462cfcd586b9c7d134c4b1bb2d4ec15633356dd23"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6662_Gesture_None.npz",
+      "sha256": "2ddde47e6191ba486988bafa6b11a4db1d0ffd2d1621c6f792a0afe4fc7b0fdb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7126_Gesture_None.npz",
+      "sha256": "f2667342c9e33d99fd4c1f8efd7fbf2ce4916e0b45c9b04b70c0a9c67be32b65"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6943_Gesture_None.npz",
+      "sha256": "ff7b4e91f89d9bd1031c1d312d371584bf0a7fa1ecad723946aee1bc4410e663"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7143_Gesture_None.npz",
+      "sha256": "cc45e647aba0e99ddc3e74c04faa2aaa51e04dbaaba403d3ba14e37db020072b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6706_Gesture_None.npz",
+      "sha256": "784790a5972c709169cf576791e4e5d8632280e79f9135510d7fad60cc38e54d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7086_Gesture_None.npz",
+      "sha256": "e4f540d5c72dc0039900b294fb165f14413f8923e14d66db4212bede606f46be"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7060_Gesture_None.npz",
+      "sha256": "7525a7a79a1964c181a81bf601b01eb523f9aa5496054231f1791ed736d755a7"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7147_Gesture_None.npz",
+      "sha256": "c1890898c18fc8341ecc6e84cabd5baab62a0def582097250a99cad78b1f8845"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6625_Gesture_None.npz",
+      "sha256": "f60947be111bb4893442ae878524dae22952101caa178ef579e49265cf73b6ea"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7093_Gesture_None.npz",
+      "sha256": "c7eac4f9abe4bf44a5c61be3388f332a84ab213bb0ed6e4418d30c29a3430efc"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7070_Gesture_None.npz",
+      "sha256": "4fe8cd8c7ef1ad3b86bc5313639535d7752e932acc99527059c3101193005504"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7100_Gesture_None.npz",
+      "sha256": "f1eaa3392fea969daf44f5f71f1182831b52a7d7bb504ce5474d63e0040ef0e5"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7043_Gesture_None.npz",
+      "sha256": "bbd37cf10e442c0f9d1b4cfcc8c37fe9b98c90e53c18c629f4bf81ed9c8246bb"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_7156_Gesture_None.npz",
+      "sha256": "a949438072d957f582e27f18520f47ae9d240f64780d1731d4b94b2703d18772"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6896_Gesture_None.npz",
+      "sha256": "1871784ce8369f6b681ec1e73b37913b8649760cc4d8b96659d6054c663b25a3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6652_Gesture_None.npz",
+      "sha256": "0927dfb6b754b45727cc0cbda832c003d108f2869a5234a40008c820be9efa04"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/Gesture/TedM3D_M3D_TED_EG2009_6628_Gesture_None.npz",
+      "sha256": "4f3d7e085e45c242cc2bc5b3813b08a1eccdaa99802d904bb91f36f8162b715e"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_46_NoGesture_None.npz",
+      "sha256": "32ab81a604ac6d991fc539632dd6dc62a2d0b5dd0e11d9541b2e5a996fa083ad"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_169_NoGesture_None.npz",
+      "sha256": "6bc2003a0eb00fe39dc13d0297c7cd95b3e58e25dccc9bdd9e21ff185a6a89ca"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_26_NoGesture_None.npz",
+      "sha256": "4ddf9ac4e684094321dd7d91cbaf40c181ea2de975c642ca982430e0750e1b49"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_18_NoGesture_None.npz",
+      "sha256": "ee6473fdd920b16a076a2d410e726099a64c9e98f2ecc28daba21c6f53e0fb98"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_212_NoGesture_None.npz",
+      "sha256": "ebd216f234aa752d350dc6c77ffb2705e345567cd63cbd77f83df4d211734bcd"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_231_NoGesture_None.npz",
+      "sha256": "93e6f7d8626148cdc434325a6cda6fd0cf1f2e63cfdc7b0ad8c0eb68c0b23db8"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_60_NoGesture_None.npz",
+      "sha256": "60afb467909bdafa9bf320fc3a710ea4432333ff84073b5a72d1962f5d08d118"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_84_NoGesture_None.npz",
+      "sha256": "9bc3c6e229e47864d1b82077a0194c766da59f48cddd5a8b388a281544580ec2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_134_NoGesture_None.npz",
+      "sha256": "9739c7c01bb3455e56fe72706e254c36084fb843049ced17676c6003759a254b"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_242_NoGesture_None.npz",
+      "sha256": "b7babb5f0da1e71920d7abdb298cd3231dd025612af0a45ef8ad90decdc5f9c2"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_62_NoGesture_None.npz",
+      "sha256": "95ec72c1ba48f2c368a88ad6201678a27f4b6e94fa117191d831352ff8188646"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_192_NoGesture_None.npz",
+      "sha256": "5c43849dee14566e901443471cec1be5de391f4ed42af0d001ac35a8fb28f923"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_128_NoGesture_None.npz",
+      "sha256": "4ceb25cb291e9ece3d7605187236c4de46b64d28e5e824c1642add18db473fff"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_255_NoGesture_None.npz",
+      "sha256": "d5172e18f43709f9528b0f712ec1171cdd802469224518060e8a0245ef2977e6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_29_NoGesture_None.npz",
+      "sha256": "c8220be881dc0a077b9f5e84ce604d44509f65dd7325e3237caba4e2be972fde"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_243_NoGesture_None.npz",
+      "sha256": "babf4cd6437edee91abf1be037a4d1d1b7d78b9d99007322787c378f59d95d85"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_96_NoGesture_None.npz",
+      "sha256": "a0ff16eb1d7d7ec0666473185110e83e256057ef3c587d256db3457de9354920"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_135_NoGesture_None.npz",
+      "sha256": "e6dd3a5d30494d51ae9e910254d7103943c7a6af7b85c2d44f6d5c4b78717699"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_198_NoGesture_None.npz",
+      "sha256": "ba9304abdcc679189d0dbb2d10193ad3d9a09cea6d2b8c9bdffbe0a00205cb65"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_203_NoGesture_None.npz",
+      "sha256": "b38b65a54bcb434afc304e21f8b8fdc217fce822a914802436a28be32ac3f6c6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_56_NoGesture_None.npz",
+      "sha256": "ef0b6a9fd632f3fc2eb901ce393c5d367e9f6605f056cd17cbe11588e893da60"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_245_NoGesture_None.npz",
+      "sha256": "de615ac159afd54b47768c0430315035c7372a8381da416aa490599175583909"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_251_NoGesture_None.npz",
+      "sha256": "99b849f584e25efaa9c6dda191d52f40309490d8964ea6d626f57c4b0265fc75"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_79_NoGesture_None.npz",
+      "sha256": "bcbcfdf54bef2b13036f256d0b41986c01614633291423380fb06e67f12cd3ab"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_57_NoGesture_None.npz",
+      "sha256": "738216d7de94c1e635d0db2e25bd35a0423920685abbee3b08d08125e2dfbd3d"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_63_NoGesture_None.npz",
+      "sha256": "d02c6c757060bf0a3e65beec4ea5c22c24576bbbcbb4a47416d5eb6148f87f19"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_266_NoGesture_None.npz",
+      "sha256": "3db5be5003af75289343963ee1761ad5e8f3c951125a4b1e91c66176fa0083b3"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_8_NoGesture_None.npz",
+      "sha256": "473df156ab24b87582a5c45b7f14e4eeb941e0eb9940b55191af09504992b820"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_149_NoGesture_None.npz",
+      "sha256": "4568f441ce055a85d5855abf1b3723e8bbcaf0cd316aed1ddb6eca20c1926f96"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_41_NoGesture_None.npz",
+      "sha256": "20f7292a54373a91b97382b9ed654dc48acd0e7ac668c6156687d7f38904c2d0"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_201_NoGesture_None.npz",
+      "sha256": "2ad82e8db7d560e079f662814a84643024b4506b98a84728deb47317c5b8a3c4"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_32_NoGesture_None.npz",
+      "sha256": "877ff44cefa61c25c01331422efaf89dfc73107d672f22e5d2fafae568fcd933"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_182_NoGesture_None.npz",
+      "sha256": "c25ef7181636779e8c8e63b9801567af3bad25cf76d3abad05ff1a39e925b230"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_148_NoGesture_None.npz",
+      "sha256": "e3c8a8ab2aa9ed48e843be8b464bfc0fc5b9b714d309f13364ff5de0699af7d6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_194_NoGesture_None.npz",
+      "sha256": "25f1212edf076ca424fd3fe9d6404c71ca9907589066d0af9ca1786e7618a968"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_271_NoGesture_None.npz",
+      "sha256": "57416141cecd93ff5128a3a0f8edda765dec2c3e7d9082e06009a66c44d9b60c"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_36_NoGesture_None.npz",
+      "sha256": "c8c70fa77ba949e786cd6ce6e575bde3a070128e9aeda100c8184bb807b98b76"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_159_NoGesture_None.npz",
+      "sha256": "88b63b86a989a2aa20cc0c69bed93810305c04f5ac002bf7fc73951357924c12"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_97_NoGesture_None.npz",
+      "sha256": "ed0d646a6ed6252ef30c062b1bed2f723f90668dc3dced30e86ef13be3ac6aac"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_126_NoGesture_None.npz",
+      "sha256": "17eb81253b5a41b40b2aa65a12cf4360f140b2d2f163bbedb4d7d542e5b6f9ac"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_253_NoGesture_None.npz",
+      "sha256": "7a00c5899454bd5d29b751522ff84a6672c65bf9e00841b5ac3f77109f754f88"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_22_NoGesture_None.npz",
+      "sha256": "3e930291ca25ce2500fb4a9647400fddc97049ea037fbbcec64c85d52f56c2ee"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_115_NoGesture_None.npz",
+      "sha256": "5fbba437cfd470859afec4eabdc7d16b7523abe112106c869b3abcef25c7ae4f"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_143_NoGesture_None.npz",
+      "sha256": "5281a8f16a28ba37964bb70ee0d8b270b6e766ebf7fc48ac37dea16826ed3ccd"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_68_NoGesture_None.npz",
+      "sha256": "6ad87ea60d71831c5bc6ea1b82c4bca4f27f751c541c37bfe353deb381f41550"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_236_NoGesture_None.npz",
+      "sha256": "85c6995d08c42f155cff13f9a4f02de317354ee4dc7b00b7ace0affd987d5b44"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_187_NoGesture_None.npz",
+      "sha256": "19d24c1a8147bad6db208aee478e43bfaeefd54e2076bfe65d17423aeeac9bd6"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_39_NoGesture_None.npz",
+      "sha256": "ff0af17b9c0e06ca70952f60d70169a98a914864c2fe0560b24cbc6314b77269"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_202_NoGesture_None.npz",
+      "sha256": "6884827d728abaeeb54b86b6e1e9b20f1060dd614bf2f6403b7baaac935ee6ff"
+    },
+    {
+      "path": "gesture_challenge_2026_release_v1_train/train/NoGesture/TedM3D_M3D_TED_EG2009_246_NoGesture_None.npz",
+      "sha256": "0c3e6b75c51820bbc4ab064b359d11bdf627b9a9f1ae2dffa0683d393c29d970"
+    }
+  ]
+}
