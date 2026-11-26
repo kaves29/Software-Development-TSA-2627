@@ -183,3 +183,184 @@ dialog h2 { margin: 0; }
 #recording-controls { margin: 1rem 0; padding: .8rem; border: 1px solid var(--line); border-radius: .75rem; background: #edf3eb; }
 #recording-status { margin: 0 0 .65rem; font-weight: 650; }
 #recording-review audio { max-width: 100%; }
+
+/* The home screen uses a quiet sage backdrop and a separate scrolling surface. */
+body { background: #e4ede5; }
+.shell { background: #e4ede5; min-height: 100vh; }
+.goal-hero {
+  min-height: 24.5rem;
+  padding: max(1.6rem, env(safe-area-inset-top)) 1.5rem 3.1rem;
+  background: #dce9dd;
+}
+.greeting { align-items: center; }
+.greeting h1 { color: #2b3040; font-size: 1.48rem; font-weight: 700; letter-spacing: -.035em; }
+.greeting p { color: #596c60; font-size: .82rem; margin-top: .3rem; }
+.profile {
+  flex-basis: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid #91aa98;
+  background: #eaf3e9;
+  color: #505475;
+}
+.profile:hover { background: #f2f7f0; }
+.goal-ring {
+  width: min(53vw, 12.5rem);
+  margin: 2rem auto 0;
+  gap: .35rem;
+  color: #343950;
+  background: #e9f3e9;
+  border: 1px solid #81aa91;
+  box-shadow: inset 0 0 0 .55rem #d5e9d8, 0 0 0 .4rem #d0e3d2;
+}
+.goal-ring:hover { background: #eff8ef; }
+.goal-ring .goal-label { color: #536a5b; font-weight: 600; font-size: .8rem; }
+.goal-ring strong { font-size: clamp(1.4rem, 6vw, 2.15rem); letter-spacing: -.045em; }
+#goal-caption { max-width: 10rem; color: #617368; font-weight: 500; line-height: 1.35; }
+.dashboard-sheet {
+  margin-top: -1.6rem;
+  padding: 1.45rem 1.2rem 2rem;
+  border: 0;
+  border-radius: 1.7rem 1.7rem 0 0;
+  background: #f0f5ee;
+  box-shadow: 0 -5px 20px #324e3c0a;
+}
+.sheet-heading { margin: 0 .15rem 1rem; }
+.sheet-heading h2 { margin: 0; font-size: 1.16rem; letter-spacing: -.02em; }
+.sheet-heading p { color: #68796c; margin: .25rem 0 0; font-size: .8rem; }
+.dashboard-row {
+  min-height: 4.65rem;
+  margin-bottom: .65rem;
+  padding: .75rem .9rem;
+  border: 1px solid #d0dfd2;
+  border-radius: .85rem;
+  background: #e4eee3;
+  color: #303749;
+  grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+}
+.dashboard-row > span:last-child { font-size: 1.5rem; color: #6f8373; }
+.dashboard-row strong { font-size: .96rem; }
+.dashboard-row small { font-size: .76rem; }
+.row-icon { height: 2.75rem; background: #d2e4d5; color: #466a56; }
+.dashboard-row:nth-of-type(2) .row-icon { background: #e0dced; color: #585479; }
+.dashboard-row:nth-of-type(3) .row-icon { background: #d1e7e0; color: #3e776a; }
+.progress-box {
+  margin-top: .85rem;
+  padding: 1rem;
+  background: #e3ece3;
+  border-color: #d0dfd2;
+}
+.progress-box summary { color: #303749; min-height: 2rem; }
+.stats { margin: .4rem 0 .75rem; }
+.stats div { background: #f0f5ee; }
+.stats dd { font-size: 1.4rem; }
+.bottom-nav {
+  bottom: calc(.65rem + env(safe-area-inset-bottom));
+  padding: .35rem;
+  background: #f9fbf7;
+  box-shadow: 0 5px 20px #21392b1a;
+}
+.bottom-nav a { min-height: 3.25rem; align-content: center; text-align: center; }
+.bottom-nav a span:first-child { font-size: 1.2rem; font-weight: 700; }
+.bottom-nav a span:last-child { font-size: clamp(.58rem, 2.5vw, .68rem); line-height: 1.1; }
+.dashboard-row, .goal-ring, .bottom-nav a { transition: transform 110ms ease-out; }
+.dashboard-row:active, .goal-ring:active, .bottom-nav a:active { transform: scale(.98); }
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-row, .goal-ring, .bottom-nav a { transition: none; }
+}
+
+/* The week view reflects locally recorded practice days. */
+:root { font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; }
+.goal-hero { min-height: 0; padding-bottom: 3rem; }
+.greeting h1 { font-weight: 600; letter-spacing: -.035em; }
+.goal-ring { width: min(56vw, 13.3rem); margin-top: 1.5rem; }
+.goal-ring strong { font-weight: 600; }
+.week-heading {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.65rem .15rem .6rem;
+  font-size: .72rem;
+  font-weight: 650;
+  color: #475e50;
+}
+.week-strip {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.week-day { display: grid; justify-items: center; gap: .35rem; color: #4f6657; }
+.week-dot {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #a1bca6;
+  border-radius: 50%;
+  font-size: .75rem;
+  font-weight: 700;
+}
+.week-day.practiced .week-dot { background: #4d816c; color: #fff; border-color: #4d816c; }
+.week-day.today .week-dot { outline: 2px solid #8c439b; outline-offset: 2px; }
+.week-day-name { font-size: .68rem; }
+.dashboard-sheet { margin-top: -1.4rem; padding-top: 1.25rem; }
+.sheet-heading h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; font-size: 1.28rem; }
+.dashboard-row strong, .progress-box summary { font-family: Georgia, "Times New Roman", serif; font-size: 1rem; font-weight: 600; }
+.dashboard-row { min-height: 4.5rem; }
+@media (max-width: 340px) {
+  .week-dot { width: 1.75rem; height: 1.75rem; }
+}
+
+/* A darker upper area gives the practice panel its own light surface. */
+.goal-hero {
+  background: linear-gradient(155deg, #505778 0%, #62768a 52%, #8ba999 100%);
+}
+.greeting h1, .greeting p, .week-heading, .week-day { color: #f4f6f3; }
+.greeting p, .week-heading { color: #e2e9e5; }
+.week-dot { border-color: #d5e6dd; }
+.week-day.practiced .week-dot { background: #e5f1e7; color: #31483d; border-color: #e5f1e7; }
+.week-day.today .week-dot { outline-color: #efc5f2; }
+.goal-ring {
+  background: #e3eee7;
+  border-color: #b4cfc3;
+  box-shadow: inset 0 0 0 .55rem #d1e5d9, 0 0 0 .4rem #b4cfc480;
+}
+.dashboard-sheet { background: #f8f9f6; min-height: 80vh; }
+.session-list { display: grid; gap: .65rem; }
+.session-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 4.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #dce4dd;
+  border-radius: .85rem;
+  background: #edf1ee;
+  color: #343747;
+  text-align: left;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.session-row:hover { background: #e1ebe4; }
+.session-arrow { flex-shrink: 0; color: #60756a; font-family: system-ui, sans-serif; font-size: 1.6rem; padding-left: .75rem; }
+.add-session {
+  width: 100%;
+  margin-top: .8rem;
+  min-height: 3.2rem;
+  border: 1px dashed #a2b6aa;
+  background: transparent;
+  color: #4b6658;
+}
+.add-session:hover { background: #e8f0e9; }
+.session-limit { color: #53645b; font-size: .8rem; text-align: center; }
+.delete-session { margin-right: auto; background: transparent; color: #784652; border-color: #c9afb3; }
+.delete-session:hover { background: #f2e5e7; color: #67333e; }
+@media (prefers-reduced-motion: no-preference) {
+  .session-row:active, .add-session:active { transform: scale(.98); }
+  .session-row, .add-session { transition: transform 110ms ease-out; }
+}
+.sheet-hint { color: #708277; text-align: center; font-size: 1.25rem; line-height: .7; margin: -.3rem 0 .8rem; }

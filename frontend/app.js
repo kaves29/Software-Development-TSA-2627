@@ -41,7 +41,7 @@ const skills = [
   ['Structure', 'Organize an answer into a beginning, example, and takeaway.']
 ];
 const storageKey = 'speakly-dashboard';
-let dashboard = { name: '', goal: '', practiceDays: [], focus: [], improved: [] };
+let dashboard = { name: '', goal: '', practiceDays: [], focus: [], improved: [], sessions: null };
 
 try {
   dashboard = { ...dashboard, ...JSON.parse(localStorage.getItem(storageKey)) };
@@ -67,6 +67,36 @@ function updateHome() {
   screen.querySelector('#greeting').textContent = 'Hello, ' + (name || 'speaker') + '!';
   screen.querySelector('#edit-profile').textContent = name ? [...name][0].toUpperCase() : 'S';
   screen.querySelector('#practice-days').textContent = dashboard.practiceDays.length;
+  const todayDate = new Date();
+  screen.querySelector('#today-date').textContent = new Intl.DateTimeFormat(undefined, {
+    weekday: 'long', month: 'long', day: 'numeric'
+  }).format(todayDate);
+  const weekStart = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate());
+  weekStart.setDate(weekStart.getDate() - (weekStart.getDay() + 6) % 7);
+  const weekStrip = screen.querySelector('#week-strip');
+  weekStrip.replaceChildren();
+  for (let offset = 0; offset < 7; offset++) {
+    const day = new Date(weekStart);
+    day.setDate(weekStart.getDate() + offset);
+    const dateKey = localDateKey(day);
+    const practiced = dashboard.practiceDays.includes(dateKey);
+    const isToday = dateKey === localDateKey(todayDate);
+    const item = document.createElement('li');
+    item.className = 'week-day';
+    if (practiced) item.classList.add('practiced');
+    if (isToday) item.classList.add('today');
+    const label = new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(day);
+    const fullDate = new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).format(day);
+    item.setAttribute('aria-label', fullDate + (isToday ? ', today' : '') + (practiced ? ', practiced' : ', no practice recorded'));
+    const circle = document.createElement('span');
+    circle.className = 'week-dot';
+    circle.textContent = practiced ? '✓' : String(day.getDate());
+    const dayName = document.createElement('span');
+    dayName.className = 'week-day-name';
+    dayName.textContent = label;
+    item.append(circle, dayName);
+    weekStrip.append(item);
+  }
   screen.querySelector('#improved-skills').textContent = dashboard.improved.length
     ? dashboard.improved.join(', ') + ' · Self-reported'
     : 'Track improvements in your roadmap.';
@@ -95,8 +125,103 @@ function bindDashboardDialog(dialogId, buttonId, fieldName, key) {
   });
 }
 
+function bindSessions() {
+  if (!Array.isArray(dashboard.sessions)) {
+    dashboard.sessions = [
+      { name: 'Session 1', type: '', description: '' },
+      { name: 'Session 2', type: '', description: '' }
+    ];
+    saveDashboard();
+  }
+
+  const list = screen.querySelector('#session-list');
+  const addButton = screen.querySelector('#add-session');
+  const limitMessage = screen.querySelector('#session-limit');
+  const dialog = screen.querySelector('#session-dialog');
+  const form = screen.querySelector('#session-form');
+  let editingIndex = -1;
+
+  function renderSessions() {
+    list.replaceChildren();
+    dashboard.sessions.forEach((session, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'session-row';
+      const name = document.createElement('span');
+      name.textContent = session.name;
+      const arrow = document.createElement('span');
+      arrow.className = 'session-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '›';
+      button.append(name, arrow);
+      button.addEventListener('click', () => openSession(index));
+      list.append(button);
+    });
+    addButton.hidden = dashboard.sessions.length >= 5;
+    limitMessage.hidden = dashboard.sessions.length < 5;
+  }
+
+  function openSession(index) {
+    editingIndex = index;
+    const session = dashboard.sessions[index];
+    form.elements.sessionName.value = session.name;
+    form.elements.sessionType.value = session.type;
+    form.elements.sessionDescription.value = session.description;
+    dialog.showModal();
+  }
+
+  function saveSession() {
+    if (editingIndex < 0) return;
+    const oldSession = dashboard.sessions[editingIndex];
+    dashboard.sessions[editingIndex] = {
+      name: form.elements.sessionName.value.trim() || oldSession.name,
+      type: form.elements.sessionType.value,
+      description: form.elements.sessionDescription.value.trim()
+    };
+    saveDashboard();
+    editingIndex = -1;
+    renderSessions();
+  }
+
+  addButton.addEventListener('click', () => {
+    if (dashboard.sessions.length >= 5) return;
+    dashboard.sessions.push({
+      name: 'Session ' + (dashboard.sessions.length + 1),
+      type: '',
+      description: ''
+    });
+    saveDashboard();
+    renderSessions();
+    openSession(dashboard.sessions.length - 1);
+  });
+
+  dialog.addEventListener('close', saveSession);
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close();
+  });
+  form.addEventListener('submit', event => {
+    if (!form.elements.sessionName.value.trim()) {
+      event.preventDefault();
+      form.elements.sessionName.setCustomValidity('Enter a session name.');
+      form.elements.sessionName.reportValidity();
+    }
+  });
+  form.elements.sessionName.addEventListener('input', () => {
+    form.elements.sessionName.setCustomValidity('');
+  });
+  screen.querySelector('#delete-session').addEventListener('click', () => {
+    dashboard.sessions.splice(editingIndex, 1);
+    editingIndex = -1;
+    saveDashboard();
+    dialog.close();
+    renderSessions();
+  });
+  renderSessions();
+}
+
 function bindHome() {
   updateHome();
+  bindSessions();
   bindDashboardDialog('#goal-dialog', '#edit-goal', 'target', 'goal');
   bindDashboardDialog('#profile-dialog', '#edit-profile', 'displayName', 'name');
 }

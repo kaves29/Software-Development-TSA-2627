@@ -11,10 +11,10 @@
   <div class="shell">
     <main id="screen" tabindex="-1"></main>
     <nav class="bottom-nav" aria-label="Main navigation">
-      <a href="#home"><span aria-hidden="true">⌂</span>Home</a>
-      <a href="#presentation"><span aria-hidden="true">▤</span>Presentation</a>
-      <a href="#interview"><span aria-hidden="true">♧</span>Interview</a>
-      <a href="#roadmap"><span aria-hidden="true">◇</span>Roadmap</a>
+      <a href="#home"><span aria-hidden="true">⌂</span><span>Home</span></a>
+      <a href="#presentation"><span aria-hidden="true">▤</span><span>Presentation</span></a>
+      <a href="#interview"><span aria-hidden="true">♧</span><span>Interview</span></a>
+      <a href="#roadmap"><span aria-hidden="true">◇</span><span>Roadmap</span></a>
     </nav>
   </div>
   <template id="home">
@@ -24,28 +24,48 @@
         <button class="profile" id="edit-profile" type="button" aria-label="Edit dashboard name">S</button>
       </div>
       <button class="goal-ring" id="edit-goal" type="button">
-        <span>Goal countdown</span>
+        <span class="goal-label">Your goal</span>
         <strong id="goal-value">Set a date</strong>
         <span id="goal-caption">Choose your target day</span>
       </button>
+      <div class="week-heading"><span>This week</span><span>Practice days</span></div>
+      <ol class="week-strip" id="week-strip" aria-label="Practice days this week"></ol>
     </section>
     <section class="dashboard-sheet" aria-labelledby="practice-heading">
-      <span class="sheet-handle" aria-hidden="true"></span>
-      <h2 id="practice-heading">Your practice</h2>
-      <a class="dashboard-row" href="#presentation"><span class="row-icon" aria-hidden="true">▤</span><span><strong>Presentation</strong><small>Set up a rehearsal</small></span><span aria-hidden="true">›</span></a>
-      <a class="dashboard-row" href="#interview"><span class="row-icon" aria-hidden="true">♧</span><span><strong>Interview</strong><small>Try a mock question</small></span><span aria-hidden="true">›</span></a>
-      <a class="dashboard-row" href="#roadmap"><span class="row-icon" aria-hidden="true">◇</span><span><strong>Roadmap</strong><small>Choose skills to focus on</small></span><span aria-hidden="true">›</span></a>
+      <div class="sheet-hint" aria-hidden="true">⌃</div>
+      <div class="sheet-heading"><div><h2 id="practice-heading">Your practice</h2><p id="today-date"></p></div></div>
+      <div id="session-list" class="session-list"></div>
+      <button id="add-session" class="add-session" type="button">＋ Add another session</button>
+      <p id="session-limit" class="session-limit" hidden>Maximum of five sessions</p>
       <details class="progress-box" open>
         <summary>Progress</summary>
         <dl class="stats">
           <div><dt>Days practiced</dt><dd id="practice-days">0</dd></div>
           <div><dt>Saved recordings</dt><dd>0</dd></div>
         </dl>
-        <p class="note">Presentation practice can record audio in your browser. Interview practice uses a timer.</p>
         <h3>Skills you’ve improved</h3>
         <p id="improved-skills"></p>
       </details>
     </section>
+    <dialog id="session-dialog" aria-labelledby="session-dialog-title">
+      <form method="dialog" id="session-form">
+        <h2 id="session-dialog-title">Edit session</h2>
+        <label>Session name <input name="sessionName" maxlength="80" required></label>
+        <label>Practice type
+          <select name="sessionType">
+            <option value="">Choose a type</option>
+            <option value="presentation">Presentation</option>
+            <option value="interview">Interview</option>
+            <option value="roadmap">Roadmap</option>
+          </select>
+        </label>
+        <label>Description <textarea name="sessionDescription" rows="3" maxlength="500"></textarea></label>
+        <div class="dialog-actions">
+          <button type="button" id="delete-session" class="delete-session">Delete</button>
+          <button value="save">Done</button>
+        </div>
+      </form>
+    </dialog>
     <dialog id="goal-dialog">
       <form method="dialog">
         <h2>Set your goal date</h2>
