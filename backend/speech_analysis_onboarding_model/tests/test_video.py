@@ -69,3 +69,15 @@ class ProximityReturnTests(unittest.TestCase):
                 frames = [{'time_s': i / 5, 'fingertip_near_face': state}
                           for i, state in enumerate(states)]
                 self.assertEqual(observed_proximity_returns(frames, proximity_intervals(frames)), expected)
+
+
+class PoseTimelineTest(unittest.TestCase):
+    def test_preserves_timestamps_and_tracking_loss(self):
+        from types import SimpleNamespace
+        from speech_analysis_onboarding_model.video import pose_timeline
+
+        point = SimpleNamespace(x=.1, y=.2, z=.3, visibility=.8, presence=.9)
+        timeline = pose_timeline([[point], None, [point]], fps=5)
+        self.assertEqual([row['time_s'] for row in timeline], [0, .2, .4])
+        self.assertIsNone(timeline[1]['landmarks'])
+        self.assertEqual(timeline[2]['landmarks'][0]['visibility'], .8)

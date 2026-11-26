@@ -154,7 +154,19 @@ def background_shift(previous, current, pose):
     return float(np.median(np.linalg.norm(projected - background, axis=1)))
 
 
-def analyze_video(path, model, *, hand_model=None, face_model=None, max_seconds=240):
+def pose_timeline(poses, fps=FPS):
+    """Return timestamped pose landmarks for offline validation."""
+    return [
+        {'time_s': index / fps, 'landmarks': (
+            [{'x': float(point.x), 'y': float(point.y), 'z': float(point.z),
+              'visibility': float(point.visibility), 'presence': float(point.presence)}
+             for point in pose] if pose is not None else None)}
+        for index, pose in enumerate(poses)
+    ]
+
+
+def analyze_video(path, model, *, hand_model=None, face_model=None, max_seconds=240,
+                  include_pose_timeline=False):
     import mediapipe as mp
 
     command = [
@@ -234,9 +246,12 @@ def analyze_video(path, model, *, hand_model=None, face_model=None, max_seconds=
             features['hand_near_face'] = {'status': 'experimental', 'value': round(sum(usable) / len(usable), 4),
                 'method': 'fingertip proximity in image plane', 'valid_frames': len(usable),
                 'intervals': intervals, 'observed_returns': observed_proximity_returns(detail, intervals)}
-    return {'schema_version': 1, 'quality': {'frames': count,
+    result = {'schema_version': 1, 'quality': {'frames': count,
             'pose_frames': sum(p is not None for p in poses), 'camera_motion': camera_motion,
             'camera_tracked_transitions': len(shifts)}, 'features': features, 'landmark_evidence': detail}
+    if include_pose_timeline:
+        result['pose_timeline'] = pose_timeline(poses)
+    return result
 
 
 if __name__ == '__main__':
@@ -247,10 +262,13 @@ if __name__ == '__main__':
     parser.add_argument('--face-model', type=Path)
     parser.add_argument('--max-seconds', type=int, choices=range(1, 3601), metavar='1–3600',
                         default=240, help='Override the recording limit for offline benchmarks')
+    parser.add_argument('--pose-timeline', action='store_true',
+                        help='Include timestamped pose landmarks for offline validation')
     args = parser.parse_args()
     try:
         result = analyze_video(args.video, args.pose_model, hand_model=args.hand_model,
-                               face_model=args.face_model, max_seconds=args.max_seconds)
+                               face_model=args.face_model, max_seconds=args.max_seconds,
+                               include_pose_timeline=args.pose_timeline)
         print(json.dumps(result, allow_nan=False))
     except (OSError, ValueError, RuntimeError, ImportError, subprocess.SubprocessError) as exc:
         parser.exit(1, f'Video analysis failed: {type(exc).__name__}\n')
