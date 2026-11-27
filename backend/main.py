@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from backend.onboarding import InitialAnswers, FollowUpResponse, ProviderUnavailable, generate_followups
+from backend.recordings import router as recording_router
 
 
 class Question(BaseModel):
@@ -20,6 +21,7 @@ class QuestionSet(BaseModel):
 
 
 app = FastAPI(title="Speakly onboarding API", version="0.1.0")
+app.include_router(recording_router)
 
 QUESTIONS = QuestionSet(
     version="1",

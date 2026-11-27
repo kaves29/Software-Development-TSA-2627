@@ -42,3 +42,13 @@ Set `OPENAI_API_KEY` securely in the server environment to generate follow-ups. 
 Invalid answers return HTTP 422. Missing provider configuration or a provider failure returns HTTP 503 with a safe error. The service does not save answers. A client should allow a retry if generation fails. The model output is validated for two distinct questions with distinct choices, including Other.
 
 For development tests, install pytest and httpx into the virtual environment and run `python -m pytest backend/tests -q`. Tests use a simulated provider and do not need an API key. Profile confirmation, the researched activity catalog, and roadmap generation remain to be built.
+
+## Analyze an onboarding recording
+
+POST /v1/onboarding/recordings/analyze accepts multipart form data with `recording` (an audio file or video file containing audio), `sample_id` (a distinct ID chosen by the client), `prompt` (the speaking prompt), and `media_type` (`audio` or `video`). Submit each of the two or three samples separately. The response has the form `{"id": "sample-1", "result": {...}}`, matching one entry in the existing roadmap prototype's `samples` list. The client keeps the responses for the later handoff.
+
+The server temporarily writes the recording while analyzing it and removes the temporary file after the request, including on failure. Recordings are limited to 50 MB and the audio pipeline accepts up to 240 seconds. Errors return 413 for oversized recordings, 422 for empty or unprocessable recordings, and 503 when analysis is unavailable.
+
+Recording analysis needs ffmpeg and the dependencies in `speech_analysis/requirements.txt`, in addition to the main backend requirements. Set `SPEAKLY_MODEL_CACHE` to a writable model cache if needed. The first run may download upstream models. `SPEAKLY_WHISPER_MODEL` selects the Whisper model and defaults to `small.en`. To use the research filler classifier, securely provision its checkpoint outside Git and set `SPEAKLY_FILLER_HEAD` to its path. Without that checkpoint, the audio pipeline still returns its other available measurements. Video additionally needs `speech_analysis/requirements-video.txt` and `SPEAKLY_POSE_MODEL` pointing to a locally provisioned MediaPipe pose model. The video path currently uses pose analysis only.
+
+The trained filler checkpoint and video analysis remain experimental. Mock-based API tests verify data flow and cleanup, but a real recording and model run has not yet been verified through this endpoint. Results should be presented as limited observations, not diagnoses.
