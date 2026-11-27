@@ -19,3 +19,16 @@ def test_one_handed_comparison_counts_abstentions_and_excludes_both():
     assert result['by_hand']['LH']['labeled'] == 2
     with pytest.raises(ValueError):
         score([row('LH', -.1, .2)])
+
+
+def test_two_hand_proxy_counts_positive_abstentions_as_misses():
+    from speech_analysis.evaluate_gesres_hand import score_both
+
+    result = score_both([row('both', .4, .3), row('LH', .5, .4),
+                         row('RH', .1, .4), row('both', None, .2), row('RH', None, .2)])
+    assert (result['tp'], result['fp'], result['fn'], result['tn']) == (1, 1, 1, 1)
+    assert result['abstained'] == 2
+    assert result['coverage'] == .6
+    assert result['f1'] == .5
+    with pytest.raises(ValueError):
+        score_both([row('both', float('nan'), .2)])

@@ -41,12 +41,47 @@ def score(rows):
             'note': 'Annotated gesture hand and greater wrist motion are different concepts; exploratory comparison only.'}
 
 
+def score_both(rows):
+    """Compare similar wrist-motion amounts with two-handed gesture annotations."""
+    tp = fp = fn = tn = abstained = total = 0
+    for row in rows:
+        label = row['hand_label']
+        if label not in ('LH', 'RH', 'both'):
+            continue
+        total += 1
+        left = row['left_hand_motion']['value']
+        right = row['right_hand_motion']['value']
+        for value in (left, right):
+            if value is not None and (type(value) not in (int, float) or not math.isfinite(value) or value < 0):
+                raise ValueError('hand motion must be nonnegative or null')
+        if left is None or right is None or max(left, right) == 0:
+            abstained += 1
+            fn += label == 'both'
+            continue
+        predicted = min(left, right) / max(left, right) >= .5
+        if label == 'both':
+            tp += predicted
+            fn += not predicted
+        elif predicted:
+            fp += 1
+        else:
+            tn += 1
+    if not total:
+        raise ValueError('no labeled clips')
+    denominator = 2 * tp + fp + fn
+    return {'labeled_clips': total, 'tp': tp, 'fp': fp, 'fn': fn, 'tn': tn,
+            'abstained': abstained, 'coverage': (total - abstained) / total,
+            'f1': 2 * tp / denominator if denominator else None,
+            'note': 'Exploratory two-hand proxy; positive abstentions count as misses, negative abstentions excluded.'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('observations', type=Path)
     args = parser.parse_args()
     report = json.loads(args.observations.read_text())
-    print(json.dumps({'fps': report['fps'], **score(report['results'])}, indent=2))
+    print(json.dumps({'fps': report['fps'], **score(report['results']),
+                      'both_hand_proxy': score_both(report['results'])}, indent=2))
 
 
 if __name__ == '__main__':
