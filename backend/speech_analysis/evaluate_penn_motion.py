@@ -70,6 +70,31 @@ def interpolate_landmarks(poses):
     return result
 
 
+def left_hand_motion_candidate(poses):
+    """Measure wrist displacement with one shoulder scale per frame pair."""
+    previous = None
+    movements = []
+    for pose in poses:
+        current = None
+        if pose is not None:
+            a, b, wrist = (pose[index] for index in (11, 12, 15))
+            if all(min(joint.visibility, joint.presence) >= threshold
+                   for joint, threshold in ((a, .65), (b, .65), (wrist, .50))):
+                left, right, hand = (np.array((joint.x, joint.y)) for joint in (a, b, wrist))
+                width = np.linalg.norm(left - right)
+                if width >= .05:
+                    current = hand - (left + right) / 2, width
+        if current is not None and previous is not None:
+            offset, width = current
+            prior_offset, prior_width = previous
+            movements.append(np.linalg.norm(offset - prior_offset) / ((width + prior_width) / 2))
+        previous = current
+    if len(movements) < 3:
+        return None
+    # Freeze the linear calibration selected on Penn Action's training subset.
+    return float(.8 * np.median(movements) + .02)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('dataset', type=Path, help='Directory with Penn Action labels/ and frames/')
@@ -90,6 +115,7 @@ def main():
     ids = sorted(random.Random(args.seed).sample(range(1, 2327), args.sample_count))
     rows = []
     interpolated_rows = []
+    left_hand_rows = []
     total_frames = positive_frames = matched_frames = 0
     for number in ids:
         clip_id = f'{number:04d}'
@@ -119,6 +145,9 @@ def main():
         rows.append({'id': clip_id, 'speaker': clip_id, 'duration_s': len(files) / FPS,
                      'features': observations(predicted), 'reference': target})
         interpolated_rows.append({**rows[-1], 'features': observations(interpolate_landmarks(predicted))})
+        left_hand_rows.append({**rows[-1], 'features': {
+            'left_hand_motion': {'value': left_hand_motion_candidate(predicted)},
+        }})
 
     if not rows:
         parser.error('no held-out clips in the sampled subset')
@@ -134,6 +163,7 @@ def main():
         'pose_frame_agreement': matched_frames / total_frames,
         'features': motion_scores(rows),
         'interpolated_features': motion_scores(interpolated_rows),
+        'left_hand_motion_candidate': benchmark(left_hand_rows, TOLERANCES)['features']['left_hand_motion'],
     }, indent=2, allow_nan=False))
 
 
