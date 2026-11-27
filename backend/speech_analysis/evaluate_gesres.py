@@ -45,7 +45,7 @@ def main():
                             'rapid_motion': output['features']['rapid_gesture'],
                             'frames': output['quality']['frames'],
                             'pose_frames': output['quality']['pose_frames']})
-    args.output.write_text(json.dumps({'fps': args.fps, 'results': results}, indent=2) + '\n')
+    args.output.write_text(json.dumps({'video_id': args.video_id, 'fps': args.fps, 'results': results}, indent=2) + '\n')
 
 
 if __name__ == '__main__':
