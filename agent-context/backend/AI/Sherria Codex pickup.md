@@ -1,6 +1,6 @@
 # Sherria Codex pickup
 
-**Updated:** 2026-11-25
+**Updated:** 2026-11-27
 **Purpose:** Let a new Codex session resume the Speakly AI/audio-model work with the evidence and limits clear. This is a navigation and status document; the linked project notes remain the detailed source of truth.
 
 ## Current onboarding integration (2026-11-27)
@@ -45,6 +45,8 @@ The current GitHub `main` branch also contains a browser-based practice prototyp
 ### Audio
 
 The analysis pipeline reuses speech decoding/transcription and timing, Silero VAD speech regions, and acoustic/transcript measurements. The experimental filler detector is a frame classifier: frozen `microsoft/wavlm-base-plus` representations feed a small three-class head (`other`, `um`, `uh`). The four-second checkpoint uses 20 ms frame labels and overlapping windows at inference. This is a small trained head over a large upstream encoder, not a newly trained LLM or a fully fine-tuned WavLM.
+
+An earlier AMI pilot is documented in [audio-analysis.md](audio-analysis.md); its five labeled measures were below .50 and 30 of 35 listed rows lacked references. Later experiments and the current integration are documented in the dated entries there. AMI adaptation did not improve pooled filler F1. One audio-validation kernel has no captured cell outputs or metrics, and a separate adaptation attempt failed because Kaggle had no GPU attached. Check the dated audio note before proposing another training recipe.
 
 Other reported values include speaking rate, pauses, changes in rate, pitch/energy variation, repetitions/revisions, and transcript organization/content observations. Some are direct measurements; others are heuristics marked `experimental`. Do not turn these into weakness labels without reference data and a defensible threshold. The repeat/repair head has poor evidence and is not a validated detector.
 
@@ -125,7 +127,7 @@ Composio is not needed for the current Kaggle workflow and is not connected here
 1. Read the project guides above and inspect `git status`; preserve any current edits. Confirm you are in `kaves29/Software-Development-TSA-2627` and check the `main` branch before making new changes.
 2. Read the latest Kaggle log/output and compare with `audio-analysis.md`. Reproduce the SHA-256 before using a downloaded checkpoint. Do not reuse the test set to tune thresholds.
 3. Set up the project dependencies from the relevant `requirements*.txt` in an isolated environment. Run the tests with `PYTHONPATH=backend`; missing Torch, PyArrow, and OpenCV currently prevent a complete suite in this environment.
-4. Prioritize a small, speaker-disjoint, exhaustively reviewed set of continuous recordings. Candidate annotation lists are not exhaustive; never turn an unmarked interval into a hard negative without review. Preserve separate validation and untouched test data.
+4. Prioritize a small, speaker-disjoint, exhaustively reviewed set of continuous recordings. Candidate annotation lists are not exhaustive; never turn an unmarked interval into a hard negative without review. Preserve separate validation and untouched test data. The current AMI development tracks have already been used for model and threshold investigation; reserve new speakers for future validation.
 5. Improve event-level filler evaluation with frozen validation thresholds, more episodes and error review before another expensive training run. Report event precision/recall/F1, false alarms per minute, timing error, label coverage, and recording quality separately.
 6. Do not claim 15 audio or 15 video weaknesses based on field count. For each proposed behavior, record its operational definition, evidence source, labels, coverage, metric, result, and limitation. Keep unsupported behaviors experimental or unavailable.
 7. Video needs labeled speaking samples before a trained classifier or an accuracy claim. Movement is observable evidence; it cannot identify nervousness.
