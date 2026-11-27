@@ -22,3 +22,11 @@ def test_verbatim_tags_preserve_filler_timestamps_and_exclude_nonwords():
 def test_verbatim_adapter_rejects_missing_timing():
     with pytest.raises(ValueError, match='timestamps'):
         analyze_timestamped_words(6, [(0, 6)], [word('[UM]', None, None)])
+
+
+def test_verbatim_adapter_skips_collapsed_alignment_without_losing_valid_events():
+    with pytest.warns(RuntimeWarning, match='1 zero-duration'):
+        result = analyze_timestamped_words(100, [(0, 100)], [
+            word('[UM]', 66.8, 66.8), word('[UH]', 67, 67.3),
+        ])
+    assert result['fillers']['value'] == [{'text': 'uh', 'start_s': 67, 'end_s': 67.3}]

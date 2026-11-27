@@ -2,6 +2,7 @@
 
 import math
 import re
+import warnings
 
 from .analysis import analyze_features
 
@@ -12,6 +13,7 @@ TAG = re.compile(r'\s*\[([^\[\]]+)\][.!?,;:]*\s*')
 def analyze_timestamped_words(duration, speech, words, targets=()):
     """Use timed word objects from a backend such as CrisperWhisper."""
     normalized = []
+    collapsed = 0
     for word in words:
         text = word.word.strip()
         tag = TAG.fullmatch(text)
@@ -21,8 +23,13 @@ def analyze_timestamped_words(duration, speech, words, targets=()):
                 continue
         start, end = word.start, word.end
         if (not all(isinstance(t, (int, float)) and math.isfinite(t) for t in (start, end))
-                or not 0 <= start < end <= duration):
+                or not 0 <= start <= end <= duration):
             raise ValueError(f'Invalid verbatim word timestamps: {start!r}, {end!r}')
+        if start == end:
+            collapsed += 1
+            continue
         normalized.append((text, start, end))
+    if collapsed:
+        warnings.warn(f'Skipped {collapsed} zero-duration verbatim words', RuntimeWarning, stacklevel=2)
     normalized.sort(key=lambda word: word[1])
     return analyze_features(duration, speech, normalized or None, targets)
