@@ -1,8 +1,28 @@
 # English audio analysis and filler research
 
-## Current status (2026-11-25)
+## Current status (2026-11-27)
 
 The prototype has a Python audio/video CLI, multi-recording aggregation, a stateless roadmap API, training/evaluation code, and a private Kaggle notebook. The filler model trained on two Tesla T4s and its output is retrievable from Kaggle. This remains research work: general speaking-behavior accuracy is not established, the 80% target has not been shown across recordings, video observations lack labeled speaking-video evaluation, and the disfluency head is not a validated detector. The package's 15 audio fields and video measurements must not be described as 15 validated diagnoses or model capabilities. Read [Sherria Codex pickup](Sherria%20Codex%20pickup.md) for the current handoff and [onboarding roadmap plan](onboarding-roadmap-plan.md) for product scope.
+
+### Latest Kaggle review (2026-11-27)
+
+Three private Kaggle runs were inspected. The AMI adaptation run completed and produced metrics; the AMI verbatim pilot completed and produced metrics; a newer AMI audio-validation kernel reports `COMPLETE` but its downloaded notebook has no executed-cell outputs and its output contains only the notebook-conversion log, so its 24-setting decoder sweep is **not available and must not be treated as run evidence**. Its metadata confirms a T4 and internet were enabled. Another adaptation attempt, `notebookee544df586`, failed before training because `torch.cuda.is_available()` was false and the notebook raised “Enable a GPU accelerator in Kaggle.” Enable a Kaggle GPU before rerunning that notebook; no model code defect was identified from this failure.
+
+The verbatim pilot uses CrisperWhisper small on two AMI development headset tracks (two speakers, about 2,289 seconds total). With the revised 0.50 target, only five of 35 report rows have labeled references; the other 30 are `missing_reference`, not failed model scores. All five measured rows are below target:
+
+| Behavior | Metric | Result | Details |
+| --- | --- | ---: | --- |
+| Inter-segment pauses | Event F1 | 0.141 | 52/595 events matched to 144 references; 14.23 false alarms/minute |
+| `um` | Event F1 | 0.000 | 0/52 events matched; only 10 references across both tracks (one track has no positive `um`) |
+| `uh` | Event F1 | 0.280 | 45/378 matched; 69 references |
+| Speaking rate | Within ±10 WPM | 0.000 | Mean absolute recording error 78 WPM |
+| Rate changes by thirds | Within ±15 WPM | 0.000 | Mean absolute vector error 116.4 WPM |
+
+Per-recording errors are uneven: speaking-rate error is 121.3 WPM on IS1008a.D and 34.7 WPM on TS3004a.A. The pilot skipped 28 and 43 zero-duration ASR words on the respective tracks and logged missing-attention-mask warnings. Those are investigation clues, not proof that they caused the rate errors. The pauses output currently includes every gap between Silero speech regions, while the AMI reference uses gaps between manually annotated speaker segments; this operational mismatch may contribute to the high false-alarm count. Do not tune to this reference until the event definition is reviewed and both reference and prediction semantics are confirmed.
+
+The separate WavLM AMI adaptation run evaluated 79 filler references on the same two development recordings. Pooled event F1 was 0.291 for the original checkpoint at threshold .60 (P=.206, R=.494, 3.93 false alarms/min), versus .251 for the adapted head at .60 (P=.229, R=.278, 1.94 false alarms/min). At .80, original F1=.246 and adapted F1=.222. Adaptation did not improve pooled F1; it traded recall for fewer false alarms. Class-level results also conflict: adaptation modestly improved `um` F1 but reduced `uh` F1. The adaptation data and evaluation cover only two development speakers, so these are diagnostic pilot results, not a general accuracy claim.
+
+The high-value next action is to make the Kaggle validation notebook preserve `metrics.json` and run metadata in a reliably downloadable output location, then rerun with GPU explicitly enabled where required. Before new model training, review raw false positives and align behavior/reference definitions. For speaking rate, compare ASR words and timings against manual AMI words and report WER, zero-duration rate, valid-word coverage, and rate error per speaker. For pauses, test a declared duration filter on development only after confirming pause semantics. Any chosen thresholds need fresh speaker-disjoint validation; these two AMI tracks are already development data and cannot establish final generalization.
 
 The `session.py` combiner preserves per-sample observations and missing evidence; it reports coverage, not agreement or weakness. Energy spread is relative within a recording and does not measure absolute vocal projection.
 
