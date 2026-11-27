@@ -8,6 +8,7 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 
 | Path | Purpose |
 | --- | --- |
+| `../../backend/README.md` | Backend startup and current API endpoints. |
 | `md/` | Future topic notes; update existing notes before creating new ones. Currently empty. |
 | `AI/master-implementation-prompt.md` | Owner-approved scope and detailed handoff prompt for the stateless AI onboarding and personalized roadmap prototype. |
 | `AI/second-review-and-fix-prompt.md` | Follow-up instructions for independently auditing, testing, and fixing the prototype against the master specification. |

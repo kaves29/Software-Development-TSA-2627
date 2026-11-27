@@ -54,3 +54,7 @@ Update this file when the overall state or an unresolved decision changes. Store
 - 2026-11-25: Reworked Home into one phone dashboard based on the user's final stacked layout. Added a sticky goal area with an editable date and display name, an overlapping practice panel, and a fixed Home, Presentation, Interview, Roadmap tab bar. The active tab purple was visually matched to the supplied reference.
 - Added a lightweight Roadmap with local focus selections and self-reported skill improvements. Progress counts distinct device-local dates on which a rehearsal was finished. Recording count stays at zero while capture is unavailable. Browser storage holds preferences and practice dates without an account or backend.
 - Verified in Chromium at 360 × 640: fixed nav during scroll, sheet overlap, no horizontal overflow, date persistence after reload, display name, Roadmap navigation and improvement display, both rehearsal paths, and same-day deduplication. No uncaught page errors.
+
+## Backend implementation progress
+
+- 2026-11-27: Started the approved FastAPI onboarding prototype. Added a health endpoint and versioned initial-question endpoint. Adaptive follow-ups, profile confirmation, researched activity catalog, roadmap generation, and OpenAI integration remain to be built.
