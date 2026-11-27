@@ -30,3 +30,15 @@ def test_verbatim_adapter_skips_collapsed_alignment_without_losing_valid_events(
             word('[UM]', 66.8, 66.8), word('[UH]', 67, 67.3),
         ])
     assert result['fillers']['value'] == [{'text': 'uh', 'start_s': 67, 'end_s': 67.3}]
+
+
+def test_level_gate_discards_quiet_events_and_keeps_abstentions():
+    import numpy as np
+
+    from speech_analysis.verbatim import level_gated_fillers
+
+    audio = np.concatenate([np.full(1000, .01), np.ones(1000)])
+    quiet = {'text': 'uh', 'start_s': .2, 'end_s': .4}
+    loud = {'text': 'um', 'start_s': 1.2, 'end_s': 1.4}
+    assert level_gated_fillers([quiet, loud], audio, 1000) == [loud]
+    assert level_gated_fillers(None, audio, 1000) is None

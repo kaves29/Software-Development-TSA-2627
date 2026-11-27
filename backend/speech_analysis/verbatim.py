@@ -33,3 +33,25 @@ def analyze_timestamped_words(duration, speech, words, targets=()):
         warnings.warn(f'Skipped {collapsed} zero-duration verbatim words', RuntimeWarning, stacklevel=2)
     normalized.sort(key=lambda word: word[1])
     return analyze_features(duration, speech, normalized or None, targets)
+
+
+def level_gated_fillers(events, waveform, sample_rate):
+    """Research filter for low-level detections on a close-miked track."""
+    import numpy as np
+
+    if events is None:
+        return None
+    window = sample_rate // 10
+    frame_count = len(waveform) // window
+    if not frame_count:
+        return []
+    frames = waveform[:frame_count * window].reshape(frame_count, window)
+    cutoff = np.quantile(np.mean(frames ** 2, axis=1), .95) * 10 ** (-12 / 10)
+    kept = []
+    for event in events:
+        start = round(event['start_s'] * sample_rate)
+        end = round(event['end_s'] * sample_rate)
+        clip = waveform[start:end]
+        if len(clip) and np.mean(clip ** 2) >= cutoff:
+            kept.append(event)
+    return kept

@@ -9,7 +9,7 @@ from zipfile import ZipFile
 from .ami_references import segment_gap_references, word_references
 from .benchmark_features import benchmark
 from .evaluate import recording_event_metrics
-from .verbatim import analyze_timestamped_words
+from .verbatim import analyze_timestamped_words, level_gated_fillers
 
 
 def main():
@@ -35,6 +35,7 @@ def main():
     vad = load_silero_vad()
     rows = []
     diagnostics = []
+    gated_rows = []
     longer_pause_rows = []
     tolerances = {'speaking_rate': 10, 'rate_changes': 15}
     with ZipFile(args.annotations) as archive:
@@ -77,10 +78,15 @@ def main():
             })
             rows.append({'id': path.stem, 'speaker': speakers[path.stem], 'duration_s': duration,
                          'features': features, 'reference': ref})
+            gated = {'fillers': {**features['fillers'],
+                                 'value': level_gated_fillers(detected, audio, sample_rate)}}
+            gated_rows.append({**rows[-1], 'features': gated,
+                               'reference': {label: ref[label] for label in ('um', 'uh')}})
             report = {
                 'model': args.model,
                 'complete': len(rows) == len(args.recordings),
                 'pooled': benchmark(rows, tolerances),
+                'level_gated_filler_candidate': benchmark(gated_rows, tolerances),
                 'longer_silence_pause_candidate': recording_event_metrics(longer_pause_rows),
                 'untyped_filler_diagnostic': recording_event_metrics(diagnostics),
                 'per_recording': {
