@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.ndimage import gaussian_filter1d
-from scipy.signal import find_peaks
+from scipy.signal import correlate, find_peaks
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("data_dir", type=Path)
@@ -21,13 +21,16 @@ parser.add_argument(
     action="store_true",
     help="Require repeated extrema of the same polarity at comparable amplitudes",
 )
+parser.add_argument("--autocorrelation", action="store_true")
 args = parser.parse_args()
-if args.fixed and args.cycle_consistency:
+if args.fixed and (args.cycle_consistency or args.autocorrelation):
     parser.error("the fixed baseline uses the original extrema count")
 root = args.data_dir
 labels = json.loads((root / "educator_labels.json").read_text())
 tracks = np.load(root / "educator_tracks.npz", allow_pickle=False)
 grid = list(product([1, 2, 4], [0.08, 0.15, 0.25, 0.4], [2, 3, 4, 5]))
+if args.autocorrelation:
+    grid = list(product([1, 2, 4], [0.08, 0.15, 0.25, 0.4], [0.4, 0.55, 0.7, 0.85]))
 rows = []
 for k, v in sorted(labels.items(), key=lambda x: int(x[0])):
     q = tracks[k]
@@ -57,6 +60,27 @@ for k, v in sorted(labels.items(), key=lambda x: int(x[0])):
         counts = []
         for curve in curves:
             smoothed = gaussian_filter1d(curve, smooth)
+            if args.autocorrelation:
+                # A repeated trajectory should resemble itself after a nontrivial lag.
+                centered = smoothed - np.linspace(smoothed[0], smoothed[-1], len(smoothed))
+                if np.ptp(centered) < prom:
+                    counts.append(0.0)
+                    continue
+                size = len(centered)
+                lags = np.arange(4, size // 2 + 1)
+                count = size - lags
+                sums = np.r_[0, np.cumsum(centered)]
+                squared = np.r_[0, np.cumsum(centered ** 2)]
+                left_sum, right_sum = sums[count], sums[-1] - sums[lags]
+                left_var = squared[count] - left_sum ** 2 / count
+                right_var = squared[-1] - squared[lags] - right_sum ** 2 / count
+                covariance = correlate(centered, centered)[size - 1 + lags]
+                covariance -= left_sum * right_sum / count
+                norm = np.sqrt(np.maximum(left_var, 0) * np.maximum(right_var, 0))
+                correlation = np.divide(covariance, norm, out=np.zeros_like(norm), where=norm > 0)
+                peaks_in_lag = find_peaks(correlation)[0]
+                counts.append(max((correlation[i] for i in peaks_in_lag), default=0.0))
+                continue
             peaks = [find_peaks(sign * smoothed, prominence=prom, distance=3)[0]
                      for sign in (1, -1)]
             if not args.cycle_consistency:
