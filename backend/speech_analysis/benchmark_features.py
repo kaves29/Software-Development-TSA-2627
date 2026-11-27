@@ -9,6 +9,7 @@ from statistics import mean
 from .analysis import FEATURES
 from .content import AREAS
 from .evaluate import recording_event_metrics
+from .handoff import FEATURES as ONBOARDING_AUDIO_FEATURES
 from .video import NAMES
 
 EVENTS = ('pauses', 'repetitions', 'revisions', 'um', 'uh', 'hand_near_face_intervals')
@@ -16,6 +17,28 @@ EXACT = (*AREAS, 'prompt_coverage', 'organization', 'hand_near_face_returns')
 NUMERIC = tuple(name for name in (*FEATURES, *NAMES)
                 if name not in (*EVENTS, *EXACT, 'fillers'))
 TARGET = .50
+
+
+def onboarding_scorecard(features):
+    """Use the handoff inventory and retain typed filler evidence."""
+    audio = {}
+    for name in ONBOARDING_AUDIO_FEATURES:
+        if name != 'fillers':
+            audio[name] = features[name]
+            continue
+        subtypes = {label: features[label] for label in ('um', 'uh')}
+        scores = [row['score'] for row in subtypes.values()]
+        score = min(scores) if all(value is not None for value in scores) else None
+        if any(row['status'] == 'below_target' for row in subtypes.values()):
+            status = 'below_target'
+        else:
+            status = 'missing_subtype_score' if score is None else 'meets_target'
+        audio[name] = {'score': score, 'status': status, 'metric': 'minimum_typed_event_f1',
+                       'subtypes': subtypes}
+    video = {name: features[name] for name in NAMES}
+    return {'audio': audio, 'video': video,
+            'all_features_meet_target': all(
+                row['status'] == 'meets_target' for row in (*audio.values(), *video.values()))}
 
 
 def observation(features, name):
@@ -45,6 +68,16 @@ def numeric_error(actual, expected):
     return abs(actual - expected)
 
 
+def event_records(labeled, values, expected, name):
+    for row, actual, reference in zip(labeled, values, expected):
+        predicted = actual or []
+        if name in ('repetitions', 'revisions'):
+            # A timestamp-only reference can identify a repeat or revision without a verbatim quote.
+            predicted = [{key: event[key] for key in ('start_s', 'end_s')} for event in predicted]
+            reference = [{key: event[key] for key in ('start_s', 'end_s')} for event in reference]
+        yield {'duration_s': row['duration_s'], 'predicted': predicted, 'reference': reference}
+
+
 def benchmark(recordings, tolerances):
     """Report one metric and label/prediction coverage per feature."""
     ids = [row['id'] for row in recordings]
@@ -67,10 +100,7 @@ def benchmark(recordings, tolerances):
             continue
         expected = [row['reference'][name] for row in labeled]
         if name in EVENTS:
-            details = recording_event_metrics([
-                {'duration_s': row['duration_s'], 'predicted': actual or [], 'reference': ref}
-                for row, actual, ref in zip(labeled, values, expected)
-            ])
+            details = recording_event_metrics(list(event_records(labeled, values, expected, name)))
             entry.update(details=details, score=details['f1'], metric='event_f1')
             if not details['references']:
                 entry.update(score=None, status='no_positive_reference')
@@ -91,7 +121,8 @@ def benchmark(recordings, tolerances):
                          mean_recording_error=mean(errors) if errors else None)
         entry['status'] = 'meets_target' if entry['score'] >= TARGET else 'below_target'
     return {'target': TARGET, 'all_features_meet_target': all(
-        row['status'] == 'meets_target' for row in report.values()), 'features': report}
+        row['status'] == 'meets_target' for row in report.values()), 'features': report,
+        'onboarding_scorecard': onboarding_scorecard(report)}
 
 
 def compare(manifest):
@@ -118,6 +149,8 @@ def compare(manifest):
         }
     return {'target': TARGET, 'held_out_speakers': len(held_out),
             'all_features_meet_target': candidate['all_features_meet_target'],
+            'onboarding_scorecards': {'baseline': baseline['onboarding_scorecard'],
+                                      'candidate': candidate['onboarding_scorecard']},
             'features': features}
 
 

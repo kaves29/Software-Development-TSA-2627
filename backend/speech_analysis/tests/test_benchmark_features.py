@@ -5,8 +5,10 @@ def test_benchmark_keeps_missing_labels_and_abstentions_visible():
     event = {'start_s': 1.0, 'end_s': 1.2, 'text': 'uh'}
     rows = [
         {'id': 'a', 'speaker': 'A', 'duration_s': 60,
-         'features': {'fillers': {'value': [event]}, 'torso_sway': {'value': .12}},
-         'reference': {'uh': [event], 'um': [], 'torso_sway': .10}},
+         'features': {'fillers': {'value': [event]}, 'torso_sway': {'value': .12},
+                      'repetitions': {'value': [{'start_s': 4, 'end_s': 5, 'text': 'I I'}]}},
+         'reference': {'uh': [event], 'um': [], 'torso_sway': .10,
+                       'repetitions': [{'start_s': 4, 'end_s': 5}]}},
         {'id': 'b', 'speaker': 'B', 'duration_s': 60, 'features': {},
          'reference': {'uh': [event], 'torso_sway': .10}},
     ]
@@ -14,11 +16,17 @@ def test_benchmark_keeps_missing_labels_and_abstentions_visible():
     features = report['features']
     assert len(features) == 35
     assert features['uh']['score'] == 2 / 3
+    assert features['repetitions']['score'] == 1
     assert features['torso_sway']['score'] == .5
     assert features['torso_sway']['prediction_coverage'] == .5
     assert features['um']['status'] == 'no_positive_reference'
     assert features['shoulder_tilt']['status'] == 'missing_reference'
     assert not report['all_features_meet_target']
+    scorecard = report['onboarding_scorecard']
+    assert len(scorecard['audio']) == len(scorecard['video']) == 15
+    assert scorecard['audio']['fillers']['score'] is None
+    assert scorecard['audio']['fillers']['subtypes']['uh']['score'] == 2 / 3
+    assert scorecard['video']['torso_sway']['score'] == .5
 
 
 def test_event_matching_recovers_matches_that_greedy_matching_misses():
@@ -43,5 +51,8 @@ def test_paired_comparison_uses_same_labels_and_rejects_development_overlap():
     assert report['features']['uh']['change'] == 1
     assert report['features']['um']['change'] is None
     assert not report['all_features_meet_target']
+    assert report['onboarding_scorecards']['baseline']['audio']['fillers']['status'] == 'below_target'
+    assert (report['onboarding_scorecards']['candidate']['audio']['fillers']['status']
+            == 'missing_subtype_score')
     with pytest.raises(ValueError, match='disjoint'):
         compare({**manifest, 'development_speakers': ['H']})
