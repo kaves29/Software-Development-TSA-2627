@@ -52,7 +52,7 @@ def openai_roadmap(payload, key):
         definition['additionalProperties'] = False
     schema['$defs']['Activity']['properties']['catalog_id']['enum'] = list(CATALOG)
     body = {
-        'model': os.getenv('OPENAI_MODEL', 'gpt-4o-mini'),
+        'model': os.getenv('OPENAI_MODEL', 'gpt-5.4-mini'),
         'store': False,
         'input': [
             {'role': 'system', 'content': 'Create a ten-week speaking outline and seven activities for week one. '
@@ -72,6 +72,36 @@ def openai_roadmap(payload, key):
             if part.get('type') == 'output_text':
                 return json.loads(part['text'])
     raise ValueError('missing roadmap output')
+
+
+def mock_roadmap(payload):
+    """Deterministic roadmap for local integration, not a model response."""
+    profile = payload['profile']
+    goal = profile['goal']
+    context = ' '.join(str(value) for value in (
+        profile.get('priority', ''), profile.get('goals', []), profile.get('challenges', []))).lower()
+    if any(term in context for term in ('pace', 'rush', 'slowly')):
+        focus = 'pace'
+    elif any(term in context for term in ('quiet', 'heard', 'voice')):
+        focus = 'projection'
+    elif any(term in context for term in ('body', 'gesture')):
+        focus = 'gesture'
+    elif any(term in context for term in ('thought', 'organize', 'ideas')):
+        focus = 'outline'
+    else:
+        focus = 'clarity'
+    themes = ['Starting with your goal', 'Building your foundation', 'Making ideas clear',
+              'Organizing a response', 'Connecting with listeners', 'Speaking with confidence',
+              'Responding in the moment', 'Practicing your situation', 'Putting skills together',
+              'Reflection and next steps']
+    evidence_note = ('Your recording observations are estimates and can guide reflection.'
+                     if payload['observations'] else 'Use your own reflections while practicing.')
+    weeks = [{'theme': theme, 'outcome': f'Practice toward: {goal}',
+              'rationale': evidence_note if index == 0 else 'Build on the confirmed goal and earlier practice.'}
+             for index, theme in enumerate(themes)]
+    activities = ['baseline', focus, focus, 'pace', 'outline', 'impromptu', 'rehearsal']
+    return {'weeks': weeks, 'current_week': [
+        {'catalog_id': item, 'instructions': CATALOG[item]} for item in activities]}
 
 
 def generate_roadmap(request, provider=None, *, include_experimental=False):
@@ -98,20 +128,18 @@ def generate_roadmap(request, provider=None, *, include_experimental=False):
             if rows:
                 supported[name] = rows
 
-    key = os.getenv('OPENAI_API_KEY')
-    if provider is None and not key:
-        raise HTTPException(503, 'Configure OPENAI_API_KEY for live roadmap generation.')
     payload = {'profile': evidence['profile'], 'observations': supported, 'catalog': CATALOG,
                'limitations': ('Measurements depend on the prompt and recording quality. Experimental observations are tentative. '
                                    'Use these to suggest practice aligned with the stated goal. Avoid unsupported weakness claims.')}
     try:
-        raw = provider(payload) if provider else openai_roadmap(payload, key)
+        raw = provider(payload) if provider else mock_roadmap(payload)
         roadmap = Roadmap.model_validate(raw)
         if any(activity.catalog_id not in CATALOG for activity in roadmap.current_week):
             raise ValueError('invalid catalog reference')
     except (OSError, ValueError, RuntimeError, ValidationError) as exc:
         raise HTTPException(502, 'Roadmap provider failed or returned an invalid response.') from exc
-    return {'evidence': evidence, 'recording_quality': session['samples'],
+    return {'generation_mode': 'injected' if provider else 'mock',
+            'evidence': evidence, 'recording_quality': session['samples'],
             'weeks': roadmap.weeks, 'current_week': [
                 {**activity.model_dump(), 'duration_minutes': 10}
                 for activity in roadmap.current_week]}

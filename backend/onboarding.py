@@ -76,11 +76,12 @@ class ProviderUnavailable(Exception):
     pass
 
 
-def generate_followups(answers: InitialAnswers) -> FollowUpResponse:
+def openai_followups(answers: InitialAnswers) -> FollowUpResponse:
+    """Future live provider; onboarding endpoints do not call it yet."""
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise ProviderUnavailable("AI follow-ups are not configured.")
-    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    model = os.getenv("OPENAI_MODEL", "gpt-5.4-mini")
     # Names and exact ages stay on the client side of the model boundary.
     model_input = answers.model_dump(exclude={"name", "age", "question_version"})
     try:
@@ -106,3 +107,25 @@ def generate_followups(answers: InitialAnswers) -> FollowUpResponse:
         return FollowUpResponse.model_validate(parsed.model_dump())
     except (APIError, APITimeoutError, ValueError, IndexError) as exc:
         raise ProviderUnavailable("Could not generate follow-up questions. Please try again.") from exc
+
+
+def generate_followups(answers: InitialAnswers) -> FollowUpResponse:
+    """Return predictable, profile-aware questions without a provider request."""
+    challenges = set(answers.challenges)
+    if "I lose my train of thought" in challenges:
+        prompt = "When do you most often lose your place?"
+        options = ["At the start", "Between ideas", "While answering questions", "Other"]
+    elif "Rush or speak too slowly" in challenges:
+        prompt = "When does your pace feel hardest to manage?"
+        options = ["At the start", "During explanations", "While answering questions", "Other"]
+    elif "Feel nervous" in challenges:
+        prompt = "When does nervousness affect your speaking most?"
+        options = ["Before I begin", "At the start", "During questions", "Other"]
+    else:
+        prompt = "Which part of your speaking situation would you like to practice first?"
+        options = ["Starting", "Explaining an idea", "Answering questions", "Other"]
+    return FollowUpResponse.model_validate({'questions': [
+        {'id': 'follow_up_1', 'prompt': prompt, 'options': options},
+        {'id': 'follow_up_2', 'prompt': 'How soon would you like to use this skill?',
+         'options': ['Within a week', 'Within a month', 'No fixed date', 'Other']},
+    ]})

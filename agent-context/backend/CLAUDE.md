@@ -8,6 +8,7 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 
 | Path | Purpose |
 | --- | --- |
+| `../../backend/README.md` | Backend startup and current API endpoints. |
 | `md/` | Future topic notes; update existing notes before creating new ones. Currently empty. |
 | `AI/master-implementation-prompt.md` | Historical implementation specification; later onboarding decisions supersede conflicting details. |
 | `AI/audio-analysis.md` | Audio prototype, upstream model and dataset sources, CPU validation, and Kaggle research workflow. |

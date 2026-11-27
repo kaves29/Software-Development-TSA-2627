@@ -3,6 +3,10 @@
 **Updated:** 2026-11-25
 **Purpose:** Let a new Codex session resume the Speakly AI/audio-model work with the evidence and limits clear. This is a navigation and status document; the linked project notes remain the detailed source of truth.
 
+## Current onboarding integration (2026-11-27)
+
+The `onboarding-ai-integration` branch contains the mock onboarding and roadmap connection, including the trained frame-based filler checkpoint adapter and optional video analysis. Read `backend/README.md` and the latest entry in `audio-analysis.md` for setup, tests, and limitations. The OpenAI adapters default to `gpt-5.4-mini` for a future switch, but the API endpoints deliberately use mocks and make no OpenAI requests. The checkpoint and upstream weights are external artifacts; configure them by path rather than committing them.
+
 ## Read these first
 
 1. [`/AGENTS.md`](../../../AGENTS.md) — team rules, ownership, and repository navigation.

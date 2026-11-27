@@ -42,11 +42,11 @@ def test_invalid_answers_rejected(monkeypatch, answers, field, value):
     assert client.post("/v1/onboarding/follow-ups", json=answers).status_code == 422
 
 
-def test_missing_key_is_safe(monkeypatch, answers):
+def test_mock_followups_work_without_key(monkeypatch, answers):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     response = client.post("/v1/onboarding/follow-ups", json=answers)
-    assert response.status_code == 503
-    assert response.json()["detail"] == "AI follow-ups are not configured."
+    assert response.status_code == 200
+    assert len(response.json()["questions"]) == 2
 
 
 def test_other_text_is_accepted(monkeypatch, answers):
@@ -60,7 +60,7 @@ def test_other_text_is_accepted(monkeypatch, answers):
 def test_provider_receives_no_name_or_age(monkeypatch, answers):
     import json
     from types import SimpleNamespace
-    from backend.onboarding import InitialAnswers, generate_followups
+    from backend.onboarding import InitialAnswers, openai_followups
 
     response = FollowUpResponse.model_validate({"questions": [
         {"id": "follow_up_1", "prompt": "When is it hardest?",
@@ -75,12 +75,15 @@ def test_provider_receives_no_name_or_age(monkeypatch, answers):
             assert "name" not in model_input
             assert "age" not in model_input
             assert model_input["situation"] == "Giving a presentation"
+            assert kwargs['model'] == 'gpt-5.4-mini'
+            assert kwargs['store'] is False
             return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(parsed=response))])
 
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    monkeypatch.delenv("OPENAI_MODEL", raising=False)
     monkeypatch.setattr("backend.onboarding.OpenAI", lambda **kwargs: SimpleNamespace(
         chat=SimpleNamespace(completions=FakeCompletions())))
-    assert generate_followups(InitialAnswers.model_validate(answers)) == response
+    assert openai_followups(InitialAnswers.model_validate(answers)) == response
 
 
 def test_invalid_model_output_rejected():
@@ -104,7 +107,7 @@ def test_recordings_and_confirmed_answers_reach_roadmap(monkeypatch, answers):
             features["left_hand_motion"] = {"status": "experimental", "value": .12}
         return {"features": features, "research": {"transcript": "private text"}}
 
-    def roadmap(payload, key):
+    def roadmap(payload):
         assert payload["profile"]["goals"] == answers["outcomes"]
         assert payload["profile"]["follow_up_answers"] == {"follow_up_1": "During transitions"}
         assert "name" not in payload["profile"] and "age" not in payload["profile"]
@@ -117,7 +120,7 @@ def test_recordings_and_confirmed_answers_reach_roadmap(monkeypatch, answers):
                 "current_week": [{"catalog_id": "outline", "instructions": "Rehearse"}] * 7}
 
     monkeypatch.setattr("backend.recordings.analyze_media", analyze)
-    monkeypatch.setattr("backend.speech_analysis.roadmap.openai_roadmap", roadmap)
+    monkeypatch.setattr("backend.speech_analysis.roadmap.mock_roadmap", roadmap)
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     samples = []
     for video in ("false", "true"):

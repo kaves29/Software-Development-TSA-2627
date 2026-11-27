@@ -31,9 +31,10 @@ class RoadmapTest(unittest.TestCase):
             self.assertEqual(len(data['recording_quality']), count)
             self.assertEqual(sum(day['duration_minutes'] for day in data['current_week']), 70)
 
-    def test_missing_secret_and_invalid_provider(self):
+    def test_mock_requires_no_secret_and_invalid_provider_is_rejected(self):
         with patch.dict('os.environ', {'OPENAI_API_KEY': ''}):
-            self.assertEqual(TestClient(create_app()).post(
-                '/api/roadmap/generate', json=self.request()).status_code, 503)
+            response = TestClient(create_app()).post('/api/roadmap/generate', json=self.request())
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.json()['generation_mode'], 'mock')
         self.assertEqual(TestClient(create_app(lambda _: {})).post(
             '/api/roadmap/generate', json=self.request()).status_code, 502)
