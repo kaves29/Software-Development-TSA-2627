@@ -8,6 +8,7 @@ from zipfile import ZipFile
 
 from .ami_references import segment_gap_references, word_references
 from .benchmark_features import benchmark
+from .evaluate import recording_event_metrics
 from .verbatim import analyze_timestamped_words
 
 
@@ -33,6 +34,8 @@ def main():
                                compute_type='float16' if args.device == 'cuda' else 'float32')
     vad = load_silero_vad()
     rows = []
+    diagnostics = []
+    longer_pause_rows = []
     tolerances = {'speaking_rate': 10, 'rate_changes': 15}
     with ZipFile(args.annotations) as archive:
         with archive.open('corpusResources/meetings.xml') as stream:
@@ -51,14 +54,35 @@ def main():
             speech = [(r['start'] / sample_rate, r['end'] / sample_rate)
                       for r in get_speech_timestamps(torch.from_numpy(np.ascontiguousarray(audio)),
                                                      vad, sampling_rate=sample_rate)]
+            longer_speech = [
+                (r['start'] / sample_rate, r['end'] / sample_rate)
+                for r in get_speech_timestamps(torch.from_numpy(np.ascontiguousarray(audio)),
+                                               vad, sampling_rate=sample_rate,
+                                               min_silence_duration_ms=1000)
+            ]
+            longer_pause_rows.append({
+                'duration_s': duration, 'reference': ref['pauses'],
+                'predicted': [{'start_s': end, 'end_s': start}
+                              for (_, end), (start, _) in zip(longer_speech, longer_speech[1:])
+                              if start > end],
+            })
             result = model.transcribe(audio, sr=sample_rate, language='en', word_timestamps=True)
             features = analyze_timestamped_words(duration, speech, result.words or [])
+            detected = features['fillers']['value']
+            diagnostics.append({
+                'duration_s': duration,
+                'reference': [{**event, 'text': 'filler'} for label in ('um', 'uh')
+                              for event in ref[label]],
+                'predicted': [{**event, 'text': 'filler'} for event in (detected or [])],
+            })
             rows.append({'id': path.stem, 'speaker': speakers[path.stem], 'duration_s': duration,
                          'features': features, 'reference': ref})
             report = {
                 'model': args.model,
                 'complete': len(rows) == len(args.recordings),
                 'pooled': benchmark(rows, tolerances),
+                'longer_silence_pause_candidate': recording_event_metrics(longer_pause_rows),
+                'untyped_filler_diagnostic': recording_event_metrics(diagnostics),
                 'per_recording': {
                     row['id']: benchmark([row], tolerances) for row in rows
                 },
