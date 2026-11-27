@@ -1,4 +1,4 @@
-"""Explore Speakly wrist-motion coverage on GESRes annotated gesture clips.
+"""Explore Speakly wrist-motion measurements on GESRes annotated gesture clips.
 
 This is an exploratory label comparison, not an estimate of gesture accuracy:
 GESRes speed labels and Speakly's rapid-motion threshold have different definitions.
@@ -23,7 +23,7 @@ def main():
     parser.add_argument('--fps', type=int, choices=(5, 10), required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    video.FPS = args.fps  # Comparison is limited to the speed-normalized rapid-motion field.
+    video.FPS = args.fps  # Per-frame hand movement is compared only within the same fps.
     with args.annotations.open(encoding='utf-8-sig', newline='') as source:
         rows = [row for row in csv.DictReader(source) if row['id'] == args.video_id]
     if not rows:
@@ -41,7 +41,9 @@ def main():
                            check=True, timeout=30)
             output = video.analyze_video(clip, args.pose_model)
             results.append({'index': index + 1, 'start_s': start, 'end_s': end,
-                            'speed_label': row['speed'],
+                            'speed_label': row['speed'], 'hand_label': row['handedness'],
+                            'left_hand_motion': output['features']['left_hand_motion'],
+                            'right_hand_motion': output['features']['right_hand_motion'],
                             'rapid_motion': output['features']['rapid_gesture'],
                             'frames': output['quality']['frames'],
                             'pose_frames': output['quality']['pose_frames']})
