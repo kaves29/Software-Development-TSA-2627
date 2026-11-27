@@ -2,13 +2,13 @@
 
 Personalized communication practice · TSA Software Development 2026–2027
 
-Speakly is a planned web app for practicing presentations, interviews, and everyday conversations. Users record a response, review feedback, and get a focused exercise based on their goals and previous attempts.
+Speakly is a planned communication-practice app for presentations, interviews, and everyday conversations. Users will record a response, review supported feedback, and get a focused exercise based on their goals and previous attempts.
 
 The goal is to make useful speaking practice easier to access without needing a coach or someone available to listen every time.
 
 ## Project status
 
-This project is in the planning stage. The features and technology choices below describe the proposed app; they have not been implemented yet. **Speakly** is the working title.
+The project includes a browser-based practice prototype and an early Python audio-analysis/roadmap API prototype. AI analysis is not connected to the practice interface, and the React Native app and real-user evaluation remain future work. Check [`project_status.md`](agent-context/project/md/project_status.md) before treating a planned feature as implemented. **Speakly** is the working title.
 
 ## How it works
 
@@ -49,7 +49,7 @@ Webcam-based pose estimation could help users review repeated upper-body movemen
 
 | Component | Proposed tools |
 | --- | --- |
-| Frontend | React, HTML, and CSS |
+| Frontend | Browser prototype; production framework unresolved (React Native is a proposal) |
 | Backend | Python and FastAPI |
 | Speech recognition | A speech-to-text provider, still to be selected |
 | Speech metrics and exercise recommendations | Custom Python logic |
@@ -107,10 +107,11 @@ Presentation, Interview, Roadmap, and Progress sections. The bottom tabs
 provide a second route to Home and the three practice areas. Roadmap offers
 sample exercises and lets users select focus skills and mark improvements
 they notice. Progress counts distinct local days with a finished rehearsal,
-shows self-reported improvements, and displays zero recordings because
-capture is unavailable. The display name, goal date, practice dates, and
+shows self-reported improvements, and displays zero saved recordings.
+Presentation practice supports optional audio recording and immediate playback.
+Recordings are temporary and are not saved between sessions. The display name, goal date, practice dates, and
 skill selections are stored in the current browser. Assessment, account
-services, recording, analysis, and saved session playback remain outside
+services, interview recording, analysis, and saved session playback remain outside
 this prototype.
 
 The screens draw on the team’s [FigJam app flow](https://www.figma.com/board/fbmVOq5zpYMDSyR7gGmH9z/app-flow)

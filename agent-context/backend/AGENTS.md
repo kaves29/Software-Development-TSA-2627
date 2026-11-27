@@ -10,7 +10,10 @@ Read the repository-root AGENTS.md first. The team retains high-level decisions.
 | --- | --- |
 | `../../backend/README.md` | Backend startup and current API endpoints. |
 | `md/` | Future topic notes; update existing notes before creating new ones. Currently empty. |
-| `AI/master-implementation-prompt.md` | Owner-approved scope and detailed handoff prompt for the stateless AI onboarding and personalized roadmap prototype. |
+| `AI/master-implementation-prompt.md` | Historical implementation specification; later onboarding decisions supersede conflicting details. |
+| `AI/audio-analysis.md` | Audio prototype, upstream model and dataset sources, CPU validation, and Kaggle research workflow. |
+| `AI/Sherria Codex pickup.md` | Current project handoff, model/data access, verified results, setup, and next steps. Read this first when resuming model work. |
+| `AI/onboarding-roadmap-plan.md` | Current adaptive onboarding and roadmap direction; supersedes the master prompt's 70-detailed-activities requirement. |
 | `AI/second-review-and-fix-prompt.md` | Follow-up instructions for independently auditing, testing, and fixing the prototype against the master specification. |
 | `skills/` | Approved reusable skills for this area; currently empty. |
 | `AGENTS.md`, `CLAUDE.md` | Identical local instructions and directory index. |

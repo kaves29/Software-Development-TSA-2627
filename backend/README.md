@@ -11,6 +11,6 @@ python -m pip install -r backend/requirements.txt
 python -m uvicorn backend.main:app --reload
 ```
 
-GET /health returns `{"status":"ok"}`. GET /v1/onboarding/questions returns the question set and its version. Interactive API documentation is available at /docs on the running server. The client retains answers; these endpoints do not collect or save them.
+GET /health returns `{"status":"ok"}`. GET /v1/onboarding/questions returns the question set and its version. Interactive API documentation is available at /docs on the running server. For Other selections, the client should allow short free text. The priority options come from the selected outcomes and challenges. The client retains answers; these endpoints do not collect or save them.
 
 Adaptive follow-ups, profile confirmation, the reviewed activity catalog, roadmap generation, and provider integration are still to be implemented.

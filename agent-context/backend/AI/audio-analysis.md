@@ -1,0 +1,324 @@
+# English audio analysis and filler research
+
+## Current status (2026-11-27)
+
+The prototype has a Python audio/video CLI, multi-recording aggregation, a stateless roadmap API, training/evaluation code, and a private Kaggle notebook. The filler model trained on two Tesla T4s and its output is retrievable from Kaggle. This remains research work: general speaking-behavior accuracy is not established, the 80% target has not been shown across recordings, video observations lack labeled speaking-video evaluation, and the disfluency head is not a validated detector. The package's 15 audio fields and video measurements must not be described as 15 validated diagnoses or model capabilities. Read [Sherria Codex pickup](Sherria%20Codex%20pickup.md) for the current handoff and [onboarding roadmap plan](onboarding-roadmap-plan.md) for product scope.
+
+### Latest Kaggle review (2026-11-27)
+
+Three private Kaggle runs were inspected. The AMI adaptation run completed and produced metrics; the AMI verbatim pilot completed and produced metrics; a newer AMI audio-validation kernel reports `COMPLETE` but its downloaded notebook has no executed-cell outputs and its output contains only the notebook-conversion log, so its 24-setting decoder sweep is **not available and must not be treated as run evidence**. Its metadata confirms a T4 and internet were enabled. Another adaptation attempt, `notebookee544df586`, failed before training because `torch.cuda.is_available()` was false and the notebook raised “Enable a GPU accelerator in Kaggle.” Enable a Kaggle GPU before rerunning that notebook; no model code defect was identified from this failure.
+
+The corrected validation kernel version 4 also failed at its initial GPU check. Kaggle metadata still says `enable_gpu: true` and `machine_shape: NvidiaTeslaT4`, but the runtime reported `torch.cuda.is_available() == false` and stopped before downloading data or scoring. No new metrics were produced. This points to an accelerator allocation/session issue rather than a detector result. In Kaggle, open the notebook settings, choose GPU, restart the session, and confirm `torch.cuda.get_device_name(0)` prints a T4 before rerunning. If GPU remains unavailable, check Kaggle accelerator quota/account status; do not interpret another immediate startup failure as a model failure.
+
+The verbatim pilot uses CrisperWhisper small on two AMI development headset tracks (two speakers, about 2,289 seconds total). With the revised 0.50 target, only five of 35 report rows have labeled references; the other 30 are `missing_reference`, not failed model scores. All five measured rows are below target:
+
+| Behavior | Metric | Result | Details |
+| --- | --- | ---: | --- |
+| Inter-segment pauses | Event F1 | 0.141 | 52/595 events matched to 144 references; 14.23 false alarms/minute |
+| `um` | Event F1 | 0.000 | 0/52 events matched; only 10 references across both tracks (one track has no positive `um`) |
+| `uh` | Event F1 | 0.280 | 45/378 matched; 69 references |
+| Speaking rate | Within ±10 WPM | 0.000 | Mean absolute recording error 78 WPM |
+| Rate changes by thirds | Within ±15 WPM | 0.000 | Mean absolute vector error 116.4 WPM |
+
+Per-recording errors are uneven: speaking-rate error is 121.3 WPM on IS1008a.D and 34.7 WPM on TS3004a.A. The pilot skipped 28 and 43 zero-duration ASR words on the respective tracks and logged missing-attention-mask warnings. Those are investigation clues, not proof that they caused the rate errors. The pauses output currently includes every gap between Silero speech regions, while the AMI reference uses gaps between manually annotated speaker segments; this operational mismatch may contribute to the high false-alarm count. Do not tune to this reference until the event definition is reviewed and both reference and prediction semantics are confirmed.
+
+The separate WavLM AMI adaptation run evaluated 79 filler references on the same two development recordings. Pooled event F1 was 0.291 for the original checkpoint at threshold .60 (P=.206, R=.494, 3.93 false alarms/min), versus .251 for the adapted head at .60 (P=.229, R=.278, 1.94 false alarms/min). At .80, original F1=.246 and adapted F1=.222. Adaptation did not improve pooled F1; it traded recall for fewer false alarms. Class-level results also conflict: adaptation modestly improved `um` F1 but reduced `uh` F1. The adaptation data and evaluation cover only two development speakers, so these are diagnostic pilot results, not a general accuracy claim.
+
+
+The corrected version writes its metrics and run summary to top-level Kaggle output files, but it still needs one successful GPU run to retrieve them. After that, use the best weaker-class filler setting from the development sweep only as a candidate, then evaluate it on new speakers. Separately audit speaking-rate word alignment and pause definitions. Do not claim the 0.50 target is reached from the prior runs: none of the five scored behaviors reaches it, and the remaining 30 lack labels.
+
+The `session.py` combiner preserves per-sample observations and missing evidence; it reports coverage, not agreement or weakness. Energy spread is relative within a recording and does not measure absolute vocal projection.
+
+The session entrypoint now accepts a JSON manifest (`recordings`: a list of two or three objects with `id`, audio `path`, and optional `targets` list). Run `PYTHONPATH=backend python -m speech_analysis.session manifest.json --model tiny.en --cache-dir /path/to/cache`; relative audio paths resolve relative to the manifest. A failed recording is reported without discarding the others. A CPU smoke run using the existing JFK and AMI clips returned ten fields for both recordings without recorded model errors; this checks integration only, not evaluator accuracy. The CPU test suite passed 13 tests. Multi-sample output currently reports coverage only, not recurring/mixed behavior, and is not yet wired to the roadmap.
+
+The in-progress session output now has 15 named fields: the previous ten and five experimental transcript observations (main point, supporting detail, transitions, closing and prompt relevance). The latter overlap conceptually with the prior phrase-based `organization` and `prompt_coverage` fields; they must not be counted as independent weaknesses. For the five new fields, `--content-openai` explicitly sends each transcript and its optional manifest `prompt` to the configured OpenAI model using `OPENAI_API_KEY` and `OPENAI_MODEL`; calls request `store: false`. Positive findings require an exact transcript quote. Without the flag, a key, or successful provider output, those fields are unavailable. `store: false` is a request setting, not a statement about all provider data retention. No live API test was possible because this environment has no OpenAI key. The default path was CPU-smoke-tested on two existing recordings and returned 15 fields, including five unavailable content observations. Eighteen tests pass. Fifteen output fields do **not** demonstrate 15 validated distinct capabilities; detector improvements, meaningful labeled evaluation and roadmap integration remain outstanding.
+
+Filler training now supports `--unfreeze-last N` to compare the frozen-head baseline with partial encoder fine-tuning. The head uses AdamW at 0.001, selected encoder layers at 0.00001; these are experiment settings, not demonstrated optimal values. New checkpoints include fine-tuned encoder weights and remain compatible with older head-only checkpoints. One- and two-worker CPU smoke runs with three clips per split completed, and the single-worker checkpoint loaded in the audio CLI on the JFK fixture. These tiny runs verify wiring only. Twenty-two unit tests pass. No new Kaggle run has been launched; controlled model selection, held-out evaluation, and the rest of the evaluator remain outstanding.
+
+The comparison workflow now trains frozen and partially unfrozen variants using train/validation splits only, chooses the higher validation mean filler F1 (ties favor the frozen model), and evaluates the selected checkpoint on the test split. A two-worker CPU fixture exercised both choices and a single-worker selected-checkpoint test; six examples per split are insufficient for performance conclusions. The official test split has already been used in the earlier baseline experiments documented below, so it is not an untouched final benchmark for this project. The Kaggle generator now encodes this comparison but has not yet run it remotely. Twenty-three unit tests pass.
+
+`handoff.roadmap_evidence(profile, session)` prepares a versioned roadmap input and excludes names, raw age, transcripts, audio, and content excerpts. Free-form profile values and caller-supplied sample IDs can themselves contain identifying information, so callers must choose these appropriately. `roadmap.py` now implements a stateless FastAPI endpoint and a server-side OpenAI Responses API call with schema-constrained output; mock-provider tests cover the contract. The live provider call still needs a securely configured key and smoke test. Returned observations do not automatically become weakness judgments.
+
+DisfluencySpeech's annotated transcript uses bracketed reparandum/repair pairs such as `[ I, + I ]`; `disfluency.labeled_repairs` now extracts those pairs and applies a conservative text-prefix rule to distinguish repetition from other repairs. In a read-only inspection of the first 100 training rows, 45 had at least one parsable pair (25 repetition events, 36 other repairs). These counts are parser output, not manually verified labels or model performance. Single-speaker acted audio and markup gaps make this dataset insufficient to validate generalization, and unmarked repairs must not be treated as certain negatives. No disfluency model has been trained. Twenty-eight CPU unit tests pass.
+
+The transcript heuristic now detects immediately repeated phrases of up to four words in addition to single words, taking the longest match at each location. On the first 100 DisfluencySpeech training transcripts, comparing whether any repetition was found against automatically parsed bracket labels yielded 23 true positives, 3 false positives, 0 false negatives and 74 true negatives. This is a row-level development sanity check on reference transcripts, not audio inference, a held-out test, or a human-verified benchmark; it can overestimate real performance. Deliberate repetition remains indistinguishable from disfluency. Twenty-nine CPU unit tests pass.
+
+The filler training code now also supports pinned `microsoft/wavlm-base-plus` revision `4c66d4806a428f2e922ccfa1a962776e232d487b` as a frozen encoder candidate, motivated by the [WavLM paper](https://arxiv.org/abs/2110.13900). Checkpoints record their encoder family, while legacy head-only checkpoints default to wav2vec2; loading a mismatched encoder fails. One- and two-worker CPU smoke runs completed with six clips per split and the resulting WavLM checkpoint ran through the JFK audio CLI without model errors. Those tiny runs do not establish comparative accuracy. The Kaggle job includes the third candidate, but has not yet run it. Thirty CPU unit tests pass. Model and dataset usage rights must be reviewed for the intended use; the existing PodcastFillers-derived models remain research-only.
+
+An experimental `train_disfluency` command now trains a two-output frozen wav2vec2/WavLM head for clip-level presence of parsed repetition and repair annotations. It reads DisfluencySpeech parquet, filters out audio longer than 12 seconds to avoid truncating clip-level labels, resamples to 16 kHz, masks padded frames when pooling, and evaluates against a separate validation file. No bracket annotation means no *parsed annotation*, not proof no disfluency occurred. A two-worker CPU smoke run used distinct sets of six rows drawn from the dataset's test parquet solely for wiring; validation F1 was zero for both labels and this tiny fixture cannot measure performance. No usable disfluency model, event timing, inference integration, full dataset training, or independent-speaker validation has yet been established. Thirty-five CPU tests pass.
+
+The optional `--disfluency-head` CLI argument now returns uncalibrated probabilities for twelve-second recording segments under `research.disfluency_segments`; these are not event timestamps and are excluded from the roadmap handoff. The CPU fixture checkpoint ran through the audio CLI, and a separate held-out-evaluation command ran on six additional fixture clips. A three-recording session smoke test used two real clips and a deliberately missing third file: the two usable results survived, the missing file was reported, and a 13-field roadmap evidence contract was produced. The full transcript-based OpenAI path remains untested live because no API key is configured. Thirty-nine CPU unit tests pass.
+
+Private [Kaggle notebook version 2](https://www.kaggle.com/code/shouryakaveti/speakly-filler-research) was submitted and is queued. The code requests two T4 GPUs, compares three filler candidates using validation selection, and trains the experimental disfluency head against the pinned DisfluencySpeech parquet files with SHA-256 checks. No GPU allocation, completion, or results have been confirmed yet. Version 2 supersedes the earlier statements in this file that a new Kaggle run has not been launched.
+
+The OpenAI request construction has also been checked with a mocked HTTP provider: it uses structured output, requests `store: false`, and keeps the API key out of the request body. This does not verify a live provider call or provider retention policy. Forty CPU tests pass.
+
+## Kaggle version 2 results and next decisions
+
+Version 2 completed. Run metadata and training outputs report two Tesla T4 GPUs; they do not measure GPU utilization. The filler candidates were selected by mean validation F1 for “um” and “uh” on 2,379 isolated clips: frozen wav2vec2 0.748, partially unfrozen wav2vec2 0.757, frozen WavLM 0.895. The selected WavLM model scored F1 0.925 for “um” and 0.823 for “uh” on 9,475 official test clips (mean 0.874). The test has been used in earlier experiments and is not pristine. The selected-model comparison is erroneously labeled `wav2vec2_head` in the test JSON; checkpoint metadata and `selected.json` show it is WavLM. Isolated clip classification does not establish event-detection performance in full onboarding recordings. PodcastFillers annotations restrict derived models to noncommercial research.
+
+The disfluency head performed poorly on 250 held-out single-speaker acted clips: repetition 0 true positives and 73 false negatives; repair 2 true positives, 1 false positive and 59 false negatives (recall 3.3%, F1 0.063). Its zero predicted repetitions make precision undefined, even though the metrics code reports zero. It should not be used for coaching decisions. Parsed bracket labels and the single speaker limit what these results establish. Diagnose class imbalance, thresholds and clip-level pooling against validation data before another training run; compare event-aware approaches and independently sourced speakers before claiming generalization. Do not tune against the test set.
+
+Selected WavLM checkpoint SHA-256: `427945fc6f3c614d4d7a35faa5ec4c51ccfaaeb66fc38a7a3086806c43147c12` (local research copy under `/workspace/scratch/speakly-v2-selected/filler-comparison/wavlm/`). Disfluency checkpoint SHA-256: `0f03044d6239ea77d6a6bc6fdcefb750df29dd8054d65121c0599b69de49d1c1`. They remain research artifacts, not validated coaching models. Raw metrics were downloaded under `/workspace/scratch/speakly-v2-json/`.
+
+The combined session contract omits overlapping legacy `organization` and `prompt_coverage` heuristics and exposes audio measurements plus experimental transcript observations. A fifteen-field output is not evidence of fifteen validated independent capabilities. Transcript observations require the optional OpenAI call and are unavailable by default. Their live provider operation and accuracy have not been verified. The roadmap endpoint is implemented separately in `roadmap.py`.
+
+Speakly measures one recording at a time. A caller can compare the two onboarding responses using the same schema. Each result describes its own recording. The roadmap service can use reviewed observations alongside the user's goal. Recording analysis and the two OpenAI onboarding questions serve separate roles.
+
+```mermaid
+flowchart LR
+    A[Audio file] --> B[FFmpeg<br/>mono, 16 kHz]
+    B --> C[Silero<br/>speech intervals]
+    B --> D[Whisper<br/>word timestamps]
+    C --> E[Speakly features]
+    D --> E
+    B --> F[Optional wav2vec 2.0<br/>research filler head]
+    F --> E
+    E --> G[JSON with feature status<br/>and recording quality]
+```
+
+| Observation | Method and limit |
+|---|---|
+| Speaking rate | Recognized words per minute of full response. Quiet time is included. |
+| Rate changes | Three equal time windows. Each needs at least four recognized words. |
+| Pauses | Gaps between Silero speech intervals. Default detector padding affects boundaries. |
+| Fillers | Timestamped transcript tokens `um` and `uh`, or experimental wav2vec 2.0 window predictions. Whisper can omit fillers. |
+| Repetitions | Adjacent identical recognized words, excluding `um` and `uh`. Deliberate repetition can match. |
+| Revisions and false starts | Explicit repair phrases or interruption punctuation preserved by transcription. These are clues with incomplete coverage. |
+| Prompt coverage | Exact phrase checks against the prompt author's supplied targets. Paraphrases can be missed. |
+| Organization | Indicators for explicit point, example, and closing phrases. A false indicator means the marker was absent, and structured answers can omit these phrases. |
+| Pitch variation | pYIN 90th-to-10th percentile span in semitones over voiced frames. It describes the sample and carries no normative rating. |
+
+Quality checks include decoded duration, detected speech duration, clipping and model errors. Speech below one second or severe clipping suppresses feature values. Noise and transcription quality require further evaluation. Experimental fields need validation on Speakly prompts before they drive roadmap selection. Clinical and personal trait assessment falls outside the audio contract.
+
+## Run locally
+
+From the repository root on Linux or macOS with Python 3.12 and FFmpeg:
+
+```bash
+python -m venv backend/.venv
+source backend/.venv/bin/activate
+# Use the PyTorch CPU index on Linux. On macOS use ordinary pip for torch and torchaudio.
+pip install --index-url https://download.pytorch.org/whl/cpu torch torchaudio
+pip install -r backend/speech_analysis/requirements.txt
+PYTHONPATH=backend python -m speech_analysis response.wav --target "example phrase"
+PYTHONPATH=backend python -m unittest discover -s backend/speech_analysis/tests
+```
+
+The first run downloads model weights. `--cache-dir` selects a writable model cache. `--model tiny.en` selects a faster smoke-test model. The default is `small.en`. The CLI accepts audio decodable by FFmpeg up to 240 seconds. It emits JSON on stdout and returns nonzero for unreadable input or a core audio-stage failure. Load an optional research checkpoint with `--filler-head path/to/filler-head.pt`.
+
+For a human reference, use a JSON object keyed by feature name. For `pauses` use a list of `start_s` and `end_s` records. For `fillers` include lowercase `text` as well. The evaluator uses a 250 ms tolerance for both boundaries and matches each reference at most once.
+
+```bash
+PYTHONPATH=backend python -m speech_analysis.evaluate observation.json reference.json
+```
+
+## Models and data
+
+| Source | Use in this prototype |
+|---|---|
+| [Whisper](https://github.com/openai/whisper) | Official MIT implementation and `small.en` weights. Native timestamping keeps one transcription pass. |
+| [Silero VAD](https://github.com/snakers4/silero-vad) | Pretrained speech interval model, reused through its Python package. |
+| [librosa pYIN](https://librosa.org/doc/main/generated/librosa.pyin.html) | Pitch estimation. |
+| [wav2vec 2.0 base](https://huggingface.co/facebook/wav2vec2-base) | Frozen audio encoder pinned to revision `0b5b8e868dd84f03fd87d01f9c4ff0f080fecfe8`. Speakly trains a linear three-class head over pooled encoder frames. |
+| [PodcastFillers](https://zenodo.org/records/7121457) | Official one-second clips and CSV for training and held-out evaluation. The official split separates podcast shows. The verified CSV contains 64,835 train, 2,379 validation, and 9,475 test events in the consolidated split. |
+| [DisfluencySpeech](https://huggingface.co/datasets/amaai-lab/DisfluencySpeech), [AMI](https://huggingface.co/datasets/edinburghcstr/ami), [LibriSpeech](https://huggingface.co/datasets/openslr/librispeech_asr) | Candidates for subsequent reference-based transcription and timing checks. These were not used to train the filler head. None supplies Speakly's own prompt rubric labels. |
+
+The code integrates upstream packages and checkpoints directly. Keeping upstream code as a dependency avoids maintaining forks. PodcastFillers' annotation terms limit this training experiment to noncommercial research. Keep its data and derived checkpoint in the private research workspace. [Annotation terms](https://podcastfillers.github.io/license/)
+
+## Kaggle experiment
+
+The private notebook is generated by `backend/speech_analysis/kaggle_job.py`. It checks for two T4 GPUs, downloads the official final ZIP volume and annotations, verifies their published checksums, and extracts numbered clips with a verified 7-Zip binary. The ZIP central directory places all 85,803 numbered clips on the final volume, so the generator supplies sparse offset placeholders for the earlier episode volumes and verifies the extracted filenames against the CSV. This reduces the download from about 25.3 GB to 5.9 GB. Distributed data parallelism runs two training workers. The saved checkpoint is selected by validation macro F1 across the two filler classes. The output includes a held-out test confusion matrix and a paired comparison with Whisper transcript counting on a fixed subset of up to 32 held-out clips per class. Isolated event-clip scores do not establish detection accuracy on full responses. Evaluate event timing and false alarms on consented onboarding recordings before using the classifier for recommendations.
+
+```bash
+python backend/speech_analysis/kaggle_job.py KAGGLE_USERNAME /path/to/private-kernel-bundle
+kaggle kernels push --path /path/to/private-kernel-bundle --accelerator NvidiaTeslaT4
+```
+
+The API credential is supplied through the environment. The notebook stores its artifacts under `/kaggle/working/filler-results`.
+
+
+## Verified CPU results
+
+- Four unit tests cover the feature contract, silence, transcription failure, and event matching.
+- The [Whisper JFK fixture](https://github.com/openai/whisper/blob/main/tests/jfk.flac) produced a valid nine-field result with the default `small.en` model. On this cloud executor, an 11-second clip took 11.92 seconds and about 1.85 GB peak RSS with weights already cached. Initial download took substantially longer. This is a single run, not a latency benchmark.
+- A two-second silent clip returned nine insufficient-evidence results. A `tiny.en` run on the same speech fixture loaded the optional filler head and executed window inference. That head was trained on synthetic tones for wiring checks.
+- Single-process CPU and two-process CPU training ran through the dataset loader, train and validation loops, checkpoint save and reload, and test reporting. Synthetic fixture scores have no meaning for filler accuracy.
+- A split ZIP fixture verified that the selected extractor reproduces the original clip byte-for-byte. Zenodo's CSV checksum matched and no episode ID appeared in multiple official clip splits.
+
+Kaggle accepted the private [Speakly Filler Research notebook](https://www.kaggle.com/code/shouryakaveti/speakly-filler-research) as version 1. Reading back its metadata confirmed `NvidiaTeslaT4`, and the running notebook reported two Tesla T4 GPUs. Version 1 uses the full split archive. The smaller staging path in the local generator passed a split-archive fixture and has yet to run on Kaggle.
+
+Two samples from the LibriSpeech clean test split (`6930-75918-0000` and `6930-75918-0001`) had one word edit across 51 reference words in total with `small.en`. Both came from the same reader and are only transcription sanity checks. They do not establish word error rate for spontaneous onboarding speech.
+
+A CPU smoke run used 18 official PodcastFillers clips (six per split). It loaded the official labels, wrote and reloaded a checkpoint, and compared both models on the same six held-out clips. The WAV payload CRCs matched the archive directory. The tiny sample is a wiring check, with no claim about filler performance.
+
+A CPU fixture with two synthesized speech sections separated by two seconds of inserted silence produced a 2.276-second estimated gap. The speech boundaries extend beyond the inserted silence itself. The fixture also exercised prompt coverage and the example marker.
+
+The optimized staging method extracted 18 byte-identical clips from the real ZIP64 layout using its central directory and verified byte ranges. The full optimized download and Kaggle run remain unverified.
+
+Three short samples from the AMI headset test split produced 7 word edits across 32 reference words with `small.en`. The sample is too small to estimate domain performance. It illustrates why the clean LibriSpeech check cannot stand in for conversational or onboarding speech.
+
+
+## Completed training run
+
+Private Kaggle version 1 completed three epochs on two Tesla T4 GPUs. The training script reported 211.53 seconds through checkpoint selection, excluding data staging and the final comparisons. Epoch 3 had the highest mean validation F1 across “um” and “uh” (0.748). The encoder stayed frozen and the three-class linear head was trained.
+
+| Evaluation | Clips | “Um” F1 | “Uh” F1 | Mean filler F1 |
+|---|---:|---:|---:|---:|
+| wav2vec 2.0 head, official test split | 9,475 | 0.806 | 0.690 | 0.748 |
+| wav2vec 2.0 head, matched subset | 96 | 0.813 | 0.702 | 0.757 |
+| Whisper transcript count, same subset | 96 | 0.755 | 0.171 | 0.463 |
+
+On the full test split, precision and recall were 0.850 and 0.766 for “um,” and 0.741 and 0.645 for “uh.” The paired comparison used 32 clips per class. It shows that the audio head recovered more fillers in that sample, with a precision tradeoff. The evaluation uses centered, one-second podcast clips, whereas onboarding inference scans whole recordings. Event-level precision, recall, and timing on those recordings still require annotations. Keep the head optional for research.
+
+The private run's `filler-results/` output contains `metrics.json` and `filler-head.pt`. The downloaded head's SHA-256 is `4ab282e8724e7aa3ce8fe9306007fe375c2dafc31566f6b67c89da314f022fbd`. [Kaggle run](https://www.kaggle.com/code/shouryakaveti/speakly-filler-research)
+
+The downloaded Kaggle checkpoint also loaded in the CPU analyzer. It returned all nine feature fields with no model errors on the 11-second JFK fixture. The run took 18.79 seconds with weights cached and reported no filler events on that clip. This verifies integration of the trained weights, with no estimate of detection accuracy on full recordings.
+
+## Onboarding video prototype
+
+The optional video stage uses [MediaPipe Pose Landmarker Lite](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker). Install `backend/speech_analysis/requirements-video.txt` and download the [version 1 model bundle](https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task), SHA-256 `59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a`.
+
+Set `"video": true` for a video recording in the session manifest and run `PYTHONPATH=backend python -m speech_analysis.session manifest.json --pose-model pose_landmarker_lite.task`. Audio-only recordings can be in the same manifest. Video adds ten measurements to the fifteen existing fields. These cover shoulder tilt, lateral lean, horizontal and vertical torso movement, head orientation proxy and movement, each wrist's movement, hand movement asymmetry, and wrist spacing. Most quantities use shoulder width as the scale. Results depend on camera angle, camera stability, visibility, and the framing. The head orientation proxy is not an eye contact measure. Missing or obscured landmarks suppress the affected measurements. Results remain experimental in the roadmap handoff.
+
+A three-second CPU fixture made from MediaPipe's sample pose image with a speech audio track detected pose in all fifteen sampled frames. The same MP4 and a separate audio clip completed a mixed session with 25 evidence fields. Controlled landmarks exercise translation and occlusion. The image fixture checks detection and plumbing only. Motion accuracy and coaching relevance require recordings with varied framing and reference annotations before a pilot can establish performance. The Kaggle repetition/repair checkpoint remains research-only and is excluded from the roadmap handoff.
+
+Two additional CPU integration fixtures ran through FFmpeg and MediaPipe. A controlled horizontal translation of the pose image detected a pose in 15 of 15 frames, with median horizontal movement 0.1686 shoulder widths per sampled frame and vertical movement 0.0006. A blank clip detected no poses in 15 frames and returned insufficient evidence for all ten video fields. These fixtures confirm directional response and abstention. The translation can also represent camera motion, so the evaluator cannot attribute it to the speaker without a stable camera. Real speaker movement accuracy remains unmeasured.
+
+## Onboarding integration and evaluation status
+
+Install `backend/speech_analysis/requirements-roadmap.txt` and run `PYTHONPATH=backend uvicorn speech_analysis.roadmap:app`. POST to `/api/roadmap/generate` with `confirmed: true`, a nonempty `goal`, optional `profile`, and two or three `samples` in the existing combiner format (`id`, `result.features`, optional `result.quality`). The response includes evidence, recording quality, ten outline weeks, and seven catalog activities of ten minutes each. The service uses only descriptive timing estimates in the model input. It returns 503 without `OPENAI_API_KEY`; `OPENAI_MODEL` optionally selects the model. The mock provider exercises the same route and output validation.
+
+The video report now has 15 fields. Five new fields describe the fraction of usable frames or transitions with rapid wrist movement (2 shoulder widths per second), wrists close together (0.25 shoulder widths), a wrist near the nose (0.35 shoulder widths), visible wrists, and pose coverage. These are provisional pose-based proxies. Wrist proximity cannot establish contact, rubbing, or the reason for movement. Pose coverage and wrist visibility describe recording quality. The thresholds have no behavior-level validation yet.
+
+| Source | Labels and population | Use and split |
+|---|---|---|
+| PodcastFillers | Timestamped filler events in English podcasts | Noncommercial research under annotation terms. Prior official clip test is historical. A fresh full-recording test is pending. |
+| DisfluencySpeech | Parsed repetition and repair annotations from one actor | Development only. Separate corpus is needed for speaker-held-out evaluation. |
+| MediaPipe sample image derivatives | Known translation, static pose, and empty frame fixtures | Engineering checks only. No annotated real speaker movements. |
+| Speakly reference recordings | Proposed timestamped events and visibility conditions | Pending. Use consented recordings, separate speakers by split, and freeze thresholds before the test. |
+
+`recording_event_metrics` computes micro precision, recall, F1, false alarms per minute, and matched boundary error on full-recording predictions and references. There is no new population accuracy estimate. The video system still requires hand and face tracking, camera motion checks, and temporal event labels to cover the approved gesture and habit definitions. No new Kaggle experiments were submitted in this integration pass.
+
+### Detailed landmark and camera-motion checks
+
+The video and session CLIs accept optional `--hand-model` and `--face-model` arguments. Use the version 1 MediaPipe Hand Landmarker and Face Landmarker bundles. With both enabled, hand-near-face uses fingertip-to-nose image distance scaled by eye spacing. It reports timestamped intervals after three consecutive positive samples at 5 Hz. Tracking gaps end intervals, and proximity alone cannot establish physical contact or a habit. The session records diagnostic coverage under `research.video_landmarks`.
+
+The camera check estimates global translation from optical flow outside the previous pose bounds. Motion or inadequate reliable background tracks suppress camera-relative torso sway and vertical motion. Rotation, zoom, moving backgrounds and camera-motion thresholds still need labeled evaluation. Controlled image translation and textureless backgrounds exercise the estimator. On MediaPipe sample-image fixtures encoded as short clips, the portrait detected face and hands in 10 of 10 frames, and a thumb fixture detected a hand and no face in all 10 frames. These checks verify tracker wiring and visibility, not repeated-habit accuracy.
+
+### Continuous audio benchmark
+
+Run `python -m speech_analysis.evaluate_podcast AUDIO CSV EPISODE CHECKPOINT` with `PYTHONPATH=backend`. It scores a continuous excerpt (default 60–240 seconds of the original episode) using Silero and the existing WavLM inference threshold of 0.85, without tuning. A match requires the same label and both boundaries within 250 ms. This is a strict check because the current detector outputs approximate one-second windows. PodcastFillers annotations come from candidate events, so apparent false alarms should be audited for unannotated genuine fillers before interpreting precision. Use the official split and preserve episode grouping.
+
+The existing transcript rules were also scored on all 250 supplied reference transcripts in the official DisfluencySpeech test parquet. Comparing utterance-level presence with the bracket parser, repetition was 73 true positives, 10 false positives and zero false negatives (F1 0.936). Repair was 3 true positives, 16 false positives and 58 false negatives (F1 0.075). This is a transcript-only baseline from one actor. It bypasses speech recognition, does not score timing, and does not establish performance on incoming audio.
+
+Two CRC-verified original episode files supplied the first continuous benchmark. Both used 180 seconds starting at 60 seconds with the published checkpoint and threshold unchanged. No threshold was selected from the test result.
+
+| Official episode split | References / predictions | Center P / R / F1 (250 ms) | Boundary F1 (250 ms) | Unmatched predictions/min (center) |
+|---|---:|---:|---:|---:|
+| Validation, Grrrl, Uninterrupted | 12 / 20 | .450 / .750 / .563 | .125 | 3.67 |
+| Test, The Genealogy Happy Hour | 13 / 8 | .875 / .538 / .667 | .095 | .33 |
+
+Center-matched timing error averaged 96 ms on validation and 87 ms on test. The center metric evaluates event localization separately from the boundary mismatch caused by one-second windows. One episode per split and candidate-based annotations limit the results. Treat the test episode as a historical baseline for subsequent variants. Neither score meets the 85–90% target.
+
+For the staged accuracy goal, keep camera-motion checks, visibility checks, and repeated behaviors separate in the benchmark. A visible quick gesture is an observation, while recurrence needs multiple annotated intervals and adequate visibility between them. Reference videos should include stationary and moving cameras, deliberate gestures and similar-looking non-events, and obscured hands and faces. Use speaker-disjoint validation and test groups. Report event F1 and precision/recall for repeated habits, measurement error for continuous motion, and the fraction of usable recordings each result covers.
+
+The benchmark accepts repeated `--threshold` arguments and reuses one WavLM inference pass. The validation excerpt gave midpoint F1 .370, .408, .488, .563 and .636 at .40, .55, .70, .85 and .95 respectively. At .95 precision was .700 and recall .583. The test excerpt was not used to choose thresholds or rerun at these thresholds. The default remains .85 because a single episode does not support calibration. Tests verify that multiple thresholds can use the same candidate windows.
+
+A CPU audio-to-transcript smoke benchmark ran Whisper `small.en` with word timestamps and the existing transcript rules on the first 32 official DisfluencySpeech test rows. For utterance-level bracket presence, repetitions yielded 1 TP / 2 FP / 4 FN (F1 .25); repairs yielded 0 TP / 3 FP / 8 FN (F1 0). This uses one acted speaker, a small deterministic prefix, and full-utterance speech intervals to isolate ASR plus transcript rules. It confirms the reference-transcript score does not transfer to the current audio path. A disfluency-preserving, time-aligned baseline and speaker-disjoint labels are needed for further model selection.
+
+### Research-backed candidate ablation
+
+Silero covered the midpoints of all 12 validation and 13 test annotations at its existing settings. Ignoring um/uh identity improved validation midpoint F1 from .563 to .625 and left test midpoint F1 at .667. Thus the observed gap includes classifier and proposal errors beyond class confusion or VAD coverage. One-second proposal boundaries also inflate timing error.
+
+The experimental `--transcript-candidates --cache-dir CACHE` path in `evaluate_podcast` follows the [PodcastFillers paper's ASR/VAD candidate method](https://arxiv.org/html/2203.15135). It centers one-second classifier inputs on detected-speech gaps in Whisper timestamps and keeps explicit transcript fillers. Candidate intervals give tighter boundaries. At threshold .85 on the same 180-second validation excerpt, midpoint F1 dropped from .563 to .353 (3 of 12 matched, 5 emitted), and boundary F1 rose from .125 to .235. A validation-only union with the original .85 or .95 proposals, excluding duplicates within 350 ms, did not beat the equivalent baseline. A fixed-width diagnostic shrinking the original proposals to .35 seconds raised validation boundary F1 to .563 at .85 and .636 at .95. This diagnoses window geometry but does not recover missed detections or establish actual boundaries. None of the experimental settings changed the default evaluator or was selected on the test excerpt.
+
+Next training should use time-aligned frame labels and offset jitter as in the paper's frame-classifier approach, including ordinary speech as hard negatives. Score midpoint and boundary F1 separately on more untouched continuous recordings, and use speaker-disjoint spontaneous speech with time-aligned annotations for repetition and repair. No public dataset in the current workspace supplies labels for all proposed video behaviors.
+
+### Frame-level timing experiment
+
+`speech_analysis.train_filler_frames` uses PodcastFillers' official clip split and event boundaries to supervise 20 ms WavLM frames. It trains a linear head on frozen WavLM features, shifts training events by up to 120 ms, and uses labeled non-filler clips as negatives. Continuous evaluation with `evaluate_podcast --frame-head` averages overlapping windows and reports midpoint and boundary F1. The original clip evaluator rejects frame checkpoints to prevent silently applying the wrong inference method.
+
+One- and two-worker CPU smoke runs verified training and checkpoint export on the existing 18-clip fixture. The one-worker checkpoint emitted zero events at thresholds .50–.70 on the continuous validation excerpt. This is a wiring check with six training clips, not a meaningful performance estimate. The private Kaggle frame experiment was submitted separately with two T4s requested. Configuration: official PodcastFillers train and validation splits, 3 epochs, 32 clips per worker, WAV archive and annotation checksums verified by the notebook, WavLM pinned as above. It remains research-only under the PodcastFillers annotation terms. Final GPU allocation and model performance remain pending.
+
+The private frame run completed on two Tesla T4s. Validation mean F1 for the two filler classes improved across epochs from .763 to .781 to .790 on annotated clip frames. This metric scores 20 ms frames, whereas continuous evaluation matches whole events. Checkpoint SHA-256: `d669cda8a31b6fe023dba3b645d751f5f3ecf4eadfb884e5695f074434ca6bf9`.
+
+Continuous validation of the trained frame head used the same 180-second validation excerpt and a threshold sweep from .50 to .95. Threshold .90 maximized midpoint F1 (.600, 6 matches out of 8 predictions and 12 references); boundary F1 was .500. The strongest sliding-window validation threshold (.95) had midpoint F1 .636 and original-window boundary F1 .182. Freeze .90 for frames and .95 for the tuned baseline before scoring the newly extracted Pat Finn test excerpt. The .85 default baseline is reported for continuity.
+
+Both configured models were scored on the same previously unused continuous test excerpt, `CEO Interview 2017_Pat Finn`, 60–240 s (18 “um”, 18 “uh”). The episode was recovered from the original split archive and matched its CRC32. Thresholds were frozen before evaluation.
+
+| Model | Midpoint P / R / F1 | Boundary F1 | Midpoint false alarms/min | Mean matched midpoint error |
+|---|---:|---:|---:|---:|
+| Default sliding windows, .85 | .611 / .306 / .407 | .000 | 2.33 | 170 ms |
+| Tuned sliding windows, .95 | .733 / .306 / .431 | .000 | 1.33 | 170 ms |
+| Frame model, .90 | .846 / .306 / .449 | .367 | .67 | 64 ms |
+
+Frame predictions matched 11 of 36 references by midpoint, the same count as both baselines. Silero covered 36 of 36 reference midpoints and collapsing the labels to a single filler class did not change the frame model's midpoint result. Prioritize recall through validation-only error analysis and training on longer contiguous, time-aligned speech, with a temporal head and examples of both missed fillers and confusing ordinary speech. Keep the current detector default unchanged. Use multiple validation episodes to tune duration and confidence and reserve new test recordings. This one excerpt supplies a paired comparison, not a population estimate. Raw results are in `/workspace/scratch/speakly-episode-bench/fresh-frame.json` and `fresh-baseline.json`.
+
+### Validation-only decoder comparison
+
+Compared both CRC-verified validation episodes at 60–240 s, adding `LMScast_315 How to Create Profitable Online Courses and Membership Sites Even After Failures Along the Way` to the prior Grrrl excerpt. The two excerpts contain 15 labeled filler events across six minutes. The same cached WavLM frame scores were reused for all configurations.
+
+| Frame decoder | Boundary P / R / F1 | Midpoint P / R / F1 | Unmatched midpoint predictions/min |
+| --- | --- | --- | --- |
+| Existing comparison setting (.90, 5 frames) | .600 / .400 / .480 | .700 / .467 / .560 | .50 |
+| Best fixed threshold (.80, 8 frames) | .636 / .467 / .538 | .727 / .533 / .615 | .50 |
+| Best hysteresis (.85 onset, .75 continuation, 8 frames, 0 gap frames) | .583 / .467 / .519 | .667 / .533 / .593 | .67 |
+
+Swept 12 fixed settings and 108 hysteresis settings. The best fixed setting recovered one additional correctly localized filler. The best hysteresis setting used zero gap frames and added one more unmatched prediction than the best fixed threshold. Results are too sparse to change defaults. The held-out excerpt was excluded from this sweep. Preserve fresh episodes for final evaluation and test training/inference context matching next: use longer contiguous windows, retain verified positive events, and audit high-scoring ordinary speech before using it as hard negatives. The training clip pipeline uses one-second crops and a frozen WavLM encoder; this run isolates decoding and provides no evidence for a new training recipe yet.
+
+### Continuous training data audit
+
+The pinned PodcastFillers CSV contains 28,793 filler events across 173 official training episodes and 1,148 across six validation episodes. There are 36,042 marked training examples of words, breaths, laughter, or music. The official train and validation clip rows agree with their source episode splits. The 9,114 `extra` rows have no consolidated event label and span all three episode splits.
+
+For four-second windows centered on each marked filler, the union of official marked intervals covers an average of 14.1% of training time and 14.0% of validation time. This measures annotation coverage. The rest of each window has unknown status under these labels. For a clean longer-context comparison, use labels for marked filler and marked non-filler frames, mask ambiguous and unmarked frames during training, and audit high-scoring unmarked validation spans before interpreting them as false alarms. Either keep the baseline at one second or explicitly configure the longer window at both training and inference. The current inference path scores overlapping one-second windows, and the current Kaggle setup retrieves numbered clips only. Continuous training requires retrieving original training episode audio separately. Group windows by source episode before sampling and preserve the held-out test recordings.
+
+### Four-second training path
+
+`speech_analysis.train_filler_frames --episodes EPISODE_WAV_DIRECTORY --csv LABELS --output CHECKPOINT` reads four-second windows from mono 16 kHz episode WAV files named after the CSV's `podcast_filename` column. Frame targets use explicitly marked events. Unmarked frames and overlapping frames with conflicting labels are excluded from loss and metrics. The checkpoint records window size, and `evaluate_podcast --frame-head` reuses that size for scoring, including the one-second fallback for historical checkpoints.
+
+The 56-test CPU suite passed. A separate CPU smoke run trained frozen WavLM on two synthetic six-second WAVs, exported a four-second checkpoint, and loaded it through the recording evaluator. Synthetic fixtures verify wiring only. A meaningful run still needs the original training and validation episodes prepared as WAVs, plus an event-level comparison on continuous validation recordings.
+
+The original archive directory matched all 173 training and six validation filenames in the official episode split. The training MP3 payloads occupy about 7.00 GB compressed across `.z03` (107 recordings) and `.zip` (66). Validation occupies about 0.29 GB in `.zip`. All 20 test episodes are on `.z03` and can be excluded by selecting only train/validation archive members. The clip-only sparse placeholders cannot supply original episode audio. For a full training run, stage the needed members from their actual volumes and check archive CRCs before decoding.
+
+A real-data CPU smoke run used a CRC-verified a16z training episode and separate Grrrl and LMScast validation episode files. With one epoch and up to 24 windows per split, validation filler-class mean frame F1 was .463. The exported checkpoint produced no detections at .80 on the Grrrl 60–240 s excerpt (12 annotated references). This confirms original-episode ingest, training, and checkpoint evaluation. It provides no evidence of a gain at this training size. The .80 threshold was previously selected for the one-second model, so it is only a wiring check here. The full training experiment needs its own validation threshold and a reserved test set.
+
+Generate the private continuous experiment with `python -m speech_analysis.kaggle_job --continuous KAGGLE_OWNER OUTPUT_DIRECTORY` from a shell with `PYTHONPATH=backend`. The notebook downloads and verifies the official final ZIP, third split volume, and CSV before extracting only the 179 train/validation recordings. 7-Zip verifies member CRCs during extraction. The other two volumes are sparse offset placeholders. Extraction is followed by 16 kHz mono decoding and distributed training with 8 windows per worker, 3 epochs, and two T4s. The notebook saves `filler-continuous-head.pt`. A local 7-Zip fixture verified train/validation selection, exclusion of the test member, and WAV conversion. All archive member paths match the official directory. Notebook generation was verified locally; the full Kaggle run has not been submitted.
+
+Kaggle accepted version 1 of the private [Speakly Filler Continuous notebook](https://www.kaggle.com/code/shouryakaveti/speakly-filler-continuous) as a Quick Save with GPU T4 ×2 requested. The upload response reported no execution. The immediate status query returned RUNNING, so actual cell execution was unconfirmed.
+
+The failed Kaggle log showed repeated DNS failures resolving `pypi.org` during dependency installation. The job never entered dataset staging or training and produced no checkpoint or accuracy metrics. Version 4 was uploaded as a Quick Save with internet enabled in metadata. It checks DNS for PyPI, Zenodo, and Hugging Face before package installation and installs only the two explicit frame-training dependencies. The generated cell compiled locally. Kaggle connectivity still needs confirmation during the next run.
+
+The subsequent run again failed on Kaggle DNS for PyPI before training. The downloaded remote metadata showed internet enabled. Version 6 was saved without execution. It retries required DNS lookups, skips installing dependencies already present at their required versions, and retries dataset downloads on connection errors. Local checks compiled the generated notebook and simulated transient and persistent DNS failures. Persistent Kaggle network outages still prevent access to the original dataset and pinned model.
+
+The next Kaggle run failed all four DNS lookups for Zenodo and stopped before training. Version 8 adds an offline input path. Attach a private bundle containing a `speakly-continuous-input.json` marker, the original `PodcastFillers.zip`, `PodcastFillers.z03`, and `PodcastFillers.csv`, the pinned 7-Zip 25.01 Linux binary as `7zz`, the pinned Hugging Face WavLM snapshot in `wavlm/`, and any missing runtime wheels in `wheels/`. The offline path verifies archive and executable checksums and uses local-only model and wheel loading. The full bundle has not been staged or attached. The emitted notebook compiled and a mocked attached input skipped DNS, and all 56 local tests passed. No training was launched when uploading version 8.
+
+### Completed four-second Kaggle run
+
+Kaggle completed three epochs on two Tesla T4s. Validation filler-class mean frame F1 was .866, .867, and .875. The final metric appeared about 2 h 22 min after notebook start. Checkpoint SHA-256: `68aee44b596e7a36c46f5c1aaa083b4dfb0c46aa1cd4540872cc211484f19ca4`. The frame metric covers marked intervals only and is not directly comparable with continuous event F1.
+
+On the same two 180-second validation excerpts used for the one-second decoder, the four-second model at .75 found 12 of 15 labeled events by midpoint but produced 39 unmatched predictions. A threshold-only sweep achieved .519 midpoint and boundary F1 at .95. Requiring 12 consecutive frames at .80 improved both metrics to .621 (9 matches, 14 predictions, 15 references, .83 unmatched predictions/min). A two-model agreement filter peaked at .593 on these excerpts. The earlier one-second model's best validation setting gave .615 midpoint and .538 boundary F1. The four-second model recovers one more matched midpoint with two more unmatched predictions. The validation excerpts are small and contain candidate annotations rather than exhaustive labels. Keep deployment defaults unchanged.
+
+Both checkpoints were then evaluated on the CRC-verified, previously unused official test episode `Claire Zorn_'Turns Out I Had More Things To Write Down!'`, 60–240 s, with 19 marked events. Settings were frozen using the two validation excerpts.
+
+| Checkpoint and decoder | Midpoint P / R / F1 | Boundary F1 | Unmatched midpoint predictions/min |
+| --- | --- | --- | --- |
+| One-second, .80 and 8 frames | 1.000 / .789 / .882 | .765 | 0.00 |
+| Four-second, .95 and 5 frames (best threshold-only validation setting) | .933 / .737 / .824 | .765 | .33 |
+| Four-second, .80 and 12 frames (best duration-calibrated validation setting) | .696 / .842 / .762 | .667 | 2.33 |
+
+The four-second settings improve one aspect at a time. The duration-calibrated setting catches one more filler than the one-second comparison and adds seven unmatched events. The one-second model exceeded .80 midpoint F1 on this excerpt, but previously scored .449 on the Pat Finn excerpt under a different decoder setting. The new score is not a repeatable milestone across recording conditions. Do not select a decoder from this held-out comparison. Build an exhaustively reviewed, multi-episode validation set and inspect unmatched detections before treating them as hard negatives or running another long GPU experiment. The evaluator now accepts `--min-frames` to reproduce threshold-plus-duration tests. Local suite: 56 passing tests.
+
+All five unmatched midpoint predictions from the four-second duration-calibrated validation run were centered outside every interval in the official CSV, including marked non-filler intervals. They are unreviewed, so they should not be used as hard negatives yet. A local listening queue in `/workspace/scratch/speakly-episode-bench/validation-listening/review.csv` pairs two-second audio clips with timestamps for those five predictions and the six missed references.
+
+Whisper small.en CPU transcribed all 11 two-second validation review clips with word timestamps. It emitted neither “um” nor “uh” in any clip, including the six clips with official filler labels. Ordinary words spanned the candidate midpoint in all five unmatched clips, and Whisper also aligned ordinary words across or near the center of the labeled misses. The short-clip transcript is therefore a poor adjudicator for these examples. The review labels remain blank, and these clips were not added as training negatives. If all five unmatched events were genuine additional fillers, the two-excerpt midpoint F1 would change from .621 to .824 with the six existing misses still counted. This is a sensitivity calculation, not measured performance.
+
+The fingertip proximity observation now reports observed returns separately from intervals. Two proximity intervals count as a return only when separated by at least three consecutive frames with both landmarks visible and the fingertip away from the face. Occlusion can split an interval but cannot establish separation. The focused video suite passed five tests, including visible separation, tracking loss, and intermittent visibility. The observation remains experimental pending labeled video evaluation.
+
+The video camera check now fits translation, rotation and uniform scale to spatially distributed background tracks using a robust similarity transform. Unreliable fits abstain. Controlled 4-degree rotation, 8% zoom, 5-pixel translation and textureless cases passed. On the controlled translated video fixture, 14 of 14 transitions yielded camera estimates, the quality flag was movement_detected, and torso sway was suppressed. This verifies camera-motion handling on controlled inputs. The camera threshold and behavior accuracy on real speaking recordings remain unvalidated. Full local suite: 58 passing tests.
+
+The session report now lists which samples produced detailed fingertip-to-face return counts and which of those samples showed one or more observed returns. This preserves recording-specific evidence and prevents audio-only clips or pose-only wrist proxies from being counted as negative examples. A zero return count describes the observed frames, and it cannot rule out movement during occlusion. The summary remains experimental pending labeled speaking-video validation.
+
+For the first video event benchmark, `python -m speech_analysis.evaluate ANALYSIS_JSON REFERENCE_JSON` accepts a reference object with `hand_near_face` intervals (each with `start_s` and `end_s`). Use detailed hand and face analysis output. The scorer calculates event precision, recall, F1 and boundary error with a 250 ms tolerance on both boundaries. Empty predicted intervals with sufficient tracking count as zero detections. Missing interval evidence is reported separately so evaluation can report both event scores and abstention coverage.
+
+The same video benchmark accepts an optional `hand_near_face_returns` reference count. Annotators count a return only after visible separation. The scorer reports count error and exact agreement independently of interval F1, and preserves abstention when the model has no return count.

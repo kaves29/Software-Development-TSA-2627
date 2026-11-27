@@ -9,6 +9,7 @@ class Question(BaseModel):
     required: bool = True
     options: list[str] = Field(default_factory=list)
     description: str | None = None
+    max_selections: int | None = None
 
 
 class QuestionSet(BaseModel):
@@ -21,29 +22,33 @@ app = FastAPI(title="Speakly onboarding API", version="0.1.0")
 QUESTIONS = QuestionSet(
     version="1",
     questions=[
+        Question(id="name", prompt="What is your name?", type="text"),
         Question(id="age", prompt="How old are you?", type="number",
                  description="Enter your age in years, not your date of birth."),
-        Question(id="language", prompt="Are you ready to practice in English?",
-                 type="single_select", options=["Yes"]),
-        Question(id="situations", prompt="Where would you like to practice speaking?",
-                 type="multi_select", options=["Presentations", "Class participation",
-                 "Interviews", "Conversations", "Explaining ideas", "Other"]),
-        Question(id="goals", prompt="What would you like to achieve?",
-                 type="multi_select", options=["Express ideas clearly", "Organize my thoughts",
-                 "Engage listeners", "Feel more prepared", "Other"]),
-        Question(id="challenges", prompt="What would you like to work on?",
-                 type="multi_select", options=["Getting started", "Organizing ideas",
-                 "Speaking clearly", "Voice projection", "Pacing and pauses",
-                 "Engaging listeners", "Gestures and posture", "Everyday nerves", "Other"]),
-        Question(id="commitment", prompt="Can you practice for ten minutes each day?",
-                 type="single_select", options=["Yes", "I need flexibility"],
-                 description="The prototype roadmap uses ten minutes each day."),
-        Question(id="preferences", prompt="How do you prefer to practice?",
-                 type="multi_select", options=["Guided steps", "Examples",
-                 "Independent practice", "Reflection", "Other"]),
-        Question(id="constraints", prompt="Is there anything else that would help shape your practice?",
-                 type="text", required=False,
+        Question(id="language", prompt="What is your preferred language?", type="text",
+                 description="Practice is currently available in English only."),
+        Question(id="motivation", prompt="Why do you want to improve your speaking?",
+                 type="multi_select", max_selections=2,
+                 options=["Do better at school", "Grow at work", "Prepare for a job or college",
+                          "Feel more comfortable in everyday life", "Connect with people",
+                          "Work toward a personal goal", "Other"]),
+        Question(id="outcomes", prompt="What would you most like to be able to do?",
+                 type="multi_select", max_selections=2,
+                 options=["Explain ideas clearly", "Organize my thoughts", "Speak at a comfortable pace",
+                          "Be heard clearly", "Keep people interested", "Respond without much preparation",
+                          "Use body language effectively", "Other"]),
+        Question(id="challenges", prompt="What usually gets in the way when you try to do that?",
+                 type="multi_select", max_selections=2,
+                 options=["I lose my train of thought", "Rush or speak too slowly", "Struggle to find words",
+                          "Speak too quietly", "Feel nervous", "Have trouble holding attention",
+                          "Feel unsure what to do with my body", "Other"]),
+        Question(id="situation", prompt="Think of a recent time that happened. What were you doing?",
+                 type="single_select", options=["Giving a presentation", "Answering a question",
+                 "Talking one-on-one", "Speaking in a group", "Interviewing", "Other"]),
+        Question(id="situation_details", prompt="What happened?", type="text", required=False,
                  description="Please do not include medical or identifying information."),
+        Question(id="priority", prompt="Which one matters most to you right now?",
+                 type="single_select", description="Choose from the outcomes and challenges you selected."),
     ],
 )
 

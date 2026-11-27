@@ -174,3 +174,375 @@ dialog h2 { margin: 0; }
 .skill-row label { display: flex; align-items: center; margin-bottom: .5rem; }
 .skill-row input { width: auto; accent-color: var(--nav-purple); }
 .skill-row p { margin: .35rem 0; }
+
+#random-settings { display: grid; gap: 1rem; }
+#random-settings .note { margin: 0; }
+.secondary { background: transparent; color: var(--navy); }
+.secondary:hover { background: #dceee3; }
+
+#recording-controls { margin: 1rem 0; padding: .8rem; border: 1px solid var(--line); border-radius: .75rem; background: #edf3eb; }
+#recording-status { margin: 0 0 .65rem; font-weight: 650; }
+#recording-review audio { max-width: 100%; }
+
+/* The home screen uses a quiet sage backdrop and a separate scrolling surface. */
+body { background: #e4ede5; }
+.shell { background: #e4ede5; min-height: 100vh; }
+.goal-hero {
+  min-height: 24.5rem;
+  padding: max(1.6rem, env(safe-area-inset-top)) 1.5rem 3.1rem;
+  background: #dce9dd;
+}
+.greeting { align-items: center; }
+.greeting h1 { color: #2b3040; font-size: 1.48rem; font-weight: 700; letter-spacing: -.035em; }
+.greeting p { color: #596c60; font-size: .82rem; margin-top: .3rem; }
+.profile {
+  flex-basis: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid #91aa98;
+  background: #eaf3e9;
+  color: #505475;
+}
+.profile:hover { background: #f2f7f0; }
+.goal-ring {
+  width: min(53vw, 12.5rem);
+  margin: 2rem auto 0;
+  gap: .35rem;
+  color: #343950;
+  background: #e9f3e9;
+  border: 1px solid #81aa91;
+  box-shadow: inset 0 0 0 .55rem #d5e9d8, 0 0 0 .4rem #d0e3d2;
+}
+.goal-ring:hover { background: #eff8ef; }
+.goal-ring .goal-label { color: #536a5b; font-weight: 600; font-size: .8rem; }
+.goal-ring strong { font-size: clamp(1.4rem, 6vw, 2.15rem); letter-spacing: -.045em; }
+#goal-caption { max-width: 10rem; color: #617368; font-weight: 500; line-height: 1.35; }
+.dashboard-sheet {
+  margin-top: -1.6rem;
+  padding: 1.45rem 1.2rem 2rem;
+  border: 0;
+  border-radius: 1.7rem 1.7rem 0 0;
+  background: #f0f5ee;
+  box-shadow: 0 -5px 20px #324e3c0a;
+}
+.sheet-heading { margin: 0 .15rem 1rem; }
+.sheet-heading h2 { margin: 0; font-size: 1.16rem; letter-spacing: -.02em; }
+.sheet-heading p { color: #68796c; margin: .25rem 0 0; font-size: .8rem; }
+.dashboard-row {
+  min-height: 4.65rem;
+  margin-bottom: .65rem;
+  padding: .75rem .9rem;
+  border: 1px solid #d0dfd2;
+  border-radius: .85rem;
+  background: #e4eee3;
+  color: #303749;
+  grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+}
+.dashboard-row > span:last-child { font-size: 1.5rem; color: #6f8373; }
+.dashboard-row strong { font-size: .96rem; }
+.dashboard-row small { font-size: .76rem; }
+.row-icon { height: 2.75rem; background: #d2e4d5; color: #466a56; }
+.dashboard-row:nth-of-type(2) .row-icon { background: #e0dced; color: #585479; }
+.dashboard-row:nth-of-type(3) .row-icon { background: #d1e7e0; color: #3e776a; }
+.progress-box {
+  margin-top: .85rem;
+  padding: 1rem;
+  background: #e3ece3;
+  border-color: #d0dfd2;
+}
+.progress-box summary { color: #303749; min-height: 2rem; }
+.stats { margin: .4rem 0 .75rem; }
+.stats div { background: #f0f5ee; }
+.stats dd { font-size: 1.4rem; }
+.bottom-nav {
+  bottom: calc(.65rem + env(safe-area-inset-bottom));
+  padding: .35rem;
+  background: #f9fbf7;
+  box-shadow: 0 5px 20px #21392b1a;
+}
+.bottom-nav a { min-height: 3.25rem; align-content: center; text-align: center; }
+.bottom-nav a span:first-child { font-size: 1.2rem; font-weight: 700; }
+.bottom-nav a span:last-child { font-size: clamp(.58rem, 2.5vw, .68rem); line-height: 1.1; }
+.dashboard-row, .goal-ring, .bottom-nav a { transition: transform 110ms ease-out; }
+.dashboard-row:active, .goal-ring:active, .bottom-nav a:active { transform: scale(.98); }
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-row, .goal-ring, .bottom-nav a { transition: none; }
+}
+
+/* The week view reflects locally recorded practice days. */
+:root { font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; }
+.goal-hero { min-height: 0; padding-bottom: 3rem; }
+.greeting h1 { font-weight: 600; letter-spacing: -.035em; }
+.goal-ring { width: min(56vw, 13.3rem); margin-top: 1.5rem; }
+.goal-ring strong { font-weight: 600; }
+.week-heading {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.65rem .15rem .6rem;
+  font-size: .72rem;
+  font-weight: 650;
+  color: #475e50;
+}
+.week-strip {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.week-day { display: grid; justify-items: center; gap: .35rem; color: #4f6657; }
+.week-dot {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #a1bca6;
+  border-radius: 50%;
+  font-size: .75rem;
+  font-weight: 700;
+}
+.week-day.practiced .week-dot { background: #4d816c; color: #fff; border-color: #4d816c; }
+.week-day.today .week-dot { outline: 2px solid #8c439b; outline-offset: 2px; }
+.week-day-name { font-size: .68rem; }
+.dashboard-sheet { margin-top: -1.4rem; padding-top: 1.25rem; }
+.sheet-heading h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; font-size: 1.28rem; }
+.dashboard-row strong, .progress-box summary { font-family: Georgia, "Times New Roman", serif; font-size: 1rem; font-weight: 600; }
+.dashboard-row { min-height: 4.5rem; }
+@media (max-width: 340px) {
+  .week-dot { width: 1.75rem; height: 1.75rem; }
+}
+
+/* A darker upper area gives the practice panel its own light surface. */
+.goal-hero {
+  background: linear-gradient(155deg, #505778 0%, #62768a 52%, #8ba999 100%);
+}
+.greeting h1, .greeting p, .week-heading, .week-day { color: #f4f6f3; }
+.greeting p, .week-heading { color: #e2e9e5; }
+.week-dot { border-color: #d5e6dd; }
+.week-day.practiced .week-dot { background: #e5f1e7; color: #31483d; border-color: #e5f1e7; }
+.week-day.today .week-dot { outline-color: #efc5f2; }
+.goal-ring {
+  background: #e3eee7;
+  border-color: #b4cfc3;
+  box-shadow: inset 0 0 0 .55rem #d1e5d9, 0 0 0 .4rem #b4cfc480;
+}
+.dashboard-sheet { background: #f8f9f6; min-height: 80vh; }
+.session-list { display: grid; gap: .65rem; }
+.session-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 4.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #dce4dd;
+  border-radius: .85rem;
+  background: #edf1ee;
+  color: #343747;
+  text-align: left;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.session-row:hover { background: #e1ebe4; }
+.session-arrow { flex-shrink: 0; color: #60756a; font-family: system-ui, sans-serif; font-size: 1.6rem; padding-left: .75rem; }
+.add-session {
+  width: 100%;
+  margin-top: .8rem;
+  min-height: 3.2rem;
+  border: 1px dashed #a2b6aa;
+  background: transparent;
+  color: #4b6658;
+}
+.add-session:hover { background: #e8f0e9; }
+.session-limit { color: #53645b; font-size: .8rem; text-align: center; }
+.delete-session { margin-right: auto; background: transparent; color: #784652; border-color: #c9afb3; }
+.delete-session:hover { background: #f2e5e7; color: #67333e; }
+@media (prefers-reduced-motion: no-preference) {
+  .session-row:active, .add-session:active { transform: scale(.98); }
+  .session-row, .add-session { transition: transform 110ms ease-out; }
+}
+.sheet-hint { color: #708277; text-align: center; font-size: 1.25rem; line-height: .7; margin: -.3rem 0 .8rem; }
+
+.goal-carousel { display: grid; grid-template-columns: 2.8rem minmax(0, 1fr) 2.8rem; align-items: center; margin-top: 1.4rem; }
+.goal-carousel .goal-ring { margin: 0 auto; width: min(52vw, 13.3rem); }
+.goal-nav { padding: 0; width: 2.6rem; height: 2.6rem; border: 0; border-radius: 50%; background: transparent; color: #f5faf7; font-size: 2rem; line-height: 1; }
+.goal-nav:disabled { opacity: .3; }
+.goal-nav:hover:not(:disabled) { background: #ffffff25; }
+.goal-ring {
+  background: radial-gradient(circle at 45% 43%, #e3f5ee99, #b5d8ca55 45%, #648b9455 78%, #7fc9b988 100%);
+  border: 1px solid #b9fff0;
+  box-shadow: inset 0 0 1.2rem #c4ffeb88, 0 0 .5rem #adfff0, 0 0 1.2rem #74dfc888;
+  color: #fff;
+}
+.goal-ring:hover { background: radial-gradient(circle at 45% 43%, #e3f5eeaa, #b5d8ca55 45%, #648b9455 78%, #7fc9b988 100%); }
+.goal-ring .goal-label, #goal-caption { color: #f5fff9; }
+.goal-ring strong { font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: clamp(2.5rem, 12vw, 3.8rem); font-weight: 400; }
+.goal-position { text-align: center; color: #eef8f1; font-size: .72rem; margin: .7rem 0 0; }
+.week-day.past { opacity: .55; }
+.week-day.past .week-dot { border-style: dashed; }
+.week-day.today.practiced .week-dot { color: #31483d; }
+.sheet-heading { display: flex; justify-content: space-between; align-items: center; }
+.calendar-open { width: 2.75rem; height: 2.75rem; padding: 0; background: #e9efea; color: #435e50; border: 0; border-radius: 50%; font-size: 1.25rem; }
+.calendar-open:hover { background: #dae8dd; }
+.session-line { display: grid; grid-template-columns: minmax(0, 1fr) 4.5rem; align-items: stretch; }
+.session-card { position: relative; min-width: 0; }
+.session-row { padding-right: 3.4rem; }
+.session-check { position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); width: 1.5rem; height: 1.5rem; margin: 0; accent-color: #527d69; cursor: pointer; }
+.session-time { display: flex; align-items: center; justify-content: center; border-left: 1px solid #cadbd0; margin-left: .55rem; padding-left: .3rem; color: #566a5c; font-size: .65rem; text-align: center; overflow-wrap: anywhere; }
+.calendar-header { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.calendar-header button { min-width: 2.7rem; padding: .4rem; font-size: 1.3rem; }
+.calendar-header h2 { font-size: 1.2rem; text-align: center; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .2rem; margin: 1rem 0; text-align: center; }
+.calendar-grid span { font-size: .75rem; padding: .5rem 0; }
+.calendar-grid button { background: transparent; color: #2c3e35; border: 0; padding: .45rem 0; min-height: 2.5rem; }
+.calendar-grid button.past { color: #899990; }
+.calendar-grid button[aria-current="date"] { background: #525778; color: white; border-radius: 50%; }
+.calendar-grid button:hover { background: #d6e5d9; color: #293c33; }
+.skill-bar { display: grid; grid-template-columns: minmax(0, 1fr) 1.25fr 2.5rem; align-items: center; gap: .5rem; margin: .65rem 0; }
+.skill-bar input[type="text"], .skill-bar input:not([type]) { background: transparent; border: 0; padding: .35rem 0; font-size: .85rem; }
+.skill-bar input[type="range"] { padding: 0; accent-color: #667c94; }
+.skill-bar output { font-size: .75rem; }
+
+/* Keep the mobile navigation legible as content scrolls beneath it. */
+:root {
+  --nav-purple: #54547a;
+  --nav-lavender: #e8e8f0;
+  --nav-inactive: #54547a;
+}
+.bottom-nav::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  left: -.7rem;
+  right: -.7rem;
+  bottom: calc(-.65rem - env(safe-area-inset-bottom));
+  height: calc(5.75rem + env(safe-area-inset-bottom));
+  background: linear-gradient(to bottom, transparent, #f2f6f1b8 42%, #f2f6f1ed 100%);
+}
+.bottom-nav a[aria-current] { color: #45456b; background: #e8e8f0; }
+.week-day.today .week-dot { outline-color: #d9f4e8; }
+@media (max-width: 38rem) {
+  html { scrollbar-width: none; }
+  html::-webkit-scrollbar { display: none; }
+}
+
+.bottom-nav svg, .calendar-open svg { display: block; width: 1.25rem; height: 1.25rem; }
+.calendar-open { display: grid; place-items: center; background: transparent; border-radius: .4rem; }
+.calendar-open:hover { background: #e4ebe5; }
+.goal-ring strong { font-family: Georgia, "Times New Roman", serif; font-weight: 500; }
+.session-group-cards { display: grid; gap: .65rem; min-width: 0; }
+.session-line.untimed { grid-template-columns: 1fr; }
+.session-time {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: 0 0 0 .35rem;
+  margin-left: .4rem;
+}
+.session-time::before, .session-time::after {
+  content: "";
+  flex: 1;
+  min-height: .5rem;
+  width: 1px;
+  background: #cadbd0;
+}
+.skill-bar progress { display: block; width: 100%; height: .45rem; border: 0; border-radius: 1rem; overflow: hidden; background: #d4ded7; }
+.skill-bar progress::-webkit-progress-bar { background: #d4ded7; border-radius: 1rem; }
+.skill-bar progress::-webkit-progress-value { background: #667c94; border-radius: 1rem; }
+.skill-bar progress::-moz-progress-bar { background: #667c94; border-radius: 1rem; }
+
+/* A single soft ring keeps the countdown readable against the navy background. */
+.goal-ring, .goal-ring:hover {
+  background: radial-gradient(circle at 48% 42%, #90bcb49a, #6c929c83 60%, #789e9b8c 100%);
+  border: 1px solid #c6f1e4;
+  box-shadow: inset 0 0 1.4rem #dafbef38, 0 0 .55rem #a0e9d75c;
+}
+.goal-ring strong { font-family: Georgia, "Times New Roman", serif; letter-spacing: -.035em; }
+dialog {
+  max-height: min(85dvh, 46rem);
+  overflow-y: auto;
+  border: 1px solid #dce7dc;
+  border-radius: 1.4rem;
+  padding: 1.4rem;
+  background: #f7faf6;
+  color: #303747;
+  box-shadow: 0 1.2rem 3rem #263b3450;
+}
+dialog::backdrop { background: #27344788; }
+dialog h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; letter-spacing: -.025em; }
+dialog form { gap: .95rem; }
+dialog label { font-size: .8rem; font-weight: 700; color: #46574f; gap: .45rem; }
+dialog input, dialog select, dialog textarea {
+  min-height: 2.9rem;
+  font-family: inherit;
+  font-size: .95rem;
+  font-weight: 400;
+  border: 1px solid #c8d8cb;
+  border-radius: .75rem;
+  background: #eef4ed;
+  color: #2d3940;
+  padding: .72rem .85rem;
+}
+dialog textarea { resize: vertical; }
+dialog .date-field {
+  cursor: pointer;
+  background: #eef4ed;
+  color: #34463c;
+}
+dialog .dialog-actions { gap: .45rem; flex-wrap: wrap; margin-top: .25rem; }
+dialog .dialog-actions button { min-height: 2.8rem; border-radius: .7rem; padding: .65rem .9rem; }
+#calendar-dialog { width: min(24rem, calc(100% - 2rem)); padding: 1.4rem; }
+.calendar-kicker { margin: 0 0 .3rem; color: #607369; font-size: .78rem; font-weight: 650; }
+.calendar-header { margin: .2rem 0 .8rem; }
+.calendar-header h2 { font-size: 1.35rem; }
+.calendar-header button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #d8e4da;
+  border-radius: .75rem;
+  background: #edf4ed;
+  color: #4d6170;
+}
+.calendar-header button:hover { background: #dcebe0; }
+.calendar-grid { gap: .2rem; margin: .6rem 0 .2rem; }
+.calendar-grid span { color: #697c70; font-weight: 700; font-size: .7rem; }
+.calendar-grid button { min-width: 0; height: 2.7rem; border-radius: .7rem; font-weight: 500; }
+.calendar-grid button.past { color: #89988f; }
+.calendar-grid button.calendar-today { box-shadow: inset 0 0 0 1px #829d8a; }
+.calendar-grid button[aria-current="date"] { border-radius: .7rem; background: #54547a; color: white; }
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open] { animation: dialog-appear 180ms cubic-bezier(.16, 1, .3, 1); }
+  @keyframes dialog-appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+}
+
+#goal-dialog form { text-align: center; }
+#goal-dialog label { text-align: center; font-family: Georgia, "Times New Roman", serif; font-size: .95rem; font-weight: 600; }
+#goal-dialog input { text-align: center; font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; }
+#goal-dialog .dialog-actions { justify-content: center; }
+.time-field { cursor: pointer; text-align: center; }
+#time-dialog h2 { text-align: center; }
+.time-picker { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .55rem; }
+.time-picker label { text-align: center; font-size: .75rem; }
+.time-picker select { text-align: center; padding: .65rem .3rem; font-size: 1.05rem; }
+#time-dialog .dialog-actions { justify-content: center; }
+
+/* A consistent type system for session, calendar, goal, and time controls. */
+:root { font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; }
+dialog, dialog button, dialog input, dialog select, dialog textarea {
+  font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+}
+dialog h2, .calendar-header h2, #goal-dialog label {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -.025em;
+}
+#calendar-dialog { background: #f8faf6; }
+.calendar-kicker { color: #5b7164; letter-spacing: .01em; }
+.calendar-grid button { font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: .9rem; }
+.calendar-grid button:disabled { color: #aab8ad; cursor: not-allowed; background: transparent; }
+#session-dialog label, #time-dialog label { font-size: .8rem; letter-spacing: .01em; }
+.session-row:disabled { opacity: .65; }
+.session-check:disabled { opacity: .55; cursor: default; }
