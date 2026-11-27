@@ -337,3 +337,21 @@ On the complete ES2008a.A development recording, retaining a verbatim-transcript
 ### Wrist trajectory recurrence
 
 Tested normalized autocorrelation of detrended, shoulder-relative wrist trajectories as an alternative to counting extrema. A candidate needed sufficient motion amplitude and a positive local correlation maximum at a lag between four frames and half the interval. Using the same five previously studied development speakers with threshold selection on the other four, it scored 0.234 pooled F1 (64 TP, 326 FP, 94 FN), compared with 0.289 for the matched extrema-count baseline. Missing tracks counted as errors. The evaluation used presegmented gestures, so it does not measure full-recording detections. Reproduce with `gesres_repetition_pilot.py --autocorrelation` on the `train5` corpus. No rule was promoted.
+
+### Frozen repetition filter replication and rate diagnostic
+
+The frozen 0.2 acoustic corroboration rule improved pooled repetition F1 from 0.216 to 0.333 on two additional complete recordings, ES2006a.A and TS3005a.A. The unfiltered rule found 8/12 references from 62 predictions. The filtered rule found 6/12 from 24 predictions, reducing false alarms from 1.245 to 0.415 per minute. Per-recording F1 was 0.444 and 0.222. These AMI training recordings were outside the one-recording threshold selection but were previously used in other development experiments. The official test remains unused.
+
+Compared recording-length words per minute against the annotated participant's transcript with the same tokenization and added `--rate-diagnostic` to reproduce. On ES2006a.A, TS3005a.A and ES2008a.A the verbatim ASR estimates were 75.9, 110.7 and 90.7 WPM versus references of 24.7, 71.3 and 65.3 WPM. Mean absolute error was 38.6 WPM. The ASR sees meeting audio and may transcribe other speakers. These are development diagnostics, and no formal rate tolerance has been validated for onboarding.
+
+### Per-feature acceptance inventory
+
+| Scope | Features | Acceptance status |
+|---|---|---|
+| Audio event detectors | Fillers, repetitions, pauses | Development diagnostics below 0.50. The pause result uses a word-gap proxy. |
+| Audio rate | Speaking rate, rate changes | Development overcount on meeting audio. Independent single-speaker benchmark and frozen per-feature tolerances needed. |
+| Other emitted audio | Revisions, prompt coverage, organization, pitch variation, energy variation | Independent reference scores unavailable. |
+| Remaining five audio features | Five additional distinct outputs still required to reach 15 | Feature definitions, implementation and independent validation remain open. |
+| Video gesture behavior | Rapid gesture, repeated gesture, head motion | Proxy or presegmented benchmarks only. Full-recording validation needed. Repeated gesture is an experimental detector outside the standard output. |
+| Other standard video outputs | Shoulder tilt, lateral lean, torso sway, vertical motion, head-turn proxy, left and right hand motion, hand asymmetry, gesture span, hands together, hand near face, wrist visibility, pose coverage | No completed independent acceptance benchmarks. |
+| Video tracking and camera diagnostics | Hand landmarks, facial landmarks, camera motion | Cropped stills or controlled clips where available. Independent full-recording validation remains open. |

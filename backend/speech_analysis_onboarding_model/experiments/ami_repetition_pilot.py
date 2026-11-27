@@ -103,7 +103,10 @@ def main():
     )
     parser.add_argument("--acoustic-dir", type=Path, help="Filter ASR repeats using cached acoustic scores")
     parser.add_argument("--acoustic-min-peak", type=float, default=0.2)
+    parser.add_argument("--rate-diagnostic", action="store_true")
     args = parser.parse_args()
+    if args.rate_diagnostic and not args.word_cache_dir:
+        parser.error("--rate-diagnostic requires --word-cache-dir")
     if args.acoustic_dir and not args.word_cache_dir:
         parser.error("--acoustic-dir requires --word-cache-dir")
     if not args.recordings or len(set(args.recordings)) != len(args.recordings):
@@ -125,6 +128,8 @@ def main():
             reference = reference_repetitions(archive, name, by_id)
             with open_wave(str(args.audio_dir / f"{name}.wav")) as wav:
                 duration = wav.getnframes() / wav.getframerate()
+            if args.rate_diagnostic:
+                reference_rates = analyze_features(duration, [(0, duration)], words, [])
             if args.prediction_dir:
                 result = json.loads((args.prediction_dir / f"{name}.json").read_text())
                 feature = result["features"]["repetitions"]
@@ -143,9 +148,13 @@ def main():
                         for row in rows_from_asr
                         if row["word"].strip().lower() not in {"[breath]", "[noise]", "[laughter]"}
                     ]
-                prediction = analyze_features(duration, [(0, duration)], words, [])[
-                    "repetitions"
-                ]["value"]
+                features = analyze_features(duration, [(0, duration)], words, [])
+                prediction = features["repetitions"]["value"]
+                if args.rate_diagnostic:
+                    for feature in ("speaking_rate", "rate_changes"):
+                        observed = features[feature]["value"]
+                        expected = reference_rates[feature]["value"]
+                        print("rate diagnostic", name, feature, observed, expected)
             if prediction is not None:
                 prediction = [
                     {"start_s": e["start_s"], "end_s": e["end_s"]} for e in prediction
