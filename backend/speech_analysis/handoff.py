@@ -3,7 +3,8 @@
 import math
 from .video import NAMES as VIDEO_FEATURES
 
-PROFILE_FIELDS = ('goal', 'goals', 'situations', 'challenges', 'priority', 'constraints', 'age_band')
+PROFILE_FIELDS = ('goal', 'goals', 'situations', 'challenges', 'priority', 'constraints', 'age_band',
+                  'motivation', 'follow_up_answers')
 FEATURES = ('speaking_rate', 'rate_changes', 'pauses', 'fillers', 'repetitions', 'revisions',
             'pitch_variation', 'energy_variation', 'opening_context', 'main_point', 'supporting_detail',
             'transitions', 'closing', 'prompt_relevance', 'prompt_completion')

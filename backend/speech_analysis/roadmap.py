@@ -74,48 +74,56 @@ def openai_roadmap(payload, key):
     raise ValueError('missing roadmap output')
 
 
+def generate_roadmap(request, provider=None, *, include_experimental=False):
+    if not request.confirmed or not request.goal.strip():
+        raise HTTPException(422, 'Confirm the profile and select a speaking goal.')
+    try:
+        if any(not isinstance(row.get('result'), dict) or
+               not isinstance(row['result'].get('features'), dict) for row in request.samples):
+            raise ValueError('Each sample requires a result with features.')
+        session = combine_results(request.samples)
+        evidence = roadmap_evidence({**request.profile, 'goal': request.goal}, session)
+    except (TypeError, ValueError, AttributeError) as exc:
+        raise HTTPException(422, 'Invalid recording results.') from exc
+
+    supported = {}
+    names = evidence['audio_evidence'] if include_experimental else ('speaking_rate', 'pauses', 'rate_changes')
+    statuses = {'estimated', 'experimental'} if include_experimental else {'estimated'}
+    for name in names:
+        item = evidence['audio_evidence'].get(name)
+        if item:
+            rows = [{'sample_index': index, 'status': row['status'], 'value': row['value']}
+                    for index, row in enumerate(item['samples'], start=1)
+                    if row['status'] in statuses and row['value'] is not None]
+            if rows:
+                supported[name] = rows
+
+    key = os.getenv('OPENAI_API_KEY')
+    if provider is None and not key:
+        raise HTTPException(503, 'Configure OPENAI_API_KEY for live roadmap generation.')
+    payload = {'profile': evidence['profile'], 'observations': supported, 'catalog': CATALOG,
+               'limitations': ('Measurements depend on the prompt and recording quality. Experimental observations are tentative. '
+                                   'Use these to suggest practice aligned with the stated goal. Avoid unsupported weakness claims.')}
+    try:
+        raw = provider(payload) if provider else openai_roadmap(payload, key)
+        roadmap = Roadmap.model_validate(raw)
+        if any(activity.catalog_id not in CATALOG for activity in roadmap.current_week):
+            raise ValueError('invalid catalog reference')
+    except (OSError, ValueError, RuntimeError, ValidationError) as exc:
+        raise HTTPException(502, 'Roadmap provider failed or returned an invalid response.') from exc
+    return {'evidence': evidence, 'recording_quality': session['samples'],
+            'weeks': roadmap.weeks, 'current_week': [
+                {**activity.model_dump(), 'duration_minutes': 10}
+                for activity in roadmap.current_week]}
+
+
+
 def create_app(provider=None):
     app = FastAPI()
 
     @app.post('/api/roadmap/generate')
     def generate(request: Onboarding):
-        if not request.confirmed or not request.goal.strip():
-            raise HTTPException(422, 'Confirm the profile and select a speaking goal.')
-        try:
-            if any(not isinstance(row.get('result'), dict) or
-                   not isinstance(row['result'].get('features'), dict) for row in request.samples):
-                raise ValueError('Each sample requires a result with features.')
-            session = combine_results(request.samples)
-            evidence = roadmap_evidence({**request.profile, 'goal': request.goal}, session)
-        except (TypeError, ValueError, AttributeError) as exc:
-            raise HTTPException(422, 'Invalid recording results.') from exc
-
-        # Only the measured timing fields have a clear descriptive meaning.
-        supported = {}
-        for name in ('speaking_rate', 'pauses', 'rate_changes'):
-            item = evidence['audio_evidence'].get(name)
-            if item:
-                rows = [row for row in item['samples'] if row['status'] == 'estimated'
-                        and row['value'] is not None]
-                if rows:
-                    supported[name] = rows
-
-        key = os.getenv('OPENAI_API_KEY')
-        if provider is None and not key:
-            raise HTTPException(503, 'Configure OPENAI_API_KEY for live roadmap generation.')
-        payload = {'profile': evidence['profile'], 'observations': supported, 'catalog': CATALOG,
-                   'limitations': 'Timing varies with prompt and recording quality. Do not infer a weakness.'}
-        try:
-            raw = provider(payload) if provider else openai_roadmap(payload, key)
-            roadmap = Roadmap.model_validate(raw)
-            if any(activity.catalog_id not in CATALOG for activity in roadmap.current_week):
-                raise ValueError('invalid catalog reference')
-        except (OSError, ValueError, RuntimeError, ValidationError) as exc:
-            raise HTTPException(502, 'Roadmap provider failed or returned an invalid response.') from exc
-        return {'evidence': evidence, 'recording_quality': session['samples'],
-                'weeks': roadmap.weeks, 'current_week': [
-                    {**activity.model_dump(), 'duration_minutes': 10}
-                    for activity in roadmap.current_week]}
+        return generate_roadmap(request, provider)
 
     return app
 
