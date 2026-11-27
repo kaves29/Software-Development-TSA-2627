@@ -101,7 +101,11 @@ def main():
         type=Path,
         help="Score existing analysis JSON instead of oracle words",
     )
+    parser.add_argument("--acoustic-dir", type=Path, help="Filter ASR repeats using cached acoustic scores")
+    parser.add_argument("--acoustic-min-peak", type=float, default=0.2)
     args = parser.parse_args()
+    if args.acoustic_dir and not args.word_cache_dir:
+        parser.error("--acoustic-dir requires --word-cache-dir")
     if not args.recordings or len(set(args.recordings)) != len(args.recordings):
         parser.error("recordings must be unique")
     with ZipFile(args.annotations) as archive:
@@ -145,6 +149,15 @@ def main():
             if prediction is not None:
                 prediction = [
                     {"start_s": e["start_s"], "end_s": e["end_s"]} for e in prediction
+                ]
+            if args.acoustic_dir:
+                import numpy as np
+
+                scores = np.load(args.acoustic_dir / f"{name}.npy", allow_pickle=False)[:, 1]
+                prediction = [
+                    event for event in prediction
+                    if scores[int(event["start_s"] * 50):int(event["end_s"] * 50) + 1]
+                    .max(initial=0) >= args.acoustic_min_peak
                 ]
             row = {
                 "duration_s": duration,
