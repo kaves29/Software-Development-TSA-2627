@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
+
+from backend.onboarding import InitialAnswers, FollowUpResponse, ProviderUnavailable, generate_followups
 
 
 class Question(BaseModel):
@@ -61,3 +63,16 @@ def health() -> dict[str, str]:
 @app.get("/v1/onboarding/questions", response_model=QuestionSet)
 def onboarding_questions() -> QuestionSet:
     return QUESTIONS
+
+
+@app.post("/v1/onboarding/follow-ups", response_model=FollowUpResponse)
+def follow_up_questions(answers: InitialAnswers) -> FollowUpResponse:
+    options = {question.id: question.options for question in QUESTIONS.questions}
+    try:
+        answers.validate_options(options)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    try:
+        return generate_followups(answers)
+    except ProviderUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
