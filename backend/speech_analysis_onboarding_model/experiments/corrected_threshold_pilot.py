@@ -8,7 +8,10 @@ from zipfile import ZipFile
 
 import numpy as np
 from speech_analysis_onboarding_model.ami_split import recording_splits
-from speech_analysis_onboarding_model.evaluate import recording_event_metrics
+from speech_analysis_onboarding_model.evaluate import (
+    event_scores,
+    recording_event_metrics,
+)
 from speech_analysis_onboarding_model.evaluate_ami import filler_reference
 from speech_analysis_onboarding_model.filler_frames import decode_hysteresis
 
@@ -18,6 +21,8 @@ parser.add_argument("--sdk-dir", type=Path, required=True)
 parser.add_argument("--acoustic-dir", type=Path, required=True)
 parser.add_argument("--label-dir", type=Path, required=True)
 parser.add_argument("--holdout", help="Score a fixed 0.2/0.1 rule on this recording")
+parser.add_argument("--candidate-audit", action="store_true")
+parser.add_argument("--rescue", action="store_true", help="Test high-confidence acoustic-only candidates")
 parser.add_argument("recordings", nargs="+")
 args = parser.parse_args()
 names = args.recordings
@@ -36,6 +41,7 @@ if not set(names) <= allowed.keys() or len({allowed[n] for n in names}) != len(n
     parser.error("recordings must be non-test and have distinct speakers")
 thresholds = (0.2, 0.3, 0.4, 0.5, 0.6)
 windows = (0.1, 0.25, 0.5, 1.0)
+rescue_levels = (1.1, 0.65, 0.8, 0.9, 0.95) if args.rescue else (1.1,)
 rows = {}
 for n in names:
     a = json.loads((args.sdk_dir / f"{n}.recall.json").read_text())
@@ -54,6 +60,23 @@ for n in names:
             y = min(len(w), max(x + 1, round(e["end_s"] / 0.02)))
             e["text"] = ["um", "uh"][w[x:y, 1:3].sum(0).argmax()]
         print("candidate_count", n, t, len(events), flush=True)
+        if args.candidate_audit and t == 0.2:
+            sdk_events = [
+                {"start_s": filler["start"], "end_s": filler["end"]}
+                for filler in a["fillers"]
+            ]
+            untyped_refs = [{k: event[k] for k in ("start_s", "end_s")} for event in refs]
+            untyped_acoustic = [{k: event[k] for k in ("start_s", "end_s")} for event in events]
+            for source, candidates in (
+                ("sdk", sdk_events),
+                ("acoustic", untyped_acoustic),
+                ("union", sdk_events + untyped_acoustic),
+                ("acoustic typed", events),
+            ):
+                reference = refs if source == "acoustic typed" else untyped_refs
+                score = event_scores(candidates, reference, 0.25)
+                print("candidate audit", n, source, score["matches"], len(candidates), len(refs))
+
         for window in windows:
             kept = [
                 e
@@ -64,15 +87,17 @@ for n in names:
                     for u in a["fillers"]
                 )
             ]
-            options[(t, window)] = {
-                "duration_s": a["duration"],
-                "predicted": kept,
-                "reference": refs,
-            }
+            for rescue in rescue_levels:
+                predicted = [e for e in events if e in kept or e["score"] >= rescue]
+                options[(t, window, rescue)] = {
+                    "duration_s": a["duration"],
+                    "predicted": predicted,
+                    "reference": refs,
+                }
     rows[n] = options
 if args.holdout:
     target = args.holdout
-    result = rows[target][(0.2, 0.1)]
+    result = rows[target][(0.2, 0.1, 1.1)]
     sdk = json.loads((args.sdk_dir / f"{target}.recall.json").read_text())
     labels = np.load(args.label_dir / f"{target}.frame.npy", allow_pickle=False)
     baseline = []
@@ -93,7 +118,7 @@ scores = []
 for target in names:
     train = [n for n in names if n != target]
     best = max(
-        product(thresholds, windows),
+        product(thresholds, windows, rescue_levels),
         key=lambda k: (recording_event_metrics([rows[n][k] for n in train])["f1"], k),
     )
     r = rows[target][best]
@@ -112,6 +137,6 @@ for setting in ((0.2, 0.1), (0.3, 0.1), (0.4, 0.1), (0.5, 0.1), (0.6, 0.1)):
     print(
         "fixed",
         setting,
-        recording_event_metrics([rows[n][setting] for n in names]),
+        recording_event_metrics([rows[n][(*setting, 1.1)] for n in names]),
         flush=True,
     )
