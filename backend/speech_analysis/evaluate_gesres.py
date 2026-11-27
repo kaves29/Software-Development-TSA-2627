@@ -22,7 +22,10 @@ def main():
     parser.add_argument('--pose-model', type=Path, required=True)
     parser.add_argument('--fps', type=int, choices=(5, 10), required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--crop-left-pixels', type=int, default=0, help='Optional research-only crop in source pixels')
     args = parser.parse_args()
+    if args.crop_left_pixels < 0:
+        parser.error('crop-left-pixels cannot be negative')
     video.FPS = args.fps  # Per-frame hand movement is compared only within the same fps.
     with args.annotations.open(encoding='utf-8-sig', newline='') as source:
         rows = [row for row in csv.DictReader(source) if row['id'] == args.video_id]
@@ -35,9 +38,11 @@ def main():
             if not 0 <= start < end:
                 raise ValueError(f'invalid annotation interval at row {index + 1}')
             clip = Path(temp) / f'{index}.mp4'
-            subprocess.run(['ffmpeg', '-v', 'error', '-nostdin', '-ss', str(start),
-                            '-i', str(args.video), '-t', str(end - start), '-an',
-                            '-c:v', 'libx264', '-preset', 'ultrafast', '-y', str(clip)],
+            command = ['ffmpeg', '-v', 'error', '-nostdin', '-ss', str(start),
+                       '-i', str(args.video), '-t', str(end - start), '-an']
+            if args.crop_left_pixels:
+                command += ['-vf', f'crop=iw-{args.crop_left_pixels}:ih:{args.crop_left_pixels}:0']
+            subprocess.run(command + ['-c:v', 'libx264', '-preset', 'ultrafast', '-y', str(clip)],
                            check=True, timeout=30)
             output = video.analyze_video(clip, args.pose_model)
             results.append({'index': index + 1, 'start_s': start, 'end_s': end,
@@ -47,7 +52,8 @@ def main():
                             'rapid_motion': output['features']['rapid_gesture'],
                             'frames': output['quality']['frames'],
                             'pose_frames': output['quality']['pose_frames']})
-    args.output.write_text(json.dumps({'video_id': args.video_id, 'fps': args.fps, 'results': results}, indent=2) + '\n')
+    args.output.write_text(json.dumps({'video_id': args.video_id, 'fps': args.fps,
+                                      'crop_left_pixels': args.crop_left_pixels, 'results': results}, indent=2) + '\n')
 
 
 if __name__ == '__main__':
