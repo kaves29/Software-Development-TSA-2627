@@ -62,3 +62,16 @@ def test_retimed_gate_uses_label_duration_and_never_exceeds_recording():
     actual = retimed_level_gated_fillers(events, np.ones(1000), 1000)
     assert [event['start_s'] for event in actual] == [.1, .8]
     assert [event['end_s'] for event in actual] == [pytest.approx(.79), 1.0]
+
+
+def test_verbatim_adapter_clamps_rounding_at_recording_end():
+    duration = 2584.234625
+    with pytest.warns(RuntimeWarning, match='rounded word ends'):
+        result = analyze_timestamped_words(duration, [(0, duration)], [
+            word('[UH]', 2583.64, 2584.24),
+        ])
+    assert result['fillers']['value'][0]['end_s'] == round(duration, 3)
+    with pytest.raises(ValueError, match='timestamps'):
+        analyze_timestamped_words(duration, [(0, duration)], [
+            word('[UH]', 2583.64, 2584.4),
+        ])

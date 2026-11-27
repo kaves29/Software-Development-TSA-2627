@@ -13,7 +13,7 @@ TAG = re.compile(r'\s*\[([^\[\]]+)\][.!?,;:]*\s*')
 def analyze_timestamped_words(duration, speech, words, targets=(), *, repetition_candidate=False):
     """Use timed word objects from a backend such as CrisperWhisper."""
     normalized = []
-    collapsed = 0
+    collapsed = clamped = 0
     for word in words:
         text = word.word.strip()
         tag = TAG.fullmatch(text)
@@ -23,12 +23,18 @@ def analyze_timestamped_words(duration, speech, words, targets=(), *, repetition
                 continue
         start, end = word.start, word.end
         if (not all(isinstance(t, (int, float)) and math.isfinite(t) for t in (start, end))
-                or not 0 <= start <= end <= duration):
+                or not (0 <= start <= duration and start <= end <= duration + .01)):
             raise ValueError(f'Invalid verbatim word timestamps: {start!r}, {end!r}')
+        if end > duration:
+            clamped += 1
+            end = duration
         if start == end:
             collapsed += 1
             continue
         normalized.append((text, start, end))
+    if clamped:
+        warnings.warn(f'Clamped {clamped} rounded word ends to the recording duration',
+                      RuntimeWarning, stacklevel=2)
     if collapsed:
         warnings.warn(f'Skipped {collapsed} zero-duration verbatim words', RuntimeWarning, stacklevel=2)
     normalized.sort(key=lambda word: word[1])
