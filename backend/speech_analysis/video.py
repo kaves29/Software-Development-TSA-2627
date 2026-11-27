@@ -44,8 +44,7 @@ def observations(frames):
                         current['head'] = (nose - center) / scale
                     ears = [point(7), point(8)]
                     if nose is not None and all(p is not None for p in ears):
-                        distances = [np.linalg.norm(nose - p) for p in ears]
-                        values['head_turn_proxy'].append(abs(distances[0] - distances[1]) / max(sum(distances), .01))
+                        values['head_turn_proxy'].append(nose_ear_asymmetry(nose, ears))
                     for side, index in [('left', 15), ('right', 16)]:
                         wrist = point(index)
                         if wrist is not None:
@@ -87,6 +86,22 @@ def observations(frames):
             result[name] = {'status': 'experimental', 'value': round(float(aggregate(measurements)), 4),
                             'valid_frames': len(measurements)}
     return result
+
+
+def nose_ear_asymmetry(nose, ears):
+    distances = [np.linalg.norm(nose - ear) for ear in ears]
+    return float(abs(distances[0] - distances[1]) / max(sum(distances), .01))
+
+
+def absolute_face_yaw(matrix):
+    """Estimate absolute head turn in degrees from the face transform."""
+    matrix = np.asarray(matrix)
+    if matrix.shape != (4, 4) or not np.isfinite(matrix).all():
+        return None
+    horizontal, forward = matrix[0, 2], matrix[2, 2]
+    if np.hypot(horizontal, forward) < 1e-6:
+        return None
+    return float(abs(np.degrees(np.arctan2(horizontal, forward))))
 
 
 def proximity_intervals(frames):
@@ -191,7 +206,7 @@ def analyze_video(path, model, *, hand_model=None, face_model=None):
                 face = stack.enter_context(mp.tasks.vision.FaceLandmarker.create_from_options(
                     mp.tasks.vision.FaceLandmarkerOptions(
                         base_options=mp.tasks.BaseOptions(model_asset_path=str(face_model)),
-                        running_mode=running_mode)))
+                        running_mode=running_mode, output_facial_transformation_matrixes=True)))
             for index in range(count):
                 frame = np.frombuffer(pixels.read(frame_bytes), np.uint8).reshape(HEIGHT, WIDTH, 3)
                 image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame)
@@ -208,6 +223,8 @@ def analyze_video(path, model, *, hand_model=None, face_model=None):
                     hands = hand.detect_for_video(image, timestamp).hand_landmarks if hand else []
                     face_result = face.detect_for_video(image, timestamp) if face else None
                     faces = face_result.face_landmarks if face_result else []
+                    transforms = face_result.facial_transformation_matrixes if face_result else []
+                    yaw = absolute_face_yaw(transforms[0]) if len(transforms) else None
                     near_face = None
                     if hands and faces:
                         eyes = np.array([(faces[0][i].x, faces[0][i].y) for i in (33, 263)])
@@ -219,6 +236,7 @@ def analyze_video(path, model, *, hand_model=None, face_model=None):
                                                  for finger in (points[i] for i in (4, 8, 12, 16, 20))))
                     detail.append({'time_s': timestamp / 1000, 'hands_detected': len(hands) if hand else None,
                                    'face_detected': bool(faces) if face else None,
+                                   'absolute_face_yaw_degrees': yaw,
                                    'fingertip_near_face': near_face})
     camera_motion = ('unavailable' if len(shifts) < max(5, (count - 1) * .5)
                      else 'movement_detected' if np.percentile(shifts, 90) >= 3 else 'low_translation')

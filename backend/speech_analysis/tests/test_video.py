@@ -69,3 +69,15 @@ class ProximityReturnTests(unittest.TestCase):
                 frames = [{'time_s': i / 5, 'fingertip_near_face': state}
                           for i, state in enumerate(states)]
                 self.assertEqual(observed_proximity_returns(frames, proximity_intervals(frames)), expected)
+
+
+def test_absolute_face_yaw_extracts_rotation_without_scale_dependence():
+    import numpy as np
+    from speech_analysis.video import absolute_face_yaw
+
+    angle = np.deg2rad(-35)
+    transform = np.eye(4)
+    transform[:3, 2] = 2 * np.array([np.sin(angle), 0, np.cos(angle)])
+    np.testing.assert_allclose(absolute_face_yaw(transform), 35)
+    transform[:3, 2] = 0
+    assert absolute_face_yaw(transform) is None

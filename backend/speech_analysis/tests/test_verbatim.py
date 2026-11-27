@@ -42,3 +42,23 @@ def test_level_gate_discards_quiet_events_and_keeps_abstentions():
     loud = {'text': 'um', 'start_s': 1.2, 'end_s': 1.4}
     assert level_gated_fillers([quiet, loud], audio, 1000) == [loud]
     assert level_gated_fillers(None, audio, 1000) is None
+
+
+def test_repetition_candidate_keeps_chain_and_ignores_fillers_but_not_long_gaps():
+    from speech_analysis.verbatim import repeat_events
+
+    words = [('we', .1, .2), ('uh', .25, .35), ('we', .4, .5), ('we', .55, .65),
+             ('can', .7, .8), ('can', 2., 2.1)]
+    assert repeat_events(words) == [{'text': 'we we we', 'start_s': .1, 'end_s': .65}]
+
+
+def test_retimed_gate_uses_label_duration_and_never_exceeds_recording():
+    import numpy as np
+
+    from speech_analysis.verbatim import retimed_level_gated_fillers
+
+    events = [{'text': 'um', 'start_s': .1, 'end_s': .7},
+              {'text': 'uh', 'start_s': .8, 'end_s': 1.0}]
+    actual = retimed_level_gated_fillers(events, np.ones(1000), 1000)
+    assert [event['start_s'] for event in actual] == [.1, .8]
+    assert [event['end_s'] for event in actual] == [pytest.approx(.79), 1.0]
