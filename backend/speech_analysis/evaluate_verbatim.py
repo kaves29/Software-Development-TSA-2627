@@ -30,6 +30,8 @@ def main():
     parser.add_argument('--device', choices=('cpu', 'cuda'), default='cpu')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--cpu-int8', action='store_true', help='use CTranslate2 CPU inference')
+    parser.add_argument('--timing-method', choices=('attention', 'forced_aligner'),
+                        default='attention')
     parser.add_argument('--event-cache', type=Path, help='optional local JSON with filler timestamps')
     args = parser.parse_args()
     if args.cpu_int8 and args.device != 'cpu':
@@ -89,7 +91,11 @@ def main():
                               for (_, end), (start, _) in zip(longer_speech, longer_speech[1:])
                               if start > end],
             })
-            result = model.transcribe(audio, sr=sample_rate, language='en', word_timestamps=True)
+            result = model.transcribe(audio, sr=sample_rate, language='en', word_timestamps=True,
+                                      timing_method=args.timing_method)
+            if (args.timing_method == 'forced_aligner'
+                    and result.timing_method != 'forced_aligner'):
+                raise RuntimeError(f'{path.stem}: the backend fell back from forced alignment')
             repetition_ref = repetition_references(archive, path.stem, duration)
             features = analyze_timestamped_words(duration, speech, result.words or [],
                                                  repetition_candidate=repetition_ref is not None)
@@ -128,6 +134,7 @@ def main():
                 'model': args.model,
                 'backend': backend,
                 'precision': precision,
+                'timing_method': args.timing_method,
                 'complete': len(rows) == len(args.recordings),
                 'pooled': benchmark(rows, tolerances),
                 'level_gated_filler_candidate': benchmark(gated_rows, tolerances),
