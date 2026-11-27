@@ -1,4 +1,4 @@
-"""Build independent filler and rate references from AMI manual word timing."""
+"""Build independent filler, rate, and inter-segment pause references from AMI manual word timing."""
 
 import argparse
 import json
@@ -36,6 +36,27 @@ def word_references(archive, recording, duration):
     return reference
 
 
+def segment_gap_references(archive, recording, duration):
+    """Use gaps between manual speaker segments, excluding track edges."""
+    if not math.isfinite(duration) or duration <= 0:
+        raise ValueError('provide the complete recording duration in seconds')
+    with archive.open(f'segments/{recording}.segments.xml') as stream:
+        root = ElementTree.parse(stream).getroot()
+    spans = sorted((float(node.attrib['transcriber_start']),
+                    float(node.attrib['transcriber_end'])) for node in root.iter('segment'))
+    gaps = []
+    previous_end = None
+    for start, end in spans:
+        if not 0 <= start < end <= duration:
+            raise ValueError(f'{recording}: segment timing outside recording: {start}, {end}')
+        if previous_end is not None and start > previous_end:
+            gaps.append({'start_s': previous_end, 'end_s': start})
+        previous_end = end if previous_end is None else max(previous_end, end)
+    if not spans:
+        raise ValueError(f'{recording}: no manual speaker segments')
+    return gaps
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('archive', type=Path)
@@ -44,6 +65,7 @@ def main():
     args = parser.parse_args()
     with ZipFile(args.archive) as archive:
         reference = word_references(archive, args.recording, args.duration)
+        reference['pauses'] = segment_gap_references(archive, args.recording, args.duration)
     print(json.dumps(reference, indent=2))
 
 
