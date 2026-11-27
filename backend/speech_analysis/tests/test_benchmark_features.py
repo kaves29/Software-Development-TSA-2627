@@ -27,3 +27,21 @@ def test_event_matching_recovers_matches_that_greedy_matching_misses():
     ref = [{'start_s': t, 'end_s': t + .1} for t in (0.72, 1.0)]
     pred = [{'start_s': t, 'end_s': t + .1} for t in (0.9, 1.13)]
     assert event_scores(pred, ref, .2)['matches'] == 2
+
+
+def test_paired_comparison_uses_same_labels_and_rejects_development_overlap():
+    import pytest
+    from speech_analysis.benchmark_features import compare
+
+    event = {'start_s': 1.0, 'end_s': 1.2, 'text': 'uh'}
+    row = {'id': 'held-out', 'speaker': 'H', 'duration_s': 60,
+           'baseline_features': {'fillers': {'value': []}},
+           'features': {'fillers': {'value': [event]}},
+           'reference': {'uh': [event]}}
+    manifest = {'recordings': [row], 'development_speakers': ['D'], 'tolerances': {}}
+    report = compare(manifest)
+    assert report['features']['uh']['change'] == 1
+    assert report['features']['um']['change'] is None
+    assert not report['all_features_meet_target']
+    with pytest.raises(ValueError, match='disjoint'):
+        compare({**manifest, 'development_speakers': ['H']})

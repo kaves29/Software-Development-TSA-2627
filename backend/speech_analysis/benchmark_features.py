@@ -94,12 +94,42 @@ def benchmark(recordings, tolerances):
         row['status'] == 'meets_target' for row in report.values()), 'features': report}
 
 
+def compare(manifest):
+    """Compare frozen candidate and baseline predictions against identical labels."""
+    recordings = manifest['recordings']
+    development = set(manifest['development_speakers'])
+    held_out = {row['speaker'] for row in recordings}
+    if not development or development & held_out:
+        raise ValueError('declare development speakers disjoint from held-out speakers')
+    if any(not speaker for speaker in held_out | development):
+        raise ValueError('speaker identifiers must be nonempty')
+    tolerances = manifest['tolerances']
+    baseline = benchmark([
+        {**row, 'features': row['baseline_features']} for row in recordings
+    ], tolerances)
+    candidate = benchmark(recordings, tolerances)
+    features = {}
+    for name, result in candidate['features'].items():
+        prior = baseline['features'][name]
+        before, after = prior['score'], result['score']
+        features[name] = {
+            'baseline': prior, 'candidate': result,
+            'change': None if before is None or after is None else after - before,
+        }
+    return {'target': TARGET, 'held_out_speakers': len(held_out),
+            'all_features_meet_target': candidate['all_features_meet_target'],
+            'features': features}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('manifest', type=Path)
+    parser.add_argument('--compare', action='store_true', help='compare on held-out speakers')
     args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text())
-    print(json.dumps(benchmark(manifest['recordings'], manifest['tolerances']), indent=2))
+    report = (compare(manifest) if args.compare else
+              benchmark(manifest['recordings'], manifest['tolerances']))
+    print(json.dumps(report, indent=2))
 
 
 if __name__ == '__main__':
