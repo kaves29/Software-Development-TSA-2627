@@ -7,7 +7,7 @@ from pathlib import Path
 from xml.etree import ElementTree
 from zipfile import ZipFile
 
-from .ami_disfluency import repetition_references
+from .ami_disfluency import explicit_revision_references, repetition_references
 from .ami_references import segment_gap_references, word_references
 from .benchmark_features import benchmark
 from .evaluate import recording_event_metrics
@@ -60,6 +60,7 @@ def main():
     retimed_rows = []
     repetition_rows = {'baseline': [], 'candidate': []}
     untimed_repetitions = 0
+    untimed_revisions = 0
     longer_pause_rows = []
     tolerances = {'speaking_rate': 10, 'rate_changes': 15}
     with ZipFile(args.annotations) as archive:
@@ -97,6 +98,10 @@ def main():
                     and result.timing_method != 'forced_aligner'):
                 raise RuntimeError(f'{path.stem}: the backend fell back from forced alignment')
             repetition_ref = repetition_references(archive, path.stem, duration)
+            revision_ref = explicit_revision_references(archive, path.stem, duration)
+            if revision_ref is not None:
+                ref['revisions'] = revision_ref['events']
+                untimed_revisions += revision_ref['excluded_without_valid_timing']
             features = analyze_timestamped_words(duration, speech, result.words or [],
                                                  repetition_candidate=repetition_ref is not None)
             if repetition_ref is not None:
@@ -145,6 +150,8 @@ def main():
                     for method, records in repetition_rows.items()
                 },
                 'excluded_repetition_references_without_timing': untimed_repetitions,
+                'revision_reference_scope': 'explicit editing terms',
+                'excluded_revision_references_without_timing': untimed_revisions,
                 'untyped_filler_diagnostic': recording_event_metrics(diagnostics),
                 'per_recording': {
                     row['id']: benchmark([row], tolerances) for row in rows

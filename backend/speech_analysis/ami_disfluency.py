@@ -1,4 +1,4 @@
-"""Read timed repetition spans from AMI's manual disfluency layer."""
+"""Read timed events from AMI's manual disfluency layer."""
 
 import re
 from xml.etree import ElementTree
@@ -8,6 +8,15 @@ IDS = re.compile(r'id\(([^()]+)\)')
 
 
 def repetition_references(archive, recording, duration):
+    return disfluency_references(archive, recording, duration, 'ami_dsfl_12', nested=True)
+
+
+def explicit_revision_references(archive, recording, duration):
+    """Read explicit editing terms, the narrow revision class detected by Speakly."""
+    return disfluency_references(archive, recording, duration, 'ami_dsfl_4', nested=False)
+
+
+def disfluency_references(archive, recording, duration, ontology_id, *, nested):
     path = f'disfluency/{recording}.disfluency.xml'
     if path not in archive.namelist():
         return None
@@ -21,15 +30,16 @@ def repetition_references(archive, recording, duration):
     untimed = 0
     for annotation in annotations.iter('dsfl'):
         if not any(pointer.get('role') == 'dsfl-type'
-                   and pointer.get('href', '').endswith('#id(ami_dsfl_12)')
+                   and pointer.get('href', '').endswith(f'#id({ontology_id})')
                    for pointer in annotation.findall(NITE + 'pointer')):
             continue
         positions = []
-        for component in annotation.findall('dsfl'):
+        components = annotation.findall('dsfl') if nested else [annotation]
+        for component in components:
             for child in component.findall(NITE + 'child'):
                 ids = IDS.findall(child.attrib['href'])
                 if not 1 <= len(ids) <= 2 or any(key not in indices for key in ids):
-                    raise ValueError(f'{recording}: unresolved repetition word link')
+                    raise ValueError(f'{recording}: unresolved {ontology_id} word link')
                 positions.extend(range(indices[ids[0]], indices[ids[-1]] + 1))
         selected = [words[index] for index in positions
                     if words[index].tag == 'w' and words[index].get('punc') != 'true']

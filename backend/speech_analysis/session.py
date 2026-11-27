@@ -107,13 +107,17 @@ def main():
     parser.add_argument('--pose-model', type=Path)
     parser.add_argument('--hand-model', type=Path)
     parser.add_argument('--face-model', type=Path)
+    parser.add_argument('--pose-fingertip-proximity', action='store_true',
+                        help='use the experimental pose fingertip method for hand-near-face')
     parser.add_argument('--content-openai', action='store_true',
                         help='Send transcript and prompt to OpenAI for experimental content analysis')
     args = parser.parse_args()
     try:
         recordings = load_manifest(args.manifest)
         from .video import analyze_video
-        video_analyzer = (lambda path: analyze_video(path, args.pose_model, hand_model=args.hand_model, face_model=args.face_model)) if args.pose_model else None
+        video_analyzer = (lambda path: analyze_video(
+            path, args.pose_model, hand_model=args.hand_model, face_model=args.face_model,
+            pose_fingertip_proximity=args.pose_fingertip_proximity)) if args.pose_model else None
         if any(item['video'] for item in recordings) and video_analyzer is None:
             raise ValueError('video recordings require --pose-model')
         result = analyze_session(recordings, lambda path, targets, prompt: analyze_recording(

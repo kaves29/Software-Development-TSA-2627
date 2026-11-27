@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from speech_analysis.video import observations
+from speech_analysis.video import observations, pose_fingertip_near_face
 
 
 class VideoEvidenceTest(unittest.TestCase):
@@ -81,3 +81,14 @@ def test_absolute_face_yaw_extracts_rotation_without_scale_dependence():
     np.testing.assert_allclose(absolute_face_yaw(transform), 35)
     transform[:3, 2] = 0
     assert absolute_face_yaw(transform) is None
+
+
+def test_pose_proximity_distinguishes_visible_hands_from_missing_evidence():
+    pose = [SimpleNamespace(x=.5, y=.5, visibility=0., presence=0.) for _ in range(33)]
+    for index, x in ((0, .5), (11, .4), (12, .6)):
+        pose[index] = SimpleNamespace(x=x, y=.5, visibility=1., presence=1.)
+    assert pose_fingertip_near_face(pose) is None
+    pose[19] = SimpleNamespace(x=.55, y=.5, visibility=.5, presence=.5)
+    assert pose_fingertip_near_face(pose) is True
+    pose[19].y = .7
+    assert pose_fingertip_near_face(pose) is False

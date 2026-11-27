@@ -169,7 +169,25 @@ def background_shift(previous, current, pose):
     return float(np.median(np.linalg.norm(projected - background, axis=1)))
 
 
-def analyze_video(path, model, *, hand_model=None, face_model=None):
+def pose_fingertip_near_face(pose):
+    """Estimate image-plane proximity when the relevant pose joints are visible."""
+    if pose is None:
+        return None
+    shoulders_and_nose = [pose[index] for index in (11, 12, 0)]
+    if any(min(joint.visibility, joint.presence) < .65 for joint in shoulders_and_nose):
+        return None
+    left, right, nose = (np.array((joint.x, joint.y)) for joint in shoulders_and_nose)
+    width = np.linalg.norm(left - right)
+    if width < .05:
+        return None
+    tips = [joint for joint in pose[17:23] if min(joint.visibility, joint.presence) >= .40]
+    if not tips:
+        return None
+    return any(np.linalg.norm(np.array((joint.x, joint.y)) - nose) <= .35 * width
+               for joint in tips)
+
+
+def analyze_video(path, model, *, hand_model=None, face_model=None, pose_fingertip_proximity=False):
     import mediapipe as mp
 
     command = [
@@ -218,15 +236,15 @@ def analyze_video(path, model, *, hand_model=None, face_model=None):
                         shifts.append(shift)
                 previous_gray = gray
                 poses.append(found[0] if found else None)
-                if hand or face:
+                if hand or face or pose_fingertip_proximity:
                     timestamp = index * 1000 // FPS
                     hands = hand.detect_for_video(image, timestamp).hand_landmarks if hand else []
                     face_result = face.detect_for_video(image, timestamp) if face else None
                     faces = face_result.face_landmarks if face_result else []
                     transforms = face_result.facial_transformation_matrixes if face_result else []
                     yaw = absolute_face_yaw(transforms[0]) if len(transforms) else None
-                    near_face = None
-                    if hands and faces:
+                    near_face = pose_fingertip_near_face(poses[-1]) if pose_fingertip_proximity else None
+                    if not pose_fingertip_proximity and hands and faces:
                         eyes = np.array([(faces[0][i].x, faces[0][i].y) for i in (33, 263)])
                         nose = np.array([faces[0][1].x, faces[0][1].y])
                         eye_span = np.linalg.norm(eyes[0] - eyes[1])
@@ -244,13 +262,15 @@ def analyze_video(path, model, *, hand_model=None, face_model=None):
     if camera_motion != 'low_translation':
         for name in ('torso_sway', 'vertical_motion'):
             features[name] = {'status': 'insufficient_evidence', 'value': None}
-    if hand_model and face_model:
+    if pose_fingertip_proximity or (hand_model and face_model):
         usable = [row['fingertip_near_face'] for row in detail if row['fingertip_near_face'] is not None]
         features['hand_near_face'] = {'status': 'insufficient_evidence', 'value': None}
         if len(usable) >= 5:
             intervals = proximity_intervals(detail)
+            method = ('pose fingertip proximity in image plane' if pose_fingertip_proximity
+                      else 'fingertip proximity in image plane')
             features['hand_near_face'] = {'status': 'experimental', 'value': round(sum(usable) / len(usable), 4),
-                'method': 'fingertip proximity in image plane', 'valid_frames': len(usable),
+                'method': method, 'valid_frames': len(usable),
                 'intervals': intervals, 'observed_returns': observed_proximity_returns(detail, intervals)}
     return {'schema_version': 1, 'quality': {'frames': count,
             'pose_frames': sum(p is not None for p in poses), 'camera_motion': camera_motion,
@@ -263,8 +283,13 @@ if __name__ == '__main__':
     parser.add_argument('--pose-model', type=Path, required=True)
     parser.add_argument('--hand-model', type=Path)
     parser.add_argument('--face-model', type=Path)
+    parser.add_argument('--pose-fingertip-proximity', action='store_true',
+                        help='use the experimental pose fingertip method for hand-near-face')
     args = parser.parse_args()
     try:
-        print(json.dumps(analyze_video(args.video, args.pose_model, hand_model=args.hand_model, face_model=args.face_model), allow_nan=False))
+        result = analyze_video(args.video, args.pose_model, hand_model=args.hand_model,
+                               face_model=args.face_model,
+                               pose_fingertip_proximity=args.pose_fingertip_proximity)
+        print(json.dumps(result, allow_nan=False))
     except (OSError, ValueError, RuntimeError, ImportError, subprocess.SubprocessError) as exc:
         parser.exit(1, f'Video analysis failed: {type(exc).__name__}\n')
