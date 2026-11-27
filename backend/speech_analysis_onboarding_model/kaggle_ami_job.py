@@ -60,6 +60,12 @@ import subprocess
 import sys
 from zipfile import ZipFile
 
+import torch
+
+if not torch.cuda.is_available():
+    raise RuntimeError('Enable a GPU accelerator in Kaggle before running this notebook.')
+print('GPU:', torch.cuda.get_device_name(0), flush=True)
+
 root = Path('/kaggle/temp/speakly-ami')
 root.mkdir(parents=True, exist_ok=True)
 package = root / {package.name!r}
@@ -102,6 +108,7 @@ for split, requested in (('training', train), ('development', development)):
         url = ('https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/'
                f'{{meeting}}/audio/{{meeting}}.Headset-{{channel}}.wav')
         path = audio / f'{{recording}}.wav'
+        print('Preparing', split, recording, flush=True)
         download(url, path)
         if digest(path) != {AUDIO_SHA!r}[recording]:
             raise ValueError(f'AMI audio checksum mismatch: {{recording}}')
