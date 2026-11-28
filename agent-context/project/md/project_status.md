@@ -96,3 +96,6 @@ Update this file when the overall state or an unresolved decision changes. Store
 
 - 2026-11-27 10:31 PM Eastern: Sri directed a sequential landmark roadmap with six traveler choices, three skin tones, easy/medium/hard stops, locked regions, and multiple-choice questions shown one at a time. Codex implemented the flow and generated original pixel travelers and transparent artwork with ImageGen. Existing completed sections remain saved. Chromium verified character choice, incorrect-answer retry, direct-link locks, sequential progression, region unlock and persistence. The skin tones are visual approximations generated from Sri's requested colors. Changes await GitHub push approval.
 - 2026-11-27 10:32 PM Eastern: Sri approved publishing the traveler selection, sequential roadmap locks and quiz updates. Codex prepared the tested changes and original generated artwork for main.
+
+- 2026-11-27 11:15 PM Eastern: Sri requested three separate confirmations before an agent calls a project AI model. Codex added the rule to all four synchronized shared agent guides. This documentation rule does not implement a runtime confirmation screen. Changes await GitHub push approval.
+- 2026-11-27 11:16 PM Eastern: Sri approved publishing the three-confirmation agent rule for project AI model calls. Codex prepared the synchronized guides and log for main.

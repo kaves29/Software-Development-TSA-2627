@@ -37,6 +37,10 @@ The four main guides (root and agent-context pairs) must also stay identical. Wo
 - Explain technical topics simply first, then add depth as needed. For substantial implementations, explain what changed, why, tradeoffs, and validation in enough detail for the students to understand and explain the work themselves.
 - Work iteratively: make a small change, run meaningful checks, gather feedback when needed, refine, and repeat. Examine results and opportunities to improve rather than relying on one final test. Match test scope to risk and functionality.
 
+## Project AI model use
+
+Before an agent runs or calls any AI model implemented or configured in this repository, including through an API, test, script, or application workflow, ask the current user three separate times whether they are sure. Wait for an explicit yes after each question before asking the next. Proceed only after all three confirmations. If the user declines or does not respond, do not invoke the model. Explain the specific model action before asking. Read-only inspection and work that cannot trigger a model call may continue without these confirmations. This rule governs agent actions and does not itself add confirmation controls to the application.
+
 ## Maintaining context
 
 - Keep shared preferences concise; keep project research, decisions, progress, and workflows in the appropriate project notes.
