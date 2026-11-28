@@ -41,7 +41,7 @@ The four main guides (root and agent-context pairs) must also stay identical. Wo
 
 - Keep shared preferences concise; keep project research, decisions, progress, and workflows in the appropriate project notes.
 - After meaningful progress or a decision, update the relevant existing Markdown file. Create a descriptively named file only when no existing topic fits. More initial setup files are expected; avoid fragmenting established topics later.
-- For each progress or change entry, record the responsible team member, a concise description, and the date and time with timezone. Distinguish the person directing the work from any AI assistance. If the contributor is unknown, record that as unknown rather than guessing. Use the actual time of the entry.
+- For every progress or changelog entry, record all responsible team members, their contributions, and the date and time with timezone. Apply this to every team member. Distinguish the person directing the work from any AI assistance. If the contributor is unknown, record that as unknown rather than guessing. Use the actual time of the entry.
 - New folders and notes are allowed when useful. Update the relevant directory index when adding, moving, or removing context files.
 - Flag stale, conflicting, or long-unreviewed information and clarify material conflicts. Record decision status and sources; do not silently convert a proposal into a decision.
 - Tell the user whenever persistent information is recorded or updated, identify its location, and explain the reason.

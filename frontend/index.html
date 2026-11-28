@@ -21,7 +21,7 @@
     <section class="goal-hero">
       <div class="greeting">
         <div><h1 id="greeting">Hello, speaker!</h1><p>Keep working toward your speaking goals.</p></div>
-        <button class="profile" id="edit-profile" type="button" aria-label="Edit dashboard name">S</button>
+        <button class="profile" id="edit-profile" type="button" aria-label="Open account">S</button>
       </div>
       <div class="goal-carousel"><button type="button" id="goal-prev" class="goal-nav" aria-label="Previous goal">‹</button><button class="goal-ring" id="edit-goal" type="button">
         <span class="goal-label">Your goal</span>
@@ -112,12 +112,87 @@
       </form>
     </dialog>
   </template>
+  <template id="account">
+    <section class="account-page">
+      <a href="#home" class="account-back">‹ <span>Dashboard</span></a>
+      <h1>My account</h1>
+      <form id="account-form">
+        <div class="avatar-editor">
+          <label class="avatar-preview" for="avatar-file"><span id="avatar-initial">S</span><img id="avatar-image" alt="" hidden></label>
+          <label for="avatar-file" class="avatar-link">Change photo</label>
+          <input id="avatar-file" type="file" accept="image/*" hidden>
+          <button id="remove-avatar" type="button" class="text-button">Remove photo</button>
+        </div>
+        <label>Name <input name="name" autocomplete="given-name" maxlength="40"></label>
+        <label>Username <input name="username" autocomplete="username" maxlength="40"></label>
+        <label>Email address <input name="email" type="email" autocomplete="email" maxlength="254"></label>
+        <label>Phone number <input name="phone" type="tel" autocomplete="tel" maxlength="30"></label>
+        <label>Recovery email <input name="recoveryEmail" type="email" maxlength="254"></label>
+        <button type="submit">Save changes</button>
+        <p id="account-status" role="status" class="account-note">Profile details are saved in this browser on this device.</p>
+      </form>
+      <div class="account-links">
+        <a href="#settings"><span>Settings</span><span>›</span></a>
+        <a href="#privacy"><span>Privacy</span><span>›</span></a>
+      </div>
+      <section class="account-actions">
+        <button disabled>Sign out</button>
+        <button disabled>Delete account permanently</button>
+        <p>Account sign-in and deletion will be available when accounts are connected.</p>
+      </section>
+    </section>
+  </template>
+  <template id="settings">
+    <section class="account-page"><a href="#account" class="account-back">‹ <span>Account</span></a>
+      <h1>Settings</h1>
+      <div class="settings-card">
+        <label>Interview speaker voice
+          <select disabled><option>Not available yet</option></select>
+        </label>
+        <p>Voice selection will be available when interview speech is added.</p>
+      </div>
+    </section>
+  </template>
+  <template id="privacy">
+    <section class="account-page"><a href="#account" class="account-back">‹ <span>Account</span></a>
+      <h1>Privacy</h1>
+      <div class="settings-card">
+        <h2>Recordings</h2>
+        <p>Presentation audio is available for review during the session and is not saved after you leave.</p>
+        <label>Save recordings after leaving <select disabled><option>Not available yet</option></select></label>
+      </div>
+      <div class="settings-card">
+        <h2>Device access</h2>
+        <p>Speakly asks your browser before using the microphone. You can change device permissions in browser settings.</p>
+        <div class="permission-row"><span>Microphone</span><strong id="microphone-status">Checking…</strong></div>
+        <div class="permission-row"><span>Camera</span><strong id="camera-status">Checking…</strong></div>
+        <div class="permission-row"><span>Photo library</span><strong>Selected files only</strong></div>
+      </div>
+    </section>
+  </template>
   <template id="roadmap">
-    <section class="inner-page">
-      <a class="back" href="#home">← Home</a>
+    <section class="roadmap-page">
+      <a class="account-back" href="#home">‹ <span>Dashboard</span></a>
       <h1>Your roadmap</h1>
-      <p>Choose skills to practice. Mark improvement when you notice a change in your own rehearsals.</p>
-      <div id="skill-list"></div>
+      <p class="roadmap-intro">Your path will take shape as you practice.</p>
+      <div class="map-frame" id="map-frame" tabindex="0" role="region" aria-label="Roadmap map. Drag or scroll to explore.">
+        <div class="map-canvas">
+          <svg class="roadmap-art" viewBox="0 0 740 420" aria-hidden="true" focusable="false">
+            <path class="road-edge" d="M80 340 C210 340 105 220 265 240 S410 320 420 210 S510 85 660 95"/>
+            <path class="road-center" d="M80 340 C210 340 105 220 265 240 S410 320 420 210 S510 85 660 95"/>
+            <g class="map-stops"><circle cx="80" cy="340" r="12"/><circle cx="265" cy="240" r="12"/><circle cx="420" cy="210" r="12"/><circle cx="660" cy="95" r="12"/></g>
+          </svg>
+          <div class="map-bus" aria-label="Starting point"><svg viewBox="0 0 48 36" aria-hidden="true"><rect x="3" y="4" width="42" height="25" rx="7" fill="#54547a"/><rect x="8" y="8" width="13" height="9" rx="2" fill="#d9eee5"/><rect x="24" y="8" width="13" height="9" rx="2" fill="#d9eee5"/><circle cx="12" cy="29" r="4" fill="#283648"/><circle cx="36" cy="29" r="4" fill="#283648"/></svg></div>
+        </div>
+      </div>
+      <p class="map-hint">Drag the map to explore</p>
+      <section class="roadmap-progress">
+        <h2>Your progress</h2>
+        <div class="roadmap-stat"><span>Sections completed</span><strong>0</strong></div>
+        <div class="roadmap-stat"><span>Strongest and developing skills</span><strong>Not available yet</strong></div>
+        <p>Skills and progress will appear after the onboarding assessment and roadmap are connected.</p>
+      </section>
+      <section class="roadmap-skills"><h2>Practice focus</h2><p>Choose a skill or note an improvement you’ve noticed.</p><div id="skill-list"></div></section>
     </section>
   </template>
   <template id="presentation">

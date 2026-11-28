@@ -65,7 +65,14 @@ function localDateKey(date = new Date()) {
 function updateHome() {
   const name = dashboard.name;
   screen.querySelector('#greeting').textContent = 'Hello, ' + (name || 'speaker') + '!';
-  screen.querySelector('#edit-profile').textContent = name ? [...name][0].toUpperCase() : 'S';
+  const profile = screen.querySelector('#edit-profile');
+  profile.textContent = name ? [...name][0].toUpperCase() : 'S';
+  if (dashboard.avatar) {
+    const photo = document.createElement('img');
+    photo.src = dashboard.avatar;
+    photo.alt = '';
+    profile.replaceChildren(photo);
+  }
   screen.querySelector('#practice-days').textContent = dashboard.practiceDays.length;
   const todayDate = new Date();
   screen.querySelector('#today-date').textContent = new Intl.DateTimeFormat(undefined, {
@@ -83,7 +90,7 @@ function updateHome() {
     const isToday = dateKey === localDateKey(todayDate);
     const item = document.createElement('li');
     item.className = 'week-day';
-    if (practiced) item.classList.add('practiced');
+    if (practiced && isToday) item.classList.add('practiced');
     if (isToday) item.classList.add('today');
     if (dateKey < localDateKey(todayDate)) item.classList.add('past');
     const label = new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(day);
@@ -139,7 +146,7 @@ function bindHome() {
   }
   saveDashboard();
   updateHome();
-  bindDashboardDialog('#profile-dialog', '#edit-profile', 'displayName', 'name');
+  screen.querySelector('#edit-profile').addEventListener('click', () => { location.hash = '#account'; });
 
   let goalIndex = 0;
   const goalDialog = screen.querySelector('#goal-dialog');
@@ -455,7 +462,87 @@ function bindHome() {
   renderSessions();
 }
 
+function bindAccount() {
+  const form = screen.querySelector('#account-form');
+  const fields = ['name', 'username', 'email', 'phone', 'recoveryEmail'];
+  const status = screen.querySelector('#account-status');
+  const avatar = screen.querySelector('#avatar-image');
+  const initial = screen.querySelector('#avatar-initial');
+  const photoInput = screen.querySelector('#avatar-file');
+  let pendingAvatar = dashboard.avatar || '';
+
+  for (const name of fields) form.elements[name].value = dashboard[name] || '';
+
+  function updateAvatar() {
+    initial.textContent = (form.elements.name.value.trim()[0] || 'S').toUpperCase();
+    avatar.hidden = !pendingAvatar;
+    initial.hidden = Boolean(pendingAvatar);
+    if (pendingAvatar) avatar.src = pendingAvatar;
+    else avatar.removeAttribute('src');
+  }
+
+  form.elements.name.addEventListener('input', updateAvatar);
+  photoInput.addEventListener('change', () => {
+    const file = photoInput.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/') || file.size > 1024 * 1024) {
+      status.textContent = 'Choose an image under 1 MB.';
+      photoInput.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.addEventListener('load', () => { pendingAvatar = reader.result; updateAvatar(); });
+    reader.readAsDataURL(file);
+  });
+  screen.querySelector('#remove-avatar').addEventListener('click', () => {
+    pendingAvatar = '';
+    photoInput.value = '';
+    updateAvatar();
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const next = { ...dashboard, avatar: pendingAvatar };
+    for (const name of fields) next[name] = form.elements[name].value.trim();
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      dashboard = next;
+      status.textContent = 'Saved on this device.';
+    } catch {
+      status.textContent = 'Could not save. Check browser storage or choose a smaller photo.';
+    }
+  });
+  updateAvatar();
+}
+
+async function bindPrivacy() {
+  for (const name of ['microphone', 'camera']) {
+    const target = screen.querySelector('#' + name + '-status');
+    try {
+      const permission = await navigator.permissions.query({ name });
+      if (target.isConnected) target.textContent = { granted: 'Allowed', denied: 'Blocked', prompt: 'Ask first' }[permission.state];
+    } catch {
+      if (target.isConnected) target.textContent = 'See browser settings';
+    }
+  }
+}
+
 function bindRoadmap() {
+  const map = screen.querySelector('#map-frame');
+  let drag = null;
+  map.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch') return;
+    drag = { x: event.clientX, y: event.clientY, left: map.scrollLeft, top: map.scrollTop };
+    map.setPointerCapture(event.pointerId);
+    map.classList.add('dragging');
+  });
+  map.addEventListener('pointermove', event => {
+    if (!drag) return;
+    map.scrollLeft = drag.left - (event.clientX - drag.x);
+    map.scrollTop = drag.top - (event.clientY - drag.y);
+  });
+  const stopDrag = () => { drag = null; map.classList.remove('dragging'); };
+  map.addEventListener('pointerup', stopDrag);
+  map.addEventListener('pointercancel', stopDrag);
   const list = screen.querySelector('#skill-list');
   for (const [skill, exercise] of skills) {
     const row = document.createElement('section');
@@ -724,15 +811,18 @@ function bindSetup(mode) {
 
 function route() {
   const requested = location.hash.slice(1);
-  const mode = ['presentation', 'interview', 'roadmap'].includes(requested) ? requested : 'home';
+  const mode = ['presentation', 'interview', 'roadmap', 'account', 'settings', 'privacy'].includes(requested) ? requested : 'home';
   show(mode);
+  document.querySelector('.bottom-nav').hidden = ['account', 'settings', 'privacy'].includes(mode);
   for (const link of document.querySelectorAll('nav a')) {
     if (link.hash === '#' + mode) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
   if (mode === 'home') bindHome();
   else if (mode === 'roadmap') bindRoadmap();
-  else bindSetup(mode);
+  else if (mode === 'account') bindAccount();
+  else if (mode === 'privacy') bindPrivacy();
+  else if (mode !== 'settings') bindSetup(mode);
 }
 
 for (const link of document.querySelectorAll('.bottom-nav a')) {
@@ -742,3 +832,19 @@ for (const link of document.querySelectorAll('.bottom-nav a')) {
 }
 window.addEventListener('hashchange', route);
 route();
+
+let displayedDate = localDateKey();
+window.setInterval(() => {
+  if (location.hash !== '' && location.hash !== '#home') return;
+  const currentDate = localDateKey();
+  if (currentDate !== displayedDate) {
+    displayedDate = currentDate;
+    route();
+  }
+}, 60000);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && (!location.hash || location.hash === '#home') && localDateKey() !== displayedDate) {
+    displayedDate = localDateKey();
+    route();
+  }
+});
