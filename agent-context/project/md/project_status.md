@@ -85,3 +85,5 @@ Update this file when the overall state or an unresolved decision changes. Store
 - 2026-11-27: Added an onboarding recording upload endpoint that invokes the existing audio pipeline and optional video pose pipeline, returns sample results for a future roadmap handoff, and removes temporary uploads. Mock API tests cover the handoff and cleanup. Real model inference and the mobile integration remain unverified; roadmap requirements are awaiting further owner input.
 
 - 2026-11-27 07:03 PM Eastern: Team member directing the work unknown; Codex added a local backend test page for onboarding questions, follow-ups, and recording uploads, and documented VS Code startup. Browser checks covered server status, questions, input errors, and the missing-key response. Live OpenAI and recording model inference remain unverified.
+
+- 2026-11-27 07:31 PM Eastern: Team member directing the work unknown; Codex prepared a Google Colab notebook for the backend test page and made its API requests work with a hosted path. The notebook was validated locally; an actual Google Colab session remains unverified.

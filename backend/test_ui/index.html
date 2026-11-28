@@ -97,12 +97,12 @@
       }
     }
 
-    fetch("/health").then(response => {
+    fetch("health").then(response => {
       document.querySelector("#health").textContent = response.ok ? "● Server connected" : "Server unavailable";
     }).catch(() => { document.querySelector("#health").textContent = "Server unavailable"; });
 
     document.querySelector("#load-questions").addEventListener("click", () =>
-      request("/v1/onboarding/questions", {}, document.querySelector("#questions-status"), document.querySelector("#questions-output")));
+      request("v1/onboarding/questions", {}, document.querySelector("#questions-status"), document.querySelector("#questions-output")));
 
     document.querySelector("#answers-form").addEventListener("submit", async event => {
       event.preventDefault();
@@ -113,7 +113,7 @@
       catch { output.hidden = true; status.textContent = "Check the JSON formatting and try again."; return; }
       const button = event.submitter;
       button.disabled = true;
-      await request("/v1/onboarding/follow-ups", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(answers)}, status, output);
+      await request("v1/onboarding/follow-ups", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(answers)}, status, output);
       button.disabled = false;
     });
 
@@ -121,7 +121,7 @@
       event.preventDefault();
       const button = event.submitter;
       button.disabled = true;
-      await request("/v1/onboarding/recordings/analyze", {method: "POST", body: new FormData(event.currentTarget)}, document.querySelector("#recording-status"), document.querySelector("#recording-output"));
+      await request("v1/onboarding/recordings/analyze", {method: "POST", body: new FormData(event.currentTarget)}, document.querySelector("#recording-status"), document.querySelector("#recording-output"));
       button.disabled = false;
     });
   </script>

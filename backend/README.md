@@ -69,3 +69,7 @@ python -m uvicorn backend.main:app --reload
 ```
 
 Open http://127.0.0.1:8000/test in your browser. The page checks the server, displays onboarding questions, sends editable sample answers to the follow-up endpoint, and uploads an audio or video file for analysis. It displays the response or error from the backend. Follow-ups need `OPENAI_API_KEY`, and recording analysis needs the additional models and dependencies described above. The page uses a sample profile and does not store answers in the browser.
+
+## Test in Google Colab
+
+Open [the Colab notebook](https://colab.research.google.com/github/kaves29/Software-Development-TSA-2627/blob/main/backend/test_ui/colab_backend_test.ipynb) and choose **Runtime → Run all**. The notebook clones this repository and starts the backend in a temporary Google Colab session, then displays the test page in the notebook. Use sample information. Follow-up generation requires an API key, and recording analysis requires the separate models and dependencies described above.
