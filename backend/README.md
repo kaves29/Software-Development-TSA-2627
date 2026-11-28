@@ -52,3 +52,20 @@ The server temporarily writes the recording while analyzing it and removes the t
 Recording analysis needs ffmpeg and the dependencies in `speech_analysis/requirements.txt`, in addition to the main backend requirements. Set `SPEAKLY_MODEL_CACHE` to a writable model cache if needed. The first run may download upstream models. `SPEAKLY_WHISPER_MODEL` selects the Whisper model and defaults to `small.en`. To use the research filler classifier, securely provision its checkpoint outside Git and set `SPEAKLY_FILLER_HEAD` to its path. Without that checkpoint, the audio pipeline still returns its other available measurements. Video additionally needs `speech_analysis/requirements-video.txt` and `SPEAKLY_POSE_MODEL` pointing to a locally provisioned MediaPipe pose model. The video path currently uses pose analysis only.
 
 The trained filler checkpoint and video analysis remain experimental. Mock-based API tests verify data flow and cleanup, but a real recording and model run has not yet been verified through this endpoint. Results should be presented as limited observations, not diagnoses.
+
+## Test the backend in VS Code
+
+Open the repository folder in VS Code and open a terminal. From the repository root, create a virtual environment and install the backend dependencies:
+
+```sh
+python -m venv .venv
+```
+
+Activate it with `source .venv/bin/activate` on macOS or Linux, or `.venv\\Scripts\\Activate.ps1` in Windows PowerShell. Then run:
+
+```sh
+python -m pip install -r backend/requirements.txt
+python -m uvicorn backend.main:app --reload
+```
+
+Open http://127.0.0.1:8000/test in your browser. The page checks the server, displays onboarding questions, sends editable sample answers to the follow-up endpoint, and uploads an audio or video file for analysis. It displays the response or error from the backend. Follow-ups need `OPENAI_API_KEY`, and recording analysis needs the additional models and dependencies described above. The page uses a sample profile and does not store answers in the browser.

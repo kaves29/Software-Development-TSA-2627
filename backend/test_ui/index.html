@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speakly · Backend test</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #263b36; background: #eef3ef; }
+    * { box-sizing: border-box; }
+    body { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; border-bottom: 1px solid #b7c9bf; padding-bottom: 1.4rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.7rem); letter-spacing: -.04em; margin: .2rem 0; }
+    h2 { font-size: 1.2rem; margin: 0 0 .6rem; }
+    p { line-height: 1.5; margin: .4rem 0; }
+    .brand { color: #42695b; font-size: .9rem; font-weight: 700; }
+    .status { font-size: .9rem; color: #45685a; text-align: right; }
+    main { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    section { background: #fff; border: 1px solid #cbdad0; border-radius: .8rem; padding: 1.25rem; min-width: 0; }
+    .wide { grid-column: 1 / -1; }
+    .help { color: #50665d; font-size: .9rem; margin-bottom: 1rem; }
+    button { background: #315d50; color: white; border: 0; border-radius: .4rem; padding: .7rem 1rem; font: inherit; font-weight: 650; cursor: pointer; }
+    button:disabled { opacity: .55; cursor: wait; }
+    button:hover:not(:disabled) { background: #24483e; }
+    input, select, textarea { width: 100%; border: 1px solid #9ab0a4; border-radius: .4rem; padding: .65rem; font: inherit; color: inherit; background: #fff; }
+    textarea, pre { font-family: ui-monospace, monospace; font-size: .83rem; }
+    textarea { min-height: 19rem; resize: vertical; line-height: 1.45; }
+    label { display: block; font-size: .9rem; font-weight: 650; margin: .8rem 0 .35rem; }
+    form button { margin-top: 1rem; }
+    pre { background: #f1f6f2; border-radius: .4rem; padding: .8rem; overflow: auto; max-height: 25rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .message { color: #50665d; font-size: .9rem; margin: .8rem 0 0; }
+    :focus-visible { outline: 3px solid #a05dc0; outline-offset: 3px; }
+    @media (max-width: 660px) { main { grid-template-columns: 1fr; } .wide { grid-column: auto; } header { align-items: start; flex-direction: column; } .status { text-align: left; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div><span class="brand">Speakly</span><h1>Backend test</h1><p>Try the onboarding API from your computer.</p></div>
+    <p class="status" id="health" role="status">Checking server…</p>
+  </header>
+  <main>
+    <section>
+      <h2>Onboarding questions</h2>
+      <p class="help">Load the questions currently provided by the backend.</p>
+      <button type="button" id="load-questions">Load questions</button>
+      <p class="message" id="questions-status" role="status"></p>
+      <pre id="questions-output" hidden></pre>
+    </section>
+    <section>
+      <h2>Recording analysis</h2>
+      <p class="help">Upload an audio file or a video with audio. Analysis needs the model setup described in the README.</p>
+      <form id="recording-form">
+        <label for="sample-id">Sample ID</label>
+        <input id="sample-id" name="sample_id" value="sample-1" maxlength="80" required>
+        <label for="prompt">Speaking prompt</label>
+        <input id="prompt" name="prompt" value="Tell me about a project you enjoyed." maxlength="500" required>
+        <label for="media-type">Recording type</label>
+        <select id="media-type" name="media_type"><option value="audio">Audio</option><option value="video">Video with audio</option></select>
+        <label for="recording">Choose a file</label>
+        <input id="recording" name="recording" type="file" accept="audio/*,video/*" required>
+        <button>Analyze recording</button>
+      </form>
+      <p class="message" id="recording-status" role="status"></p>
+      <pre id="recording-output" hidden></pre>
+    </section>
+    <section class="wide">
+      <h2>Follow-up questions</h2>
+      <p class="help">Edit the example answers and send them to the backend. This uses OpenAI and needs a server-side API key.</p>
+      <form id="answers-form">
+        <label for="answers">Answers as JSON</label>
+        <textarea id="answers" spellcheck="false" required></textarea>
+        <button>Generate follow-ups</button>
+      </form>
+      <p class="message" id="answers-status" role="status"></p>
+      <pre id="answers-output" hidden></pre>
+    </section>
+  </main>
+  <script>
+    const sampleAnswers = {
+      question_version: "1", name: "Sam", age: 16, language: "English",
+      motivation: ["Do better at school"], outcomes: ["Explain ideas clearly"],
+      challenges: ["I lose my train of thought"], situation: "Giving a presentation",
+      situation_details: "", priority: "Explain ideas clearly", other_details: {}
+    };
+    document.querySelector("#answers").value = JSON.stringify(sampleAnswers, null, 2);
+
+    async function request(url, options, status, output) {
+      status.textContent = "Working…";
+      output.hidden = true;
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        output.textContent = JSON.stringify(data, null, 2);
+        output.hidden = false;
+        status.textContent = response.ok ? "Request completed." : `Request failed (HTTP ${response.status}). See details below.`;
+      } catch {
+        status.textContent = "Could not reach the server. Check that it is running.";
+      }
+    }
+
+    fetch("/health").then(response => {
+      document.querySelector("#health").textContent = response.ok ? "● Server connected" : "Server unavailable";
+    }).catch(() => { document.querySelector("#health").textContent = "Server unavailable"; });
+
+    document.querySelector("#load-questions").addEventListener("click", () =>
+      request("/v1/onboarding/questions", {}, document.querySelector("#questions-status"), document.querySelector("#questions-output")));
+
+    document.querySelector("#answers-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      const status = document.querySelector("#answers-status");
+      const output = document.querySelector("#answers-output");
+      let answers;
+      try { answers = JSON.parse(document.querySelector("#answers").value); }
+      catch { output.hidden = true; status.textContent = "Check the JSON formatting and try again."; return; }
+      const button = event.submitter;
+      button.disabled = true;
+      await request("/v1/onboarding/follow-ups", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(answers)}, status, output);
+      button.disabled = false;
+    });
+
+    document.querySelector("#recording-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      const button = event.submitter;
+      button.disabled = true;
+      await request("/v1/onboarding/recordings/analyze", {method: "POST", body: new FormData(event.currentTarget)}, document.querySelector("#recording-status"), document.querySelector("#recording-output"));
+      button.disabled = false;
+    });
+  </script>
+</body>
+</html>

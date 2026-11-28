@@ -1,4 +1,7 @@
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 from backend.onboarding import InitialAnswers, FollowUpResponse, ProviderUnavailable, generate_followups
@@ -78,3 +81,8 @@ def follow_up_questions(answers: InitialAnswers) -> FollowUpResponse:
         return generate_followups(answers)
     except ProviderUnavailable as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+
+@app.get("/test", include_in_schema=False)
+def test_page() -> FileResponse:
+    return FileResponse(Path(__file__).parent / "test_ui" / "index.html")
