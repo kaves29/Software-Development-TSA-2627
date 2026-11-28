@@ -583,6 +583,22 @@ const landmarks = [
   { name: 'Hawa Mahal', region: 'India', skill: 'Structure', prompts: ['Tell a short story with a takeaway.', 'Compare two activities.', 'Explain a choice and your reasons.'] }
 ];
 
+function isRoadmapUnlocked(index) {
+  const completed = Array.isArray(dashboard.roadmapCompleted) ? dashboard.roadmapCompleted : [];
+  if (index === 0) return true;
+  const previousRegionEnd = Math.floor(index / 3) * 3;
+  return completed.includes(index - 1) &&
+    Array.from({ length: previousRegionEnd }, (_, step) => step).every(step => completed.includes(step));
+}
+
+function travelerSprite(id) {
+  const sprite = document.createElement('span');
+  sprite.className = 'character-sprite';
+  sprite.style.backgroundPosition = ((id % 3) * 50) + '% ' + (id < 3 ? '0%' : '100%');
+  sprite.setAttribute('aria-hidden', 'true');
+  return sprite;
+}
+
 function bindRoadmap() {
   const map = screen.querySelector('#map-frame');
   const canvas = screen.querySelector('#map-canvas');
@@ -600,6 +616,26 @@ function bindRoadmap() {
   map.addEventListener('pointerup', stopDrag);
   map.addEventListener('pointercancel', stopDrag);
   const completed = Array.isArray(dashboard.roadmapCompleted) ? dashboard.roadmapCompleted : [];
+  const characterDialog = screen.querySelector('#character-dialog');
+  const characterOptions = screen.querySelector('#character-options');
+  for (let id = 0; id < 6; id++) {
+    const choice = document.createElement('button');
+    choice.type = 'button';
+    choice.className = 'character-choice';
+    const outfit = id < 3 ? 'Pink cardigan' : 'Navy vest';
+    const tone = ['light', 'medium', 'dark'][id % 3];
+    choice.setAttribute('aria-label', outfit + ', ' + tone + ' skin tone');
+    choice.append(travelerSprite(id));
+    choice.addEventListener('click', () => {
+      dashboard.roadmapCharacter = id;
+      saveDashboard();
+      characterDialog.close();
+      route();
+    });
+    characterOptions.append(choice);
+  }
+  screen.querySelector('#character-change').addEventListener('click', () => characterDialog.showModal());
+  if (!Number.isInteger(dashboard.roadmapCharacter)) characterDialog.showModal();
   screen.querySelector('#completed-count').textContent = completed.length + ' / 9';
 
   for (let region = 0; region < 3; region++) {
@@ -620,25 +656,47 @@ function bindRoadmap() {
     const title = document.createElement('h2');
     title.textContent = ['USA · Pacing', 'Europe · Clarity', 'India · Structure'][region];
     area.append(title);
+    const regionLocked = region > 0 && !Array.from({ length: region * 3 }, (_, step) => step).every(step => completed.includes(step));
+    if (regionLocked) {
+      area.classList.add('region-locked');
+      const overlay = document.createElement('div');
+      overlay.className = 'region-overlay';
+      overlay.setAttribute('aria-label', 'Region locked. Complete the earlier stops.');
+      const regionLock = document.createElement('span');
+      regionLock.className = 'pixel-lock';
+      regionLock.setAttribute('aria-hidden', 'true');
+      overlay.append(regionLock);
+      area.append(overlay);
+    }
     for (let slot = 0; slot < 3; slot++) {
       const index = region * 3 + slot;
       const place = landmarks[index];
       const button = document.createElement('button');
       button.className = 'landmark stop-' + slot;
       button.type = 'button';
-      button.setAttribute('aria-label', place.name + ', ' + place.region + (completed.includes(index) ? ', completed' : ''));
+      const unlocked = isRoadmapUnlocked(index) || completed.includes(index);
+      button.disabled = !unlocked;
+      button.setAttribute('aria-label', place.name + ', ' + place.region + (completed.includes(index) ? ', completed' : unlocked ? ', unlocked' : ', locked'));
       const art = document.createElement('span');
       art.className = 'landmark-art';
       art.style.backgroundPosition = (slot * 50) + '% ' + (region * 50) + '%';
       const label = document.createElement('span');
       label.className = 'landmark-label';
-      label.textContent = place.name;
+      label.textContent = place.name + ' · ' + ['Easy', 'Medium', 'Hard'][slot];
       button.append(art, label);
+      if (!unlocked) {
+        const lock = document.createElement('span');
+        lock.className = 'stop-lock';
+        lock.append(document.createElement('span'));
+        lock.firstChild.className = 'pixel-lock';
+        lock.setAttribute('aria-hidden', 'true');
+        button.append(lock);
+      }
       if (dashboard.roadmapLocation === index || (dashboard.roadmapLocation == null && index === 0)) {
         const marker = document.createElement('span');
         marker.className = 'travel-marker';
-        marker.textContent = region === 0 ? '✈' : region === 1 ? '🚌' : '🚆';
-        marker.setAttribute('aria-label', region === 0 ? 'Current location, airplane' : region === 1 ? 'Current location, bus' : 'Current location, train');
+        marker.append(travelerSprite(Number.isInteger(dashboard.roadmapCharacter) ? dashboard.roadmapCharacter : 0));
+        marker.setAttribute('aria-hidden', 'true');
         button.append(marker);
       }
       button.addEventListener('click', () => {
@@ -657,32 +715,117 @@ function bindRoadmap() {
   }
 }
 
+const roadmapQuizzes = {
+  Pacing: [
+    ['What can help listeners follow a longer answer?', ['Pause between main ideas', 'Rush through every sentence', 'Avoid taking breaths'], 0],
+    ['If you lose your place, what is a helpful next step?', ['Take a moment and continue', 'Stop speaking permanently', 'Repeat every word as fast as possible'], 0],
+    ['How can you practice a comfortable pace?', ['Record a short answer and listen back', 'Use one speed for every situation', 'Never pause while thinking'], 0]
+  ],
+  Clarity: [
+    ['What can make an unfamiliar idea easier to understand?', ['Use a familiar example', 'Add unrelated details', 'Skip the main point'], 0],
+    ['When explaining a process, what helps a listener?', ['Present the steps in order', 'Start with unrelated facts', 'Leave out the purpose'], 0],
+    ['How can you check whether your explanation was clear?', ['Ask a listener what they understood', 'Assume everyone understood', 'Change the topic immediately'], 0]
+  ],
+  Structure: [
+    ['What is a useful way to organize a short answer?', ['Main idea, example, takeaway', 'Details with no main idea', 'Conclusion before choosing a topic'], 0],
+    ['What can support an opinion?', ['A relevant example and a reason', 'An unrelated story', 'Repeating the opinion only'], 0],
+    ['How can you end a longer explanation?', ['Summarize the main point', 'Introduce several unrelated ideas', 'Leave the sentence unfinished'], 0]
+  ]
+};
+
+const advancedRoadmapQuizzes = {
+  Pacing: [
+    [
+      ['Your answer has three ideas. Where could you pause?', ['Between the ideas', 'Only after every word', 'Never'], 0],
+      ['A listener asks you to slow down. What can you try?', ['Pause briefly and use shorter phrases', 'Ignore the listener', 'Stop taking breaths'], 0],
+      ['How could you compare two recordings?', ['Listen to similar answers and notice pauses', 'Judge your personality from speed', 'Use only the longer recording'], 0]
+    ],
+    [
+      ['A technical point needs emphasis. What might help?', ['Pause before and after the key point', 'Speed through the key point', 'Remove all pauses'], 0],
+      ['Your audience looks confused during a fast explanation. What can you do?', ['Pause, rephrase and check in', 'Speak even faster', 'Continue without checking'], 0],
+      ['What is a good pacing goal for a practice session?', ['Choose a pace that fits your audience and message', 'Use exactly the same speed in every setting', 'Treat all pauses as mistakes'], 0]
+    ]
+  ],
+  Clarity: [
+    [
+      ['An audience is unfamiliar with a term. What helps?', ['Define it in everyday language', 'Repeat the term without explanation', 'Move on immediately'], 0],
+      ['Your explanation has too many details. What should you do first?', ['Identify the main point', 'Add more unrelated examples', 'Speak more quietly'], 0],
+      ['How can an example support a difficult idea?', ['Connect it directly to the idea', 'Use a random example', 'Avoid explaining the connection'], 0]
+    ],
+    [
+      ['A listener misunderstands an instruction. What next?', ['Rephrase and ask what needs clarification', 'Repeat it faster', 'Blame the listener'], 0],
+      ['How can you make a complex comparison clear?', ['Use a shared point of comparison', 'Switch topics between items', 'Remove all context'], 0],
+      ['When adapting to an audience, what matters?', ['Their familiarity with the topic', 'Using as many technical terms as possible', 'Giving everyone identical detail'], 0]
+    ]
+  ],
+  Structure: [
+    [
+      ['For a problem-solving answer, what sequence works?', ['Problem, action, result', 'Result, unrelated story, problem', 'Only the problem'], 0],
+      ['What makes an example useful in an answer?', ['It supports the main point', 'It changes the topic', 'It replaces the answer entirely'], 0],
+      ['How can you transition between ideas?', ['Use a phrase showing their connection', 'Switch without context', 'Repeat the opening indefinitely'], 0]
+    ],
+    [
+      ['You have several points and limited time. How should you plan?', ['Prioritize the points supporting your purpose', 'Give unrelated details equal time', 'Skip the main point'], 0],
+      ['How can you connect a story to an interview question?', ['Explain the relevant result and lesson', 'End without connecting it', 'Describe unrelated events only'], 0],
+      ['How can you revise a disorganized answer?', ['Identify the main point and reorder supporting details', 'Add details without a plan', 'Remove every example'], 0]
+    ]
+  ]
+};
+
 function bindSection(index) {
   const place = landmarks[index];
-  if (!place) { location.hash = '#roadmap'; return; }
-  screen.querySelector('#section-region').textContent = place.region + ' · ' + place.skill;
+  const completed = Array.isArray(dashboard.roadmapCompleted) ? dashboard.roadmapCompleted : [];
+  if (!place || (!isRoadmapUnlocked(index) && !completed.includes(index)) || !Number.isInteger(dashboard.roadmapCharacter)) {
+    location.hash = '#roadmap';
+    return;
+  }
+  screen.querySelector('#section-region').textContent = place.region + ' · ' + place.skill + ' · ' + ['Easy', 'Medium', 'Hard'][index % 3];
   screen.querySelector('#section-title').textContent = place.name;
   const container = screen.querySelector('#section-questions');
-  const saved = dashboard.sectionResponses?.[index] || [];
-  place.prompts.forEach((prompt, i) => {
-    const label = document.createElement('label');
-    label.textContent = prompt;
-    const input = document.createElement('textarea');
-    input.rows = 3; input.required = true; input.value = saved[i] || '';
-    label.append(input); container.append(label);
-  });
-  screen.querySelector('#section-form').addEventListener('submit', event => {
+  const form = screen.querySelector('#section-form');
+  const feedback = screen.querySelector('#section-feedback');
+  const difficulty = index % 3;
+  const questions = difficulty === 0 ? roadmapQuizzes[place.skill] : advancedRoadmapQuizzes[place.skill][difficulty - 1];
+  let questionIndex = 0;
+
+  function renderQuestion() {
+    screen.querySelector('#quiz-step').textContent = 'Question ' + (questionIndex + 1) + ' of ' + questions.length;
+    feedback.textContent = '';
+    container.replaceChildren();
+    const [question, options] = questions[questionIndex];
+    const legend = document.createElement('legend');
+    legend.textContent = question;
+    container.append(legend);
+    options.forEach((option, i) => {
+      const label = document.createElement('label');
+      label.className = 'quiz-option';
+      const input = document.createElement('input');
+      input.type = 'radio'; input.name = 'answer'; input.value = String(i); input.required = true;
+      label.append(input, document.createTextNode(option));
+      container.append(label);
+    });
+    screen.querySelector('#quiz-next').textContent = questionIndex === questions.length - 1 ? 'Finish section' : 'Next question';
+  }
+  form.addEventListener('submit', event => {
     event.preventDefault();
-    const inputs = [...container.querySelectorAll('textarea')];
-    const empty = inputs.find(input => !input.value.trim());
-    if (empty) { empty.focus(); return; }
-    dashboard.sectionResponses ||= {};
-    dashboard.sectionResponses[index] = inputs.map(input => input.value.trim());
+    const chosen = form.querySelector('input[name="answer"]:checked');
+    if (!chosen) return;
+    if (Number(chosen.value) !== questions[questionIndex][2]) {
+      feedback.textContent = 'Try another answer.';
+      return;
+    }
+    if (questionIndex < questions.length - 1) {
+      questionIndex++;
+      renderQuestion();
+      return;
+    }
     dashboard.roadmapCompleted ||= [];
     if (!dashboard.roadmapCompleted.includes(index)) dashboard.roadmapCompleted.push(index);
+    dashboard.roadmapLocation = Math.min(index + 1, landmarks.length - 1);
     saveDashboard();
     location.hash = '#roadmap';
   });
+  renderQuestion();
 }
 
 function bindRetake() {

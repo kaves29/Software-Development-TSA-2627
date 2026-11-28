@@ -184,7 +184,13 @@
     <section class="roadmap-page">
       <a class="account-back" href="#home">‹ <span>Dashboard</span></a>
       <h1>Your roadmap</h1>
-      <p class="roadmap-intro">Your path will take shape as you practice.</p>
+      <p class="roadmap-intro">Explore one stop at a time.</p>
+      <button type="button" class="character-change" id="character-change">Choose traveler</button>
+      <dialog id="character-dialog" aria-labelledby="character-title">
+        <h2 id="character-title">Choose your traveler</h2>
+        <p>Pick the character who will travel with you.</p>
+        <div class="character-options" id="character-options"></div>
+      </dialog>
       <div class="map-frame" id="map-frame" tabindex="0" role="region" aria-label="Vertical roadmap. Scroll or drag to explore.">
         <div id="map-canvas" class="travel-map"></div>
       </div>
@@ -209,8 +215,8 @@
   <template id="section-practice">
     <section class="account-page"><a href="#roadmap" class="account-back">‹ <span>Roadmap</span></a>
       <p id="section-region" class="section-region"></p><h1 id="section-title"></h1>
-      <p>Take your time with each prompt. Your responses stay in this browser.</p>
-      <form id="section-form"><div id="section-questions"></div><button>Complete section</button></form>
+      <p id="quiz-step" class="quiz-step"></p>
+      <form id="section-form"><fieldset id="section-questions"></fieldset><p id="section-feedback" role="status"></p><button id="quiz-next" type="submit">Next</button></form>
     </section>
   </template>
   <template id="retake">
