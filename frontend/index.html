@@ -122,6 +122,13 @@
           <label for="avatar-file" class="avatar-link">Change photo</label>
           <input id="avatar-file" type="file" accept="image/*" hidden>
           <button id="remove-avatar" type="button" class="text-button">Remove photo</button>
+          <div id="crop-controls" class="crop-controls" hidden>
+            <p>Adjust your photo</p>
+            <label>Zoom <input type="range" id="crop-zoom" min="1" max="3" step=".05" value="1"></label>
+            <label>Move left or right <input type="range" id="crop-x" min="0" max="100" value="50"></label>
+            <label>Move up or down <input type="range" id="crop-y" min="0" max="100" value="50"></label>
+            <button type="button" id="crop-apply" class="secondary">Apply photo</button>
+          </div>
         </div>
         <label>Name <input name="name" autocomplete="given-name" maxlength="40"></label>
         <label>Username <input name="username" autocomplete="username" maxlength="40"></label>
@@ -163,10 +170,13 @@
       </div>
       <div class="settings-card">
         <h2>Device access</h2>
-        <p>Speakly asks your browser before using the microphone. You can change device permissions in browser settings.</p>
-        <div class="permission-row"><span>Microphone</span><strong id="microphone-status">Checking…</strong></div>
-        <div class="permission-row"><span>Camera</span><strong id="camera-status">Checking…</strong></div>
-        <div class="permission-row"><span>Photo library</span><strong>Selected files only</strong></div>
+        <p>Choose what Speakly may request. Your browser controls device permissions.</p>
+        <label class="permission-row"><span>Microphone</span><input type="checkbox" id="microphone-access" role="switch"></label>
+        <label class="permission-row"><span>Camera</span><input type="checkbox" id="camera-access" role="switch"></label>
+        <label class="gallery-choice">Photo library
+          <select id="photo-access"><option value="none">None</option><option value="selected">Selected photos</option><option value="all">All photos</option></select>
+        </label>
+        <p>In a browser, photos are accessed only when you select files.</p>
       </div>
     </section>
   </template>
@@ -175,24 +185,38 @@
       <a class="account-back" href="#home">‹ <span>Dashboard</span></a>
       <h1>Your roadmap</h1>
       <p class="roadmap-intro">Your path will take shape as you practice.</p>
-      <div class="map-frame" id="map-frame" tabindex="0" role="region" aria-label="Roadmap map. Drag or scroll to explore.">
-        <div class="map-canvas">
-          <svg class="roadmap-art" viewBox="0 0 740 420" aria-hidden="true" focusable="false">
-            <path class="road-edge" d="M80 340 C210 340 105 220 265 240 S410 320 420 210 S510 85 660 95"/>
-            <path class="road-center" d="M80 340 C210 340 105 220 265 240 S410 320 420 210 S510 85 660 95"/>
-            <g class="map-stops"><circle cx="80" cy="340" r="12"/><circle cx="265" cy="240" r="12"/><circle cx="420" cy="210" r="12"/><circle cx="660" cy="95" r="12"/></g>
-          </svg>
-          <div class="map-bus" aria-label="Starting point"><svg viewBox="0 0 48 36" aria-hidden="true"><rect x="3" y="4" width="42" height="25" rx="7" fill="#54547a"/><rect x="8" y="8" width="13" height="9" rx="2" fill="#d9eee5"/><rect x="24" y="8" width="13" height="9" rx="2" fill="#d9eee5"/><circle cx="12" cy="29" r="4" fill="#283648"/><circle cx="36" cy="29" r="4" fill="#283648"/></svg></div>
-        </div>
+      <div class="map-frame" id="map-frame" tabindex="0" role="region" aria-label="Vertical roadmap. Scroll or drag to explore.">
+        <div id="map-canvas" class="travel-map"></div>
       </div>
-      <p class="map-hint">Drag the map to explore</p>
+      <p class="map-hint">Scroll or drag to explore the route</p>
       <section class="roadmap-progress">
         <h2>Your progress</h2>
-        <div class="roadmap-stat"><span>Sections completed</span><strong>0</strong></div>
-        <div class="roadmap-stat"><span>Strongest and developing skills</span><strong>Not available yet</strong></div>
-        <p>Skills and progress will appear after the onboarding assessment and roadmap are connected.</p>
+        <div class="roadmap-stat"><span>Sections completed</span><strong id="completed-count">0 / 9</strong></div>
+        <p>Complete all three prompts in a section to mark it complete.</p>
       </section>
-      <section class="roadmap-skills"><h2>Practice focus</h2><p>Choose a skill or note an improvement you’ve noticed.</p><div id="skill-list"></div></section>
+      <section class="roadmap-skills">
+        <h2>Skills</h2><p>Example levels for the design preview. These are not quiz results.</p>
+        <div class="skill-chart" aria-label="Example skill levels">
+          <div><span style="height:58%"></span><small>Pacing</small></div>
+          <div><span style="height:76%"></span><small>Clarity</small></div>
+          <div><span style="height:43%"></span><small>Structure</small></div>
+          <div><span style="height:65%"></span><small>Fluency</small></div>
+        </div>
+      </section>
+      <section class="retake-section"><h2>Check in with your goals</h2><p>Answer five short questions to update your practice preferences.</p><a href="#retake" class="button">Retake quick quiz</a></section>
+    </section>
+  </template>
+  <template id="section-practice">
+    <section class="account-page"><a href="#roadmap" class="account-back">‹ <span>Roadmap</span></a>
+      <p id="section-region" class="section-region"></p><h1 id="section-title"></h1>
+      <p>Take your time with each prompt. Your responses stay in this browser.</p>
+      <form id="section-form"><div id="section-questions"></div><button>Complete section</button></form>
+    </section>
+  </template>
+  <template id="retake">
+    <section class="account-page"><a href="#roadmap" class="account-back">‹ <span>Roadmap</span></a>
+      <h1>Quick check-in</h1><p>Tell us what you want to practice. You can change your answers later.</p>
+      <form id="retake-form"><div id="retake-questions"></div><button>Save answers</button><p id="quiz-status" role="status"></p></form>
     </section>
   </template>
   <template id="presentation">

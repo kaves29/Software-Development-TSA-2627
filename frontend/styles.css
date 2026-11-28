@@ -585,3 +585,44 @@ button:disabled, select:disabled { cursor: not-allowed; opacity: .65; }
 .map-bus svg { width: 100%; height: 100%; }
 .map-hint { margin: .5rem .2rem 1rem; }
 .roadmap-skills .skill-row h2 { font-size: 1.1rem; }
+
+.account-links { border: 0; border-radius: 0; background: transparent; padding: 0; }
+.account-links a { padding: .2rem .2rem; border-bottom: 1px solid #c5d6c8; }
+.account-links a + a { border-top: 0; }
+.crop-controls { width: 100%; display: grid; gap: .5rem; padding: .8rem; border-radius: .8rem; background: #edf4ed; }
+.crop-controls p { margin: 0; color: #485d50; font-weight: 700; font-size: .85rem; }
+.crop-controls label { display: grid; gap: .25rem; }
+.crop-controls input[type="range"] { min-height: 1.5rem; padding: 0; accent-color: #54547a; }
+.permission-row input { width: 2.6rem; height: 1.45rem; accent-color: #54547a; }
+.gallery-choice { margin-top: .7rem; }
+.gallery-choice select { margin-top: .4rem; width: 100%; }
+.map-frame { height: min(62vh, 36rem); overflow-y: auto; overflow-x: hidden; background: #c4ddbb; border: 3px solid #6b886e; border-radius: .65rem; scroll-behavior: auto; }
+.travel-map { width: 100%; position: relative; }
+.map-region { height: 720px; position: relative; overflow: hidden; background-color: #b8d6ab; background-image: radial-gradient(#91bc8e 1px, transparent 1px); background-size: 14px 14px; }
+.map-region.region-1 { background-color: #c4d7be; background-image: radial-gradient(#a8c4a5 1px, transparent 1px); }
+.map-region.region-2 { background-color: #d9d8ae; background-image: radial-gradient(#c2c695 1px, transparent 1px); }
+.map-region h2 { position: absolute; z-index: 1; top: .8rem; left: .8rem; margin: 0; padding: .4rem .65rem; background: #f3f4df; color: #34483c; border: 2px solid #789174; border-radius: .2rem; font: 700 .8rem "Trebuchet MS", sans-serif; }
+.travel-road { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.travel-road path { fill: none; stroke-linecap: square; }
+.travel-road-edge { stroke: #45535a; stroke-width: 49; }
+.travel-road-dash { stroke: #e2e4d5; stroke-width: 3; stroke-dasharray: 12 17; }
+.landmark { position: absolute; z-index: 1; width: 43%; padding: .25rem; border: 2px solid #687c67; border-radius: .35rem; background: #ecf1df; color: #273e34; box-shadow: 3px 3px 0 #6a806b; }
+.landmark:hover { background: #f6f8eb; color: #273e34; }
+.landmark.stop-0 { top: 11%; left: 8%; }
+.landmark.stop-1 { top: 40%; right: 5%; }
+.landmark.stop-2 { top: 70%; left: 7%; }
+.landmark-art { display: block; width: 100%; aspect-ratio: 1.25; background-image: url("./assets/roadmap-landmarks.png"); background-size: 300% 300%; image-rendering: pixelated; border-radius: .15rem; }
+.landmark-label { display: block; padding: .35rem .1rem .15rem; font-size: .72rem; }
+.travel-marker { position: absolute; top: -.9rem; right: -.6rem; display: grid; place-items: center; width: 2rem; height: 2rem; background: #f8f4df; border: 2px solid #54547a; border-radius: 50%; font: 1rem sans-serif; }
+.skill-chart { display: flex; justify-content: space-around; align-items: end; height: 11rem; gap: .6rem; padding-top: .7rem; }
+.skill-chart div { height: 100%; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: end; gap: .45rem; }
+.skill-chart div > span { width: min(100%, 2.4rem); background: #8799a3; border-radius: .35rem .35rem 0 0; }
+.skill-chart div:nth-child(2) > span { background: #729e8a; }
+.skill-chart div:nth-child(3) > span { background: #8c88a8; }
+.skill-chart div:nth-child(4) > span { background: #65a69a; }
+.skill-chart small { font-size: .65rem; color: #43564b; }
+.retake-section { margin: 1.3rem 0; }
+.retake-section h2 { font: 600 1.2rem Georgia, serif; }
+#section-questions, #retake-questions { display: grid; gap: 1rem; }
+#section-questions textarea { width: 100%; }
+.section-region { color: #5d7a69; font-weight: 700; }
